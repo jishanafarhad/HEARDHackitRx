@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HEARD — prototype v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#7B5FC7; --purple-d:#4A3A8A; --purple-l:#EDE7FA; --lav:#F4F0FC;
+    --teal:#2BB5A0; --teal-l:#E3F7F2;
+    --yellow:#F5C542; --yellow-l:#FFF6D6; --yellow-d:#9A6D00;
+    --green:#2ECC71; --green-l:#E4F9EC; --green-d:#1B7A44;
+    --red:#E84545; --red-l:#FDE8E8; --red-d:#B02525;
+    --orange:#F0803C; --orange-l:#FEEBDD;
+    --ink:#2B2540; --ink-2:#5B5478; --muted:#8B85A3; --line:#E6E1F2;
+    --grad:linear-gradient(120deg,#6F5BC5 0%,#2FB8A5 100%);
+    --grad-bg:linear-gradient(180deg,#F4F0FC 0%,#EAF7F2 100%);
+    --b1:#8C5A2B;--b2:#A6713A;--b3:#BF8A4F;--b4:#C9A365;--b5:#D9B96E;--b6:#E6C34F;--b7:#EDB52E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--grad-bg);min-height:100%;color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15px;line-height:1.45;font-feature-settings:"tnum" 1}
+  button{font:inherit;cursor:pointer;background:none;border:0;color:inherit}
+  button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+  .rail{display:flex;align-items:center;gap:20px;padding:12px 24px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+  .mark{font-weight:800;font-size:24px;letter-spacing:.08em;color:var(--purple-d)}
+  .mark small{display:block;font-size:11px;letter-spacing:0;color:var(--muted);font-weight:600;margin-top:-3px}
+  .roles{display:flex;gap:4px;margin-left:auto;background:var(--lav);padding:4px;border-radius:999px}
+  .roles button{padding:7px 14px;border-radius:999px;color:var(--ink-2);font-weight:700;font-size:13px}
+  .roles button[aria-selected="true"]{background:var(--purple);color:#fff}
+  .roles button.kid[aria-selected="true"]{background:var(--grad)}
+
+  .view{display:none;max-width:1200px;margin:0 auto;padding:24px}
+  .view.active{display:block}
+  .phone{max-width:420px;margin:0 auto;background:#fff;border-radius:28px;box-shadow:0 12px 40px rgba(74,58,138,.14);overflow:hidden;min-height:760px;display:flex;flex-direction:column}
+  .phone .top{background:#fff;padding:16px 18px 10px;border-bottom:1px solid var(--line)}
+  .phone .body{flex:1;overflow:auto;background:var(--grad-bg);padding:16px}
+  .phone .tabs{display:flex;background:#fff;border-top:1px solid var(--line)}
+  .phone .tabs button{flex:1;padding:10px 4px 12px;font-size:11px;font-weight:700;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px}
+  .phone .tabs button span{font-size:20px}
+  .phone .tabs button.on{color:var(--purple)}
+  .h{font-weight:800;font-size:22px;color:var(--ink)}
+  .sub{color:var(--muted);font-size:13px;font-weight:600;margin-top:2px}
+
+  /* ---------- patient quick record ---------- */
+  .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+  .quick button{background:#fff;border-radius:18px;padding:16px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;font-weight:800;box-shadow:0 2px 8px rgba(74,58,138,.08);border:2px solid transparent}
+  .quick button span{font-size:30px}
+  .quick button.on{border-color:var(--purple)}
+  .free{margin-top:14px;background:#fff;border-radius:18px;padding:12px;box-shadow:0 2px 8px rgba(74,58,138,.08)}
+  .free textarea{width:100%;border:0;resize:none;font:inherit;font-weight:600;font-size:15px;min-height:64px;outline:none;background:transparent}
+  .free .row{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-top:6px}
+  .free .row .mic{width:38px;height:38px;border-radius:50%;background:var(--lav);color:var(--purple);font-size:18px}
+  .btn{background:var(--purple);color:#fff;padding:10px 18px;border-radius:999px;font-weight:800}
+  .btn.grad{background:var(--grad)}
+  .btn.ghost{background:var(--lav);color:var(--purple-d)}
+  .btn.small{padding:7px 12px;font-size:13px}
+  .ask{margin-top:14px;background:#fff;border-radius:18px;padding:16px;border:2px solid var(--purple);display:none}
+  .ask.on{display:block}
+  .ask .q{font-weight:800;font-size:16px}
+  .ask .why{font-size:12px;color:var(--muted);font-weight:600;margin-top:2px}
+  .scale{display:grid;grid-template-columns:repeat(11,1fr);gap:4px;margin-top:12px}
+  .scale button{aspect-ratio:1;border-radius:10px;font-weight:800;background:var(--lav);color:var(--purple-d)}
+  .scale button:nth-child(n+5){background:var(--yellow-l);color:var(--yellow-d)}
+  .scale button:nth-child(n+8){background:var(--orange-l);color:#9A4A12}
+  .scale button:nth-child(n+10){background:var(--red-l);color:var(--red-d)}
+  .scale button.on{outline:3px solid var(--purple)}
+  .faces{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:12px}
+  .faces button{background:var(--lav);border-radius:14px;padding:8px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:800;color:var(--ink-2)}
+  .faces button svg{width:40px;height:40px}
+  .faces button.on{background:var(--yellow-l);outline:3px solid var(--purple)}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .chips button{background:var(--lav);color:var(--purple-d);padding:8px 14px;border-radius:999px;font-weight:800;font-size:13px}
+  .chips button.on{background:var(--purple);color:#fff}
+  .chips button.blood{background:var(--red-l);color:var(--red-d)} .chips button.blood.on{background:var(--red);color:#fff}
+  .bristol{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:12px}
+  .bristol button{border-radius:12px;padding:8px 2px 6px;background:var(--lav);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:800;color:var(--ink-2)}
+  .bristol button svg{width:34px;height:34px}
+  .bristol button.on{outline:3px solid var(--purple);background:#fff}
+  .today{margin-top:16px}
+  .today h3{font-size:13px;color:var(--muted);font-weight:800;margin-bottom:8px}
+  .entry{background:#fff;border-radius:14px;padding:10px 14px;margin-bottom:8px;display:flex;gap:10px;align-items:center;font-weight:700;font-size:14px;box-shadow:0 1px 4px rgba(74,58,138,.06)}
+  .entry .t{color:var(--muted);font-weight:700;font-size:12px;min-width:44px}
+  .entry .pill{margin-left:auto;font-size:11px;padding:2px 8px;border-radius:999px;background:var(--teal-l);color:#146F60}
+  .cardp{margin-top:16px;background:var(--grad);color:#fff;border-radius:20px;padding:16px}
+  .cardp b{font-size:16px;display:block}
+  .cardp span{font-size:13px;opacity:.9}
+  .cardp .btn{background:#fff;color:var(--purple-d);margin-top:10px;display:inline-block}
+
+  /* ---------- kid mode ---------- */
+  .kid .seg{display:flex;background:var(--lav);border-radius:999px;padding:3px;margin-top:8px}
+  .kid .seg button{flex:1;padding:6px;border-radius:999px;font-size:12px;font-weight:800;color:var(--muted)}
+  .kid .seg button.on{background:var(--purple);color:#fff}
+  .stats{display:flex;gap:8px;margin-bottom:12px}
+  .stat{background:#fff;border-radius:999px;padding:8px 14px;font-weight:800;font-size:14px;display:flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(74,58,138,.08)}
+  .stat.xp{margin-left:auto;background:var(--yellow-l);color:var(--yellow-d)}
+  .room{background:linear-gradient(180deg,#FFE9D6 0%,#FFD9BC 100%);border-radius:22px;height:240px;position:relative;overflow:hidden;box-shadow:inset 0 -40px 0 #B27B5A}
+  .room .sofa{position:absolute;left:30px;right:30px;bottom:48px;height:70px;background:#6F5BC5;border-radius:16px 16px 6px 6px}
+  .room .sofa::before{content:"";position:absolute;left:-12px;right:-12px;bottom:0;height:34px;background:#5A48A8;border-radius:10px}
+  .room .lamp{position:absolute;right:26px;top:36px;width:50px;height:36px;background:var(--yellow);border-radius:6px 6px 20px 20px;box-shadow:0 0 40px 10px rgba(245,197,66,.55)}
+  .room .lamp::after{content:"";position:absolute;left:23px;top:36px;width:4px;height:110px;background:#B27B5A}
+  .room .plant{position:absolute;left:26px;bottom:60px;width:38px;height:54px;background:#7BD389;border-radius:50% 50% 30% 30%}
+  .room .gummy{position:absolute;left:50%;transform:translateX(-50%);bottom:56px;width:120px;transition:transform .3s}
+  .room.rest .gummy{transform:translateX(-50%) translateY(14px) rotate(-8deg);opacity:.85}
+  .room .name{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;background:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:13px;color:var(--purple-d)}
+  .room .zz{position:absolute;left:58%;top:40px;font-weight:800;color:var(--purple-d);font-size:22px;display:none}
+  .room.rest .zz{display:block}
+  .xpbar{margin:10px 0 4px;height:10px;border-radius:999px;background:#fff;overflow:hidden}
+  .xpbar i{display:block;height:100%;background:var(--grad);border-radius:999px;transition:width .4s}
+  .xplab{text-align:center;font-size:13px;font-weight:700;color:var(--muted)}
+  .logcard{margin-top:12px;background:var(--grad);color:#fff;border-radius:20px;padding:16px;display:flex;align-items:center;gap:12px}
+  .logcard b{font-size:20px;display:block}
+  .logcard span{font-size:13px;opacity:.92}
+  .logcard .xpchip{margin-left:auto;background:rgba(255,255,255,.22);border-radius:14px;padding:8px 12px;text-align:center;font-weight:800;font-size:12px}
+  .logcard .xpchip big{display:block;font-size:20px}
+  .road{margin-top:12px;background:#fff;border-radius:18px;padding:14px}
+  .road h4{font-size:13px;color:var(--purple-d);font-weight:800;display:flex;justify-content:space-between}
+  .road h4 a{color:var(--purple);text-decoration:none;font-size:12px}
+  .nodes{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+  .node{width:44px;height:44px;border-radius:50%;background:var(--lav);display:flex;align-items:center;justify-content:center;font-size:20px;position:relative}
+  .node.done{background:var(--purple);}
+  .node.here{background:var(--purple);outline:4px solid var(--yellow-l)}
+  .node.locked{opacity:.45}
+  .node.real::after{content:"";position:absolute;right:-2px;bottom:-2px;width:14px;height:14px;border-radius:50%;background:var(--teal);border:2px solid #fff}
+  .roadseg{flex:1;height:4px;background:var(--lav)} .roadseg.done{background:var(--purple)}
+  .roadnote{font-size:11px;color:var(--muted);margin-top:8px;font-weight:600}
+  .roadnote i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--teal);vertical-align:-1px;margin-right:4px}
+  .game{background:#fff;border-radius:22px;padding:18px;margin-top:6px}
+  .game .h{font-size:20px}
+  .poo{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+  .poo button{background:var(--lav);border-radius:18px;padding:10px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;font-weight:800;color:var(--ink-2)}
+  .poo button svg{width:56px;height:56px}
+  .poo button.on{background:var(--yellow-l);outline:3px solid var(--purple)}
+  .poo .lab{font-size:10px;color:var(--muted);font-weight:700}
+  .kfaces{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+  .kfaces button{background:var(--lav);border-radius:18px;padding:12px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;font-weight:800;color:var(--ink-2)}
+  .kfaces button svg{width:64px;height:64px}
+  .kfaces button.on{background:var(--yellow-l);outline:3px solid var(--purple)}
+  .foods{margin-top:12px;display:grid;gap:8px}
+  .fd{background:#fff;border:2px solid var(--line);border-radius:16px;padding:10px 12px;display:flex;align-items:center;gap:10px;font-weight:800}
+  .fd .dot{width:14px;height:14px;border-radius:50%;background:#C9C3DB;flex-shrink:0}
+  .fd.friend .dot{background:var(--green)} .fd.foe .dot{background:var(--red)} .fd.retry .dot{background:var(--yellow)}
+  .fd .st{font-size:11px;font-weight:700;color:var(--muted);display:block}
+  .fd.friend .st{color:var(--green-d)} .fd.foe .st{color:var(--red-d)} .fd.retry .st{color:var(--yellow-d)}
+  .fd .sw{margin-left:auto;display:flex;gap:4px}
+  .fd .sw button{width:30px;height:30px;border-radius:50%;background:var(--lav);font-size:14px}
+  .fd .sw button.g{background:var(--green-l)} .fd .sw button.y{background:var(--yellow-l)} .fd .sw button.r{background:var(--red-l)}
+  .reward{margin-top:12px;background:var(--yellow-l);color:var(--yellow-d);border-radius:14px;padding:10px 14px;font-weight:800;text-align:center;display:none}
+  .reward.on{display:block}
+  .search{width:100%;padding:12px 14px;border:2px solid var(--line);border-radius:999px;font:inherit;font-weight:700;margin-top:12px;background:#fff}
+  .meals{display:flex;gap:6px;margin-top:12px}
+  .meals button{flex:1;background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px;font-weight:800;font-size:12px;color:var(--muted)}
+  .meals button.on{border-color:var(--yellow);background:var(--yellow-l);color:var(--yellow-d)}
+
+  /* ---------- caregiver ---------- */
+  .cgwrap{max-width:820px;margin:0 auto}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+  .persp{background:#fff;border-radius:20px;padding:18px;box-shadow:0 2px 10px rgba(74,58,138,.08)}
+  .persp h3{font-size:12px;color:var(--muted);font-weight:800}
+  .persp .val{font-size:38px;font-weight:800;margin-top:4px;color:var(--purple-d)}
+  .persp .val small{font-size:14px;color:var(--muted);font-weight:700;margin-left:6px}
+  .persp .prov{font-size:12px;color:var(--purple);font-weight:800;margin-top:2px}
+  .persp p{margin-top:10px;font-weight:600;font-size:14px}
+  .diff{margin-top:14px;background:var(--purple-l);border-radius:18px;padding:14px 16px;font-weight:600;color:var(--purple-d)}
+  .gstat{display:flex;align-items:center;gap:14px;background:#fff;border-radius:20px;padding:14px 18px;margin-top:16px;box-shadow:0 2px 10px rgba(74,58,138,.08)}
+  .gstat svg{width:56px;height:56px;flex-shrink:0}
+  .gstat b{display:block;font-size:16px} .gstat span{font-size:13px;color:var(--muted);font-weight:600}
+  .gstat .btn{margin-left:auto}
+  .gstat .btn.on{background:var(--teal)}
+  table{border-collapse:collapse;width:100%;font-size:13px;font-weight:600}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:800;font-size:12px}
+  td.n{text-align:right}
+
+  /* ---------- clinical ---------- */
+  .clin{display:grid;grid-template-columns:260px 1fr;gap:24px;align-items:start}
+  .ident{position:sticky;top:74px;background:#fff;border-radius:22px;padding:18px;box-shadow:0 2px 12px rgba(74,58,138,.08)}
+  .ident h1{font-size:20px;font-weight:800}
+  .ident .meta{color:var(--muted);font-size:13px;font-weight:600;margin-top:2px}
+  .ident dl{margin-top:14px;display:grid;grid-template-columns:auto 1fr;gap:6px 10px;font-size:13px;font-weight:600}
+  .ident dt{color:var(--muted)} .ident dd{font-weight:800}
+  .flags{margin-top:16px}
+  .flag{border-radius:12px;padding:10px 12px;margin-bottom:8px;font-size:13px;font-weight:600;background:var(--red-l)}
+  .flag b{display:block;color:var(--red-d);font-weight:800}
+  .flag.warn{background:var(--yellow-l)} .flag.warn b{color:var(--yellow-d)}
+  .flag .route{color:var(--ink-2);margin-top:3px;font-size:12px}
+  .approval{margin-top:14px;font-size:12px;font-weight:800;color:#146F60;background:var(--teal-l);padding:8px 10px;border-radius:10px}
+  .canvas>section{background:#fff;border-radius:22px;padding:18px 20px;margin-bottom:16px;box-shadow:0 2px 12px rgba(74,58,138,.06)}
+  .canvas h2{font-size:15px;font-weight:800;margin-bottom:10px;display:flex;align-items:baseline;gap:10px;color:var(--purple-d)}
+  .canvas h2 span{font-weight:600;color:var(--muted);font-size:13px}
+  .score{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .score .big{font-size:40px;font-weight:800;line-height:1;color:var(--purple-d)}
+  .band{padding:4px 12px;border-radius:999px;font-weight:800;font-size:13px}
+  .band.mod{background:var(--orange-l);color:#9A4A12} .band.rem{background:var(--green-l);color:var(--green-d)}
+  .denom{color:var(--muted);font-size:13px;font-weight:700}
+  .delta{font-size:16px;font-weight:600;line-height:1.5;margin-top:10px;max-width:72ch;color:var(--ink-2)}
+  .tl{width:100%;height:auto;display:block}
+  .legend{display:flex;gap:14px;font-size:12px;font-weight:700;color:var(--ink-2);margin-top:6px;flex-wrap:wrap}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .div{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .div .box{background:var(--lav);border-radius:14px;padding:14px}
+  .div .box h3{font-size:12px;color:var(--muted);font-weight:800;margin-bottom:6px}
+  .div .stat{font-size:17px;font-weight:800;background:none;box-shadow:none;padding:0;border-radius:0;display:block}
+  .pattern{background:var(--yellow-l);border-radius:14px;padding:14px 16px;margin-top:12px;font-weight:600}
+  .pattern b{color:var(--yellow-d);font-weight:800}
+  .pattern p{margin-top:4px;max-width:78ch;color:var(--ink-2)}
+  .lab{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:8px 16px;font-size:13px;margin-top:12px;font-weight:600}
+  .lab .hh{color:var(--muted);font-weight:800;font-size:12px}
+  .stale{color:var(--red-d);font-weight:800} .ageing{color:var(--yellow-d);font-weight:800} .current{color:var(--green-d);font-weight:800}
+  .concerns{list-style:none;counter-reset:c}
+  .concerns li{counter-increment:c;display:grid;grid-template-columns:30px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-weight:700;font-size:16px}
+  .concerns li::before{content:counter(c);width:24px;height:24px;border-radius:50%;background:var(--purple);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:800}
+  .unsaid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .unsaid div{background:var(--purple-l);border-radius:14px;padding:12px 14px;font-weight:600;font-size:14px}
+  .unsaid div b{display:block;font-weight:800;color:var(--purple-d)} .unsaid div span{color:var(--ink-2);font-size:13px}
+  .refer{display:flex;gap:8px;flex-wrap:wrap}
+  .refer button{background:var(--lav);color:var(--purple-d);padding:9px 16px;border-radius:999px;font-weight:800}
+  .refer button.sent{background:var(--teal);color:#fff}
+  .tag{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:800}
+  .tag.warn{background:var(--yellow-l);color:var(--yellow-d)} .tag.ok{background:var(--green-l);color:var(--green-d)} .tag.grey{background:var(--lav);color:var(--ink-2)}
+  .grid-foods{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .food{border:2px solid var(--line);border-radius:16px;padding:12px;font-size:13px;font-weight:600}
+  .food b{display:block;font-size:14px;font-weight:800} .food .s{color:var(--muted)}
+  .food.foe{border-color:var(--red);background:var(--red-l)} .food.retry{border-color:var(--yellow);background:var(--yellow-l)} .food.friend{border-color:var(--green);background:var(--green-l)}
+  .breadth{display:flex;gap:8px;align-items:flex-end;height:110px;margin-top:6px}
+  .breadth div{flex:1;background:var(--purple);border-radius:8px 8px 0 0;color:#fff;font-size:13px;text-align:center;padding-top:4px;font-weight:800}
+  .breadth div.low{background:var(--red)}
+  .breadth-lab{display:flex;gap:8px;font-size:12px;color:var(--muted);font-weight:700} .breadth-lab div{flex:1;text-align:center}
+  .note{font-size:13px;color:var(--muted);margin-top:10px;font-weight:600}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--purple-d);color:#fff;padding:12px 18px;border-radius:999px;font-weight:800;font-size:14px;display:none;z-index:9}
+
+  .modes{margin-left:auto;display:flex;background:var(--lav);border-radius:999px;padding:3px}
+  .modes button{padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:var(--muted)}
+  .modes button.on{background:var(--grad);color:#fff}
+  .cgrec{margin-top:16px;background:#fff;border-radius:20px;padding:14px;box-shadow:0 2px 10px rgba(74,58,138,.08)}
+  .cgrec .quick{margin-top:0}
+  .cgrec .quick button{box-shadow:none;background:var(--lav)}
+  .cgrec .free{box-shadow:none;background:var(--lav)}
+  .cgrec .entry{background:var(--lav);box-shadow:none}
+  .entry .pill.cost{background:var(--yellow-l);color:var(--yellow-d)} .entry .pill.pharm{background:var(--purple-l);color:var(--purple-d)} .entry .pill.diet{background:var(--green-l);color:var(--green-d)} .entry .pill.good{background:var(--teal-l);color:#146F60}
+
+  /* font blend: Plex for clinical chrome, Nunito for patient-facing */
+  .phone,.cgwrap,.roles{font-family:"Nunito",system-ui,sans-serif}
+  .mark{font-family:"IBM Plex Sans",system-ui,sans-serif;font-weight:600}
+  .clin{font-family:"IBM Plex Sans",system-ui,sans-serif}
+  .clin .ident h1,.clin .canvas h2,.clin .score .big{font-weight:600}
+  .clin .flag b,.clin .pattern b,.clin .band,.clin .tag,.clin .approval,.clin th,.clin .ident dd,.clin .food b{font-weight:600}
+  .clin .delta,.clin .concerns li,.clin td,.clin .food,.clin .lab,.clin .unsaid div,.clin .pattern,.clin .ident dl{font-weight:400}
+  .clin .unsaid div b,.clin .stale,.clin .ageing,.clin .current,.clin .legend,.clin .breadth div,.clin .breadth-lab,.clin .note,.clin .denom,.clin .div .stat,.clin .ident .meta,.clin .canvas h2 span,.clin .refer button{font-weight:500}
+  /* camera */
+  .snap{margin-top:12px;display:flex;gap:8px}
+  .snap label{flex:1;background:var(--grad);color:#fff;border-radius:16px;padding:14px;font-weight:800;text-align:center;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+  .snap label span{font-size:22px}
+  .snap input{display:none}
+  .snapres{display:none;margin-top:10px;background:var(--lav);border-radius:16px;padding:12px;align-items:center;gap:12px}
+  .snapres.on{display:flex}
+  .snapres img{width:64px;height:64px;object-fit:cover;border-radius:12px;background:#ddd}
+  .snapres .g{font-weight:800} .snapres .g small{display:block;font-weight:700;color:var(--muted);font-size:12px}
+  .snapres .chips{margin-top:6px}
+  @media (max-width:900px){.clin{grid-template-columns:1fr}.ident{position:static}.div,.unsaid,.two{grid-template-columns:1fr}.grid-foods{grid-template-columns:1fr 1fr}.roles{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+
+<header class="rail">
+  <div class="mark">HEARD<small>Health · Empowerment · Advocacy · Resilience · Dignity</small></div>
+  <nav class="roles" role="tablist">
+    <button role="tab" aria-selected="true" data-v="patient">Patient</button>
+        <button role="tab" aria-selected="false" data-v="caregiver">Caregiver</button>
+    <button role="tab" aria-selected="false" data-v="doctor">Doctor</button>
+    <button role="tab" aria-selected="false" data-v="pharm">Pharmacist</button>
+    <button role="tab" aria-selected="false" data-v="diet">Dietitian</button>
+  </nav>
+</header>
+
+<!-- SVG defs shared -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="gummy">
+      <ellipse cx="60" cy="118" rx="34" ry="8" fill="rgba(0,0,0,.12)"/>
+      <rect x="28" y="62" width="64" height="52" rx="16" fill="#F0803C"/>
+      <circle cx="44" cy="80" r="5" fill="#F5C542"/><circle cx="72" cy="94" r="5" fill="#2BB5A0"/><circle cx="58" cy="102" r="4" fill="#E84545"/>
+      <rect x="18" y="72" width="14" height="30" rx="7" fill="#7B5FC7"/><rect x="88" y="72" width="14" height="30" rx="7" fill="#7B5FC7"/>
+      <ellipse cx="42" cy="114" rx="12" ry="7" fill="#fff"/><ellipse cx="78" cy="114" rx="12" ry="7" fill="#fff"/>
+      <path d="M38 24 L34 4 L48 20 Z M82 24 L86 4 L72 20 Z" fill="#7B5FC7"/>
+      <ellipse cx="60" cy="40" rx="32" ry="30" fill="#7B5FC7"/>
+      <circle cx="47" cy="36" r="10" fill="#fff"/><circle cx="73" cy="36" r="10" fill="#fff"/>
+      <circle cx="49" cy="38" r="5" fill="#2B2540"/><circle cx="75" cy="38" r="5" fill="#2B2540"/>
+      <circle cx="51" cy="36" r="1.6" fill="#fff"/><circle cx="77" cy="36" r="1.6" fill="#fff"/>
+      <path d="M46 54 Q60 66 74 54" stroke="#2B2540" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="55" y="57" width="10" height="7" rx="2" fill="#fff"/>
+      <circle cx="36" cy="48" r="5" fill="#F0803C" opacity=".5"/><circle cx="84" cy="48" r="5" fill="#F0803C" opacity=".5"/>
+    </g>
+    <g id="pooshape"><path d="M22 50 Q10 50 12 40 Q8 34 16 30 Q14 22 24 22 Q26 12 34 16 Q40 10 42 20 Q50 22 46 30 Q54 34 48 40 Q52 50 40 50 Z"/></g>
+  </defs>
+</svg>
+
+<!-- ================= PATIENT ================= -->
+<main class="view active" id="v-patient">
+  <div class="phone" id="pphone">
+    <div class="top">
+      <div style="display:flex;align-items:center;gap:10px"><div class="h">Marcus</div><div class="modes"><button class="on" onclick="mode('chat',this)">💬 Chat</button><button onclick="mode('game',this)">🎮 Game</button></div></div>
+      <div class="sub" id="p-sub">Tap what happened. Words only if you want.</div>
+      <div id="p-seg" style="display:none"><div class="seg"><button class="on" onclick="kidTab('home',this)">Home</button><button onclick="kidTab('tummy',this)">Tummy Monster</button><button onclick="kidTab('pain',this)">Pain Scale</button><button onclick="kidTab('food',this)">Food Detective</button></div></div>
+    </div>
+    <div class="body">
+     <div id="p-chat">
+      <div class="quick">
+        <button onclick="askStool()"><span>🚽</span>Went</button>
+        <button onclick="askPain()"><span>⚡</span>Pain</button>
+        <button onclick="askFood()"><span>🍜</span>Ate</button>
+      </div>
+
+      <div class="free">
+        <textarea id="free" placeholder="Or just say it. e.g. “last night was very painful”"></textarea>
+        <div class="row"><button class="mic" aria-label="Speak">🎙</button><button class="btn" onclick="parseFree()">Record</button></div>
+      </div>
+
+      <div class="ask" id="ask"></div>
+
+      <div class="today">
+        <h3>Today · Friday 4 Sep</h3>
+        <div id="entries">
+          <div class="entry"><span class="t">06:40</span>Went · type 6 · blood mixed<span class="pill">night</span></div>
+          <div class="entry"><span class="t">08:10</span>Pain 6 · after breakfast</div>
+        </div>
+      </div>
+
+      <div class="cardp"><b>Your card for Tuesday is ready</b><span>Dr Nair, 8 Sep. Read it, change it, then share. Nothing goes until you say so.</span><br><button class="btn" onclick="toast('Card opened')">Open card</button></div>
+     </div>
+     <div id="p-game" class="kid" style="display:none">
+      <!-- HOME -->
+      <div id="k-home">
+        <div class="stats"><div class="stat">🔥 <span id="streak">3</span> days this week</div><div class="stat xp">⭐ <span id="xp">340</span> XP</div></div>
+        <div class="room" id="room">
+          <div class="plant"></div><div class="lamp"></div><div class="sofa"></div>
+          <svg class="gummy" viewBox="0 0 120 130"><use href="#gummy"/></svg>
+          <div class="zz">z z z</div>
+          <div class="name" id="gname">Gummy · Young stage 🌺</div>
+        </div>
+        <div class="xpbar"><i id="xpfill" style="width:68%"></i></div>
+        <div class="xplab"><span id="xplab">340 / 500 XP to Grown ✨</span></div>
+        <div class="logcard" onclick="kidTab('tummy',document.querySelectorAll('.kid .seg button')[1])"><div><b>Log today</b><span>How is Gummy feeling?</span></div><div class="xpchip"><big>⭐</big>+25 XP</div></div>
+        <div class="road">
+          <h4>🗺️ Remission Road <a href="#" onclick="toast('Full map');return false">See full map →</a></h4>
+          <div class="nodes">
+            <div class="node done">🏡</div><div class="roadseg done"></div>
+            <div class="node here">🔥</div><div class="roadseg"></div>
+            <div class="node locked real">🔍</div><div class="roadseg"></div>
+            <div class="node locked real">💊</div><div class="roadseg"></div>
+            <div class="node locked real">🏆</div>
+          </div>
+          <div class="roadnote"><i></i>Teal dot = unlocked by something real from your doctor, not by playing. Next: a calprotectin test that comes back normal.</div>
+        </div>
+      </div>
+
+      <!-- TUMMY MONSTER -->
+      <div id="k-tummy" style="display:none">
+        <div class="game">
+          <div class="h">What did your poo look like?</div>
+          <div class="sub">Tap the one that's closest. No wrong answers.</div>
+          <div class="poo" id="poo"></div>
+          <div class="chips" style="margin-top:14px"><button onclick="tog(this)">Went at night 🌙</button><button class="blood" onclick="tog(this)">Saw blood 🩸</button><button onclick="tog(this)">Had to rush 💨</button></div>
+          <div class="chips"><button class="btn grad" style="width:100%" onclick="kidLog('tummy',25,'Poo logged')">Tell Gummy ⭐ +25</button></div>
+          <div class="reward" id="rw-tummy">Gummy feels heard. +25 XP</div>
+        </div>
+      </div>
+
+      <!-- PAIN -->
+      <div id="k-pain" style="display:none">
+        <div class="game">
+          <div class="h">How much does your tummy hurt right now?</div>
+          <div class="sub">Pick the face that feels most like you.</div>
+          <div class="kfaces" id="kfaces"></div>
+          <div class="chips" style="margin-top:14px"><button onclick="tog(this)">After eating 🍚</button><button onclick="tog(this)">At school 🏫</button><button onclick="tog(this)">Woke me up 🌙</button></div>
+          <div class="chips"><button class="btn grad" style="width:100%" onclick="kidLog('pain',25,'Pain logged')">Tell Gummy ⭐ +25</button></div>
+          <div class="reward" id="rw-pain">Thanks for telling. +25 XP</div>
+        </div>
+      </div>
+
+      <!-- FOOD -->
+      <div id="k-food" style="display:none">
+        <div class="game">
+          <div class="h">Food Detective 🔍</div>
+          <div class="sub">Which foods are friends right now? Things can change — a foe can become a friend again.</div>
+          <div class="meals"><button class="on">🌅 Breakfast</button><button>☀️ Lunch</button><button>🌙 Dinner</button></div>
+          <div class="snap"><label><span>📷</span>Snap your plate<input type="file" accept="image/*" capture="environment" onchange="snap(this,'k')"></label></div>
+          <div class="snapres" id="snap-k"><img id="img-k" alt=""><div class="g">Gummy thinks this is…<small>tap to confirm, or fix it</small><div class="chips"><button onclick="snapPick(this,'k','Chicken rice')">Chicken rice</button><button onclick="snapPick(this,'k','Fish soup')">Fish soup</button><button onclick="snapPick(this,'k','Something else')">Something else</button></div></div></div>
+          <input class="search" placeholder="Or search foods…" oninput="filt(this.value)">
+          <div class="foods" id="foods"></div>
+          <div class="reward" id="rw-food">Milk is a friend again! +40 XP for trying</div>
+        </div>
+      </div>
+    
+     </div>
+    </div>
+    <div class="tabs">
+      <button class="on"><span>📝</span>Record</button><button><span>🍽️</span>Food</button><button><span>📄</span>My card</button><button><span>💊</span>Medicines</button><button><span>🧭</span>Road</button>
+    </div>
+  </div>
+</main>
+
+<!-- ================= CAREGIVER ================= -->
+<main class="view" id="v-caregiver">
+  <div class="cgwrap">
+    <div class="h">Zara, today</div>
+    <div class="sub">She logged through Gummy this afternoon. Here's her day beside yours.</div>
+    <div class="gstat" id="gstat">
+      <svg viewBox="0 0 120 130"><use href="#gummy"/></svg>
+      <div><b id="gs-b">Gummy is awake · 3 of 3 days for alive, 5 for thriving</b><span id="gs-s">Tummy Monster and Pain Scale done today. Food Detective not yet.</span></div>
+      <button class="btn ghost" id="restbtn" onclick="rest()">Turn on rest mode</button>
+    </div>
+    <div class="cgrec">
+      <div class="quick">
+        <button onclick="cgAsk('med')"><span>💊</span>Medicines</button>
+        <button onclick="cgAsk('eat')"><span>🍚</span>Eating</button>
+        <button onclick="cgAsk('mood')"><span>🙂</span>How she is</button>
+      </div>
+      <div class="free">
+        <textarea id="cgfree" placeholder="Or just say it. e.g. “the medicine is a bit too expensive” · “she keeps being drowsy” · “she's started eating less” · “coping well with the meds”"></textarea>
+        <div class="row"><button class="mic" aria-label="Speak">🎙</button><button class="btn" onclick="cgParse()">Record</button></div>
+      </div>
+      <div class="ask" id="cgask"></div>
+      <div class="today"><h3>What you've told the team this week</h3><div id="cgentries">
+        <div class="entry"><span class="t">Tue</span>Ate half of dinner, no complaints<span class="pill">dietitian</span></div>
+        <div class="entry"><span class="t">Mon</span>Coping well with the new tablets<span class="pill">nurse</span></div>
+      </div></div>
+    </div>
+    <div class="two">
+      <div class="persp"><h3>Zara said</h3><div class="val">6<small>out of 10</small></div><div class="prov">Child, via Gummy · Faces scale</div><p>Poo "like porridge" — type 6. Went 4 times. Tummy hurt "a lot after recess".</p></div>
+      <div class="persp"><h3>You said</h3><div class="val">3<small>out of 10</small></div><div class="prov">Caregiver</div><p>Seemed fine at dinner. Ate half. Didn't complain.</p></div>
+    </div>
+    <div class="diff">Two pictures of the same afternoon. That's normal — kids and parents disagree on pain about three times more than on night-time toilet trips. Both go to Dr Lim as they are. Nobody has to be right.</div>
+    <div class="two">
+      <div class="persp"><h3>This week</h3><table style="margin-top:8px"><tr><th>Day</th><th>Zara</th><th>You</th></tr><tr><td>Mon</td><td>Pain 2 · type 4</td><td>Pain 2</td></tr><tr><td>Wed</td><td>Pain 5 · type 6</td><td>Pain 2</td></tr><tr><td>Fri</td><td>Pain 6 · type 6</td><td>Pain 3</td></tr></table></div>
+      <div class="persp"><h3>School</h3><p>Zara mentioned recess twice this week. A letter asking Ms Rahman for unrestricted toilet access is drafted.</p><button class="btn ghost small" style="margin-top:10px" onclick="toast('Letter opened')">Review the letter</button></div>
+    </div>
+  </div>
+</main>
+
+<!-- ================= DOCTOR ================= -->
+<main class="view" id="v-doctor">
+  <div class="clin">
+    <aside class="ident">
+      <h1>Marcus Tan</h1><div class="meta">34 · Ulcerative colitis, left-sided · Dx 2021</div>
+      <dl><dt>Therapy</dt><dd>Mesalazine 2.4 g, since Mar 2024</dd><dt>Last seen</dt><dd>4 Aug · 31 days</dd><dt>Next</dt><dd>8 Sep, 2:40 pm</dd><dt>Logged</dt><dd>26 of 28 days</dd></dl>
+      <div class="flags">
+        <div class="flag"><b>Nocturnal stools</b>9 of last 14 nights<div class="route">IBD nurse notified 1 Sep · acknowledged</div></div>
+        <div class="flag"><b>Blood, mixed</b>11 of 14 days, 1 day "mostly"<div class="route">Routed to you · 2 Sep</div></div>
+        <div class="flag warn"><b>NSAID exposure</b>Ibuprofen from 19 Aug<div class="route">Flagged by pharmacy</div></div>
+      </div>
+      <div class="approval">✓ Card approved by patient 4 Sep, 9:12 pm</div>
+    </aside>
+    <div class="canvas">
+      <section>
+        <h2>Derived activity <span>computed from daily logs — never asked as a questionnaire</span></h2>
+        <div class="score"><div class="big">SCCAI 8</div><span class="band mod">moderate</span><span class="denom">from 26 of 28 days · was 2 at last visit</span></div>
+        <div class="delta">Quiet for the first two weeks, then a clear turn from about 22 August: frequency doubled, stools loosened to 6–7, blood appeared, night-time stools began. Pain rose in step and is mostly after meals.</div>
+      </section>
+      <section>
+        <h2>Twenty-eight days <span>8 Aug – 4 Sep</span></h2>
+        <div id="tl-doc"></div>
+        <div class="legend"><span><i style="background:var(--b5)"></i>Bristol type</span><span><i style="background:var(--purple-d)"></i>Stools / 24 h</span><span><i style="background:var(--purple)"></i>of which at night</span><span><i style="background:var(--red)"></i>Blood</span><span><i style="background:var(--orange);border-radius:50%"></i>Pain 0–10</span></div>
+      </section>
+      <section>
+        <h2>Symptoms against inflammation <span>not the same measurement</span></h2>
+        <div class="div"><div class="box"><h3>Symptom burden</h3><div class="stat">High, rising since 22 Aug</div></div><div class="box"><h3>Objective signal</h3><div class="stat">Untested this episode</div></div></div>
+        <div class="pattern"><b>Symptoms raised, no current marker.</b><p>Last calprotectin is 124 days old and predates this episode. That is not the same as a normal calprotectin. Symptoms are also confounded: ibuprofen from 19 Aug, loperamide self-started 27 Aug — see pharmacist.</p></div>
+        <div class="lab"><div class="hh">Test</div><div class="hh">Result</div><div class="hh">Collected</div><div class="hh">Age</div>
+          <div>CRP</div><div>11 mg/L</div><div>17 Aug</div><div class="ageing">18 d · ageing</div>
+          <div>Calprotectin</div><div>480 µg/g</div><div>3 May</div><div class="stale">124 d · stale</div>
+          <div>Haemoglobin</div><div>12.8 g/dL</div><div>17 Aug</div><div class="ageing">18 d · ageing</div></div>
+      </section>
+      <section><h2>What Marcus most wants to talk about <span>ranked by him</span></h2>
+        <ol class="concerns"><li>Waking at night to go — I'm scared it's getting worse</li><li>Whether I can still travel for my sister's wedding in October</li><li>The ibuprofen I've been taking for my back — is that ok?</li></ol></section>
+      <section><h2>Logged often, never raised in clinic</h2>
+        <div class="unsaid"><div><b>Tiredness</b><span>16 of 28 days · never raised at a visit</span></div><div><b>Toilet access at work</b><span>8 mentions · open-plan office, one cubicle</span></div></div></section>
+      <section><h2>Refer <span>one tap — the summary goes with it</span></h2>
+        <div class="refer"><button onclick="refer(this,'IBD nurse')">IBD nurse</button><button onclick="refer(this,'dietitian')">Dietitian</button><button onclick="refer(this,'pharmacist')">Pharmacist</button><button onclick="refer(this,'medical social worker')">Medical social worker</button><button onclick="refer(this,'psychologist')">Psychologist</button></div></section>
+    </div>
+  </div>
+</main>
+
+<!-- ================= PHARMACIST ================= -->
+<main class="view" id="v-pharm">
+  <div class="clin">
+    <aside class="ident">
+      <h1>Marcus Tan</h1><div class="meta">34 · UC · Mesalazine 2.4 g</div>
+      <dl><dt>MARS-5</dt><dd>17 / 25 <span style="color:var(--red-d)">↓ from 24</span></dd><dt>Missed</dt><dd>9 of 28</dd><dt>Pattern</dt><dd>Stopped when well</dd><dt>Steroids 12 mo</dt><dd>1 course · 42 d</dd></dl>
+      <div class="flags">
+        <div class="flag"><b>NSAID</b>Ibuprofen 400 mg from 19 Aug, OTC<div class="route">Recognised flare trigger</div></div>
+        <div class="flag warn"><b>Loperamide</b>Self-started 27 Aug<div class="route">Doctor's frequency may be masked</div></div>
+        <div class="flag warn"><b>Adherence fell before symptoms</b>Gaps from 17 Aug · turn 22 Aug<div class="route">Counselling call suggested</div></div>
+      </div>
+      <div class="approval">✓ Card approved 4 Sep</div>
+    </aside>
+    <div class="canvas">
+      <section><h2>Doses against symptoms <span>did stopping come first?</span></h2>
+        <div id="tl-pharm"></div>
+        <div class="legend"><span><i style="background:var(--green)"></i>Taken</span><span><i style="background:var(--red)"></i>Missed</span><span><i style="background:var(--purple-d)"></i>Stools / 24 h</span><span><i style="background:var(--orange);border-radius:50%"></i>Pain</span></div>
+        <div class="pattern"><b>Stopping preceded the symptoms.</b><p>Doses went irregular from 17 August while he was well — "felt better" on 6 of 9 misses. Frequency and blood rose five days later. Classic remission-adherence pattern. A conversation, not a lecture.</p></div></section>
+      <section><h2>Medicines that change what the other dashboards see</h2>
+        <table><tr><th>Medicine</th><th>Since</th><th>Source</th><th>Effect on the streams</th></tr>
+          <tr><td>Ibuprofen 400 mg</td><td>19 Aug</td><td><span class="tag grey">Patient, OTC</span></td><td>NSAID — recognised UC flare trigger. Started 3 days before symptoms turned.</td></tr>
+          <tr><td>Loperamide 2–4 mg</td><td>27 Aug</td><td><span class="tag grey">Patient, OTC</span></td><td>Masks frequency. True count since 27 Aug is probably higher than logged.</td></tr>
+          <tr><td>Ferrous fumarate</td><td>—</td><td><span class="tag ok">Not taking</span></td><td>Would darken and firm stool. Not a confounder here.</td></tr></table></section>
+      <section><h2>Also taking <span>asked plainly, reported verbatim</span></h2>
+        <table><tr><th>What</th><th>How often</th><th>Type</th><th>Note</th></tr>
+          <tr><td>"Herbal tea from my mum for the stomach"</td><td>Most evenings</td><td><span class="tag grey">TCM</span></td><td>Unidentified. Ask what's in it — to know, not to stop it.</td></tr>
+          <tr><td>Probiotic capsules</td><td>Daily</td><td><span class="tag grey">Supplement</span></td><td>Low concern.</td></tr></table></section>
+      <section><h2>Why he misses doses <span>his words</span></h2>
+        <table><tr><th>Reason</th><th class="n">Times</th><th>Where it points</th></tr>
+          <tr><td>Felt better, didn't seem needed</td><td class="n">6</td><td>Belief about necessity — a five-minute conversation</td></tr>
+          <tr><td>Forgot</td><td class="n">2</td><td>Reminder timing</td></tr>
+          <tr><td>Ran out</td><td class="n">1</td><td>Refill sync</td></tr></table></section>
+    </div>
+  </div>
+</main>
+
+<!-- ================= DIETITIAN ================= -->
+<main class="view" id="v-diet">
+  <div class="clin">
+    <aside class="ident">
+      <h1>Marcus Tan</h1><div class="meta">34 · UC · Referred by Dr Nair 4 Sep</div>
+      <dl><dt>Weight</dt><dd>71.2 kg <span style="color:var(--red-d)">−3.1 % / 4 wk</span></dd><dt>MUST</dt><dd>1 · medium</dd><dt>Foods / week</dt><dd>9 <span style="color:var(--red-d)">from 23</span></dd><dt>Setting</dt><dd>Hawker most lunches</dd></dl>
+      <div class="flags">
+        <div class="flag"><b>Diet narrowing</b>Distinct foods down 61 % in 4 weeks<div class="route">Fastest fall on the caseload this month</div></div>
+        <div class="flag warn"><b>Dairy removed without advice</b>Milk out since 24 Aug after one bad day<div class="route">Reintroduction candidate</div></div>
+        <div class="flag warn"><b>Meals skipped on pain days</b>7 of 14<div class="route">Appetite trending down</div></div>
+      </div>
+      <div class="approval">✓ Card approved 4 Sep</div>
+    </aside>
+    <div class="canvas">
+      <section><h2>How wide the diet is <span>distinct foods per week</span></h2>
+        <div class="breadth"><div style="height:100%">23</div><div style="height:91%">21</div><div style="height:61%">14</div><div style="height:39%" class="low">9</div></div>
+        <div class="breadth-lab"><div>8–14 Aug</div><div>15–21 Aug</div><div>22–28 Aug</div><div>29 Aug–4 Sep</div></div>
+        <div class="delta">Fewer than half the foods he ate a month ago. Most of what's gone is what he eats with other people.</div></section>
+      <section><h2>Friend, foe, or trying again <span>his own list — only you can make a foe permanent</span></h2>
+        <div class="grid-foods">
+          <div class="food foe"><b>Laksa</b><span class="s">Foe 16 d · 3 exposures · never retried</span></div>
+          <div class="food foe"><b>Char kway teow</b><span class="s">Foe 14 d · 4 exposures</span></div>
+          <div class="food foe"><b>Nasi lemak</b><span class="s">Foe 12 d · 5 exposures</span></div>
+          <div class="food retry"><b>Milk</b><span class="s">1 exposure · dropped after one bad day → suggest retry</span></div>
+          <div class="food foe"><b>Rojak</b><span class="s">Foe 9 d · 2 exposures</span></div>
+          <div class="food foe"><b>Chilli</b><span class="s">Foe 8 d · many exposures</span></div>
+          <div class="food retry"><b>Roti prata</b><span class="s">2 exposures → suggest retry</span></div>
+          <div class="food friend"><b>Fish soup</b><span class="s">Friend · 11 times · no pattern</span></div>
+        </div></section>
+      <section><h2>Food beside symptoms <span>association only · sorted by how often eaten, not how scary</span></h2>
+        <table><tr><th>Food</th><th class="n">Eaten</th><th>Bristol shift 6–12 h</th><th>Pain</th><th>Read</th></tr>
+          <tr><td>Chicken rice</td><td class="n">11</td><td>none</td><td>0</td><td><span class="tag ok">no pattern</span></td></tr>
+          <tr><td>Fish soup</td><td class="n">11</td><td>none</td><td>0</td><td><span class="tag ok">no pattern</span></td></tr>
+          <tr><td>Congee</td><td class="n">9</td><td>none</td><td>−1</td><td><span class="tag ok">no pattern</span></td></tr>
+          <tr><td>Nasi lemak</td><td class="n">5</td><td>+1 on 3 of 5</td><td>+2</td><td><span class="tag warn">weak association</span></td></tr>
+          <tr><td>Laksa</td><td class="n">3</td><td>+2 on 2 of 3</td><td>+3</td><td><span class="tag grey">too few to say</span></td></tr>
+          <tr><td>Milk</td><td class="n">1</td><td>+2</td><td>+3</td><td><span class="tag grey">one day is not a pattern</span></td></tr></table>
+        <div class="note">All inside a flare that began ~22 Aug. Food and flare are tangled. Nothing here is a cause.</div></section>
+      <section><h2>When pain comes</h2><div class="div"><div class="box"><h3>Within an hour of eating</h3><div class="stat">9 of last 14 days</div></div><div class="box"><h3>Meals skipped</h3><div class="stat">7 of 14 · all pain days</div></div></div></section>
+    </div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---- mock 28 days ---- */
+const D={bristol:[4,4,5,4,4,5,4,4,4,5,4,4,5,5,6,6,6,7,6,7,7,6,7,7,6,7,7,7],freq:[3,3,4,3,3,4,3,3,3,4,3,4,4,4,5,5,6,6,6,7,5,6,7,7,6,7,8,7],noct:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,2,1,1,2,2],blood:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,1,2,2,2,2,3,2],pain:[2,2,3,2,2,3,2,2,2,3,2,3,3,3,4,4,5,5,5,6,5,6,6,7,6,7,7,7],dose:[1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,0,1,1,0,1,1,1,1,1,1,1],events:{12:'Ibuprofen',20:'Loperamide',10:'CRP 11'}};
+const B=['#8C5A2B','#A6713A','#BF8A4F','#C9A365','#D9B96E','#E6C34F','#EDB52E'];
+const labels=['8 Aug','','','','','','14','','','','','','','21','','','','','','','28','','','','','1 Sep','','4 Sep'];
+function timeline(el,o){const W=920,pl=44,pr=16,n=28,cw=(W-pl-pr)/n,H=o.pharm?250:300;let s=`<svg class="tl" viewBox="0 0 ${W} ${H}">`;
+ for(const[d,t]of Object.entries(D.events)){const x=pl+(d-1)*cw+cw/2;s+=`<line x1="${x}" y1="8" x2="${x}" y2="${H-22}" stroke="#8B85A3" stroke-dasharray="3 3"/><text x="${x+4}" y="16" font-size="10" font-weight="700" fill="#8B85A3">${t}</text>`}
+ let y;
+ if(o.pharm){y=28;s+=`<text x="0" y="${y+11}" font-size="11" font-weight="700" fill="#8B85A3">Dose</text>`;D.dose.forEach((v,i)=>{const x=pl+i*cw;s+=`<rect x="${x+1}" y="${y}" width="${cw-2}" height="14" rx="4" fill="${v?'#2ECC71':'#E84545'}"/>`});y=54}
+ else{y=28;s+=`<text x="0" y="${y+11}" font-size="11" font-weight="700" fill="#8B85A3">Bristol</text>`;D.bristol.forEach((v,i)=>{const x=pl+i*cw;s+=`<rect x="${x+1}" y="${y}" width="${cw-2}" height="14" rx="4" fill="${B[v-1]}"/><text x="${x+cw/2}" y="${y+11}" font-size="9" font-weight="800" text-anchor="middle" fill="#2B2540">${v}</text>`});y=50;s+=`<text x="0" y="${y+9}" font-size="11" font-weight="700" fill="#8B85A3">Blood</text>`;D.blood.forEach((v,i)=>{if(!v)return;const x=pl+i*cw;s+=`<rect x="${x+1}" y="${y}" width="${cw-2}" height="10" rx="3" fill="#E84545" opacity="${[0,.4,.7,1][v]}"/>`});y=70}
+ const fy=y,fh=110,mx=8;s+=`<text x="0" y="${fy+12}" font-size="11" font-weight="700" fill="#8B85A3">Stools</text><line x1="${pl}" y1="${fy+fh-fh*6/mx}" x2="${W-pr}" y2="${fy+fh-fh*6/mx}" stroke="#E6E1F2" stroke-dasharray="2 3"/><text x="0" y="${fy+fh-fh*6/mx+3}" font-size="10" fill="#8B85A3">6</text>`;
+ D.freq.forEach((v,i)=>{const x=pl+i*cw,h=fh*v/mx,nh=fh*D.noct[i]/mx;s+=`<rect x="${x+3}" y="${fy+fh-h}" width="${cw-6}" height="${h}" rx="3" fill="#4A3A8A"/>`;if(nh)s+=`<rect x="${x+3}" y="${fy+fh-nh}" width="${cw-6}" height="${nh}" rx="3" fill="#7B5FC7"/>`});
+ const pts=D.pain.map((v,i)=>`${pl+i*cw+cw/2},${fy+fh-fh*v/10}`).join(' ');s+=`<polyline points="${pts}" fill="none" stroke="#F0803C" stroke-width="2.5"/>`;D.pain.forEach((v,i)=>{s+=`<circle cx="${pl+i*cw+cw/2}" cy="${fy+fh-fh*v/10}" r="3" fill="#fff" stroke="#F0803C" stroke-width="2"/>`});
+ labels.forEach((t,i)=>{if(!t)return;s+=`<text x="${pl+i*cw+cw/2}" y="${H-6}" font-size="10" font-weight="700" text-anchor="middle" fill="#8B85A3">${t}</text>`});el.innerHTML=s+'</svg>'}
+timeline(document.getElementById('tl-doc'),{});timeline(document.getElementById('tl-pharm'),{pharm:true});
+
+/* ---- nav ---- */
+document.querySelectorAll('.roles button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.roles button').forEach(x=>x.setAttribute('aria-selected','false'));b.setAttribute('aria-selected','true');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById('v-'+b.dataset.v).classList.add('active');window.scrollTo({top:0})}));
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
+function refer(b,w){b.classList.add('sent');b.textContent=b.textContent.replace(/ ✓$/,'')+' ✓';toast('Referred to '+w+' with summary attached')}
+function tog(b){b.classList.toggle('on')}
+
+/* ---- faces + poo SVG ---- */
+const faceSVG=(lvl)=>{const m=[[38,'M22 40 Q32 48 42 40'],[38,'M22 41 Q32 46 42 41'],[38,'M22 43 L42 43'],[38,'M22 45 Q32 41 42 45'],[38,'M22 47 Q32 40 42 47'],[38,'M20 48 Q32 38 44 48']][lvl];const brow=lvl>=3?`<path d="M20 26 L28 29 M44 26 L36 29" stroke="#2B2540" stroke-width="2.5" stroke-linecap="round"/>`:'';const tear=lvl===5?`<ellipse cx="18" cy="38" rx="2.5" ry="4" fill="#2BB5A0"/><ellipse cx="46" cy="38" rx="2.5" ry="4" fill="#2BB5A0"/>`:'';return`<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="${['#F5C542','#F5C542','#F5C542','#F0A03C','#F0803C','#E84545'][lvl]}"/><circle cx="24" cy="30" r="3.5" fill="#2B2540"/><circle cx="40" cy="30" r="3.5" fill="#2B2540"/>${brow}<path d="${m[1]}" stroke="#2B2540" stroke-width="3" fill="none" stroke-linecap="round"/>${tear}</svg>`};
+const pooSVG=(t)=>{const col=B[t-1];const shapes=[`<circle cx="20" cy="40" r="7"/><circle cx="34" cy="34" r="7"/><circle cx="44" cy="44" r="6"/><circle cx="30" cy="48" r="6"/>`,`<path d="M12 44 Q14 30 26 30 Q30 22 40 28 Q52 30 50 42 Q48 52 34 50 Q18 52 12 44Z"/><circle cx="24" cy="38" r="3" fill="rgba(0,0,0,.15)"/><circle cx="38" cy="42" r="3" fill="rgba(0,0,0,.15)"/>`,`<path d="M10 40 Q12 26 28 28 Q44 26 52 36 Q54 50 36 50 Q16 52 10 40Z"/><path d="M18 36 Q26 40 22 46 M34 32 Q40 38 36 44" stroke="rgba(0,0,0,.18)" stroke-width="2" fill="none"/>`,`<path d="M8 40 Q12 26 30 28 Q48 26 56 36 Q54 50 36 50 Q14 52 8 40Z"/>`,`<circle cx="20" cy="38" r="9"/><circle cx="38" cy="34" r="9"/><circle cx="34" cy="48" r="8"/><circle cx="50" cy="44" r="7"/>`,`<path d="M10 42 Q14 30 26 34 Q34 26 40 34 Q52 30 54 44 Q50 54 36 52 Q20 56 10 42Z" opacity=".85"/><circle cx="22" cy="44" r="3" fill="rgba(255,255,255,.4)"/><circle cx="42" cy="46" r="3" fill="rgba(255,255,255,.4)"/>`,`<ellipse cx="32" cy="44" rx="24" ry="10" opacity=".7"/><ellipse cx="32" cy="40" rx="18" ry="6" opacity=".5"/>`][t-1];return`<svg viewBox="0 0 64 64"><g fill="${col}">${shapes}</g></svg>`};
+const pooNames=['Rabbit droppings','Lumpy log','Cracked log','Smooth snake','Soft blobs','Mushy','Watery'];
+document.getElementById('poo').innerHTML=[1,2,3,4,5,6,7].map(t=>`<button onclick="pick(this,'#poo')">${pooSVG(t)}Type ${t}<span class="lab">${pooNames[t-1]}</span></button>`).join('');
+document.getElementById('kfaces').innerHTML=[0,2,4,6,8,10].map((v,i)=>`<button onclick="pick(this,'#kfaces')">${faceSVG(i)}${['No hurt','Hurts a bit','Hurts more','Hurts a lot','Hurts a whole lot','Worst ever'][i]}</button>`).join('');
+function pick(b,sel){document.querySelectorAll(sel+' button').forEach(x=>x.classList.remove('on'));b.classList.add('on')}
+
+/* ---- kid state ---- */
+let XP=340,STREAK=3,restOn=false;
+function kidTab(id,btn){['home','tummy','pain','food'].forEach(k=>document.getElementById('k-'+k).style.display=k===id?'':'none');document.querySelectorAll('.kid .seg button').forEach(x=>x.classList.remove('on'));btn.classList.add('on')}
+function kidLog(which,pts,msg){XP+=pts;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';document.getElementById('xplab').textContent=XP>=500?'Gummy is Grown! ✨':`${XP} / 500 XP to Grown ✨`;if(XP>=500)document.getElementById('gname').textContent='Gummy · Grown stage 🌟';document.getElementById('rw-'+which).classList.add('on');toast(msg+' · logged as "child via Gummy"')}
+const FOODS=[['Chicken rice','friend'],['Fish soup','friend'],['Laksa','foe'],['Char kway teow','foe'],['Wonton mee','friend'],['Milk','retry'],['Nasi lemak','foe'],['Congee','friend'],['Roti prata','retry'],['Mee pok','friend']];
+function renderFoods(q=''){document.getElementById('foods').innerHTML=FOODS.filter(f=>f[0].toLowerCase().includes(q.toLowerCase())).map((f,i)=>`<div class="fd ${f[1]}" data-i="${FOODS.indexOf(f)}"><span class="dot"></span><div>${f[0]}<span class="st">${{friend:'friend food',foe:'foe food — for now',retry:'trying again 🕵️'}[f[1]]}</span></div><div class="sw"><button class="g" title="Friend" onclick="setF(${FOODS.indexOf(f)},'friend')">🙂</button><button class="y" title="Trying again" onclick="setF(${FOODS.indexOf(f)},'retry')">🕵️</button><button class="r" title="Foe for now" onclick="setF(${FOODS.indexOf(f)},'foe')">😣</button></div></div>`).join('')}
+function setF(i,s){const was=FOODS[i][1];FOODS[i][1]=s;renderFoods();if(was!=='friend'&&s==='friend'){document.getElementById('rw-food').textContent=FOODS[i][0]+' is a friend again! +40 XP for trying';document.getElementById('rw-food').classList.add('on');XP+=40;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%'}else if(s==='foe'){toast('Marked foe for now — it can come back')}}
+function filt(v){renderFoods(v)}
+renderFoods();
+function rest(){restOn=!restOn;const b=document.getElementById('restbtn');b.classList.toggle('on',restOn);b.textContent=restOn?'Rest mode is on':'Turn on rest mode';document.getElementById('room').classList.toggle('rest',restOn);document.getElementById('gs-b').textContent=restOn?'Gummy is resting':'Gummy is awake · 3 of 3 days for alive, 5 for thriving';document.getElementById('gs-s').textContent=restOn?'Streak paused. Nothing lost. Dr Lim can see rest mode is on.':'Tummy Monster and Pain Scale done today. Food Detective not yet.';toast(restOn?'Rest mode on. Nothing is lost.':'Rest mode off')}
+
+/* ---- patient quick record with structured follow-up ---- */
+const ask=document.getElementById('ask');
+let cur={};
+function askPain(src){cur={type:'pain',text:src||''};ask.className='ask on';ask.innerHTML=`<div class="q">${src?'You said it hurt. How much, 0 to 10?':'How much, 0 to 10?'}</div><div class="why">A number is something your doctor can compare week to week.</div><div class="scale">${[...Array(11).keys()].map(n=>`<button onclick="pick(this,'.scale');cur.score=${n}">${n}</button>`).join('')}</div><div class="chips"><button onclick="tog(this)">After eating</button><button onclick="tog(this)">Before going</button><button onclick="tog(this)">Woke me</button><button onclick="tog(this)">Cramping</button></div><div class="chips"><button class="btn" onclick="save()">Save</button><button class="btn ghost" onclick="ask.className='ask'">Skip</button></div>`}
+function askStool(src){cur={type:'stool',text:src||''};ask.className='ask on';ask.innerHTML=`<div class="q">${src?'You mentioned going. What was it like?':'What was it like?'}</div><div class="why">Tap the closest. This is the Bristol chart your doctor already uses.</div><div class="bristol">${[1,2,3,4,5,6,7].map(t=>`<button onclick="pick(this,'.bristol');cur.b=${t}">${pooSVG(t)}${t}</button>`).join('')}</div><div class="chips"><button onclick="tog(this)">At night</button><button onclick="tog(this)">Urgent</button><button class="blood" onclick="tog(this);cur.blood=1">Blood</button></div><div class="chips" id="bloodq" style="display:none"></div><div class="chips"><button class="btn" onclick="save()">Save</button><button class="btn ghost" onclick="ask.className='ask'">Skip</button></div>`;ask.querySelector('.blood').addEventListener('click',()=>{const q=document.getElementById('bloodq');q.style.display='flex';q.innerHTML=`<span style="font-size:12px;font-weight:800;color:var(--muted);align-self:center">Blood:</span><button onclick="pick(this,'#bloodq')">Streaks</button><button onclick="pick(this,'#bloodq')">Mixed in</button><button onclick="pick(this,'#bloodq')">Mostly blood</button>`})}
+function askFood(src){cur={type:'food',text:src||''};ask.className='ask on';ask.innerHTML=`<div class="q">What did you eat?</div><div class="why">Just the dish. Where and how much are optional.</div><div class="snap"><label><span>📷</span>Photo of the plate<input type="file" accept="image/*" capture="environment" onchange="snap(this,'p')"></label></div><div class="snapres" id="snap-p"><img id="img-p" alt=""><div class="g">Looks like…<small>confirm or fix</small><div class="chips"><button onclick="snapPick(this,'p','Chicken rice')">Chicken rice</button><button onclick="snapPick(this,'p','Fish soup')">Fish soup</button><button onclick="snapPick(this,'p','Something else')">Something else</button></div></div></div><input class="search" placeholder="or type it, e.g. chicken rice" id="fin"><div class="chips"><button onclick="tog(this)">Hawker</button><button onclick="tog(this)">Home</button><button onclick="tog(this)">Small portion</button><button onclick="tog(this)">Skipped a meal</button></div><div class="chips"><button class="btn" onclick="save()">Save</button><button class="btn ghost" onclick="ask.className='ask'">Skip</button></div>`}
+function parseFree(){const t=document.getElementById('free').value.trim();if(!t)return;const l=t.toLowerCase();const hasNum=/\b([0-9]|10)\s*(\/|out of)\s*10\b/.test(l);
+ if(/pain|hurt|cramp|ache|sore/.test(l)&&!hasNum){askPain(t);return}
+ if(/toilet|went|poo|stool|loo|bathroom|diarrh/.test(l)&&!/type\s*[1-7]/.test(l)){askStool(t);return}
+ if(/blood/.test(l)){askStool(t);return}
+ if(/ate|eat|lunch|dinner|breakfast|rice|noodle|laksa/.test(l)){askFood(t);return}
+ addEntry('Note · '+t);document.getElementById('free').value='';toast('Recorded')}
+function save(){let txt='';if(cur.type==='pain')txt=`Pain ${cur.score??'?'}`+(cur.text?' · "'+cur.text+'"':'');if(cur.type==='stool')txt=`Went · type ${cur.b??'?'}`+(cur.blood?' · blood':'')+(cur.text?' · "'+cur.text+'"':'');if(cur.type==='food'){const v=document.getElementById('fin')?.value;txt='Ate · '+(v||'?')}addEntry(txt);ask.className='ask';document.getElementById('free').value='';toast('Recorded')}
+function addEntry(t){const d=new Date(),hh=String(d.getHours()).padStart(2,'0'),mm=String(d.getMinutes()).padStart(2,'0');const e=document.createElement('div');e.className='entry';e.innerHTML=`<span class="t">${hh}:${mm}</span>${t}`;document.getElementById('entries').prepend(e)}
+
+/* ---- patient mode switch ---- */
+function mode(m,btn){document.querySelectorAll('.modes button').forEach(x=>x.classList.remove('on'));btn.classList.add('on');document.getElementById('p-chat').style.display=m==='chat'?'':'none';document.getElementById('p-game').style.display=m==='game'?'':'none';document.getElementById('p-seg').style.display=m==='game'?'':'none';document.getElementById('p-sub').textContent=m==='chat'?'Tap what happened. Words only if you want.':'Play to log. Gummy keeps the record.'}
+
+/* ---- caregiver record with structured follow-ups ---- */
+const cgask=document.getElementById('cgask');let cg={};
+function cgAsk(kind,src){cg={kind,text:src||''};cgask.className='ask on';
+ if(kind==='cost')cgask.innerHTML=`<div class="q">Which medicine, and how much of a strain?</div><div class="why">This goes to the pharmacist and the medical social worker. There are often options — generics, subsidy schemes, splitting supply.</div><div class="chips"><button onclick="tog(this)">Mesalazine</button><button onclick="tog(this)">Azathioprine</button><button onclick="tog(this)">Adalimumab</button><button onclick="tog(this)">Nutrition drinks</button></div><div class="chips"><button onclick="pick(this,'#cgask .lvl')" class="lvl">A bit</button><button onclick="pick(this,'#cgask .lvl')" class="lvl">A lot</button><button onclick="pick(this,'#cgask .lvl')" class="lvl">Can't continue</button></div><div class="chips"><button class="btn" onclick="cgSave('Medicine cost · '+chipsOf('#cgask'),'cost','pharmacist + MSW')">Save</button><button class="btn ghost" onclick="cgask.className='ask'">Skip</button></div>`;
+ if(kind==='drowsy')cgask.innerHTML=`<div class="q">When is she drowsy, and since when?</div><div class="why">Timing tells the pharmacist whether it's likely the medicine.</div><div class="chips"><button onclick="tog(this)">After the morning dose</button><button onclick="tog(this)">All day</button><button onclick="tog(this)">Evenings</button><button onclick="tog(this)">At school</button></div><div class="chips"><button onclick="pick(this,'#cgask .since')" class="since">Few days</button><button onclick="pick(this,'#cgask .since')" class="since">About a week</button><button onclick="pick(this,'#cgask .since')" class="since">Since the new medicine</button></div><div class="chips"><button class="btn" onclick="cgSave('Drowsy · '+chipsOf('#cgask'),'pharm','pharmacist')">Save</button><button class="btn ghost" onclick="cgask.className='ask'">Skip</button></div>`;
+ if(kind==='eat')cgask.innerHTML=`<div class="q">Eating less — how much less?</div><div class="why">The dietitian watches this closely. Half portions for a week matter more than one skipped meal.</div><div class="chips"><button onclick="pick(this,'#cgask .amt')" class="amt">Half portions</button><button onclick="pick(this,'#cgask .amt')" class="amt">Skipping meals</button><button onclick="pick(this,'#cgask .amt')" class="amt">Only drinks</button></div><div class="chips"><button onclick="pick(this,'#cgask .since')" class="since">Today</button><button onclick="pick(this,'#cgask .since')" class="since">Few days</button><button onclick="pick(this,'#cgask .since')" class="since">Over a week</button></div><div class="chips"><button onclick="tog(this)">Says tummy hurts</button><button onclick="tog(this)">Just not hungry</button><button onclick="tog(this)">Scared of foods</button></div><div class="chips"><button class="btn" onclick="cgSave('Eating less · '+chipsOf('#cgask'),'diet','dietitian')">Save</button><button class="btn ghost" onclick="cgask.className='ask'">Skip</button></div>`;
+ if(kind==='med')cgask.innerHTML=`<div class="q">About her medicines</div><div class="chips"><button onclick="cgAsk('cost')">Cost is a problem</button><button onclick="cgAsk('drowsy')">Side effect</button><button onclick="cgAsk('good')">Coping well</button><button onclick="cgAsk('missed')">Missed doses</button></div>`;
+ if(kind==='missed')cgask.innerHTML=`<div class="q">Missed how many, and why?</div><div class="why">No judgement. The reason is the useful part.</div><div class="chips"><button onclick="pick(this,'#cgask .n')" class="n">One</button><button onclick="pick(this,'#cgask .n')" class="n">A few</button><button onclick="pick(this,'#cgask .n')" class="n">Most this week</button></div><div class="chips"><button onclick="tog(this)">Refuses</button><button onclick="tog(this)">Forgot</button><button onclick="tog(this)">Ran out</button><button onclick="tog(this)">Vomited it</button></div><div class="chips"><button class="btn" onclick="cgSave('Missed doses · '+chipsOf('#cgask'),'pharm','pharmacist')">Save</button><button class="btn ghost" onclick="cgask.className='ask'">Skip</button></div>`;
+ if(kind==='good'){cgSave('Coping well with medicines'+(src?' · "'+src+'"':''),'good','nurse');return}
+ if(kind==='mood')cgask.innerHTML=`<div class="q">How is she, overall?</div><div class="chips"><button onclick="cgSave('Doing well','good','nurse')">Good week</button><button onclick="cgSave('Low or withdrawn','pharm','MSW')">Low or withdrawn</button><button onclick="cgSave('Anxious about school','pharm','MSW')">Anxious about school</button><button onclick="cgAsk('drowsy')">Drowsy or flat</button></div>`;}
+function chipsOf(sel){return [...document.querySelectorAll(sel+' .chips button.on')].map(b=>b.textContent).join(', ')||'no detail'}
+function cgParse(){const t=document.getElementById('cgfree').value.trim();if(!t)return;const l=t.toLowerCase();
+ if(/expensive|cost|afford|price|\$|money/.test(l)){cgAsk('cost',t);return}
+ if(/drows|sleepy|tired|flat|lethargic|dozy/.test(l)){cgAsk('drowsy',t);return}
+ if(/eat|appetite|hungry|meal|portion|food/.test(l)){cgAsk('eat',t);return}
+ if(/coping|fine|well|good|managing|ok with/.test(l)){cgAsk('good',t);return}
+ if(/miss|forgot|refus|spat|vomit/.test(l)){cgAsk('missed',t);return}
+ cgSave('Note · '+t,'good','nurse')}
+function cgSave(txt,cls,route){const e=document.createElement('div');e.className='entry';e.innerHTML=`<span class="t">Now</span>${txt}<span class="pill ${cls}">${route}</span>`;document.getElementById('cgentries').prepend(e);cgask.className='ask';document.getElementById('cgfree').value='';toast('Recorded · caregiver report · routed to '+route)}
+
+/* ---- photo capture (mock recognition) ---- */
+function snap(inp,who){const f=inp.files&&inp.files[0];const box=document.getElementById('snap-'+who);const img=document.getElementById('img-'+who);if(f){img.src=URL.createObjectURL(f)}else{img.removeAttribute('src')}box.classList.add('on');toast('Photo saved with the meal · recognition is a guess until you confirm')}
+function snapPick(b,who,name){pick(b,'#snap-'+who+' .chips');if(who==='p'){const fin=document.getElementById('fin');if(fin)fin.value=name==='Something else'?'':name}else{if(name!=='Something else'){const i=FOODS.findIndex(f=>f[0]===name);if(i<0)FOODS.unshift([name,'friend']);renderFoods();XP+=15;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';toast(name+' logged from photo · +15 XP')}}}
+</script>
+</body>
+</html>
