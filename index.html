@@ -560,6 +560,96 @@
   .idrow span.blank{background:rgba(255,255,255,.12);font-weight:700;opacity:.8}
   .idnote{margin-top:10px;font-size:13px;font-weight:600;color:var(--ink-2);background:var(--lav);border-radius:14px;padding:10px 12px}
   .idnote b{display:block;font-size:11px;font-weight:800;color:var(--muted);margin-bottom:2px}
+
+  .modesw{display:flex;gap:4px;background:var(--lav);padding:4px;border-radius:999px;margin-left:12px}
+  .modesw button{padding:7px 14px;border-radius:999px;font-weight:800;font-size:13px;color:var(--ink-2)}
+  .modesw button[aria-selected="true"]{background:var(--ink);color:#fff}
+  .reset{margin-left:8px;font-size:12px;font-weight:700;color:var(--muted);padding:6px 10px;border-radius:999px;background:var(--lav)}
+  /* HCP mode re-skins every clinical variable */
+  body.hcp{--purple:#1E5F74;--purple-d:#132A35;--purple-l:#DCEBF0;--lav:#EDF2F5;--teal:#2A9D8F;--teal-l:#DDF1EE;--ink:#132A35;--ink-2:#3D5561;--muted:#6C8290;--line:#D3DEE4;--grad:linear-gradient(120deg,#1E5F74 0%,#2A9D8F 100%);--grad-bg:linear-gradient(180deg,#EDF2F5 0%,#E6EEF2 100%)}
+  body.hcp .rail{background:#132A35;border-color:#132A35}
+  body.hcp .mark{color:#fff} body.hcp .mark small{color:#9FB6C1}
+  body.hcp .modesw{background:rgba(255,255,255,.1)} body.hcp .modesw button{color:#C9D8DF} body.hcp .modesw button[aria-selected="true"]{background:#fff;color:#132A35}
+  body.hcp .roles{background:rgba(255,255,255,.1)} body.hcp .roles button{color:#C9D8DF} body.hcp .roles button[aria-selected="true"]{background:#2A9D8F;color:#fff}
+  body.hcp .reset{background:rgba(255,255,255,.1);color:#C9D8DF}
+  body.hcp .ident,body.hcp .canvas>section{border:1px solid var(--line);box-shadow:none}
+  body.hcp .canvas h2{color:var(--purple)}
+  body.hcp .concerns li::before{background:var(--purple)}
+  .hcpbar{background:#132A35;color:#fff;padding:8px 24px;font-size:12px;font-weight:600;display:none;letter-spacing:.02em}
+  body.hcp .hcpbar{display:block}
+  .hcpbar b{color:#7FD1C6}
+  /* opener */
+  .opener{background:var(--purple-d);color:#fff;border-radius:22px;padding:20px 22px;margin-bottom:16px}
+  .opener .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;color:#9FB6C1;text-transform:uppercase}
+  .opener p{font-size:19px;font-weight:600;line-height:1.45;margin-top:6px}
+  .opener .sub{font-size:13px;color:#C9D8DF;margin-top:8px;font-weight:500}
+  /* provenance toggle */
+  .provsw{display:flex;gap:4px;flex-wrap:wrap}
+  .provsw button{background:var(--lav);padding:6px 12px;border-radius:999px;font-weight:600;font-size:12px;color:var(--ink-2)}
+  .provsw button.on{background:var(--purple);color:#fff}
+  .provbar{display:flex;height:12px;border-radius:6px;overflow:hidden;margin-top:10px}
+  .provbar i{display:block;height:100%}
+  .provleg{display:flex;gap:14px;font-size:12px;margin-top:6px;color:var(--ink-2);flex-wrap:wrap}
+  .provleg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+  .paed{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:6px 12px;font-size:13px;margin-top:10px;align-items:center}
+  .paed .hh{color:var(--muted);font-weight:600;font-size:12px}
+  .paed .dis{color:var(--red-d);font-weight:600}
+  /* missed panel */
+  .missed{display:grid;gap:8px}
+  .missed div{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;background:var(--lav);border-radius:12px;padding:10px 12px;font-size:14px}
+  .missed div b{font-weight:600} .missed div small{display:block;color:var(--muted);font-size:12px}
+  .missed .src{font-size:11px;color:var(--muted);white-space:nowrap}
+  /* nurse queue */
+  .queue{display:grid;gap:6px}
+  .qrow{display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--lav);font-size:13px}
+  .qrow.overdue{background:var(--red-l)}
+  .qrow .pid{font-weight:600;font-family:"IBM Plex Sans";font-feature-settings:"tnum"}
+  .qrow .clock{font-weight:600;font-size:12px;padding:3px 9px;border-radius:999px;background:#fff;color:var(--ink-2)}
+  .qrow.overdue .clock{background:var(--red);color:#fff}
+  .qrow .ack{font-size:12px;font-weight:600;color:var(--purple);background:#fff;padding:5px 10px;border-radius:999px}
+  .qrow .ack.done{color:var(--green-d);background:var(--green-l)}
+  /* dietitian write-back */
+  .wb{display:flex;gap:4px}
+  .wb button{font-size:11px;font-weight:600;padding:4px 9px;border-radius:999px;background:var(--lav);color:var(--ink-2)}
+  .wb button.safe{background:var(--green-l);color:var(--green-d)} .wb button.avoid{background:var(--red-l);color:var(--red-d)}
+  .wb button.on{outline:2px solid var(--purple)}
+  .wbnote{display:flex;gap:8px;margin-top:10px}
+  .wbnote input{flex:1;font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+  .wbnote button{background:var(--purple);color:#fff;padding:9px 14px;border-radius:10px;font-weight:600}
+  .wblog{margin-top:8px;font-size:12px;color:var(--purple);font-weight:600}
+  /* print */
+  .printbtn{margin-left:auto;font-size:12px;font-weight:600;background:var(--lav);color:var(--purple-d);padding:6px 12px;border-radius:999px}
+  @media print{.rail,.hcpbar,.refer,.printbtn,.provsw,.wb,.wbnote,.reset{display:none!important}.view{display:none!important}.view.active{display:block!important;padding:0}.clin{grid-template-columns:1fr}.ident{position:static}.canvas>section{break-inside:avoid;box-shadow:none;border:1px solid #ccc}body{background:#fff}}
+  /* patient: ask my team */
+  .askfab{position:absolute;right:14px;bottom:76px;background:var(--grad);color:#fff;border-radius:999px;padding:10px 14px;font-weight:800;font-size:13px;box-shadow:0 6px 18px rgba(74,58,138,.3);z-index:3}
+  .phone{position:relative}
+  .askbox{position:absolute;left:12px;right:12px;bottom:130px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 12px 40px rgba(74,58,138,.3);z-index:4;display:none}
+  .askbox.on{display:block}
+  .askbox .ctx{font-size:12px;font-weight:700;color:var(--muted);background:var(--lav);border-radius:10px;padding:8px 10px;margin-bottom:8px}
+  .askbox .ctx b{color:var(--purple-d)}
+  .askbox textarea{width:100%;font:inherit;font-weight:600;border:2px solid var(--line);border-radius:12px;padding:10px;min-height:64px;resize:none}
+  /* my story */
+  .story{position:relative;padding-left:22px;margin-top:6px}
+  .story::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .se{position:relative;padding:8px 0 8px 6px}
+  .se::before{content:"";position:absolute;left:-19px;top:14px;width:10px;height:10px;border-radius:50%;background:var(--purple);border:2px solid #fff;box-shadow:0 0 0 2px var(--purple-l)}
+  .se.good::before{background:var(--teal)} .se.hard::before{background:var(--red)}
+  .se b{display:block;font-weight:800;font-size:14px} .se small{font-size:12px;color:var(--muted);font-weight:700;display:block} .se p{font-size:13px;font-weight:600;color:var(--ink-2);margin-top:2px}
+  /* living well */
+  .goals{display:grid;gap:6px}
+  .goal{display:flex;gap:10px;align-items:center;background:var(--lav);border-radius:14px;padding:10px 12px}
+  .goal .ck{width:26px;height:26px;border-radius:50%;border:2px solid var(--teal);background:#fff;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .goal.met .ck{background:var(--teal);color:#fff}
+  .goal b{display:block;font-weight:800;font-size:14px} .goal small{font-size:12px;color:var(--muted);font-weight:700}
+  .goal.met b{text-decoration:line-through;opacity:.7}
+  /* in-room handover */
+  .inroom{position:fixed;inset:0;background:var(--ink);color:#fff;z-index:50;display:none;padding:32px 28px;overflow:auto}
+  .inroom.on{display:block}
+  .inroom h1{font-size:22px;font-weight:700;color:#C9C3DB;margin-bottom:24px}
+  .inroom ol{margin-left:28px;font-size:30px;font-weight:800;line-height:1.35}
+  .inroom ol li{margin-bottom:22px}
+  .inroom .x{position:fixed;top:18px;right:20px;background:rgba(255,255,255,.15);color:#fff;border-radius:999px;padding:10px 18px;font-weight:800}
+  .inroom .also{margin-top:30px;font-size:18px;font-weight:600;color:#C9C3DB}
   @media (max-width:900px){.clin{grid-template-columns:1fr}.ident{position:static}.div,.unsaid,.two{grid-template-columns:1fr}.grid-foods{grid-template-columns:1fr 1fr}.roles{flex-wrap:wrap}}
 </style>
 </head>
@@ -567,14 +657,22 @@
 
 <header class="rail">
   <div class="mark">HEARD<small>Health · Empowerment · Advocacy · Resilience · Dignity</small></div>
-  <nav class="roles" role="tablist">
+  <div class="modesw" role="tablist" aria-label="Mode">
+    <button aria-selected="true" onclick="setMode('pt')">💜 Patient &amp; caregiver</button>
+    <button aria-selected="false" onclick="setMode('hcp')">🩺 Care team</button>
+  </div>
+  <nav class="roles" id="roles-pt" role="tablist">
     <button role="tab" aria-selected="true" data-v="patient">Patient</button>
-        <button role="tab" aria-selected="false" data-v="caregiver">Caregiver</button>
+    <button role="tab" aria-selected="false" data-v="caregiver">Caregiver</button>
+  </nav>
+  <nav class="roles" id="roles-hcp" role="tablist" style="display:none">
     <button role="tab" aria-selected="false" data-v="doctor">Doctor</button>
     <button role="tab" aria-selected="false" data-v="pharm">Pharmacist</button>
     <button role="tab" aria-selected="false" data-v="diet">Dietitian</button>
   </nav>
+  <button class="reset" onclick="location.reload()" title="Reset the demo">↺ Reset</button>
 </header>
+<div class="hcpbar">Care team view · <b>read-only unless you are the named clinician</b> · every score shows its denominator · every lab shows its age · red means blood or a red flag, never decoration</div>
 
 <!-- SVG defs shared -->
 <svg width="0" height="0" style="position:absolute">
@@ -723,7 +821,13 @@
         </div>
       </div>
 
-      <div class="panel"><div class="ph">Your card for Tuesday</div><div class="note" style="margin-top:-4px">Dr Nair · 8 Sep, 2:40 pm · you approve this before anyone sees it</div>
+      <div class="panel"><div class="ph">What matters to me <span style="font-weight:600;color:var(--muted);font-size:12px">· in your words, not the disease's</span></div>
+        <div class="goals" id="goals"></div>
+        <div class="chips" style="margin-top:8px"><input class="fld" id="goalinp" placeholder="Add one — e.g. a full week at work" style="flex:1"><button class="btn small" onclick="addGoal()">Add</button></div>
+        <div class="note">The app notices quietly when one is met. It never turns these into a score.</div>
+      </div>
+
+      <div class="panel"><div class="ph">Your card for Tuesday <button class="editbtn" onclick="inRoom(true)">In the room ▶</button></div><div class="note" style="margin-top:-4px">Dr Nair · 8 Sep, 2:40 pm · you approve this before anyone sees it</div>
        <p class="cardtxt">Since your last visit on 4 August, things have changed in the last two weeks. You've been going more often — most days six or more — and waking at night on 9 of the last 14 nights. You noticed blood on 11 days. Pain has mostly been 5 to 7 out of 10, often within an hour of eating.</p>
        <p class="cardtxt">Your CRP from 17 August was 11. Your last stool calprotectin was in May.</p>
        <div class="ph" style="margin-top:14px">What you most want to talk about <span style="color:var(--purple);font-size:12px">reorder</span></div>
@@ -731,6 +835,24 @@
        <div class="ph" style="margin-top:14px">Mentioned, never raised in clinic</div><p class="cardtxt">Tired on 16 of 28 days. Toilet access at work, 8 times. Want either on your list?</p>
        <div class="chips" style="margin-top:10px"><button class="btn" onclick="toast('Shared with Dr Nair')">Share with Dr Nair</button><button class="btn ghost" onclick="toast('Editing')">Edit first</button><button class="btn ghost" onclick="toast('Tiredness added')">Add tiredness</button></div>
        <div class="note">Nothing reaches your care team until you tap share. 2 entries marked private are not included.</div>
+      </div>
+
+      <div class="panel"><div class="ph">My story <span style="font-weight:600;color:var(--muted);font-size:12px">· the long version, for a new doctor or for you</span></div>
+        <div class="story">
+          <div class="se hard"><b>First symptoms</b><small>Early 2021 · GP → polyclinic → specialist, five months</small><p>Blood and urgency put down to stress for most of that time.</p></div>
+          <div class="se"><b>Diagnosed</b><small>Aug 2021 · colonoscopy, NUH</small><p>Crohn's, small bowel. A lot of words at once.</p></div>
+          <div class="se hard"><b>First steroid course</b><small>Sep 2021 · 6 weeks</small><p>Worked fast. Sleep and mood were rough.</p></div>
+          <div class="se good"><b>Mesalazine, and a good stretch</b><small>Mar 2024 → Aug 2026</small><p>Twenty-nine months mostly settled. Travelled twice. Started the new job.</p></div>
+          <div class="se hard"><b>This flare</b><small>From 22 Aug 2026</small><p>Stopped the tablets in the middle of a good stretch. Ibuprofen for the back. Nights got bad.</p></div>
+          <div class="se"><b>Now</b><small>Sep 2026</small><p>Dr Nair Tuesday. Home calprotectin kit on the way. Sister's wedding in October is the thing to protect.</p></div>
+        </div>
+        <div class="chips" style="margin-top:8px"><button class="btn small ghost" onclick="toast('Story added to your card')">Add to my card</button><button class="btn small ghost" onclick="toast('PDF downloaded')">Download</button></div>
+      </div>
+
+      <div class="inroom" id="inroom"><button class="x" onclick="inRoom(false)">Close</button>
+        <h1>What I came to say</h1>
+        <ol><li>Waking at night to go — I'm scared it's getting worse</li><li>Can I still travel for my sister's wedding in October?</li><li>The ibuprofen I've been taking for my back — is that ok?</li></ol>
+        <div class="also">Also: I've been tired on 16 of the last 28 days. And I stopped the mesalazine in August because I felt fine.</div>
       </div>
      </div>
 
@@ -954,6 +1076,8 @@
       </div>
 </div>
     </div>
+    <button class="askfab" onclick="askTeam()">💬 Ask my team</button>
+    <div class="askbox" id="askbox"><div class="ctx" id="askctx"></div><textarea id="asktxt" placeholder="What do you want to ask?"></textarea><div class="chips"><button class="btn small" onclick="askSend('Sister Devi, IBD nurse')">Nurse</button><button class="btn small ghost" onclick="askSend('Pharmacy')">Pharmacist</button><button class="btn small ghost" onclick="askSend('Ms Lim, dietitian')">Dietitian</button><button class="btn small ghost" onclick="document.getElementById('askbox').className='askbox'">Close</button></div></div>
     <div class="tabs six" id="ptabs">
       <button class="on" onclick="ptab('rec',this)"><span>📝</span>Record</button><button onclick="ptab('meds',this)"><span>💊</span>Meds</button><button onclick="ptab('cal',this)" id="caltab"><span>📅</span>Calendar</button><button onclick="ptab('learn',this)"><span>📚</span>Learn</button><button onclick="ptab('card',this)"><span>📄</span>Card</button><button onclick="ptab('comm',this)" id="commtab"><span>💜</span>Community<i class="badge">2</i></button>
     </div>
@@ -1013,6 +1137,26 @@
       <div class="approval">✓ Card approved by patient 4 Sep, 9:12 pm</div>
     </aside>
     <div class="canvas">
+      <div class="opener"><div class="lbl">Ninety seconds</div>
+        <p>He stopped his mesalazine on 17 August while well. Symptoms turned on the 22nd. He has been taking ibuprofen since the 19th and loperamide since the 27th. There is no calprotectin from this episode.</p>
+        <div class="sub">Everything below is the evidence for that sentence. His top concern, in his words: <em>waking at night to go — scared it's getting worse.</em></div>
+      </div>
+
+      <section>
+        <h2>Who said what <span>every record carries its source — filter the whole page</span><button class="printbtn" onclick="window.print()">🖨 Print / share</button></h2>
+        <div class="provsw"><button class="on" onclick="prov('all',this)">All</button><button onclick="prov('patient',this)">Patient</button><button onclick="prov('caregiver',this)">Caregiver</button><button onclick="prov('school',this)">School</button><button onclick="prov('instrument',this)">Instrument</button><button onclick="prov('ai',this)">AI-inferred</button></div>
+        <div class="provbar"><i style="width:88%;background:var(--purple)"></i><i style="width:0%;background:var(--teal)"></i><i style="width:0%;background:var(--yellow)"></i><i style="width:7%;background:var(--green)"></i><i style="width:5%;background:#C9C3DB"></i></div>
+        <div class="provleg"><span><i style="background:var(--purple)"></i>Patient 88%</span><span><i style="background:var(--teal)"></i>Caregiver 0%</span><span><i style="background:var(--yellow)"></i>School 0%</span><span><i style="background:var(--green)"></i>Instrument 7%</span><span><i style="background:#C9C3DB"></i>AI-inferred 5% — always shown distinct</span></div>
+        <div id="provnote" class="note"></div>
+        <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600;color:var(--purple)">Paediatric example — three reporters, one week</summary>
+          <div class="paed"><span class="hh"></span><span class="hh">Child, via avatar</span><span class="hh">Parent</span><span class="hh">School</span>
+            <span>Mon</span><span>Pain 2 · type 4</span><span>Pain 2</span><span>—</span>
+            <span>Wed</span><span class="dis">Pain 5 · type 6</span><span class="dis">Pain 2</span><span class="dis">Left class twice, 3 toilet trips</span>
+            <span>Fri</span><span class="dis">Pain 6 · type 6</span><span class="dis">Pain 3 · "seemed fine at dinner"</span><span>Ate half of lunch</span></div>
+          <div class="note">Stored side by side, never merged. Only about one in four parent-child pairs agree on six of seven symptoms; the school is the reporter that sees the day.</div>
+        </details>
+      </section>
+
       <section>
         <h2>Derived activity <span>computed from daily logs — never asked as a questionnaire</span></h2>
         <div class="score"><div class="big">SCCAI 8</div><span class="band mod">moderate</span><span class="denom">from 26 of 28 days · was 2 at last visit</span></div>
@@ -1037,6 +1181,29 @@
         <ol class="concerns"><li>Waking at night to go — I'm scared it's getting worse</li><li>Whether I can still travel for my sister's wedding in October</li><li>The ibuprofen I've been taking for my back — is that ok?</li></ol></section>
       <section><h2>Logged often, never raised in clinic</h2>
         <div class="unsaid"><div><b>Tiredness</b><span>16 of 28 days · never raised at a visit</span></div><div><b>Toilet access at work</b><span>8 mentions · open-plan office, one cubicle</span></div></div></section>
+      <section>
+        <h2>What a normal consultation would have missed <span>in the record, not in the room</span></h2>
+        <div class="missed">
+          <div><span>😴</span><div><b>Tiredness on 16 of 28 days</b><small>Never raised at any visit on record</small></div><span class="src">energy log</span></div>
+          <div><span>💊</span><div><b>Self-started loperamide, 27 Aug</b><small>His frequency chart is probably under-reading since then</small></div><span class="src">medicines tab</span></div>
+          <div><span>🌿</span><div><b>"Herbal tea from my mum" most evenings</b><small>Unidentified. Asked plainly, answered plainly</small></div><span class="src">also-taking</span></div>
+          <div><span>🚻</span><div><b>Toilet access at work, 8 mentions</b><small>Open-plan office, one cubicle. Never said in clinic</small></div><span class="src">free text</span></div>
+          <div><span>💷</span><div><b>Skipped the dietitian on the 3rd — "didn't think I needed it"</b><small>Same belief as "felt better, stopped the tablet"</small></div><span class="src">no-show reason</span></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>IBD nurse queue <span>whole caseload · 3,312 patients · the promise clock is the point</span></h2>
+        <div class="queue">
+          <div class="qrow overdue"><span class="pid">P-2281</span><span>Flare report · blood most times, 6+ a day · <b>reply promised by 9 Sep 5 pm</b></span><span class="clock">overdue 19 h</span><button class="ack" onclick="this.className='ack done';this.textContent='Acknowledged';this.closest('.qrow').classList.remove('overdue');toast('Acknowledged · clock stopped')">Acknowledge</button></div>
+          <div class="qrow"><span class="pid">M-1047</span><span>Marcus Tan · flare report 4 Sep · replied 9:41 pm · visit brought forward</span><span class="clock">closed</span><span class="ack done">Replied</span></div>
+          <div class="qrow"><span class="pid">P-0913</span><span>Gone quiet · 16 days · was logging daily · rest mode <b>not</b> on</span><span class="clock">check-in due</span><button class="ack" onclick="this.className='ack done';this.textContent='Sent';toast('Check-in drafted in your name — review before it sends')">Draft check-in</button></div>
+          <div class="qrow"><span class="pid">P-1560</span><span>No-show 8 Sep · <b>no reason given</b> · ranks above disclosed reasons</span><span class="clock">3 d open</span><button class="ack" onclick="this.className='ack done';this.textContent='Called';toast('Logged')">Call</button></div>
+          <div class="qrow"><span class="pid">Z-0442</span><span>Zara Lim · plan-as-understood mismatch · child answered "stop the medicine"</span><span class="clock">soft</span><button class="ack" onclick="this.className='ack done';this.textContent='Noted';toast('Flag cleared')">Note</button></div>
+        </div>
+        <div class="note">Queue health: 5 open · 1 overdue · median 1.2 days open. An overdue reply is a promise the app made in Sister Devi's name that is being broken — it always sorts to the top.</div>
+      </section>
+
       <section><h2>Refer <span>one tap — the summary goes with it</span></h2>
         <div class="refer"><button onclick="refer(this,'IBD nurse')">IBD nurse</button><button onclick="refer(this,'dietitian')">Dietitian</button><button onclick="refer(this,'pharmacist')">Pharmacist</button><button onclick="refer(this,'medical social worker')">Medical social worker</button><button onclick="refer(this,'psychologist')">Psychologist</button></div></section>
     </div>
@@ -1105,16 +1272,19 @@
           <div class="sbox care"><b>Worth watching</b><span class="n">6</span><span class="s">Each with a named source, below</span></div>
           <div class="sbox avoid"><b>Avoid</b><span class="n">0</span><span class="s">Nothing set. Only you, or obstruction risk with confirmed narrowing.</span></div>
         </div>
-        <table style="margin-top:14px">
-          <tr><th>Food</th><th>Status</th><th>Source that put it there</th></tr>
-          <tr><td>Laksa</td><td><span class="tag warn">Worth watching</span></td><td>His own log — symptoms after it, in a matching phase</td></tr>
-          <tr><td>Milk</td><td><span class="tag warn">Worth watching</span></td><td>He told us lactose affects him</td></tr>
-          <tr><td>Nasi lemak</td><td><span class="tag warn">Worth watching</span></td><td>Fat load gate — active disease right now</td></tr>
-          <tr><td>Char kway teow</td><td><span class="tag warn">Worth watching</span></td><td>Fat load gate — active disease right now</td></tr>
-          <tr><td>Rojak</td><td><span class="tag warn">Worth watching</span></td><td>Fermentable carbohydrate gate — Crohn's</td></tr>
-          <tr><td>Salad</td><td><span class="tag warn">Worth watching</span></td><td>Fermentable carbohydrate gate — Crohn's</td></tr>
-          <tr><td>Roti prata</td><td><span class="tag grey">Not assessed</span></td><td>—</td></tr>
+        <div class="note" style="margin-top:12px;color:var(--purple);font-weight:600">You can change any status below. It appears in his next scan, attributed to you by name and date. He is never shown that a status was removed — it just stops applying.</div>
+        <table style="margin-top:8px">
+          <tr><th>Food</th><th>Status</th><th>Source that put it there</th><th>Set</th></tr>
+          <tr id="wb-Laksa"><td>Laksa</td><td><span class="tag warn">Worth watching</span></td><td>His own log — symptoms after it, in a matching phase</td><td><div class="wb"><button class="safe" onclick="wbSet('Laksa','safe',this)">Safe list</button><button onclick="wbSet('Laksa','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Laksa','avoid',this)">Avoid</button></div></td></tr>
+          <tr id="wb-Milk"><td>Milk</td><td><span class="tag warn">Worth watching</span></td><td>He told us lactose affects him</td><td><div class="wb"><button class="safe" onclick="wbSet('Milk','safe',this)">Safe list</button><button onclick="wbSet('Milk','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Milk','avoid',this)">Avoid</button></div></td></tr>
+          <tr id="wb-Nasi-lemak"><td>Nasi lemak</td><td><span class="tag warn">Worth watching</span></td><td>Fat load gate — active disease right now</td><td><div class="wb"><button class="safe" onclick="wbSet('Nasi lemak','safe',this)">Safe list</button><button onclick="wbSet('Nasi lemak','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Nasi lemak','avoid',this)">Avoid</button></div></td></tr>
+          <tr id="wb-Char-kway-teow"><td>Char kway teow</td><td><span class="tag warn">Worth watching</span></td><td>Fat load gate — active disease right now</td><td><div class="wb"><button class="safe" onclick="wbSet('Char kway teow','safe',this)">Safe list</button><button onclick="wbSet('Char kway teow','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Char kway teow','avoid',this)">Avoid</button></div></td></tr>
+          <tr id="wb-Rojak"><td>Rojak</td><td><span class="tag warn">Worth watching</span></td><td>Fermentable carbohydrate gate — Crohn's</td><td><div class="wb"><button class="safe" onclick="wbSet('Rojak','safe',this)">Safe list</button><button onclick="wbSet('Rojak','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Rojak','avoid',this)">Avoid</button></div></td></tr>
+          <tr id="wb-Salad"><td>Salad</td><td><span class="tag warn">Worth watching</span></td><td>Fermentable carbohydrate gate — Crohn's</td><td><div class="wb"><button class="safe" onclick="wbSet('Salad','safe',this)">Safe list</button><button onclick="wbSet('Salad','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Salad','avoid',this)">Avoid</button></div></td></tr>
+          <tr id="wb-Roti-prata"><td>Roti prata</td><td><span class="tag grey">Not assessed</span></td><td>—</td><td><div class="wb"><button class="safe" onclick="wbSet('Roti prata','safe',this)">Safe list</button><button onclick="wbSet('Roti prata','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Roti prata','avoid',this)">Avoid</button></div></td></tr>
         </table>
+        <div class="wbnote"><input id="wbfood" placeholder="Food (e.g. Laksa)" style="max-width:130px"><input id="wbtext" placeholder="Note he will see in the scan, in your words"><button onclick="wbNote()">Add note</button></div>
+        <div class="wblog" id="wblog"></div>
         <div class="note">Three of these six are open only because he is flaring. They close on their own when activity returns to remission — nothing needs removing from his diet permanently.</div>
       </section>
 
@@ -1583,6 +1753,37 @@ function renderAbout(){
  document.getElementById('rd-note').innerHTML=n?`<b>Also worth knowing</b>${n}`:`<b>Also worth knowing</b><span style="color:var(--muted)">Nothing added yet.</span>`;
 }
 renderAbout();
+
+/* ---- modes ---- */
+let MODE='pt';
+function setMode(m){MODE=m;document.body.classList.toggle('hcp',m==='hcp');document.querySelectorAll('.modesw button').forEach((b,i)=>b.setAttribute('aria-selected',(i===0)===(m==='pt')?'true':'false'));document.getElementById('roles-pt').style.display=m==='pt'?'':'none';document.getElementById('roles-hcp').style.display=m==='hcp'?'':'none';const first=document.querySelector(m==='pt'?'#roles-pt button':'#roles-hcp button');first.click()}
+
+/* ---- provenance filter ---- */
+function prov(k,b){document.querySelectorAll('.provsw button').forEach(x=>x.classList.remove('on'));b.classList.add('on');const n=document.getElementById('provnote');const msg={all:'',patient:'Showing only what Marcus entered himself — 88% of this record. Scores and the "unsaid" panel are unchanged.',caregiver:'No caregiver reports on this record. For a child, this filter is where parent and child diverge.',school:'No school reports. For a child at school, this is the reporter that sees the day.',instrument:'Instrument scores only — MARS-5 and the quarterly MUST. Nothing else on this page comes from a questionnaire.',ai:'AI-inferred fields only — 5%. Each carries a confidence value and is never merged with reported data. Below 0.7 it is omitted.'}[k];n.textContent=msg;n.style.display=msg?'':'none'}
+
+/* ---- dietitian write-back: mutates the same arrays the scan reads ---- */
+const WB_LOG=[];
+function wbSet(food,act,b){b.closest('.wb').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+ const si=DIET_SAFE.indexOf(food);if(si>=0)DIET_SAFE.splice(si,1);const ai=DIET_AVOID.findIndex(x=>x.food===food);if(ai>=0)DIET_AVOID.splice(ai,1);
+ if(act==='safe')DIET_SAFE.push(food);if(act==='avoid')DIET_AVOID.push({food,reason:'set by Ms Priya Lim, dietitian, 10 Sep',conditional:false});
+ const tag=b.closest('tr').querySelector('.tag');const st=assess(food);tag.className='tag '+({SAFE_CONFIRMED:'ok',TOLERATED_BEFORE:'ok',NOT_ASSESSED:'grey',CAUTION:'warn',AVOID:'blood'}[st.status]);tag.textContent=STATUS_LABEL[st.status];
+ b.closest('tr').querySelectorAll('td')[2].textContent=st.source||'—';
+ WB_LOG.unshift(`${food} → ${STATUS_LABEL[st.status]} · Ms Priya Lim · 10 Sep`);document.getElementById('wblog').innerHTML=WB_LOG.slice(0,4).join('<br>');
+ if(typeof renderFoods==='function')renderFoods();toast('Saved · appears in his next scan, attributed to you')}
+function wbNote(){const f=document.getElementById('wbfood').value.trim(),t=document.getElementById('wbtext').value.trim();if(!f||!t)return;DIET_NOTES[f]={note:t,by:'Ms Priya Lim, dietitian',on:'10 Sep'};WB_LOG.unshift(`Note on ${f} · Ms Priya Lim · 10 Sep`);document.getElementById('wblog').innerHTML=WB_LOG.slice(0,4).join('<br>');document.getElementById('wbfood').value='';document.getElementById('wbtext').value='';toast('Note saved · he sees it the next time he scans '+f)}
+
+/* ---- ask my team, with context attached ---- */
+function askTeam(){const box=document.getElementById('askbox');const tab=document.querySelector('#ptabs button.on')?.textContent.trim()||'Record';const last=document.querySelector('#entries .entry')?.textContent.replace(/\s+/g,' ').trim();const ctx={Record:'your last entry',Meds:'your medicines',Calendar:'your appointments',Learn:'what you were reading',Card:'your card',Community:'community'}[tab]||tab;document.getElementById('askctx').innerHTML=`Attached: <b>${ctx}</b>${last&&tab==='Record'?' — '+last.slice(0,60):''}`;box.className='askbox on';document.getElementById('asktxt').focus()}
+function askSend(who){const t=document.getElementById('asktxt').value.trim();if(!t){toast('Type a question first');return}addEntry('Asked '+who.split(',')[0]+' · "'+t.slice(0,50)+'" <span class="pill">'+(who.includes('nurse')?'nurse':who.includes('Pharm')?'pharmacist':'dietitian')+'</span>');document.getElementById('asktxt').value='';document.getElementById('askbox').className='askbox';toast('Sent to '+who+' with context · reply within '+(who.includes('Pharm')?'2':'1')+' working day'+(who.includes('Pharm')?'s':''))}
+
+/* ---- living well goals ---- */
+const GOALS=[{t:"My sister's wedding in October",s:'Travel, a long day, family food',met:false},{t:'A full week at work',s:'No days lost',met:false},{t:'Eat laksa with my mum again',s:'Once things settle',met:false},{t:'Sleep through the night',s:'Three in a row',met:true}];
+function renderGoals(){document.getElementById('goals').innerHTML=GOALS.map((g,i)=>`<div class="goal ${g.met?'met':''}"><button class="ck" onclick="GOALS[${i}].met=!GOALS[${i}].met;renderGoals();if(GOALS[${i}].met){celebrate();toast('Noticed. Well done.')}">${g.met?'✓':''}</button><div><b>${g.t}</b><small>${g.s}</small></div></div>`).join('')}
+function addGoal(){const v=document.getElementById('goalinp').value.trim();if(!v)return;GOALS.unshift({t:v,s:'',met:false});document.getElementById('goalinp').value='';renderGoals()}
+renderGoals();
+
+/* ---- in-room handover ---- */
+function inRoom(on){document.getElementById('inroom').className='inroom'+(on?' on':'')}
 </script>
 </body>
 </html>
