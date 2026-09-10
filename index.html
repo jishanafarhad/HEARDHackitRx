@@ -142,9 +142,9 @@
   .foods{margin-top:12px;display:grid;gap:8px}
   .fd{background:#fff;border:2px solid var(--line);border-radius:16px;padding:10px 12px;display:flex;align-items:center;gap:10px;font-weight:800}
   .fd .dot{width:14px;height:14px;border-radius:50%;background:#C9C3DB;flex-shrink:0}
-  .fd.friend .dot{background:var(--green)} .fd.foe .dot{background:var(--red)} .fd.retry .dot{background:var(--yellow)}
+  .fd.safe .dot{background:var(--green)} .fd.tol .dot{background:var(--teal)} .fd.avoid .dot{background:var(--red)} .fd.watch .dot{background:var(--yellow)}
   .fd .st{font-size:11px;font-weight:700;color:var(--muted);display:block}
-  .fd.friend .st{color:var(--green-d)} .fd.foe .st{color:var(--red-d)} .fd.retry .st{color:var(--yellow-d)}
+  .fd.safe .st{color:var(--green-d)} .fd.tol .st{color:#146F60} .fd.avoid .st{color:var(--red-d)} .fd.watch .st{color:var(--yellow-d)}
   .fd .sw{margin-left:auto;display:flex;gap:4px}
   .fd .sw button{width:30px;height:30px;border-radius:50%;background:var(--lav);font-size:14px}
   .fd .sw button.g{background:var(--green-l)} .fd .sw button.y{background:var(--yellow-l)} .fd .sw button.r{background:var(--red-l)}
@@ -224,7 +224,7 @@
   .grid-foods{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
   .food{border:2px solid var(--line);border-radius:16px;padding:12px;font-size:13px;font-weight:600}
   .food b{display:block;font-size:14px;font-weight:800} .food .s{color:var(--muted)}
-  .food.foe{border-color:var(--red);background:var(--red-l)} .food.retry{border-color:var(--yellow);background:var(--yellow-l)} .food.friend{border-color:var(--green);background:var(--green-l)}
+  
   .breadth{display:flex;gap:8px;align-items:flex-end;height:110px;margin-top:6px}
   .breadth div{flex:1;background:var(--purple);border-radius:8px 8px 0 0;color:#fff;font-size:13px;text-align:center;padding-top:4px;font-weight:800}
   .breadth div.low{background:var(--red)}
@@ -455,6 +455,111 @@
   .f1{top:20%;animation-duration:13s} .f2{top:70%;animation-duration:9s;animation-delay:-4s;transform:scaleX(-1)} .f3{top:45%;animation-duration:16s;animation-delay:-8s}
   @keyframes swim{from{left:-40px}to{left:110%}}
   .game.calm .reward{background:rgba(255,255,255,.15);color:#fff}
+
+  .scanres{margin-top:12px;border-radius:18px;padding:16px;background:#fff;border:2px solid var(--line)}
+  .scanres.ok{border-color:var(--green)} .scanres.na{border-color:var(--line)} .scanres.care{border-color:var(--yellow)} .scanres.avoid{border-color:var(--red)}
+  .scanres h4{font-size:20px;font-weight:800}
+  .scanres .now{font-size:12px;color:var(--muted);font-weight:700;margin-top:2px}
+  .macro{display:grid;grid-template-columns:1.4fr 1fr;gap:8px;margin-top:12px}
+  .macro .big{background:var(--purple-l);border-radius:14px;padding:10px 12px}
+  .macro .big.alt{background:var(--lav)}
+  .macro .big b{display:block;font-size:24px;font-weight:800;color:var(--purple-d);line-height:1.1}
+  .macro .big span{font-size:11px;font-weight:700;color:var(--ink-2)}
+  .macro-row{margin-top:8px;font-size:12px;font-weight:700;color:var(--ink-2)}
+  .macro-row .per100{color:var(--muted);font-weight:600;font-size:11px}
+  .stat-line{margin-top:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .pillst{padding:5px 12px;border-radius:999px;font-weight:800;font-size:13px;background:var(--lav);color:var(--ink-2)}
+  .stat-line.ok .pillst{background:var(--green-l);color:var(--green-d)}
+  .stat-line.care .pillst{background:var(--yellow-l);color:var(--yellow-d)}
+  .stat-line.avoid .pillst{background:var(--red-l);color:var(--red-d)}
+  .stat-line .src{font-size:12px;font-weight:700;color:var(--muted)}
+  .stat-detail{margin-top:6px;font-size:13px;font-weight:600;color:var(--ink-2)}
+  .stat-detail.muted-note{color:var(--muted);font-weight:600}
+  .dnote{margin-top:10px;background:var(--purple-l);border-radius:14px;padding:10px 12px;font-size:13px;font-weight:600;color:var(--ink-2)}
+  .dnote b{display:block;font-weight:800;color:var(--purple-d);font-size:12px;margin-bottom:2px}
+  .scanres .fine-print{font-size:11px;color:var(--muted);font-weight:600;margin-top:10px}
+
+  .pheno{margin-top:10px}
+  .phlab{font-size:12px;font-weight:800;color:var(--muted)} .phlab span{font-weight:700;color:var(--purple-d);margin-left:6px}
+  .phrow{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
+  .phrow button{background:var(--lav);border-radius:12px;padding:8px 6px;font-size:11px;font-weight:800;color:var(--ink-2);line-height:1.25}
+  .phrow button.on{background:var(--purple);color:#fff}
+  .fd.unknown .dot{background:#C9C3DB} .fd.watch .dot{background:var(--yellow)} .fd.avoid .dot{background:var(--red)}
+  .fd.unknown{border-color:var(--line)} .fd.watch{border-color:var(--yellow)} .fd.avoid{border-color:var(--red)}
+  .fd.unknown .st{color:var(--muted)} .fd.watch .st{color:var(--yellow-d)} .fd.avoid .st{color:var(--red-d)}
+  .fd .sw1{margin-left:auto;background:var(--lav);color:var(--purple-d);border-radius:999px;padding:7px 12px;font-weight:800;font-size:12px;white-space:nowrap}
+  .whymed{margin-top:10px;background:var(--yellow-l);border-radius:14px;padding:10px 12px;font-size:13px;font-weight:700;color:var(--yellow-d)}
+  .whymed b{font-weight:800}
+
+  .tabs.six button{font-size:10px;padding:9px 2px 11px} .tabs.six button span{font-size:18px}
+  .pals{display:grid;gap:8px}
+  .pal{display:flex;align-items:center;gap:10px;background:var(--lav);border-radius:16px;padding:10px 12px}
+  .pal svg{width:44px;height:44px;flex-shrink:0}
+  .pal .t{flex:1;min-width:0} .pal b{display:block;font-weight:800;font-size:14px} .pal small{font-size:12px;color:var(--ink-2);font-weight:600;display:block}
+  .pal .say{background:var(--purple);color:#fff;border-radius:999px;padding:7px 12px;font-weight:800;font-size:12px;white-space:nowrap}
+  .pal.new{outline:2px solid var(--teal)}
+  .saybox{margin-top:8px;display:grid;gap:5px}
+  .saybox button{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-weight:700;font-size:13px;text-align:left;color:var(--ink-2)}
+  .gifts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .gifts button{background:var(--lav);border-radius:16px;padding:12px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:800;color:var(--ink-2)}
+  .gifts button span{font-size:26px;line-height:1}
+  .gifts button.sent{background:var(--teal-l);color:#146F60}
+  .wall{display:grid;gap:8px}
+  .wl{display:flex;gap:10px;align-items:center;background:var(--lav);border-radius:14px;padding:10px 12px}
+  .wl .e{font-size:22px} .wl b{display:block;font-weight:800;font-size:13px} .wl small{font-size:12px;color:var(--muted);font-weight:600}
+  .wl .cheer{margin-left:auto;background:#fff;border-radius:999px;padding:6px 10px;font-weight:800;font-size:12px;color:var(--purple-d)}
+  .wl .cheer.on{background:var(--yellow-l);color:var(--yellow-d)}
+  .wellgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .wellgrid button{background:var(--lav);border-radius:16px;padding:12px 8px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;font-weight:800;font-size:13px;color:var(--ink)}
+  .wellgrid button span{font-size:24px} .wellgrid button small{font-size:11px;color:var(--muted);font-weight:700}
+  .mc{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
+  .mc:first-of-type{border-top:0}
+  .mc .e{font-size:22px} .mc .t{flex:1} .mc b{display:block;font-weight:800;font-size:14px} .mc small{font-size:12px;color:var(--ink-2);font-weight:600}
+  .mc .go{font-size:11px;font-weight:800;padding:6px 10px;border-radius:999px;background:var(--lav);color:var(--purple-d);white-space:nowrap}
+  .mc .go.done{background:var(--green-l);color:var(--green-d)}
+
+  .statgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .sbox{border-radius:14px;padding:12px;background:var(--lav)}
+  .sbox b{display:block;font-size:12px;font-weight:800;color:var(--ink-2)}
+  .sbox .n{display:block;font-size:26px;font-weight:800;line-height:1.1;margin:2px 0}
+  .sbox .s{font-size:11px;font-weight:600;color:var(--muted);line-height:1.35;display:block}
+  .sbox.ok{background:var(--green-l)} .sbox.ok .n{color:var(--green-d)}
+  .sbox.ok2{background:var(--teal-l)} .sbox.ok2 .n{color:#146F60}
+  .sbox.na .n{color:var(--ink-2)}
+  .sbox.care{background:var(--yellow-l)} .sbox.care .n{color:var(--yellow-d)}
+  .sbox.avoid{background:var(--red-l)} .sbox.avoid .n{color:var(--red-d)}
+  .sbox em{font-style:normal;color:var(--muted)}
+  @media (max-width:900px){.statgrid{grid-template-columns:1fr 1fr}}
+
+  .fldlab{font-size:12px;font-weight:800;color:var(--ink-2);margin-top:14px}
+  .fldlab span{font-weight:600;color:var(--muted)}
+  .fldrow{display:flex;gap:8px;margin-top:6px}
+  .fld{flex:1;font:inherit;font-weight:700;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+  .fld.short{max-width:80px}
+  .fld.area{width:100%;min-height:72px;margin-top:6px;resize:vertical;font-weight:600;font-size:14px}
+  .opts{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:6px}
+  .opts.wrap{display:flex;flex-wrap:wrap}
+  .opts button{background:var(--lav);border-radius:12px;padding:8px 10px;font-size:12px;font-weight:800;color:var(--ink-2);line-height:1.25}
+  .opts button.on{background:var(--purple);color:#fff}
+  .opts.wrap button.on{background:var(--red);color:#fff}
+  #pf-diet button.on,#pf-dx button.on,#pf-loc button.on,#pf-str button.on,#pf-surg button.on,#pf-act button.on{background:var(--purple);color:#fff}
+  .pfecho{margin-top:10px;background:var(--lav);border-radius:14px;padding:10px 12px;font-size:12px;font-weight:700;color:var(--ink-2);display:none}
+  .pfecho.on{display:block}
+  .pfecho b{color:var(--purple-d)}
+  @media (max-width:520px){.opts{grid-template-columns:1fr 1fr}}
+
+  .editbtn{background:var(--lav);color:var(--purple-d);border-radius:999px;padding:5px 14px;font-weight:800;font-size:12px}
+  .editbtn.on{background:var(--purple);color:#fff}
+  .idcard{background:var(--grad);border-radius:18px;padding:16px;color:#fff;margin-top:4px}
+  .idtop{display:flex;align-items:baseline;gap:10px}
+  .idname{font-size:20px;font-weight:800} .idage{font-size:13px;font-weight:700;opacity:.85}
+  .iddx{font-size:14px;font-weight:800;margin-top:2px;opacity:.95}
+  .idrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .idrow span{background:rgba(255,255,255,.2);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:800}
+  .idrow span.alert{background:#fff;color:var(--red-d)}
+  .idrow span.blank{background:rgba(255,255,255,.12);font-weight:700;opacity:.8}
+  .idnote{margin-top:10px;font-size:13px;font-weight:600;color:var(--ink-2);background:var(--lav);border-radius:14px;padding:10px 12px}
+  .idnote b{display:block;font-size:11px;font-weight:800;color:var(--muted);margin-bottom:2px}
   @media (max-width:900px){.clin{grid-template-columns:1fr}.ident{position:static}.div,.unsaid,.two{grid-template-columns:1fr}.grid-foods{grid-template-columns:1fr 1fr}.roles{flex-wrap:wrap}}
 </style>
 </head>
@@ -553,11 +658,6 @@
         <div class="wk" id="wk"></div>
       </div>
       <div class="panel"><div class="ph">Coming up</div><div id="events"></div></div>
-      <div class="panel"><div class="ph">From CCSS</div>
-        <div class="note" style="margin-top:0">Events are added by CCSS and show here automatically. You'll get one nudge a week at most, and only for things that match what you've told the app matters to you.</div>
-        <div class="kv"><span>Nudge me about</span><b></b></div>
-        <div class="chips" style="margin-top:4px"><button class="on" onclick="tog(this)">Diet talks</button><button class="on" onclick="tog(this)">Peer meetups</button><button onclick="tog(this)">Parent groups</button><button class="on" onclick="tog(this)">Research studies</button><button onclick="tog(this)">Fundraisers</button></div>
-      </div>
       <div class="panel"><div class="ph">Your IBD team · NUH</div>
         <div class="med"><div class="av">👩‍⚕️</div><div><b>Sister Devi</b><span>IBD nurse · replies within 1 working day</span></div><button class="btn small" onclick="ptab('rec',document.querySelectorAll('#ptabs button')[0]);askFlare()">Message</button></div>
         <div class="med"><div class="av">🩺</div><div><b>Dr Nair</b><span>Gastroenterologist · via the nurse line</span></div></div>
@@ -570,6 +670,59 @@
      </div>
 
      <div id="p-card" style="display:none">
+      <div class="panel" id="aboutcard">
+        <div class="ph" style="display:flex;align-items:center;justify-content:space-between">About me <button class="editbtn" id="editbtn" onclick="editAbout(true)">Edit</button></div>
+
+        <!-- READ MODE -->
+        <div id="pf-read">
+          <div class="idcard">
+            <div class="idtop"><div class="idname" id="rd-name">Marcus Tan</div><div class="idage" id="rd-age">34</div></div>
+            <div class="iddx" id="rd-dx">Crohn's · small bowel (ileal)</div>
+            <div class="idrow" id="rd-rows"></div>
+          </div>
+          <div class="idnote" id="rd-note"></div>
+        </div>
+
+        <!-- EDIT MODE -->
+        <div id="pf-edit" style="display:none">
+          <div class="note" style="margin-top:-2px">Leave anything blank if you'd rather not say — blank is a real answer, not a gap.</div>
+
+          <div class="fldlab">Name and age</div>
+          <div class="fldrow"><input class="fld" id="pf-name" value="Marcus Tan"><input class="fld short" id="pf-age" value="34"></div>
+
+          <div class="fldlab">What you've been told you have</div>
+          <div class="opts" id="pf-dx"><button onclick="setDx('UC',this)">Ulcerative colitis</button><button class="on" onclick="setDx('CD',this)">Crohn's</button><button onclick="setDx('IBDU',this)">Not classified</button><button onclick="setDx('unknown',this)">Not sure yet</button></div>
+
+          <div id="pf-cd">
+            <div class="fldlab">Where in the gut <span>if you know</span></div>
+            <div class="opts" id="pf-loc"><button class="on" onclick="setField('location','ileal',this)">Small bowel (ileal)</button><button onclick="setField('location','colonic',this)">Colon</button><button onclick="setField('location','ileocolonic',this)">Both</button><button onclick="setField('location','unknown',this)">Not sure</button></div>
+
+            <div class="fldlab">Any narrowing your doctor has mentioned <span>this one changes safety advice</span></div>
+            <div class="opts" id="pf-str"><button onclick="setField('stricturing','yes',this)">Yes</button><button onclick="setField('stricturing','no',this)">No</button><button class="on" onclick="setField('stricturing','unknown',this)">Not sure</button></div>
+          </div>
+
+          <div class="fldlab">Surgery</div>
+          <div class="opts" id="pf-surg"><button class="on" onclick="setField('surgical_status','none',this)">None</button><button onclick="setField('surgical_status','ileostomy',this)">Ileostomy</button><button onclick="setField('surgical_status','colostomy',this)">Colostomy</button><button onclick="setField('surgical_status','pouch',this)">Pouch</button></div>
+
+          <div class="fldlab">How things are right now</div>
+          <div class="opts" id="pf-act"><button class="on" onclick="setField('activity','active',this)">Flaring</button><button onclick="setField('activity','remission',this)">Settled</button><button onclick="setField('activity','unknown',this)">Not sure</button></div>
+
+          <div class="fldlab">Allergies <span>true allergy, not "it upsets me"</span></div>
+          <div class="opts wrap" id="pf-allergy"><button onclick="togAllergy('Peanut',this)">Peanut</button><button onclick="togAllergy('Tree nuts',this)">Tree nuts</button><button onclick="togAllergy('Shellfish',this)">Shellfish</button><button onclick="togAllergy('Egg',this)">Egg</button><button onclick="togAllergy('Soy',this)">Soy</button><button onclick="togAllergy('Wheat',this)">Wheat</button><button onclick="togAllergy('Milk protein',this)">Milk protein</button></div>
+          <div class="note" style="margin-top:4px">Anything here is an absolute avoid in your food scans, separate from anything IBD-related.</div>
+
+          <div class="fldlab">A diet you're following <span>only if someone put you on one, or you chose one</span></div>
+          <div class="opts wrap" id="pf-diet"><button class="on" onclick="setDiet('None in particular',this)">None in particular</button><button onclick="setDiet('Low residue',this)">Low residue</button><button onclick="setDiet('CDED',this)">CDED</button><button onclick="setDiet('Formula only (EEN)',this)">Formula only (EEN)</button><button onclick="setDiet('Formula plus food',this)">Formula plus food</button><button onclick="setDiet('Low FODMAP',this)">Low FODMAP</button><button onclick="setDiet('Mediterranean',this)">Mediterranean</button></div>
+          <div class="opts wrap" id="pf-pref" style="margin-top:4px"><button onclick="togPref('Halal',this)">Halal</button><button onclick="togPref('Vegetarian',this)">Vegetarian</button><button onclick="togPref('Vegan',this)">Vegan</button><button onclick="togPref('No beef',this)">No beef</button><button onclick="togPref('No pork',this)">No pork</button></div>
+
+          <div class="fldlab">Anything else your team should know</div>
+          <textarea class="fld area" id="pf-note" placeholder="e.g. I take ibuprofen for my back · toilet access at work is one cubicle · my mum makes a herbal tea I drink most evenings">I take ibuprofen for my back. Toilet access at work is one cubicle.</textarea>
+
+          <div class="chips" style="margin-top:12px"><button class="btn" onclick="saveProfile()">Save</button><button class="btn ghost" onclick="editAbout(false)">Cancel</button></div>
+          <div id="pf-echo" class="pfecho"></div>
+        </div>
+      </div>
+
       <div class="panel"><div class="ph">Your card for Tuesday</div><div class="note" style="margin-top:-4px">Dr Nair · 8 Sep, 2:40 pm · you approve this before anyone sees it</div>
        <p class="cardtxt">Since your last visit on 4 August, things have changed in the last two weeks. You've been going more often — most days six or more — and waking at night on 9 of the last 14 nights. You noticed blood on 11 days. Pain has mostly been 5 to 7 out of 10, often within an hour of eating.</p>
        <p class="cardtxt">Your CRP from 17 August was 11. Your last stool calprotectin was in May.</p>
@@ -581,15 +734,49 @@
       </div>
      </div>
 
+     <div id="p-comm" style="display:none">
+      <div class="panel"><div class="ph">Bloop's friends <span style="font-weight:600;color:var(--muted);font-size:12px">· monsters talk, not accounts</span></div>
+        <div class="pals" id="pals"></div>
+        <div class="note">You send and receive through your monsters. No photos, no phone numbers, no free typing — pick a message from the list. A CCSS moderator reads everything.</div>
+      </div>
+
+      <div class="panel"><div class="ph">Send something</div>
+        <div class="gifts" id="gifts"></div>
+        <div class="note">Giving costs you nothing — the item stays in your wardrobe too.</div>
+      </div>
+
+      <div class="panel"><div class="ph">CCSS events</div>
+        <div id="ccssev"></div>
+        <div class="note" style="margin-top:8px">Posted by CCSS. You'll get one nudge a week at most, and only for the kinds of thing you picked.</div>
+        <div class="chips" style="margin-top:4px"><button class="on" onclick="tog(this)">Diet talks</button><button class="on" onclick="tog(this)">Peer meetups</button><button onclick="tog(this)">Parent groups</button><button class="on" onclick="tog(this)">Research studies</button><button onclick="tog(this)">Fundraisers</button></div>
+      </div>
+
+      <div class="panel"><div class="ph">Monster wall</div>
+        <div class="wall" id="wall"></div>
+        <div class="note">Milestones your friends chose to share. Nobody's symptoms are ever shown here.</div>
+      </div>
+     </div>
+
      <div id="p-learn" style="display:none">
+      <div class="panel"><div class="ph">Two minutes <span style="font-weight:600;color:var(--muted);font-size:12px">· one idea, one card</span></div>
+        <div id="micro"></div>
+      </div>
+      <div class="panel"><div class="ph">Wellness</div>
+        <div class="wellgrid">
+          <button onclick="mode('game',document.querySelectorAll('.modes button')[1]);ptab('rec',document.querySelectorAll('#ptabs button')[0]);game('calm')"><span>🫧</span>Calm Cave<small>paced breathing</small></button>
+          <button onclick="toast('Body scan · 4 min')"><span>🧘</span>Body scan<small>4 min, lying down</small></button>
+          <button onclick="toast('Sleep wind-down opened')"><span>🌙</span>Wind-down<small>for restless nights</small></button>
+          <button onclick="toast('Toilet-anxiety plan opened')"><span>🚻</span>Out and about<small>toilet-anxiety plan</small></button>
+        </div>
+      </div>
       <div class="panel"><div class="ph">Build a habit <span style="font-weight:600;color:var(--muted);font-size:12px">· no streaks, tick what you did</span></div>
         <div class="habits" id="habits"></div>
-        <div class="note">Pick up to 3. Tick them on the days they happen. A missed day costs nothing. Ten ticks and the habit gets a badge.</div>
+        <div class="note">Pick up to 3. A missed day costs nothing. Ten ticks and it gets a badge.</div>
       </div>
-      <div class="panel"><div class="ph">Short, from people who know <span style="font-weight:600;color:var(--muted);font-size:12px">· XP when you finish</span></div>
+      <div class="panel"><div class="ph">Courses <span style="font-weight:600;color:var(--muted);font-size:12px">· XP when you finish</span></div>
         <div id="courses"></div>
+        <div class="note">Everything here is written or reviewed by a clinician before it's published.</div>
       </div>
-      <div class="panel"><div class="ph">From CCSS</div><div class="note" style="margin-top:0">Peer meetups, the newly-diagnosed guide, and who to call. Everything here is reviewed by a clinician before it's published.</div><button class="btn ghost small" style="margin-top:8px" onclick="toast('Opening CCSS')">Open</button></div>
      </div>
      </div>
      <div id="p-game" class="kid" style="display:none">
@@ -606,14 +793,14 @@
         <div class="xplab"><span id="xplab">340 / 500 XP to Grown ✨</span></div>
         <div class="ask" id="nameask" style="margin-top:10px"></div>
         <div class="ggrid">
-          <button onclick="game('parade')"><span>🎺</span>Poo Parade<small>+25</small></button>
-          <button onclick="game('ouch')"><span>🩹</span>Ouch Map<small>+25</small></button>
-          <button onclick="game('weather')"><span>⛅</span>Tummy Weather<small>+25</small></button>
-          <button onclick="game('feed')"><span>🍬</span>Feed Gummy<small>+15</small></button>
+          <button onclick="game('parade')"><span>🎺</span>Poo Parade<small>+10</small></button>
+          <button onclick="game('ouch')"><span>🩹</span>Ouch Map<small>+10</small></button>
+          <button onclick="game('weather')"><span>⛅</span>Tummy Weather<small>+10</small></button>
+          <button onclick="game('feed')"><span>🍬</span>Feed Bloop<small>+10</small></button>
           <button onclick="game('night')"><span>🌙</span>Night Watch<small>+10</small></button>
-          <button onclick="game('food')"><span>🔍</span>Food Detective<small>+15</small></button>
-          <button onclick="game('doctor')"><span>🩺</span>Doctor Says<small>+30</small></button>
-          <button onclick="game('calm')"><span>🫧</span>Calm Cave<small>+15</small></button>
+          <button onclick="game('food')"><span>🔍</span>Food Detective<small>+10</small></button>
+          <button onclick="game('doctor')"><span>🩺</span>Doctor Says<small>+10</small></button>
+          <button onclick="game('calm')"><span>🫧</span>Calm Cave<small>+10</small></button>
           <button onclick="game('dress')"><span>🎩</span>Dress Gummy<small>spend</small></button>
         </div>
         <div class="note" style="text-align:center;margin-top:6px">Tummy Weather = how much it hurts. Ouch Map = where.</div>
@@ -634,11 +821,11 @@
       <!-- POO PARADE -->
       <div id="k-parade" class="gscreen" style="display:none">
         <button class="back" onclick="game('home')">← Home</button>
-        <div class="game"><div class="h">Poo Parade 🎺</div><div class="sub">Gummy's friends are marching past. Tap the one that looks like yours today.</div>
+        <div class="game"><div class="h">Poo Parade 🎺</div><div class="sub">Bloop's friends are marching past. Tap the one that looks like yours today.</div>
           <div class="parade" id="parade"></div>
           <div class="chips" style="margin-top:10px"><button onclick="tog(this)">Saw blood 🩸</button><button onclick="tog(this)">Had to rush 💨</button><button onclick="tog(this)">More than 4 times</button></div>
-          <div class="chips"><button class="btn grad" style="width:100%" onclick="kidLog('parade',25,'Poo logged')">Tell Gummy ⭐ +25</button></div>
-          <div class="reward" id="rw-parade">Gummy says thanks. +25 XP</div>
+          <div class="chips"><button class="btn grad" style="width:100%" onclick="kidLog('parade',10,'Poo logged')">Tell Gummy ⭐ +10</button></div>
+          <div class="reward" id="rw-parade">Gummy says thanks. +10 XP</div>
         </div>
       </div>
 
@@ -676,8 +863,8 @@
           </div>
           <div class="sub" style="margin-top:10px">When?</div>
           <div class="chips"><button onclick="tog(this)">After eating 🍚</button><button onclick="tog(this)">Before poo 🚽</button><button onclick="tog(this)">Better after poo</button><button onclick="tog(this)">Woke me 🌙</button><button onclick="tog(this)">At school 🏫</button><button onclick="tog(this)">All day</button></div>
-          <div class="chips"><button class="btn grad" style="width:100%" onclick="ouchSave()">Tell Gummy ⭐ +25</button><button class="btn ghost" style="width:100%" onclick="ouchClear()">Clear spots</button></div>
-          <div class="reward" id="rw-ouch">Mapped. +25 XP</div>
+          <div class="chips"><button class="btn grad" style="width:100%" onclick="ouchSave()">Tell Gummy ⭐ +10</button><button class="btn ghost" style="width:100%" onclick="ouchClear()">Clear spots</button></div>
+          <div class="reward" id="rw-ouch">Mapped. +10 XP</div>
         </div>
       </div>
 
@@ -695,8 +882,8 @@
           </div>
           <div class="sub" style="margin-top:12px">And your energy?</div>
           <div class="wx small"><button onclick="pick(this,'.wx.small')">🔋 Full</button><button onclick="pick(this,'.wx.small')">🔋 Half</button><button onclick="pick(this,'.wx.small')">🪫 Empty</button></div>
-          <div class="chips"><button class="btn grad" style="width:100%" onclick="kidLog('weather',25,'Weather logged')">Report the weather ⭐ +25</button></div>
-          <div class="reward" id="rw-weather">Forecast sent. +25 XP</div>
+          <div class="chips"><button class="btn grad" style="width:100%" onclick="kidLog('weather',10,'Weather logged')">Report the weather ⭐ +10</button></div>
+          <div class="reward" id="rw-weather">Forecast sent. +10 XP</div>
         </div>
       </div>
 
@@ -705,9 +892,10 @@
         <button class="back" onclick="game('home')">← Home</button>
         <div class="game"><div class="h">Feed Gummy 🍬</div><div class="sub">Drag the tablet to Gummy — or just tap it.</div>
           <div class="feedroom" id="feedroom"><div class="gwrap feedg" id="feedg"><svg class="gummy" viewBox="0 0 120 130"><use href="#gummy"/></svg></div><div class="mouth" id="mouth">😋</div></div>
-          <div class="pills"><button class="pill-b" id="pill-am" onclick="feed(this,'Morning mesalazine')">💊 Morning<small>7:30</small></button><button class="pill-b" id="pill-pm" onclick="feed(this,'Evening mesalazine')">💊 Evening<small>8:00</small></button></div>
-          <div class="note" style="text-align:center">Miss one and Gummy's just a bit hungry. Never sick.</div>
-          <div class="reward" id="rw-feed">Nom. +15 XP</div>
+          <div class="pills"><button class="pill-b" id="pill-am" onclick="feed(this,'Tummy Shield')">🛡️ Tummy Shield<small>morning · 7:30</small></button><button class="pill-b" id="pill-pm" onclick="feed(this,'Tummy Shield')">🛡️ Tummy Shield<small>evening · 8:00</small></button></div>
+          <div class="whymed">Why you take this: <b>it keeps the angry bits in your tummy calm</b>. It works quietly, even on days you feel fine.</div>
+          <div class="note" style="text-align:center">Miss one and Bloop is just a bit hungry. Never sick.<br>The full name and dose are in your grown-up's view.</div>
+          <div class="reward" id="rw-feed">Nom. +10 XP</div>
         </div>
       </div>
 
@@ -724,7 +912,7 @@
       <!-- FOOD DETECTIVE (kept) -->
       <div id="k-food" class="gscreen" style="display:none">
         <button class="back" onclick="game('home')">← Home</button>
-        <div class="game"><div class="h">Food Detective 🔍</div><div class="sub">Which foods are friends right now? A foe can become a friend again — that's a solved case.</div>
+        <div class="game"><div class="h">Food Detective 🔍</div><div class="sub">Most foods say “Not sure yet” — that's normal, not a warning. Try one and open a case.</div>
           <div class="meals"><button class="on">🌅 Breakfast</button><button>☀️ Lunch</button><button>🌙 Dinner</button></div>
           <div class="snap"><label><span>📷</span>Snap your plate<input type="file" accept="image/*" capture="environment" onchange="snap(this,'k')"></label></div>
           <div class="snapres" id="snap-k"><img id="img-k" alt=""><div class="g">Gummy thinks this is…<small>tap to confirm, or fix it</small><div class="chips"><button onclick="snapPick(this,'k','Chicken rice')">Chicken rice</button><button onclick="snapPick(this,'k','Fish soup')">Fish soup</button><button onclick="snapPick(this,'k','Something else')">Something else</button></div></div></div>
@@ -741,8 +929,8 @@
           <div class="dsay" id="dsay"></div>
           <div class="sub" style="margin-top:12px">So what's the plan? Tap what you think.</div>
           <div class="chips" id="dplan"><button onclick="pick(this,'#dplan')">Take the new medicine every day</button><button onclick="pick(this,'#dplan')">Stop the medicine</button><button onclick="pick(this,'#dplan')">Do a poo test at home</button><button onclick="pick(this,'#dplan')">Eat whatever I want</button><button onclick="pick(this,'#dplan')">Come back in 6 weeks</button></div>
-          <div class="chips"><button class="btn grad" style="width:100%" onclick="dsaySave()">Tell Gummy ⭐ +30</button></div>
-          <div class="reward" id="rw-doctor">Thanks — Dr Lim will see what you understood. +30 XP</div>
+          <div class="chips"><button class="btn grad" style="width:100%" onclick="dsaySave()">Tell Gummy ⭐ +10</button></div>
+          <div class="reward" id="rw-doctor">Thanks — Dr Lim will see what you understood. +10 XP</div>
         </div>
       </div>
 
@@ -753,7 +941,7 @@
           <div class="cave"><div class="bubble" id="bubble"><span id="btxt">tap to start</span></div><div class="fish f1">🐠</div><div class="fish f2">🐟</div><div class="fish f3">🪼</div></div>
           <div class="chips" style="justify-content:center"><button class="btn grad" id="calmbtn" onclick="calm()">Start</button></div>
           <div class="note" style="text-align:center;color:#BFE3FF">Stress and tummy trouble feed each other. This is one way to break the loop.</div>
-          <div class="reward" id="rw-calm">Two minutes. +15 XP</div>
+          <div class="reward" id="rw-calm">Two minutes. +10 XP</div>
         </div>
       </div>
 
@@ -766,8 +954,8 @@
       </div>
 </div>
     </div>
-    <div class="tabs" id="ptabs">
-      <button class="on" onclick="ptab('rec',this)"><span>📝</span>Record</button><button onclick="ptab('meds',this)"><span>💊</span>Medicines</button><button onclick="ptab('cal',this)" id="caltab"><span>📅</span>Calendar<i class="badge">2</i></button><button onclick="ptab('card',this)"><span>📄</span>My card</button><button onclick="ptab('learn',this)"><span>📚</span>Learn</button>
+    <div class="tabs six" id="ptabs">
+      <button class="on" onclick="ptab('rec',this)"><span>📝</span>Record</button><button onclick="ptab('meds',this)"><span>💊</span>Meds</button><button onclick="ptab('cal',this)" id="caltab"><span>📅</span>Calendar</button><button onclick="ptab('learn',this)"><span>📚</span>Learn</button><button onclick="ptab('card',this)"><span>📄</span>Card</button><button onclick="ptab('comm',this)" id="commtab"><span>💜</span>Community<i class="badge">2</i></button>
     </div>
   </div>
 </main>
@@ -896,10 +1084,10 @@
   <div class="clin">
     <aside class="ident">
       <h1>Marcus Tan</h1><div class="meta">34 · UC · Referred by Dr Nair 4 Sep</div>
-      <dl><dt>Weight</dt><dd>71.2 kg <span style="color:var(--red-d)">−3.1 % / 4 wk</span></dd><dt>MUST</dt><dd>1 · medium</dd><dt>Foods / week</dt><dd>9 <span style="color:var(--red-d)">from 23</span></dd><dt>Setting</dt><dd>Hawker most lunches</dd></dl>
+      <dl><dt>Weight</dt><dd>71.2 kg <span style="color:var(--red-d)">−3.1 % / 4 wk</span></dd><dt>MUST</dt><dd>1 · medium</dd><dt>Foods / week</dt><dd>9 <span style="color:var(--red-d)">from 23</span></dd><dt>On safe list</dt><dd>3</dd><dt>Setting</dt><dd>Hawker most lunches</dd></dl>
       <div class="flags">
         <div class="flag"><b>Diet narrowing</b>Distinct foods down 61 % in 4 weeks<div class="route">Fastest fall on the caseload this month</div></div>
-        <div class="flag warn"><b>Dairy removed without advice</b>Milk out since 24 Aug after one bad day<div class="route">Reintroduction candidate</div></div>
+        <div class="flag warn"><b>Milk flagged from one bad day</b>He listed lactose as a trigger after a single episode<div class="route">Worth confirming or clearing — it is his only self-set trigger</div></div>
         <div class="flag warn"><b>Meals skipped on pain days</b>7 of 14<div class="route">Appetite trending down</div></div>
       </div>
       <div class="approval">✓ Card approved 4 Sep</div>
@@ -909,17 +1097,34 @@
         <div class="breadth"><div style="height:100%">23</div><div style="height:91%">21</div><div style="height:61%">14</div><div style="height:39%" class="low">9</div></div>
         <div class="breadth-lab"><div>8–14 Aug</div><div>15–21 Aug</div><div>22–28 Aug</div><div>29 Aug–4 Sep</div></div>
         <div class="delta">Fewer than half the foods he ate a month ago. Most of what's gone is what he eats with other people.</div></section>
-      <section><h2>Friend, foe, or trying again <span>his own list — only you can make a foe permanent</span></h2>
-        <div class="grid-foods">
-          <div class="food foe"><b>Laksa</b><span class="s">Foe 16 d · 3 exposures · never retried</span></div>
-          <div class="food foe"><b>Char kway teow</b><span class="s">Foe 14 d · 4 exposures</span></div>
-          <div class="food foe"><b>Nasi lemak</b><span class="s">Foe 12 d · 5 exposures</span></div>
-          <div class="food retry"><b>Milk</b><span class="s">1 exposure · dropped after one bad day → suggest retry</span></div>
-          <div class="food foe"><b>Rojak</b><span class="s">Foe 9 d · 2 exposures</span></div>
-          <div class="food foe"><b>Chilli</b><span class="s">Foe 8 d · many exposures</span></div>
-          <div class="food retry"><b>Roti prata</b><span class="s">2 exposures → suggest retry</span></div>
-          <div class="food friend"><b>Fish soup</b><span class="s">Friend · 11 times · no pattern</span></div>
-        </div></section>
+      <section><h2>Where each food stands <span>every status carries its source — you are the only one who can set Avoid</span></h2>
+        <div class="statgrid">
+          <div class="sbox ok"><b>On your safe list</b><span class="n">3</span><span class="s">Chicken rice · Congee · Fish soup</span></div>
+          <div class="sbox ok2"><b>Tolerated before</b><span class="n">2</span><span class="s">Mee pok · Steamed fish <em>(state-matched only)</em></span></div>
+          <div class="sbox na"><b>Not assessed</b><span class="n">31</span><span class="s">No entry from you, nothing in his log, no gate met. Expected to be the largest group.</span></div>
+          <div class="sbox care"><b>Worth watching</b><span class="n">6</span><span class="s">Each with a named source, below</span></div>
+          <div class="sbox avoid"><b>Avoid</b><span class="n">0</span><span class="s">Nothing set. Only you, or obstruction risk with confirmed narrowing.</span></div>
+        </div>
+        <table style="margin-top:14px">
+          <tr><th>Food</th><th>Status</th><th>Source that put it there</th></tr>
+          <tr><td>Laksa</td><td><span class="tag warn">Worth watching</span></td><td>His own log — symptoms after it, in a matching phase</td></tr>
+          <tr><td>Milk</td><td><span class="tag warn">Worth watching</span></td><td>He told us lactose affects him</td></tr>
+          <tr><td>Nasi lemak</td><td><span class="tag warn">Worth watching</span></td><td>Fat load gate — active disease right now</td></tr>
+          <tr><td>Char kway teow</td><td><span class="tag warn">Worth watching</span></td><td>Fat load gate — active disease right now</td></tr>
+          <tr><td>Rojak</td><td><span class="tag warn">Worth watching</span></td><td>Fermentable carbohydrate gate — Crohn's</td></tr>
+          <tr><td>Salad</td><td><span class="tag warn">Worth watching</span></td><td>Fermentable carbohydrate gate — Crohn's</td></tr>
+          <tr><td>Roti prata</td><td><span class="tag grey">Not assessed</span></td><td>—</td></tr>
+        </table>
+        <div class="note">Three of these six are open only because he is flaring. They close on their own when activity returns to remission — nothing needs removing from his diet permanently.</div>
+      </section>
+
+      <section><h2>Stale tolerance <span>dropped silently, never shown to him</span></h2>
+        <table>
+          <tr><th>Food</th><th>Logged as fine</th><th>Why it no longer counts</th></tr>
+          <tr><td>Mee pok</td><td>3 Aug, in remission</td><td>He is active now — tolerance in remission is not evidence in a flare</td></tr>
+        </table>
+        <div class="note">He has not been told this food is a problem. It has simply gone back to Not assessed.</div>
+      </section>
       <section><h2>Food beside symptoms <span>association only · sorted by how often eaten, not how scary</span></h2>
         <table><tr><th>Food</th><th class="n">Eaten</th><th>Bristol shift 6–12 h</th><th>Pain</th><th>Read</th></tr>
           <tr><td>Chicken rice</td><td class="n">11</td><td>none</td><td>0</td><td><span class="tag ok">no pattern</span></td></tr>
@@ -968,11 +1173,16 @@ function pick(b,sel){document.querySelectorAll(sel+' button').forEach(x=>x.class
 let XP=340,STREAK=3,restOn=false;
 function game(id){['home','parade','ouch','weather','feed','night','food','doctor','calm','dress'].forEach(k=>{const el=document.getElementById('k-'+k);if(el)el.style.display=k===id?'':'none'});if(id==='parade')startParade();if(id==='doctor')renderDsay();if(id==='dress')renderWardrobe();document.querySelector('#pphone .body').scrollTop=0}
 function kidLog(which,pts,msg){celebrate();XP+=pts;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';document.getElementById('xplab').textContent=XP>=500?'Gummy is Grown! ✨':`${XP} / 500 XP to Grown ✨`;if(XP>=500)document.getElementById('gname').textContent='Gummy · Grown stage 🌟';document.getElementById('rw-'+which).classList.add('on');toast(msg+' · logged as "child via Gummy"')}
-const FOODS=[['Chicken rice','friend'],['Fish soup','friend'],['Laksa','foe'],['Char kway teow','foe'],['Wonton mee','friend'],['Milk','retry'],['Nasi lemak','foe'],['Congee','friend'],['Roti prata','retry'],['Mee pok','friend']];
-function renderFoods(q=''){document.getElementById('foods').innerHTML=FOODS.filter(f=>f[0].toLowerCase().includes(q.toLowerCase())).map((f,i)=>`<div class="fd ${f[1]}" data-i="${FOODS.indexOf(f)}"><span class="dot"></span><div>${f[0]}<span class="st">${{friend:'friend food',foe:'foe food — for now',retry:'trying again 🕵️'}[f[1]]}</span></div><div class="sw"><button class="g" title="Friend" onclick="setF(${FOODS.indexOf(f)},'friend')">🙂</button><button class="y" title="Trying again" onclick="setF(${FOODS.indexOf(f)},'retry')">🕵️</button><button class="r" title="Foe for now" onclick="setF(${FOODS.indexOf(f)},'foe')">😣</button></div></div>`).join('')}
-function setF(i,s){const was=FOODS[i][1];FOODS[i][1]=s;renderFoods();if(was!=='friend'&&s==='friend'){document.getElementById('rw-food').textContent=FOODS[i][0]+' is a friend again! +40 XP for trying';document.getElementById('rw-food').classList.add('on');XP+=40;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%'}else if(s==='foe'){toast('Marked foe for now — it can come back')}}
+const KID_FOODS=['Chicken rice','Fish soup','Mee pok','Milk','Laksa','Roti prata','Congee','Ice kacang','Steamed fish','Rojak'];
+const KID_STATUS={SAFE_CONFIRMED:{t:'Dietitian says yes',c:'safe'},TOLERATED_BEFORE:{t:'Been fine before',c:'tol'},NOT_ASSESSED:{t:'Not sure yet',c:'unknown'},CAUTION:{t:'Worth watching',c:'watch'},AVOID:{t:'Not right now',c:'avoid'}};
+function renderFoods(q=''){
+ const list=KID_FOODS.filter(n=>n.toLowerCase().includes(q.toLowerCase()));
+ document.getElementById('foods').innerHTML=list.map(n=>{const a=assess(n);const k=KID_STATUS[a.status];
+  return `<div class="fd ${k.c}"><span class="dot"></span><div>${n}<span class="st">${k.t}${a.source?' — '+a.source:''}</span></div><button class="sw1" onclick="kidTry('${n}')">${a.status==='NOT_ASSESSED'?'Try it 🕵️':'Log it'}</button></div>`}).join('')}
+function kidTry(n){const a=assess(n);
+ if(a.status==='NOT_ASSESSED'){TOL_LOG.push({food:n,outcome:'no symptoms',state:{activity:PHENO.activity,surgical_status:PHENO.surgical_status}});renderFoods();XP+=10;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';document.getElementById('rw-food').textContent='Case opened on '+n+'. Tell Bloop how it goes. +10 XP';document.getElementById('rw-food').classList.add('on');celebrate()}
+ else{addEntry('Ate · '+n);toast(n+' logged')}}
 function filt(v){renderFoods(v)}
-renderFoods();
 function rest(){restOn=!restOn;const b=document.getElementById('restbtn');b.classList.toggle('on',restOn);b.textContent=restOn?'Rest mode is on':'Turn on rest mode';document.getElementById('room').classList.toggle('rest',restOn);document.getElementById('gs-b').textContent=restOn?'Gummy is resting':'Gummy is awake · 3 of 3 days for alive, 5 for thriving';document.getElementById('gs-s').textContent=restOn?'Streak paused. Nothing lost. Dr Lim can see rest mode is on.':'Tummy Monster and Pain Scale done today. Food Detective not yet.';toast(restOn?'Rest mode on. Nothing is lost.':'Rest mode off')}
 
 /* ---- patient quick record with structured follow-up ---- */
@@ -1015,72 +1225,169 @@ function cgSave(txt,cls,route){const e=document.createElement('div');e.className
 
 /* ---- photo capture (mock recognition) ---- */
 function snap(inp,who){const f=inp.files&&inp.files[0];const box=document.getElementById('snap-'+who);const img=document.getElementById('img-'+who);if(f){img.src=URL.createObjectURL(f)}else{img.removeAttribute('src')}box.classList.add('on');toast('Photo saved with the meal · recognition is a guess until you confirm')}
-function snapPick(b,who,name){pick(b,'#snap-'+who+' .chips');if(who==='p'){const fin=document.getElementById('fin');if(fin)fin.value=name==='Something else'?'':name}else{if(name!=='Something else'){const i=FOODS.findIndex(f=>f[0]===name);if(i<0)FOODS.unshift([name,'friend']);renderFoods();XP+=15;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';toast(name+' logged from photo · +15 XP')}}}
+function snapPick(b,who,name){pick(b,'#snap-'+who+' .chips');if(who==='p'){const fin=document.getElementById('fin');if(fin)fin.value=(name==='Something else'?'':name)}else{if(name!=='Something else'){if(!KID_FOODS.includes(name))KID_FOODS.unshift(name);renderFoods();XP+=10;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';toast(name+' logged from photo · +10 XP')}}}
 
-/* ---- flare-friendly scan: three sources, weighted ---- */
-/* Source 1 — guideline (general). IOIBD 2020 (Levine et al., Clin Gastroenterol Hepatol 18:1381) and ESPEN practical guideline 2020.
-   Source 2 — the patient's own diary. Source 3 — their dietitian's note, which can override. */
-const STATE={flaring:true,since:'22 Aug',dx:'uc',stricturing:false}; /* from derived band + record in the real build */
+/* =====================================================================
+   FOOD MODEL — five statuses, every one carries its source.
+   The agent never asserts safety on its own authority; it attributes.
+   NOT_ASSESSED is the default and should be by far the most common.
+   ===================================================================== */
+
+/* Phenotype. Any field may be 'unknown' — see DEFAULT MODE below. */
+const PHENO={diagnosis:'CD',location:'ileal',stricturing:'unknown',activity:'active',surgical_status:'none',since:'22 Aug'};
+
+/* Patient-reported triggers. Picklist terms that map to the CAUTION gates. */
+const KNOWN_TRIGGERS=['lactose'];
+
+/* Stated allergies. Absolute, and unrelated to IBD food tolerance.
+   This is a third ground for AVOID beyond the two in the agent spec. */
+const ALLERGIES=[];
+const ALLERGEN_MAP={'Peanut':['Rojak','Ice kacang'],'Tree nuts':['Ice kacang'],'Shellfish':['Laksa','Char kway teow','Rojak'],'Egg':['Char kway teow','Roti prata'],'Soy':['Mee pok','Steamed fish'],'Wheat':['Mee pok','Roti prata','Char kway teow'],'Milk protein':['Milk','Ice kacang','Roti prata']};
+
+/* A diet the patient has been put on or chosen. Displayed, never used to set a status. */
+const DIET_PLAN={name:'None in particular'};
+
+/* Dietitian-maintained — highest authority. Empty until a dietitian is in the loop. */
+const DIET_SAFE=['Chicken rice','Congee','Fish soup'];
+const DIET_AVOID=[];                       /* [{food, reason, conditional:bool}] */
+const DIET_NOTES={
+ 'Milk':{note:"Retry half a cup with a meal once things settle, not on an empty stomach. One bad day doesn't prove intolerance.",by:'Ms Priya Lim, dietitian',on:'28 Aug'},
+ 'Chicken rice':{note:'Plain rice, no skin — consistently well tolerated. Good default when symptomatic.',by:'Ms Priya Lim, dietitian',on:'28 Aug'}
+};
+
+/* Tolerance log. phenotype_state_at_time is written AT LOG TIME and cannot be
+   reconstructed later. A food tolerated in remission is not evidence in a flare. */
+const TOL_LOG=[
+ {food:'Chicken rice',outcome:'no symptoms',state:{activity:'active',surgical_status:'none'}},
+ {food:'Fish soup',outcome:'no symptoms',state:{activity:'active',surgical_status:'none'}},
+ {food:'Mee pok',outcome:'no symptoms',state:{activity:'remission',surgical_status:'none'}},
+ {food:'Laksa',outcome:'symptoms',state:{activity:'active',surgical_status:'none'}},
+ {food:'Milk',outcome:'symptoms',state:{activity:'active',surgical_status:'none'}}
+];
+
+/* Optional, set by the dietitian or IBD team. Never derived here. */
+const TARGETS={protein_target_g:75,energy_target_kcal:null};
+
+/* Food properties. Used ONLY to test the four phenotype gates and for macros.
+   These are not verdicts and never produce a status on their own. */
 const FOODDB={
- 'Chicken rice':{insolFibre:'low',satFat:'mod',coconut:false,redMeat:false,processed:false,lactose:false,spice:'none',hist:{n:11,worse:0}},
- 'Fish soup':{insolFibre:'low',satFat:'low',coconut:false,redMeat:false,processed:false,lactose:false,spice:'none',omega3:true,hist:{n:11,worse:0}},
- 'Steamed fish':{insolFibre:'low',satFat:'low',coconut:false,redMeat:false,processed:false,lactose:false,spice:'none',omega3:true,hist:{n:6,worse:0}},
- 'Congee':{insolFibre:'low',satFat:'low',coconut:false,redMeat:false,processed:false,lactose:false,spice:'none',hist:{n:9,worse:0}},
- 'Laksa':{insolFibre:'mod',satFat:'high',coconut:true,redMeat:false,processed:true,lactose:false,spice:'high',hist:{n:3,worse:2}},
- 'Nasi lemak':{insolFibre:'low',satFat:'high',coconut:true,redMeat:false,processed:false,lactose:false,spice:'high',hist:{n:5,worse:3}},
- 'Char kway teow':{insolFibre:'low',satFat:'high',coconut:false,redMeat:false,processed:true,lactose:false,spice:'mod',hist:{n:4,worse:2}},
- 'Bak kut teh':{insolFibre:'low',satFat:'high',coconut:false,redMeat:true,processed:false,lactose:false,spice:'mod',hist:{n:2,worse:1}},
- 'Rojak':{insolFibre:'high',satFat:'mod',coconut:false,redMeat:false,processed:false,lactose:false,spice:'mod',hist:{n:2,worse:1}},
- 'Milk':{insolFibre:'none',satFat:'mod',coconut:false,redMeat:false,processed:false,lactose:true,spice:'none',hist:{n:1,worse:1}},
- 'Roti prata':{insolFibre:'low',satFat:'high',coconut:false,redMeat:false,processed:false,lactose:false,spice:'none',hist:{n:2,worse:1}},
- 'Salad':{insolFibre:'high',satFat:'low',coconut:false,redMeat:false,processed:false,lactose:false,spice:'none',hist:{n:0,worse:0}},
- 'Mee pok':{insolFibre:'low',satFat:'mod',coconut:false,redMeat:false,processed:true,lactose:false,spice:'mod',hist:{n:7,worse:1}}
+ 'Chicken rice':{fibre:'low',fat:'mod',lactose:false,fermentable:false,obstruction:false,g:380,kcal100:180,pro100:9.5,carb100:22,fat100:6,fib100:0.8},
+ 'Fish soup':{fibre:'low',fat:'low',lactose:false,fermentable:false,obstruction:false,g:450,kcal100:65,pro100:8,carb100:3,fat100:2,fib100:0.5},
+ 'Congee':{fibre:'low',fat:'low',lactose:false,fermentable:false,obstruction:false,g:400,kcal100:60,pro100:2.5,carb100:11,fat100:0.6,fib100:0.3},
+ 'Laksa':{fibre:'mod',fat:'high',lactose:false,fermentable:false,obstruction:false,g:500,kcal100:135,pro100:5,carb100:12,fat100:8,fib100:1.5},
+ 'Nasi lemak':{fibre:'low',fat:'high',lactose:false,fermentable:false,obstruction:false,g:350,kcal100:210,pro100:7,carb100:24,fat100:10,fib100:1.2},
+ 'Char kway teow':{fibre:'low',fat:'high',lactose:false,fermentable:false,obstruction:false,g:400,kcal100:190,pro100:8,carb100:20,fat100:9,fib100:1},
+ 'Mee pok':{fibre:'low',fat:'mod',lactose:false,fermentable:false,obstruction:false,g:400,kcal100:150,pro100:9,carb100:19,fat100:4,fib100:1.2},
+ 'Milk':{fibre:'none',fat:'mod',lactose:true,fermentable:false,obstruction:false,g:250,kcal100:64,pro100:3.4,carb100:4.8,fat100:3.6,fib100:0},
+ 'Roti prata':{fibre:'low',fat:'high',lactose:false,fermentable:false,obstruction:false,g:160,kcal100:290,pro100:7,carb100:34,fat100:14,fib100:1.4},
+ 'Rojak':{fibre:'high',fat:'mod',lactose:false,fermentable:true,obstruction:true,g:300,kcal100:120,pro100:4,carb100:16,fat100:5,fib100:4.5},
+ 'Steamed fish':{fibre:'low',fat:'low',lactose:false,fermentable:false,obstruction:false,g:200,kcal100:105,pro100:20,carb100:0,fat100:2.5,fib100:0},
+ 'Salad':{fibre:'high',fat:'low',lactose:false,fermentable:true,obstruction:true,g:180,kcal100:35,pro100:2,carb100:5,fat100:0.5,fib100:3.5},
+ 'Ice kacang':{fibre:'mod',fat:'low',lactose:true,fermentable:true,obstruction:false,g:300,kcal100:110,pro100:2,carb100:24,fat100:1.5,fib100:2}
 };
-/* dietitian notes are per patient, dated, and can override the computed label */
-const DIETNOTES={
- 'Milk':{note:'Retry half a cup with a meal once things settle, not on an empty stomach. Lactose is only a problem if you\'re intolerant — one bad day doesn\'t prove that.',by:'Ms Lim, dietitian',on:'28 Aug',override:'care'},
- 'Laksa':{note:'The coconut base is the issue for UC, not the noodles. Ask for less lemak or have the dry version.',by:'Ms Lim, dietitian',on:'28 Aug'},
- 'Fish soup':{note:'Good choice — oily fish is the one omega-3 source the guideline actually recommends.',by:'Ms Lim, dietitian',on:'28 Aug'},
- 'Rojak':{note:'Hold the raw fruit and veg until you\'re settled, then bring it back — fibre is protective in remission.',by:'Ms Lim, dietitian',on:'28 Aug'}
+
+const STATUS_LABEL={
+ SAFE_CONFIRMED:"On your dietitian's safe list",
+ TOLERATED_BEFORE:"You've logged this before without symptoms",
+ NOT_ASSESSED:"Not assessed yet",
+ CAUTION:"Worth watching",
+ AVOID:"Avoid"
 };
-function flareFriendly(name){const f=FOODDB[name];if(!f)return null;let pts=0;const gl=[],tol=[];
- /* guideline items — apply in remission too, because IOIBD is about preventing relapse */
- if(STATE.dx==='uc'){ if(f.coconut)gl.push({t:'coconut / palm fat (myristic acid)',s:'IOIBD 2020, UC'}),pts+=2;
-   if(f.redMeat)gl.push({t:'red meat',s:'IOIBD 2020, UC'}),pts+=1; }
- if(STATE.dx==='cd'){ if(f.satFat==='high')gl.push({t:'saturated fat',s:'IOIBD 2020, CD'}),pts+=1;
-   if(f.insolFibre==='high'&&(STATE.stricturing||STATE.flaring))gl.push({t:'insoluble fibre',s:'IOIBD 2020, symptomatic or stricturing CD'}),pts+=2; }
- if(f.processed)gl.push({t:'processed, likely emulsifiers or thickeners',s:'IOIBD 2020, both'}),pts+=1;
- if(f.omega3)gl.push({t:'marine omega-3 — recommended',s:'IOIBD 2020, UC'}),pts-=1;
- /* tolerance items — not guideline, commonly reported; count only during a flare */
- if(STATE.flaring){ if(f.insolFibre==='high'&&STATE.dx==='uc')tol.push('rough fibre'),pts+=1; if(f.spice==='high')tol.push('very spicy'),pts+=1; if(f.lactose)tol.push('lactose, if you\'re intolerant'),pts+=1; if(f.satFat==='high'&&STATE.dx==='uc')tol.push('greasy'),pts+=1; }
- /* own diary */
- const hd=f.hist;let hist='',hw=0;
- if(hd.n===0)hist='You haven\'t logged this before.';
- else if(hd.n<4)hist=`Eaten ${hd.n} time${hd.n>1?'s':''}, worse within 6 h on ${hd.worse}. Too few to call a pattern — guideline and dietitian carry more weight here.`;
- else{const r=hd.worse/hd.n;hist=`Eaten ${hd.n} times, worse within 6 h on ${hd.worse}.`;if(r>=0.5)hw=2;else if(r>=0.3)hw=1;else if(r===0)hw=-1;pts+=hw;if(hw>0)hist+=' Your own record counts most.'}
- let lvl=pts>=3?'skip':pts>=1?'care':'fine';
- /* in remission, only the patient's own record can push a food to the top band; guideline items alone cap at 'care' */
- if(!STATE.flaring&&lvl==='skip'&&hw<2)lvl='care';
- const dn=DIETNOTES[name];let overridden=false;if(dn&&dn.override&&dn.override!==lvl){lvl=dn.override;overridden=true}
- const labels=STATE.flaring?{fine:'Usually fine for you',care:'Go carefully',skip:'Skip during a flare'}:{fine:'Usually fine for you',care:'Go carefully',skip:'Your record says go easy'};
- return{lvl,gl,tol,hist,dn,overridden,label:labels[lvl]}}
-function askScan(){cur={type:'scan'};ask.className='ask on';ask.innerHTML=`<div class="q">Scan a food</div><div class="why">A guide for right now, built from what\'s in it, what happened to you before, and how you are this week. Not a rule.</div><div class="snap"><label><span>📷</span>Point at the plate or the menu<input type="file" accept="image/*" capture="environment" onchange="scanShot(this)"></label></div><div id="scanpick" class="scanpick">${Object.keys(FOODDB).map(n=>`<button onclick="showScan('${n}')">${n}</button>`).join('')}</div><div id="scanout"></div>`}
+const STATUS_RANK={SAFE_CONFIRMED:0,TOLERATED_BEFORE:1,NOT_ASSESSED:2,CAUTION:3,AVOID:4};
+const STATUS_CLASS={SAFE_CONFIRMED:'ok',TOLERATED_BEFORE:'ok',NOT_ASSESSED:'na',CAUTION:'care',AVOID:'avoid'};
+
+function stateMatches(logged){
+ return logged.activity===PHENO.activity && logged.surgical_status===PHENO.surgical_status;
+}
+
+function assess(name){
+ const f=FOODDB[name]; if(!f) return null;
+
+ /* AVOID — allergy first, then the two grounds in the agent spec */
+ const alg=ALLERGIES.find(a=>(ALLERGEN_MAP[a]||[]).includes(name));
+ if(alg) return {status:'AVOID',source:'your stated allergy',detail:alg};
+
+ const da=DIET_AVOID.find(x=>x.food===name && !x.conditional);
+ if(da) return {status:'AVOID',source:'your dietitian',detail:da.reason||''};
+ if(PHENO.stricturing==='yes' && f.obstruction)
+   return {status:'AVOID',source:'obstruction risk with narrowing',detail:'whole nuts, popcorn, sweetcorn, raw fibrous veg, skins and pith'};
+
+ /* SAFE_CONFIRMED — dietitian's list */
+ if(DIET_SAFE.includes(name)) return {status:'SAFE_CONFIRMED',source:'your dietitian',detail:''};
+
+ /* CAUTION — needs ONE named source */
+ const dac=DIET_AVOID.find(x=>x.food===name && x.conditional);
+ if(dac) return {status:'CAUTION',source:'your dietitian (avoid-if)',detail:dac.reason||''};
+ const trig=KNOWN_TRIGGERS.find(t=>t==='lactose'?f.lactose:name.toLowerCase().includes(t));
+ if(trig) return {status:'CAUTION',source:'you told us this affects you',detail:trig};
+ const bad=TOL_LOG.find(l=>l.food===name && l.outcome==='symptoms' && stateMatches(l.state));
+ if(bad) return {status:'CAUTION',source:'your own log',detail:'you had symptoms after this before, in a similar phase'};
+ /* four phenotype gates — each needs its field to be known */
+ if(['ileostomy','colostomy','pouch'].includes(PHENO.surgical_status) && f.fibre==='high')
+   return {status:'CAUTION',source:'your stoma',detail:'fibre load'};
+ if(PHENO.location && PHENO.location.includes('ileal') && f.lactose)
+   return {status:'CAUTION',source:'ileal involvement',detail:'lactose'};
+ if(PHENO.activity==='active' && f.fat==='high')
+   return {status:'CAUTION',source:'active disease right now',detail:'fat load'};
+ if(PHENO.diagnosis==='CD' && f.fermentable)
+   return {status:'CAUTION',source:"Crohn's",detail:'fermentable carbohydrate'};
+
+ /* TOLERATED_BEFORE — state-specific. Stale tolerance is dropped silently. */
+ const good=TOL_LOG.find(l=>l.food===name && l.outcome==='no symptoms' && stateMatches(l.state));
+ if(good) return {status:'TOLERATED_BEFORE',source:'your own log',detail:''};
+
+ /* Default */
+ return {status:'NOT_ASSESSED',source:'',detail:''};
+}
+
+function macros(name){
+ const f=FOODDB[name]; if(!f) return null;
+ const r=g=>Math.round(f.g*g/100);
+ return {g:f.g,kcal:Math.round(f.g*f.kcal100/100/10)*10,pro:r(f.pro100),carb:r(f.carb100),fat:r(f.fat100),fib:r(f.fib100),
+         per100:{kcal:f.kcal100,pro:f.pro100,carb:f.carb100,fat:f.fat100,fib:f.fib100}};
+}
+
+function askScan(){cur={type:'scan'};ask.className='ask on';ask.innerHTML=`<div class="q">Scan a meal</div><div class="why">Photo of the plate, or pick what you're having. You'll get what's in it, and where each item stands for you.</div><div class="snap"><label><span>📷</span>Point at the plate<input type="file" accept="image/*" capture="environment" onchange="scanShot(this)"></label></div><div class="pheno" id="pheno"></div><div id="scanpick" class="scanpick">${Object.keys(FOODDB).map(n=>`<button onclick="showScan('${n}')">${n}</button>`).join('')}</div><div id="scanout"></div>`;renderPheno()}
+function renderPheno(){const el=document.getElementById('pheno');if(!el)return;const known=PHENO.diagnosis!=='unknown';
+ el.innerHTML=`<div class="phlab">What we know about you <span>${known?'phenotype on record':'nothing on record — default mode'}</span></div>
+  <div class="phrow">
+   <button class="${known?'on':''}" onclick="setPheno(true)">Crohn's · ileal · flaring · dietitian list</button>
+   <button class="${known?'':'on'}" onclick="setPheno(false)">Nothing known yet</button>
+  </div>`}
+function setPheno(on){if(on){PHENO.diagnosis='CD';PHENO.location='ileal';PHENO.activity='active';PHENO.surgical_status='none';DIET_SAFE.splice(0,DIET_SAFE.length,'Chicken rice','Congee','Fish soup');KNOWN_TRIGGERS.splice(0,KNOWN_TRIGGERS.length,'lactose')}
+ else{PHENO.diagnosis='unknown';PHENO.location='unknown';PHENO.activity='unknown';PHENO.surgical_status='unknown';DIET_SAFE.length=0;KNOWN_TRIGGERS.length=0}
+ renderPheno();const o=document.getElementById('scanout');if(o)o.innerHTML='';toast(on?'Phenotype on record — gates can now fire':'Default mode — unknown never becomes a warning')}
 function scanShot(inp){toast('Photo taken · which one is it?');document.getElementById('scanpick').scrollIntoView({block:'nearest'})}
-function showScan(name){const r=flareFriendly(name);const out=document.getElementById('scanout');
- const glTxt=r.gl.length?r.gl.map(g=>`${g.t} <em style="color:var(--muted);font-style:normal;font-size:11px">(${g.s})</em>`).join('; '):'nothing the guidelines single out';
- const tolTxt=r.tol.length?`During a flare many people also find: ${r.tol.join(', ')}. <em style="color:var(--muted);font-style:normal;font-size:11px">(patient-reported, not guideline)</em>`:'';
- out.innerHTML=`<div class="scanres ${r.lvl}"><span class="lbl">${r.label}</span>${r.overridden?' <span class="lbl" style="background:var(--purple-l);color:var(--purple-d)">set by your dietitian</span>':''}<h4>${name}</h4><div class="now">${STATE.dx==='uc'?'Ulcerative colitis':'Crohn\'s'} · ${STATE.flaring?'flaring since '+STATE.since+' — this label loosens as things settle':'in remission — most things are back on the table'}</div>
- <div class="why3">
-  <div><span>📋</span><div><b>Guideline</b>${glTxt}${tolTxt?'<br>'+tolTxt:''}</div></div>
-  <div><span>📖</span><div><b>Your diary</b>${r.hist}</div></div>
-  ${r.dn?`<div style="background:var(--purple-l)"><span>🩺</span><div><b>Your dietitian · ${r.dn.by}, ${r.dn.on}</b>${r.dn.note}</div></div>`:`<div><span>🩺</span><div><b>Your dietitian</b>No note on this one yet. Ask and it\'ll show here next time.</div></div>`}
- </div>
- <div class="chips"><button class="btn" onclick="scanLog('${name}',true)">Eating it — log it</button><button class="btn ghost" onclick="scanLog('${name}',false)">Skipping today</button><button class="btn ghost" onclick="toast('Sent to Ms Lim with this card')">Ask dietitian</button></div>
- <div class="fine-print">Weighting: your dietitian\'s note overrides; your own record counts once there are four or more entries; guideline items count always; flare-tolerance items count only while you\'re flaring. No single food causes a flare.</div></div>`;out.scrollIntoView({block:'nearest'})}
-function scanLog(name,ate){addEntry((ate?'Ate · ':'Skipped · ')+name+' · scanned');ask.className='ask';toast(ate?'Logged. Tell me how it goes in a few hours.':'Logged as skipped — it stays on your list, it can come back')}
+
+function showScan(name){
+ const a=assess(name), m=macros(name), dn=DIET_NOTES[name];
+ const cls=STATUS_CLASS[a.status];
+ const proFrac=TARGETS.protein_target_g?Math.round(m.pro/TARGETS.protein_target_g*10)/10:null;
+ const out=document.getElementById('scanout');
+ out.innerHTML=`<div class="scanres ${cls}">
+  <h4>${name}</h4><div class="now">Roughly ${m.g} g on the plate — an estimate from the photo.</div>
+
+  <div class="macro">
+    <div class="big"><b>${m.pro} g</b><span>protein${proFrac?` · about ${proFrac<0.34?'a quarter':proFrac<0.5?'a third':'half'} of your day`:''}</span></div>
+    <div class="big alt"><b>${m.kcal}</b><span>kcal</span></div>
+  </div>
+  <div class="macro-row">carbohydrate ${m.carb} g · fat ${m.fat} g · fibre ${m.fib} g<br><span class="per100">per 100 g: ${m.per100.kcal} kcal, ${m.per100.pro} g protein, ${m.per100.carb} g carb, ${m.per100.fat} g fat, ${m.per100.fib} g fibre</span></div>
+
+  <div class="stat-line ${cls}"><span class="pillst">${STATUS_LABEL[a.status]}</span>${a.source?`<span class="src">${a.source}</span>`:''}</div>
+  ${a.detail?`<div class="stat-detail">${a.detail}</div>`:''}
+  ${a.status==='NOT_ASSESSED'?`<div class="stat-detail muted-note">No dietitian entry and nothing in your log for this yet. That's not a warning — most foods sit here.</div>`:''}
+
+  ${dn?`<div class="dnote"><b>${dn.by} · ${dn.on}</b>${dn.note}</div>`:''}
+
+  <div class="chips"><button class="btn" onclick="scanLog('${name}',true)">Eating it — log it</button><button class="btn ghost" onclick="scanLog('${name}',false)">Not today</button><button class="btn ghost" onclick="toast('Sent to Ms Lim with this card')">Ask dietitian</button></div>
+  <div class="fine-print">Portion is estimated from the photo. Nothing here is a diagnosis, and no single food causes a flare.</div>
+ </div>`;
+ out.scrollIntoView({block:'nearest'});
+}
+function scanLog(name,ate){const m=macros(name);addEntry((ate?'Ate · ':'Not today · ')+name+(ate?` · ${m.pro} g protein, ${m.kcal} kcal`:''));ask.className='ask';toast(ate?'Logged. Tell me how it goes in a few hours.':'Logged — nothing is off your list')}
 
 /* ---- patient tabs ---- */
-function ptab(id,btn){const inGame=document.querySelector('.modes button.on')?.textContent.includes('Game');document.getElementById('p-chat').style.display=(id==='rec'&&inGame)?'none':'';document.getElementById('p-game').style.display=(id==='rec'&&inGame)?'':'none';['rec','meds','cal','card','learn'].forEach(k=>{const el=document.getElementById('p-'+k);if(el)el.style.display=k===id?'':'none'});document.querySelectorAll('#ptabs button').forEach(x=>x.classList.remove('on'));btn.classList.add('on');document.querySelector('#pphone .body').scrollTop=0}
+function ptab(id,btn){const inGame=document.querySelector('.modes button.on')?.textContent.includes('Game');document.getElementById('p-chat').style.display=(id==='rec'&&inGame)?'none':'';document.getElementById('p-game').style.display=(id==='rec'&&inGame)?'':'none';['rec','meds','cal','card','learn','comm'].forEach(k=>{const el=document.getElementById('p-'+k);if(el)el.style.display=k===id?'':'none'});document.querySelectorAll('#ptabs button').forEach(x=>x.classList.remove('on'));btn.classList.add('on');document.querySelector('#pphone .body').scrollTop=0}
 function energy(b,v){pick(b,'.energy .row3:not(.small)');const extra=[...document.querySelectorAll('.energy .row3.small button.on')].map(x=>x.textContent).join(', ');addEntry('Energy '+v+(extra?' · '+extra:''));toast('Recorded · goes to your card as fatigue if it keeps up')}
 function missed(b,why){pick(b,'#p-meds .chips');addEntry('Missed dose · '+why);toast('Logged · your pharmacist sees the reason, not just the miss')}
 
@@ -1127,7 +1434,7 @@ function startParade(){const el=document.getElementById('parade');if(el.dataset.
 function weather(b,lvl,cls){pick(b,'#wx');const sky=document.getElementById('sky');sky.className='sky '+cls;const rain=document.getElementById('rain');rain.innerHTML='';if(lvl>=2){for(let i=0;i<18;i++){const d=document.createElement('i');d.style.left=Math.random()*100+'%';d.style.animationDelay=(Math.random()*.7)+'s';rain.appendChild(d)}}cur.score=[0,2,5,7,10][lvl]}
 
 /* ---- Feed Gummy: tablet flies in, Gummy dances; missing = hungry, never sick ---- */
-function feed(b,which){if(b.classList.contains('fed'))return;b.classList.add('fly');const m=document.getElementById('mouth');m.classList.add('on');const g=document.getElementById('feedg');g.classList.remove('dance');void g.offsetWidth;g.classList.add('dance');setTimeout(()=>{b.classList.remove('fly');b.classList.add('fed');m.classList.remove('on');XP+=15;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';document.getElementById('rw-feed').classList.add('on');toast(which+' · logged as taken')},550)}
+function feed(b,which){if(b.classList.contains('fed'))return;b.classList.add('fly');const m=document.getElementById('mouth');m.classList.add('on');const g=document.getElementById('feedg');g.classList.remove('dance');void g.offsetWidth;g.classList.add('dance');setTimeout(()=>{b.classList.remove('fly');b.classList.add('fed');m.classList.remove('on');XP+=10;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';document.getElementById('rw-feed').classList.add('on');toast(which+' · logged as taken')},550)}
 
 /* ---- Night Watch ---- */
 let moons=0;
@@ -1165,17 +1472,117 @@ let OUCH=[];
 document.getElementById('zones').addEventListener('click',e=>{const r=e.target.closest('rect');if(!r)return;const z=r.dataset.z,loc=r.dataset.loc;const x=+r.getAttribute('x')+ +r.getAttribute('width')/2,y=+r.getAttribute('y')+ +r.getAttribute('height')/2;if(OUCH.find(o=>o.loc===loc)){OUCH=OUCH.filter(o=>o.loc!==loc)}else OUCH.push({z,loc,x,y});renderOuch()});
 function renderOuch(){document.getElementById('ouches').innerHTML=OUCH.map(o=>`<g class="ouch"><circle cx="${o.x}" cy="${o.y}" r="11" fill="#E84545" opacity=".9"/><text x="${o.x}" y="${o.y+5}" font-size="14" text-anchor="middle">🩹</text></g>`).join('');document.getElementById('ouchlist').innerHTML=OUCH.length?'<b>It hurts:</b>'+OUCH.map(o=>o.z).join('<br>'):'Nowhere yet — that\'s fine too.'}
 function ouchClear(){OUCH=[];renderOuch()}
-function ouchSave(){const when=[...document.querySelectorAll('#k-ouch .chips button.on')].map(b=>b.textContent.replace(/[^\w\s]/g,'').trim());cur.locs=OUCH.map(o=>o.loc);kidLog('ouch',25,'Pain mapped · '+(OUCH.length?OUCH.map(o=>o.z).join(', '):'no spots')+(cur.score!=null?' · '+cur.score+'/10':'')+(when.length?' · '+when.join(', '):''))}
+function ouchSave(){const when=[...document.querySelectorAll('#k-ouch .chips button.on')].map(b=>b.textContent.replace(/[^\w\s]/g,'').trim());cur.locs=OUCH.map(o=>o.loc);kidLog('ouch',10,'Pain mapped · '+(OUCH.length?OUCH.map(o=>o.z).join(', '):'no spots')+(cur.score!=null?' · '+cur.score+'/10':'')+(when.length?' · '+when.join(', '):''))}
 
 /* ---- Doctor Says: clinician picks 3 explainers, child taps to reveal, then says what the plan is ---- */
 const DSAY=[{e:'💊',t:'A new tablet, every morning',w:'It calms the angry bits in your tummy. It takes a few weeks to work, so keep going even when you feel fine.'},{e:'🧪',t:'A poo test at home',w:'A tiny bit of poo in a tube. It tells Dr Lim if your tummy is still angry inside, even when it doesn\'t hurt.'},{e:'🍜',t:'You can still eat with your family',w:'Some foods might be "trying again" for now. Ms Lim will help. Nothing is banned forever.'}];
 function renderDsay(){document.getElementById('dsay').innerHTML=DSAY.map((d,i)=>`<div class="ds" id="ds${i}" onclick="this.classList.add('on');this.querySelector('.tap').textContent='✓';celebrate()"><svg class="av" viewBox="0 0 120 130"><use href="#gummy"/></svg><div><b>${d.e} ${d.t}</b><small>${d.w}</small></div><span class="tap">tap</span></div>`).join('')}
-function dsaySave(){const plan=document.querySelector('#dplan button.on')?.textContent||'no answer';const wrong=/Stop the medicine|whatever I want/.test(plan);kidLog('doctor',30,'Plan as understood: '+plan);if(wrong)setTimeout(()=>toast('Logged — Dr Lim will see this doesn\'t match, and can check in'),2400)}
+function dsaySave(){const plan=document.querySelector('#dplan button.on')?.textContent||'no answer';const wrong=/Stop the medicine|whatever I want/.test(plan);kidLog('doctor',10,'Plan as understood: '+plan);if(wrong)setTimeout(()=>toast('Logged — Dr Lim will see this doesn\'t match, and can check in'),2400)}
 
 /* ---- Calm Cave: paced breathing, 4s in / 4s out, ~2 minutes ---- */
 let calmT=null,calmN=0;
-function calm(){const b=document.getElementById('bubble'),t=document.getElementById('btxt'),btn=document.getElementById('calmbtn');if(calmT){clearInterval(calmT);calmT=null;b.className='bubble out';t.textContent='tap to start';btn.textContent='Start';if(calmN>=4){XP+=15;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';document.getElementById('rw-calm').classList.add('on');toast('That counts. +15 XP')}else toast('Stopped early — that\'s fine. Nothing lost.');calmN=0;return}
+function calm(){const b=document.getElementById('bubble'),t=document.getElementById('btxt'),btn=document.getElementById('calmbtn');if(calmT){clearInterval(calmT);calmT=null;b.className='bubble out';t.textContent='tap to start';btn.textContent='Start';if(calmN>=4){XP+=10;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';document.getElementById('rw-calm').classList.add('on');toast('That counts. +15 XP')}else toast('Stopped early — that\'s fine. Nothing lost.');calmN=0;return}
  btn.textContent='Stop';calmN=0;let phase=0;const step=()=>{phase=1-phase;b.className='bubble '+(phase?'in':'out');t.textContent=phase?'breathe in':'breathe out';if(!phase)calmN++;if(calmN>=15){calm()}};step();calmT=setInterval(step,4000)}
+
+/* ---- Community: monster-to-monster, moderated, no free text ---- */
+const PALS=[
+ {name:'Momo',owner:'age 10',mood:'is wearing a new crown 👑',new:true,msg:"Momo says: I had my scope last week and it was OK!"},
+ {name:'Zuzu',owner:'age 12',mood:'reached Grown stage ✨',new:false,msg:'Zuzu says: hello from camp!'},
+ {name:'Tofu',owner:'age 9',mood:'is resting today 😴',new:false,msg:null}
+];
+const SAYINGS=['👋 Hello from Bloop!','💪 Hope today is a good one','🎉 Well done!','🫂 Me too — you\'re not the only one','🎮 Want to play Food Detective?'];
+function renderPals(){document.getElementById('pals').innerHTML=PALS.map((p,i)=>`
+ <div class="pal ${p.new?'new':''}"><svg viewBox="0 0 120 130"><use href="#gummy"/></svg>
+ <div class="t"><b>${p.name}</b><small>${p.owner} · ${p.mood}</small>${p.msg?`<small style="color:var(--purple-d);font-weight:800;margin-top:2px">${p.msg}</small>`:''}</div>
+ <button class="say" onclick="sayTo(${i})">Say hi</button></div>
+ <div class="saybox" id="say${i}" style="display:none">${SAYINGS.map(s=>`<button onclick="sendSay(${i},'${s}')">${s}</button>`).join('')}</div>`).join('')}
+function sayTo(i){const b=document.getElementById('say'+i);b.style.display=b.style.display==='none'?'grid':'none'}
+function sendSay(i,s){document.getElementById('say'+i).style.display='none';PALS[i].new=false;renderPals();const bd=document.querySelector('#commtab .badge');if(bd)bd.remove();celebrate();toast('Sent to '+PALS[i].name+' · a CCSS moderator sees it too')}
+renderPals();
+
+const GIFTS=[{e:'🎩',n:'Top hat'},{e:'🐰',n:'Bunny ears'},{e:'🌺',n:'Hibiscus'},{e:'⭐',n:'Star'}];
+function renderGifts(){document.getElementById('gifts').innerHTML=GIFTS.map((g,i)=>`<button id="gift${i}" onclick="sendGift(${i})"><span>${g.e}</span>${g.n}</button>`).join('')}
+function sendGift(i){const b=document.getElementById('gift'+i);b.classList.add('sent');celebrate(true);toast(GIFTS[i].n+' sent to Momo · you keep yours')}
+renderGifts();
+
+const CCSS_EV=[
+ {d:'Sat 12 Sep',t:'Talk: Eating out in a flare',s:'TTSH · Ms Lim speaking · 4 from your group going',rsvp:false},
+ {d:'Sat 21 Sep',t:'CCSS Kids Camp',s:'Whole day · monsters welcome',rsvp:false},
+ {d:'Sat 26 Sep',t:'Research study — IBD and sleep (NUS)',s:'Online · 30 min · CCSS-approved',rsvp:false}
+];
+function renderCcss(){document.getElementById('ccssev').innerHTML=CCSS_EV.map((e,i)=>`<div class="ev ccss"><div class="when">${e.d.split(' ')[0]}<b>${e.d.split(' ')[1]}</b></div><div class="t"><b>${e.t}</b><span>${e.s}</span></div>${e.rsvp?'<span class="go yes">Going ✓</span>':`<button class="go" onclick="ccssGo(${i})">I'll go</button>`}</div>`).join('')}
+function ccssGo(i){CCSS_EV[i].rsvp=true;renderCcss();addEntry('Going · '+CCSS_EV[i].t+' <span class="pill" style="background:var(--teal-l);color:#146F60">CCSS</span>');XP+=50;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';celebrate();toast('Added to your calendar · +50 XP for showing up for your community')}
+renderCcss();
+
+const WALL=[{e:'🏆',b:'Zuzu reached Grown stage',s:'Zuzu · 2 days ago'},{e:'🩺',b:'Momo earned the stethoscope',s:'Momo · after a clinic visit'},{e:'🕵️',b:'Tofu opened a food case — congee went fine',s:'Tofu · last week'}];
+function renderWall(){document.getElementById('wall').innerHTML=WALL.map((w,i)=>`<div class="wl"><span class="e">${w.e}</span><div><b>${w.b}</b><small>${w.s}</small></div><button class="cheer" id="ch${i}" onclick="cheer(${i})">💜 Cheer</button></div>`).join('')}
+function cheer(i){const b=document.getElementById('ch'+i);b.classList.add('on');b.textContent='💜 Cheered';toast('Cheer sent')}
+renderWall();
+
+/* ---- Learn: micro cards ---- */
+const MICRO=[
+ {e:'💊',b:'Why it works when you feel fine',s:'The tablet keeps inflammation quiet. Feeling well is the tablet working, not a reason to stop.',xp:10,done:false},
+ {e:'🚻',b:'Finding the toilet first',s:'Walk in, spot it, then relax. Thirty seconds that changes a whole meal out.',xp:10,done:true},
+ {e:'😴',b:'Why tiredness is not laziness',s:'Fatigue is common in IBD even in remission, and it is worth telling your team about.',xp:10,done:false},
+ {e:'🍚',b:'One bad day is not a trigger',s:'It takes several times before a food means anything. Keep the food on your list.',xp:10,done:false},
+ {e:'🩸',b:'What to never wait on',s:'Heavy bleeding, severe pain with a fever, or not keeping fluids down — call, do not log.',xp:10,done:false}
+];
+function renderMicro(){document.getElementById('micro').innerHTML=MICRO.map((m,i)=>`<div class="mc"><span class="e">${m.e}</span><div class="t"><b>${m.b}</b><small>${m.s}</small></div><button class="go ${m.done?'done':''}" onclick="readMicro(${i})">${m.done?'Read ✓':'Read'}</button></div>`).join('')}
+function readMicro(i){if(MICRO[i].done)return;MICRO[i].done=true;XP+=MICRO[i].xp;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';renderMicro();celebrate();toast('+'+MICRO[i].xp+' XP')}
+renderMicro();
+
+/* ---- patient profile drives the food gates ---- */
+function setDx(v,b){pick(b,'#pf-dx');PHENO.diagnosis=v;document.getElementById('pf-cd').style.display=(v==='CD'||v==='IBDU')?'':'none';if(v==='UC'){PHENO.location='colonic'}}
+function setField(k,v,b){pick(b,'#pf-'+({location:'loc',stricturing:'str',surgical_status:'surg',activity:'act'}[k]));PHENO[k]=v}
+function togAllergy(a,b){b.classList.toggle('on');const i=ALLERGIES.indexOf(a);if(i<0)ALLERGIES.push(a);else ALLERGIES.splice(i,1)}
+function setDiet(n,b){pick(b,'#pf-diet');DIET_PLAN.name=n}
+function saveProfile(){
+ const dxLabel={UC:'Ulcerative colitis',CD:"Crohn's",IBDU:'IBD, not classified',unknown:'not classified yet'}[PHENO.diagnosis];
+ const bits=[`<b>${dxLabel}</b>`];
+ if((PHENO.diagnosis==='CD'||PHENO.diagnosis==='IBDU')&&PHENO.location!=='unknown')bits.push(PHENO.location);
+ if(PHENO.stricturing==='yes')bits.push('narrowing confirmed — obstruction advice is now on');
+ if(PHENO.surgical_status!=='none')bits.push(PHENO.surgical_status);
+ bits.push(PHENO.activity==='active'?'flaring':PHENO.activity==='remission'?'settled':'activity not stated');
+ if(ALLERGIES.length)bits.push(`allergies: ${ALLERGIES.join(', ')}`);
+ if(DIET_PLAN.name!=='None in particular')bits.push(`following ${DIET_PLAN.name}`);
+ const unknowns=['diagnosis','location','stricturing','activity'].filter(k=>PHENO[k]==='unknown').length;
+ const el=document.getElementById('pf-echo');el.className='pfecho on';
+ el.innerHTML=`Your food scans will now read you as: ${bits.join(' · ')}.`+
+   (unknowns?`<br>${unknowns} thing${unknowns>1?'s':''} left blank. Blank means the app says less, never more — nothing gets guessed.`:'');
+ renderFoods();const o=document.getElementById('scanout');if(o)o.innerHTML='';renderPheno();
+ editAbout(false);toast('Saved · your food scans have been updated');
+}
+
+/* ---- About me: read card by default, edit on request ---- */
+const PREFS=[];
+function togPref(v,b){b.classList.toggle('on');const i=PREFS.indexOf(v);if(i<0)PREFS.push(v);else PREFS.splice(i,1);}
+function editAbout(on){
+ document.getElementById('pf-read').style.display=on?'none':'';
+ document.getElementById('pf-edit').style.display=on?'':'none';
+ const b=document.getElementById('editbtn');b.textContent=on?'Cancel':'Edit';b.classList.toggle('on',on);
+ b.setAttribute('onclick',on?'editAbout(false)':'editAbout(true)');
+ if(!on)renderAbout();
+}
+function renderAbout(){
+ const dxLabel={UC:'Ulcerative colitis',CD:"Crohn's",IBDU:'IBD, not classified',unknown:'Not classified yet'}[PHENO.diagnosis];
+ const locLabel={ileal:'small bowel (ileal)',colonic:'colon',ileocolonic:'small bowel and colon',unknown:null}[PHENO.location];
+ document.getElementById('rd-name').textContent=document.getElementById('pf-name').value||'—';
+ document.getElementById('rd-age').textContent=document.getElementById('pf-age').value||'';
+ document.getElementById('rd-dx').textContent=dxLabel+((PHENO.diagnosis!=='UC'&&locLabel)?' · '+locLabel:'');
+ const r=[];
+ r.push(`<span>${PHENO.activity==='active'?'Flaring now':PHENO.activity==='remission'?'Settled':'Activity not stated'}</span>`);
+ if(PHENO.stricturing==='yes')r.push('<span class="alert">Narrowing confirmed</span>');
+ else if(PHENO.stricturing==='unknown')r.push('<span class="blank">Narrowing not stated</span>');
+ if(PHENO.surgical_status!=='none')r.push(`<span>${PHENO.surgical_status}</span>`);
+ if(ALLERGIES.length)r.push(`<span class="alert">Allergy: ${ALLERGIES.join(', ')}</span>`);
+ else r.push('<span class="blank">No allergies listed</span>');
+ if(DIET_PLAN.name!=='None in particular')r.push(`<span>${DIET_PLAN.name}</span>`);
+ PREFS.forEach(p=>r.push(`<span>${p}</span>`));
+ document.getElementById('rd-rows').innerHTML=r.join('');
+ const n=document.getElementById('pf-note').value.trim();
+ document.getElementById('rd-note').innerHTML=n?`<b>Also worth knowing</b>${n}`:`<b>Also worth knowing</b><span style="color:var(--muted)">Nothing added yet.</span>`;
+}
+renderAbout();
 </script>
 </body>
 </html>
