@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HEARD — prototype v2</title>
+<title>HEARD — care team</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -653,22 +653,14 @@
   @media (max-width:900px){.clin{grid-template-columns:1fr}.ident{position:static}.div,.unsaid,.two{grid-template-columns:1fr}.grid-foods{grid-template-columns:1fr 1fr}.roles{flex-wrap:wrap}}
 </style>
 </head>
-<body>
+<body class="hcp">
 
 <header class="rail">
   <div class="mark">HEARD<small>Health · Empowerment · Advocacy · Resilience · Dignity</small></div>
-  <div class="modesw" role="tablist" aria-label="Mode">
-    <button aria-selected="true" onclick="setMode('pt')">💜 Patient &amp; caregiver</button>
-    <button aria-selected="false" onclick="setMode('hcp')">🩺 Care team</button>
-  </div>
-  <nav class="roles" id="roles-pt" role="tablist">
-    <button role="tab" aria-selected="true" data-v="patient">Patient</button>
-    <button role="tab" aria-selected="false" data-v="caregiver">Caregiver</button>
-  </nav>
-  <nav class="roles" id="roles-hcp" role="tablist" style="display:none">
-    <button role="tab" aria-selected="false" data-v="doctor">Doctor</button>
-    <button role="tab" aria-selected="false" data-v="pharm">Pharmacist</button>
-    <button role="tab" aria-selected="false" data-v="diet">Dietitian</button>
+  <nav class="roles" id="roles-hcp" role="tablist">
+    <button role="tab" aria-selected="true" data-v="doctor">Doctor's dashboard</button>
+    <button role="tab" aria-selected="false" data-v="pharm">Medication</button>
+    <button role="tab" aria-selected="false" data-v="diet">Food &amp; nutrition</button>
   </nav>
   <button class="reset" onclick="location.reload()" title="Reset the demo">↺ Reset</button>
 </header>
@@ -696,434 +688,8 @@
   </defs>
 </svg>
 
-<!-- ================= PATIENT ================= -->
-<main class="view active" id="v-patient">
-  <div class="phone" id="pphone">
-    <div class="top">
-      <div style="display:flex;align-items:center;gap:10px"><div class="h">Marcus</div><div class="modes"><button class="on" onclick="mode('chat',this)">💬 Chat</button><button onclick="mode('game',this)">🎮 Game</button></div></div>
-      <div class="sub" id="p-sub">Tap what happened. Words only if you want.</div>
-    </div>
-    <div class="body">
-     <div id="p-chat">
-     <div id="p-rec">
-      <div class="quick four">
-        <button onclick="askStool()"><span>🚽</span>Went</button>
-        <button onclick="askPain()"><span>⚡</span>Pain</button>
-        <button onclick="askFood()"><span>🍜</span>Ate</button>
-        <button onclick="askScan()" class="scanbtn"><span>📷</span>Scan</button>
-      </div>
-
-      <div class="free">
-        <textarea id="free" placeholder="Or just say it. e.g. “last night was very painful”"></textarea>
-        <div class="row"><button class="mic" aria-label="Speak">🎙</button><button class="btn" onclick="parseFree()">Record</button></div>
-      </div>
-
-      <div class="ask" id="ask"></div>
-
-      <button class="flarebtn" onclick="askFlare()"><span>🚩</span><div><b>I think I'm flaring</b><small>Tell your IBD nurse. Reply within 1 working day.</small></div></button>
-
-      <div class="energy"><div class="lab">Energy today</div><div class="row3"><button onclick="energy(this,'Low')">😮‍💨 Low</button><button onclick="energy(this,'OK')">😐 OK</button><button onclick="energy(this,'Good')">🙂 Good</button></div><div class="row3 small"><button onclick="tog(this)">Slept badly</button><button onclick="tog(this)">Stressed</button><button onclick="tog(this)">Low mood</button></div></div>
-
-      <div class="today">
-        <h3>Today · Friday 4 Sep</h3>
-        <div id="entries">
-          <div class="entry"><span class="t">06:40</span>Went · type 6 · blood mixed<span class="pill">night</span></div>
-          <div class="entry"><span class="t">08:10</span>Pain 6 · after breakfast</div>
-        </div>
-      </div>
-
-      <div class="nudge missed" id="missed1"><span>📅</span><div><b>We missed you at Ms Lim's on Thursday</b><small>No points lost. Just tell us why, so the right person can help.</small><div class="chips" style="margin-top:6px"><button onclick="noshow(this,'Too unwell','nurse')">Too unwell</button><button onclick="noshow(this,'Forgot','none')">Forgot</button><button onclick="noshow(this,'Cost or transport','MSW')">Cost / transport</button><button onclick="noshow(this,'Didn\'t think I needed it','pharmacist')">Didn't think I needed it</button></div><div class="chips"><button class="btn small" onclick="rebook('missed1')">Rebook — next Thu 10 am</button><button class="btn small ghost" onclick="document.getElementById('missed1').style.display='none'">Later</button></div></div></div>
-
-      <div class="nudge" id="nudge1"><span>🎤</span><div><b>CCSS talk this Saturday — "Eating out in a flare"</b><small>12 Sep, 2 pm, Tan Tock Seng Hospital. Ms Lim, your dietitian, is speaking. 4 people from your peer group are going.</small><div class="chips" style="margin-top:6px"><button class="btn small" onclick="rsvp(this,'CCSS talk 12 Sep','nudge1')">I'll go</button><button class="btn small ghost" onclick="toast('Reminder set for Friday')">Remind me Friday</button><button class="btn small ghost" onclick="document.getElementById('nudge1').style.display='none'">Not this time</button></div></div></div>
-
-      <div class="cardp"><b>Your card for Tuesday is ready</b><span>Dr Nair, 8 Sep. Read it, change it, then share. Nothing goes until you say so.</span><br><button class="btn" onclick="ptab('card',document.querySelectorAll('#ptabs button')[3])">Open card</button></div>
-     </div>
-
-     <div id="p-meds" style="display:none">
-      <div class="panel"><div class="ph">Today</div>
-        <div class="med"><div class="dot on"></div><div><b>Mesalazine 2.4 g</b><span>Morning · taken 7:50</span></div><span class="tag ok">✓</span></div>
-        <div class="med"><div class="dot"></div><div><b>Mesalazine 2.4 g</b><span>Evening · due 8:00 pm</span></div><button class="btn small" onclick="this.textContent='Taken ✓';this.classList.add('ghost');toast('Logged')">Took it</button></div>
-        <div class="med"><div class="dot warn"></div><div><b>Ibuprofen 400 mg</b><span>You added this 19 Aug · your pharmacist has a note</span></div><button class="btn small ghost" onclick="toast('Opening pharmacist note')">Read</button></div>
-      </div>
-      <div class="panel"><div class="ph">Reminders</div><div class="kv"><span>Morning dose</span><b>7:30 am</b></div><div class="kv"><span>Evening dose</span><b>8:00 pm</b></div><div class="kv"><span>Refill due</span><b>12 Sep · 8 days</b></div><button class="btn ghost small" style="margin-top:8px" onclick="toast('Refill request sent to pharmacy')">Request refill</button></div>
-      <div class="panel"><div class="ph">Missed a dose?</div><div class="chips" style="margin-top:6px"><button onclick="missed(this,'Felt better')">Felt better</button><button onclick="missed(this,'Forgot')">Forgot</button><button onclick="missed(this,'Ran out')">Ran out</button><button onclick="missed(this,'Side effect')">Side effect</button></div><div class="note" style="margin-top:6px">No judgement. The reason is the useful part.</div></div>
-      <div class="panel"><div class="ph">Appointments</div><div class="kv"><span>Dr Nair, gastro</span><b>Tue 8 Sep · 2:40 pm</b></div><div class="kv"><span>Ms Lim, dietitian</span><b>Thu 17 Sep · 10:00 am</b></div><div class="kv"><span>Infusion / bloods</span><b>none booked</b></div></div>
-     </div>
-
-     <div id="p-cal" style="display:none">
-      <div class="panel">
-        <div class="ph" style="display:flex;justify-content:space-between;align-items:baseline">September <span class="legendrow"><i style="background:var(--purple)"></i>Clinic <i style="background:var(--yellow)"></i>Test <i style="background:var(--teal)"></i>CCSS</span></div>
-        <div class="wk" id="wk"></div>
-      </div>
-      <div class="panel"><div class="ph">Coming up</div><div id="events"></div></div>
-      <div class="panel"><div class="ph">Your IBD team · NUH</div>
-        <div class="med"><div class="av">👩‍⚕️</div><div><b>Sister Devi</b><span>IBD nurse · replies within 1 working day</span></div><button class="btn small" onclick="ptab('rec',document.querySelectorAll('#ptabs button')[0]);askFlare()">Message</button></div>
-        <div class="med"><div class="av">🩺</div><div><b>Dr Nair</b><span>Gastroenterologist · via the nurse line</span></div></div>
-        <div class="med"><div class="av">💊</div><div><b>Pharmacy</b><span>Refills, side effects · 2 working days</span></div><button class="btn small ghost" onclick="toast('Message to pharmacy')">Message</button></div>
-        <div class="med"><div class="av">🥗</div><div><b>Ms Lim</b><span>Dietitian · notes appear in your food scans</span></div></div>
-        <div class="note">Messages are read on working days. If you're bleeding heavily, have severe pain, or a fever, don't wait for a reply — call the IBD line or go to A&amp;E.</div>
-      </div>
-      <div class="panel"><div class="ph">Your follow-up</div><div style="font-weight:700">Patient-initiated</div><div class="note" style="margin-top:2px">You're on a see-on-symptoms plan. No routine visit is booked unless you or your team asks for one. Your next check is a home calprotectin kit in December, or sooner if you report a flare.</div></div>
-      <div class="panel"><div class="ph">Share</div><div class="chips" style="margin-top:6px"><button class="btn ghost" onclick="toast('Summary PDF sent to your GP')">Send summary to my GP</button><button class="btn ghost" onclick="toast('PDF downloaded')">Download PDF</button><button class="btn ghost" onclick="toast('Letter drafted')">Letter for work</button></div><div class="note" style="margin-top:6px">You choose what's in it. Private entries stay private.</div></div>
-     </div>
-
-     <div id="p-card" style="display:none">
-      <div class="panel" id="aboutcard">
-        <div class="ph" style="display:flex;align-items:center;justify-content:space-between">About me <button class="editbtn" id="editbtn" onclick="editAbout(true)">Edit</button></div>
-
-        <!-- READ MODE -->
-        <div id="pf-read">
-          <div class="idcard">
-            <div class="idtop"><div class="idname" id="rd-name">Marcus Tan</div><div class="idage" id="rd-age">34</div></div>
-            <div class="iddx" id="rd-dx">Crohn's · small bowel (ileal)</div>
-            <div class="idrow" id="rd-rows"></div>
-          </div>
-          <div class="idnote" id="rd-note"></div>
-        </div>
-
-        <!-- EDIT MODE -->
-        <div id="pf-edit" style="display:none">
-          <div class="note" style="margin-top:-2px">Leave anything blank if you'd rather not say — blank is a real answer, not a gap.</div>
-
-          <div class="fldlab">Name and age</div>
-          <div class="fldrow"><input class="fld" id="pf-name" value="Marcus Tan"><input class="fld short" id="pf-age" value="34"></div>
-
-          <div class="fldlab">What you've been told you have</div>
-          <div class="opts" id="pf-dx"><button onclick="setDx('UC',this)">Ulcerative colitis</button><button class="on" onclick="setDx('CD',this)">Crohn's</button><button onclick="setDx('IBDU',this)">Not classified</button><button onclick="setDx('unknown',this)">Not sure yet</button></div>
-
-          <div id="pf-cd">
-            <div class="fldlab">Where in the gut <span>if you know</span></div>
-            <div class="opts" id="pf-loc"><button class="on" onclick="setField('location','ileal',this)">Small bowel (ileal)</button><button onclick="setField('location','colonic',this)">Colon</button><button onclick="setField('location','ileocolonic',this)">Both</button><button onclick="setField('location','unknown',this)">Not sure</button></div>
-
-            <div class="fldlab">Any narrowing your doctor has mentioned <span>this one changes safety advice</span></div>
-            <div class="opts" id="pf-str"><button onclick="setField('stricturing','yes',this)">Yes</button><button onclick="setField('stricturing','no',this)">No</button><button class="on" onclick="setField('stricturing','unknown',this)">Not sure</button></div>
-          </div>
-
-          <div class="fldlab">Surgery</div>
-          <div class="opts" id="pf-surg"><button class="on" onclick="setField('surgical_status','none',this)">None</button><button onclick="setField('surgical_status','ileostomy',this)">Ileostomy</button><button onclick="setField('surgical_status','colostomy',this)">Colostomy</button><button onclick="setField('surgical_status','pouch',this)">Pouch</button></div>
-
-          <div class="fldlab">How things are right now</div>
-          <div class="opts" id="pf-act"><button class="on" onclick="setField('activity','active',this)">Flaring</button><button onclick="setField('activity','remission',this)">Settled</button><button onclick="setField('activity','unknown',this)">Not sure</button></div>
-
-          <div class="fldlab">Allergies <span>true allergy, not "it upsets me"</span></div>
-          <div class="opts wrap" id="pf-allergy"><button onclick="togAllergy('Peanut',this)">Peanut</button><button onclick="togAllergy('Tree nuts',this)">Tree nuts</button><button onclick="togAllergy('Shellfish',this)">Shellfish</button><button onclick="togAllergy('Egg',this)">Egg</button><button onclick="togAllergy('Soy',this)">Soy</button><button onclick="togAllergy('Wheat',this)">Wheat</button><button onclick="togAllergy('Milk protein',this)">Milk protein</button></div>
-          <div class="note" style="margin-top:4px">Anything here is an absolute avoid in your food scans, separate from anything IBD-related.</div>
-
-          <div class="fldlab">A diet you're following <span>only if someone put you on one, or you chose one</span></div>
-          <div class="opts wrap" id="pf-diet"><button class="on" onclick="setDiet('None in particular',this)">None in particular</button><button onclick="setDiet('Low residue',this)">Low residue</button><button onclick="setDiet('CDED',this)">CDED</button><button onclick="setDiet('Formula only (EEN)',this)">Formula only (EEN)</button><button onclick="setDiet('Formula plus food',this)">Formula plus food</button><button onclick="setDiet('Low FODMAP',this)">Low FODMAP</button><button onclick="setDiet('Mediterranean',this)">Mediterranean</button></div>
-          <div class="opts wrap" id="pf-pref" style="margin-top:4px"><button onclick="togPref('Halal',this)">Halal</button><button onclick="togPref('Vegetarian',this)">Vegetarian</button><button onclick="togPref('Vegan',this)">Vegan</button><button onclick="togPref('No beef',this)">No beef</button><button onclick="togPref('No pork',this)">No pork</button></div>
-
-          <div class="fldlab">Anything else your team should know</div>
-          <textarea class="fld area" id="pf-note" placeholder="e.g. I take ibuprofen for my back · toilet access at work is one cubicle · my mum makes a herbal tea I drink most evenings">I take ibuprofen for my back. Toilet access at work is one cubicle.</textarea>
-
-          <div class="chips" style="margin-top:12px"><button class="btn" onclick="saveProfile()">Save</button><button class="btn ghost" onclick="editAbout(false)">Cancel</button></div>
-          <div id="pf-echo" class="pfecho"></div>
-        </div>
-      </div>
-
-      <div class="panel"><div class="ph">What matters to me <span style="font-weight:600;color:var(--muted);font-size:12px">· in your words, not the disease's</span></div>
-        <div class="goals" id="goals"></div>
-        <div class="chips" style="margin-top:8px"><input class="fld" id="goalinp" placeholder="Add one — e.g. a full week at work" style="flex:1"><button class="btn small" onclick="addGoal()">Add</button></div>
-        <div class="note">The app notices quietly when one is met. It never turns these into a score.</div>
-      </div>
-
-      <div class="panel"><div class="ph">Your card for Tuesday <button class="editbtn" onclick="inRoom(true)">In the room ▶</button></div><div class="note" style="margin-top:-4px">Dr Nair · 8 Sep, 2:40 pm · you approve this before anyone sees it</div>
-       <p class="cardtxt">Since your last visit on 4 August, things have changed in the last two weeks. You've been going more often — most days six or more — and waking at night on 9 of the last 14 nights. You noticed blood on 11 days. Pain has mostly been 5 to 7 out of 10, often within an hour of eating.</p>
-       <p class="cardtxt">Your CRP from 17 August was 11. Your last stool calprotectin was in May.</p>
-       <div class="ph" style="margin-top:14px">What you most want to talk about <span style="color:var(--purple);font-size:12px">reorder</span></div>
-       <ol class="cardlist"><li>Waking at night to go — I'm scared it's getting worse</li><li>Whether I can still travel for my sister's wedding in October</li><li>The ibuprofen I've been taking for my back — is that ok?</li></ol>
-       <div class="ph" style="margin-top:14px">Mentioned, never raised in clinic</div><p class="cardtxt">Tired on 16 of 28 days. Toilet access at work, 8 times. Want either on your list?</p>
-       <div class="chips" style="margin-top:10px"><button class="btn" onclick="toast('Shared with Dr Nair')">Share with Dr Nair</button><button class="btn ghost" onclick="toast('Editing')">Edit first</button><button class="btn ghost" onclick="toast('Tiredness added')">Add tiredness</button></div>
-       <div class="note">Nothing reaches your care team until you tap share. 2 entries marked private are not included.</div>
-      </div>
-
-      <div class="panel"><div class="ph">My story <span style="font-weight:600;color:var(--muted);font-size:12px">· the long version, for a new doctor or for you</span></div>
-        <div class="story">
-          <div class="se hard"><b>First symptoms</b><small>Early 2021 · GP → polyclinic → specialist, five months</small><p>Blood and urgency put down to stress for most of that time.</p></div>
-          <div class="se"><b>Diagnosed</b><small>Aug 2021 · colonoscopy, NUH</small><p>Crohn's, small bowel. A lot of words at once.</p></div>
-          <div class="se hard"><b>First steroid course</b><small>Sep 2021 · 6 weeks</small><p>Worked fast. Sleep and mood were rough.</p></div>
-          <div class="se good"><b>Mesalazine, and a good stretch</b><small>Mar 2024 → Aug 2026</small><p>Twenty-nine months mostly settled. Travelled twice. Started the new job.</p></div>
-          <div class="se hard"><b>This flare</b><small>From 22 Aug 2026</small><p>Stopped the tablets in the middle of a good stretch. Ibuprofen for the back. Nights got bad.</p></div>
-          <div class="se"><b>Now</b><small>Sep 2026</small><p>Dr Nair Tuesday. Home calprotectin kit on the way. Sister's wedding in October is the thing to protect.</p></div>
-        </div>
-        <div class="chips" style="margin-top:8px"><button class="btn small ghost" onclick="toast('Story added to your card')">Add to my card</button><button class="btn small ghost" onclick="toast('PDF downloaded')">Download</button></div>
-      </div>
-
-      <div class="inroom" id="inroom"><button class="x" onclick="inRoom(false)">Close</button>
-        <h1>What I came to say</h1>
-        <ol><li>Waking at night to go — I'm scared it's getting worse</li><li>Can I still travel for my sister's wedding in October?</li><li>The ibuprofen I've been taking for my back — is that ok?</li></ol>
-        <div class="also">Also: I've been tired on 16 of the last 28 days. And I stopped the mesalazine in August because I felt fine.</div>
-      </div>
-     </div>
-
-     <div id="p-comm" style="display:none">
-      <div class="panel"><div class="ph">Bloop's friends <span style="font-weight:600;color:var(--muted);font-size:12px">· monsters talk, not accounts</span></div>
-        <div class="pals" id="pals"></div>
-        <div class="note">You send and receive through your monsters. No photos, no phone numbers, no free typing — pick a message from the list. A CCSS moderator reads everything.</div>
-      </div>
-
-      <div class="panel"><div class="ph">Send something</div>
-        <div class="gifts" id="gifts"></div>
-        <div class="note">Giving costs you nothing — the item stays in your wardrobe too.</div>
-      </div>
-
-      <div class="panel"><div class="ph">CCSS events</div>
-        <div id="ccssev"></div>
-        <div class="note" style="margin-top:8px">Posted by CCSS. You'll get one nudge a week at most, and only for the kinds of thing you picked.</div>
-        <div class="chips" style="margin-top:4px"><button class="on" onclick="tog(this)">Diet talks</button><button class="on" onclick="tog(this)">Peer meetups</button><button onclick="tog(this)">Parent groups</button><button class="on" onclick="tog(this)">Research studies</button><button onclick="tog(this)">Fundraisers</button></div>
-      </div>
-
-      <div class="panel"><div class="ph">Monster wall</div>
-        <div class="wall" id="wall"></div>
-        <div class="note">Milestones your friends chose to share. Nobody's symptoms are ever shown here.</div>
-      </div>
-     </div>
-
-     <div id="p-learn" style="display:none">
-      <div class="panel"><div class="ph">Two minutes <span style="font-weight:600;color:var(--muted);font-size:12px">· one idea, one card</span></div>
-        <div id="micro"></div>
-      </div>
-      <div class="panel"><div class="ph">Wellness</div>
-        <div class="wellgrid">
-          <button onclick="mode('game',document.querySelectorAll('.modes button')[1]);ptab('rec',document.querySelectorAll('#ptabs button')[0]);game('calm')"><span>🫧</span>Calm Cave<small>paced breathing</small></button>
-          <button onclick="toast('Body scan · 4 min')"><span>🧘</span>Body scan<small>4 min, lying down</small></button>
-          <button onclick="toast('Sleep wind-down opened')"><span>🌙</span>Wind-down<small>for restless nights</small></button>
-          <button onclick="toast('Toilet-anxiety plan opened')"><span>🚻</span>Out and about<small>toilet-anxiety plan</small></button>
-        </div>
-      </div>
-      <div class="panel"><div class="ph">Build a habit <span style="font-weight:600;color:var(--muted);font-size:12px">· no streaks, tick what you did</span></div>
-        <div class="habits" id="habits"></div>
-        <div class="note">Pick up to 3. A missed day costs nothing. Ten ticks and it gets a badge.</div>
-      </div>
-      <div class="panel"><div class="ph">Courses <span style="font-weight:600;color:var(--muted);font-size:12px">· XP when you finish</span></div>
-        <div id="courses"></div>
-        <div class="note">Everything here is written or reviewed by a clinician before it's published.</div>
-      </div>
-     </div>
-     </div>
-     <div id="p-game" class="kid" style="display:none">
-      <div id="k-home">
-        <div class="stats"><div class="stat">🔥 <span id="streak">3</span> days this week</div><div class="stat xp">⭐ <span id="xp">340</span> XP</div></div>
-        <div class="room" id="room">
-          <div class="plant"></div><div class="lamp"></div><div class="sofa"></div>
-          <div class="gwrap" id="gwrap"><svg class="gummy" viewBox="0 0 120 130"><use href="#gummy"/></svg><div class="hat" id="hat"></div></div>
-          <div class="zz">z z z</div>
-          <button class="name" id="gname" onclick="namePick()">Gummy · Young stage 🌺 <span style="font-size:11px;opacity:.6">✎</span></button>
-          <div class="confetti" id="confetti"></div>
-        </div>
-        <div class="xpbar"><i id="xpfill" style="width:68%"></i></div>
-        <div class="xplab"><span id="xplab">340 / 500 XP to Grown ✨</span></div>
-        <div class="ask" id="nameask" style="margin-top:10px"></div>
-        <div class="ggrid">
-          <button onclick="game('parade')"><span>🎺</span>Poo Parade<small>+10</small></button>
-          <button onclick="game('ouch')"><span>🩹</span>Ouch Map<small>+10</small></button>
-          <button onclick="game('weather')"><span>⛅</span>Tummy Weather<small>+10</small></button>
-          <button onclick="game('feed')"><span>🍬</span>Feed Bloop<small>+10</small></button>
-          <button onclick="game('night')"><span>🌙</span>Night Watch<small>+10</small></button>
-          <button onclick="game('food')"><span>🔍</span>Food Detective<small>+10</small></button>
-          <button onclick="game('doctor')"><span>🩺</span>Doctor Says<small>+10</small></button>
-          <button onclick="game('calm')"><span>🫧</span>Calm Cave<small>+10</small></button>
-          <button onclick="game('dress')"><span>🎩</span>Dress Gummy<small>spend</small></button>
-        </div>
-        <div class="note" style="text-align:center;margin-top:6px">Tummy Weather = how much it hurts. Ouch Map = where.</div>
-        <div class="road">
-          <h4>🗺️ Remission Road <a href="#" onclick="toast('Full map');return false">See full map →</a></h4>
-          <div class="nodes">
-            <div class="node done">🏡</div><div class="roadseg done"></div>
-            <div class="node here">🔥</div><div class="roadseg"></div>
-            <div class="node locked">🤝</div><div class="roadseg"></div>
-            <div class="node locked real">🔍</div><div class="roadseg"></div>
-            <div class="node locked real">💊</div><div class="roadseg"></div>
-            <div class="node locked real">🏆</div>
-          </div>
-          <div class="roadnote"><i></i>Teal dot = unlocked by something real from your doctor, not by playing. 🤝 unlocks at your first CCSS meetup.</div>
-        </div>
-      </div>
-
-      <!-- POO PARADE -->
-      <div id="k-parade" class="gscreen" style="display:none">
-        <button class="back" onclick="game('home')">← Home</button>
-        <div class="game"><div class="h">Poo Parade 🎺</div><div class="sub">Bloop's friends are marching past. Tap the one that looks like yours today.</div>
-          <div class="parade" id="parade"></div>
-          <div class="chips" style="margin-top:10px"><button onclick="tog(this)">Saw blood 🩸</button><button onclick="tog(this)">Had to rush 💨</button><button onclick="tog(this)">More than 4 times</button></div>
-          <div class="chips"><button class="btn grad" style="width:100%" onclick="kidLog('parade',10,'Poo logged')">Tell Gummy ⭐ +10</button></div>
-          <div class="reward" id="rw-parade">Gummy says thanks. +10 XP</div>
-        </div>
-      </div>
-
-      <!-- OUCH MAP -->
-      <div id="k-ouch" class="gscreen" style="display:none">
-        <button class="back" onclick="game('home')">← Home</button>
-        <div class="game"><div class="h">Ouch Map 🩹</div><div class="sub">Tap where it hurts. Tap again to add another spot.</div>
-          <div class="body-wrap">
-            <svg class="bodymap" viewBox="0 0 200 260" id="bodymap">
-              <ellipse cx="100" cy="36" rx="26" ry="28" fill="#F5D6C6"/>
-              <path d="M62 70 Q100 58 138 70 L146 150 Q100 166 54 150 Z" fill="#F5D6C6"/>
-              <rect x="40" y="72" width="20" height="90" rx="10" fill="#F5D6C6"/><rect x="140" y="72" width="20" height="90" rx="10" fill="#F5D6C6"/>
-              <path d="M62 150 L70 250 L94 250 L100 170 L106 250 L130 250 L138 150 Z" fill="#7B5FC7"/>
-              <circle cx="90" cy="34" r="3" fill="#2B2540"/><circle cx="110" cy="34" r="3" fill="#2B2540"/><path d="M92 46 Q100 50 108 46" stroke="#2B2540" stroke-width="2" fill="none"/>
-              <g id="zones" fill="rgba(123,95,199,.08)" stroke="rgba(123,95,199,.25)" stroke-dasharray="3 3">
-                <rect x="78" y="82" width="44" height="26" rx="8" data-z="Top of tummy" data-loc="epigastric"/>
-                <rect x="66" y="108" width="30" height="26" rx="8" data-z="Right side" data-loc="rlq"/>
-                <rect x="85" y="108" width="30" height="26" rx="8" data-z="Around belly button" data-loc="periumbilical"/>
-                <rect x="104" y="108" width="30" height="26" rx="8" data-z="Left side" data-loc="llq"/>
-                <rect x="78" y="134" width="44" height="18" rx="8" data-z="Low down" data-loc="suprapubic"/>
-                <rect x="72" y="168" width="56" height="18" rx="8" data-z="Bottom" data-loc="perianal"/>
-                <rect x="76" y="20" width="48" height="30" rx="12" data-z="Head" data-loc="other"/>
-              </g>
-              <g id="ouches"></g>
-            </svg>
-            <div class="ouchlist" id="ouchlist">Nowhere yet — that's fine too.</div>
-          </div>
-          <div class="sub" style="margin-top:10px">How much?</div>
-          <div class="wx" id="ouchwx">
-            <button onclick="pick(this,'#ouchwx');cur.score=0">☀️<b>None</b></button>
-            <button onclick="pick(this,'#ouchwx');cur.score=2">⛅<b>A bit</b></button>
-            <button onclick="pick(this,'#ouchwx');cur.score=5">🌧️<b>Hurts</b></button>
-            <button onclick="pick(this,'#ouchwx');cur.score=7">⛈️<b>A lot</b></button>
-            <button onclick="pick(this,'#ouchwx');cur.score=10">🌩️<b>Worst</b></button>
-          </div>
-          <div class="sub" style="margin-top:10px">When?</div>
-          <div class="chips"><button onclick="tog(this)">After eating 🍚</button><button onclick="tog(this)">Before poo 🚽</button><button onclick="tog(this)">Better after poo</button><button onclick="tog(this)">Woke me 🌙</button><button onclick="tog(this)">At school 🏫</button><button onclick="tog(this)">All day</button></div>
-          <div class="chips"><button class="btn grad" style="width:100%" onclick="ouchSave()">Tell Gummy ⭐ +10</button><button class="btn ghost" style="width:100%" onclick="ouchClear()">Clear spots</button></div>
-          <div class="reward" id="rw-ouch">Mapped. +10 XP</div>
-        </div>
-      </div>
-
-      <!-- WEATHER -->
-      <div id="k-weather" class="gscreen" style="display:none">
-        <button class="back" onclick="game('home')">← Home</button>
-        <div class="game"><div class="h">Tummy Weather ⛅</div><div class="sub">What's the weather in Gummy's tummy right now?</div>
-          <div class="sky" id="sky"><div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="rain" id="rain"></div><div class="bolt" id="bolt">⚡</div></div>
-          <div class="wx" id="wx">
-            <button onclick="weather(this,0,'sunny')">☀️<b>Sunny</b><small>no hurt</small></button>
-            <button onclick="weather(this,1,'cloudy')">⛅<b>Cloudy</b><small>a bit</small></button>
-            <button onclick="weather(this,2,'rainy')">🌧️<b>Rainy</b><small>hurts</small></button>
-            <button onclick="weather(this,3,'storm')">⛈️<b>Stormy</b><small>a lot</small></button>
-            <button onclick="weather(this,4,'thunder')">🌩️<b>Thunder</b><small>worst</small></button>
-          </div>
-          <div class="sub" style="margin-top:12px">And your energy?</div>
-          <div class="wx small"><button onclick="pick(this,'.wx.small')">🔋 Full</button><button onclick="pick(this,'.wx.small')">🔋 Half</button><button onclick="pick(this,'.wx.small')">🪫 Empty</button></div>
-          <div class="chips"><button class="btn grad" style="width:100%" onclick="kidLog('weather',10,'Weather logged')">Report the weather ⭐ +10</button></div>
-          <div class="reward" id="rw-weather">Forecast sent. +10 XP</div>
-        </div>
-      </div>
-
-      <!-- FEED -->
-      <div id="k-feed" class="gscreen" style="display:none">
-        <button class="back" onclick="game('home')">← Home</button>
-        <div class="game"><div class="h">Feed Gummy 🍬</div><div class="sub">Drag the tablet to Gummy — or just tap it.</div>
-          <div class="feedroom" id="feedroom"><div class="gwrap feedg" id="feedg"><svg class="gummy" viewBox="0 0 120 130"><use href="#gummy"/></svg></div><div class="mouth" id="mouth">😋</div></div>
-          <div class="pills"><button class="pill-b" id="pill-am" onclick="feed(this,'Tummy Shield')">🛡️ Tummy Shield<small>morning · 7:30</small></button><button class="pill-b" id="pill-pm" onclick="feed(this,'Tummy Shield')">🛡️ Tummy Shield<small>evening · 8:00</small></button></div>
-          <div class="whymed">Why you take this: <b>it keeps the angry bits in your tummy calm</b>. It works quietly, even on days you feel fine.</div>
-          <div class="note" style="text-align:center">Miss one and Bloop is just a bit hungry. Never sick.<br>The full name and dose are in your grown-up's view.</div>
-          <div class="reward" id="rw-feed">Nom. +10 XP</div>
-        </div>
-      </div>
-
-      <!-- NIGHT -->
-      <div id="k-night" class="gscreen" style="display:none">
-        <button class="back" onclick="game('home')">← Home</button>
-        <div class="game night"><div class="h" style="color:#fff">Night Watch 🌙</div><div class="sub" style="color:#C9C3DB">Did you wake up to go last night? Tap the moon for each time.</div>
-          <div class="nightsky" id="nightsky"><div class="star s1"></div><div class="star s2"></div><div class="star s3"></div><div class="star s4"></div><button class="moon" id="moon" onclick="moonTap()">🌙</button><div class="moonct" id="moonct">0 times</div></div>
-          <div class="chips" style="justify-content:center"><button class="btn grad" onclick="kidLog('night',10,'Night logged')">That's all ⭐ +10</button><button class="btn ghost" onclick="nightZero()">Slept through 🎉</button></div>
-          <div class="reward" id="rw-night">Logged. +10 XP</div>
-        </div>
-      </div>
-
-      <!-- FOOD DETECTIVE (kept) -->
-      <div id="k-food" class="gscreen" style="display:none">
-        <button class="back" onclick="game('home')">← Home</button>
-        <div class="game"><div class="h">Food Detective 🔍</div><div class="sub">Most foods say “Not sure yet” — that's normal, not a warning. Try one and open a case.</div>
-          <div class="meals"><button class="on">🌅 Breakfast</button><button>☀️ Lunch</button><button>🌙 Dinner</button></div>
-          <div class="snap"><label><span>📷</span>Snap your plate<input type="file" accept="image/*" capture="environment" onchange="snap(this,'k')"></label></div>
-          <div class="snapres" id="snap-k"><img id="img-k" alt=""><div class="g">Gummy thinks this is…<small>tap to confirm, or fix it</small><div class="chips"><button onclick="snapPick(this,'k','Chicken rice')">Chicken rice</button><button onclick="snapPick(this,'k','Fish soup')">Fish soup</button><button onclick="snapPick(this,'k','Something else')">Something else</button></div></div></div>
-          <input class="search" placeholder="Or search foods…" oninput="filt(this.value)">
-          <div class="foods" id="foods"></div>
-          <div class="reward" id="rw-food">Case closed! +40 XP</div>
-        </div>
-      </div>
-
-      <!-- DOCTOR SAYS -->
-      <div id="k-doctor" class="gscreen" style="display:none">
-        <button class="back" onclick="game('home')">← Home</button>
-        <div class="game"><div class="h">Doctor Says 🩺</div><div class="sub">Dr Lim picked three things from Tuesday. Gummy explains. Then you tell us what you think the plan is.</div>
-          <div class="dsay" id="dsay"></div>
-          <div class="sub" style="margin-top:12px">So what's the plan? Tap what you think.</div>
-          <div class="chips" id="dplan"><button onclick="pick(this,'#dplan')">Take the new medicine every day</button><button onclick="pick(this,'#dplan')">Stop the medicine</button><button onclick="pick(this,'#dplan')">Do a poo test at home</button><button onclick="pick(this,'#dplan')">Eat whatever I want</button><button onclick="pick(this,'#dplan')">Come back in 6 weeks</button></div>
-          <div class="chips"><button class="btn grad" style="width:100%" onclick="dsaySave()">Tell Gummy ⭐ +10</button></div>
-          <div class="reward" id="rw-doctor">Thanks — Dr Lim will see what you understood. +10 XP</div>
-        </div>
-      </div>
-
-      <!-- CALM CAVE -->
-      <div id="k-calm" class="gscreen" style="display:none">
-        <button class="back" onclick="game('home')">← Home</button>
-        <div class="game calm"><div class="h" style="color:#fff">Calm Cave 🫧</div><div class="sub" style="color:#BFE3FF">Breathe with the bubble. In as it grows, out as it shrinks. Two minutes, or stop whenever.</div>
-          <div class="cave"><div class="bubble" id="bubble"><span id="btxt">tap to start</span></div><div class="fish f1">🐠</div><div class="fish f2">🐟</div><div class="fish f3">🪼</div></div>
-          <div class="chips" style="justify-content:center"><button class="btn grad" id="calmbtn" onclick="calm()">Start</button></div>
-          <div class="note" style="text-align:center;color:#BFE3FF">Stress and tummy trouble feed each other. This is one way to break the loop.</div>
-          <div class="reward" id="rw-calm">Two minutes. +10 XP</div>
-        </div>
-      </div>
-
-      <!-- DRESS -->
-      <div id="k-dress" class="gscreen" style="display:none">
-        <button class="back" onclick="game('home')">← Home</button>
-        <div class="game"><div class="h">Dress Gummy 🎩</div><div class="sub">Spend XP on hats. Some you can't buy — you earn them.</div>
-          <div class="wardrobe" id="wardrobe"></div>
-        </div>
-      </div>
-</div>
-    </div>
-    <button class="askfab" onclick="askTeam()">💬 Ask my team</button>
-    <div class="askbox" id="askbox"><div class="ctx" id="askctx"></div><textarea id="asktxt" placeholder="What do you want to ask?"></textarea><div class="chips"><button class="btn small" onclick="askSend('Sister Devi, IBD nurse')">Nurse</button><button class="btn small ghost" onclick="askSend('Pharmacy')">Pharmacist</button><button class="btn small ghost" onclick="askSend('Ms Lim, dietitian')">Dietitian</button><button class="btn small ghost" onclick="document.getElementById('askbox').className='askbox'">Close</button></div></div>
-    <div class="tabs six" id="ptabs">
-      <button class="on" onclick="ptab('rec',this)"><span>📝</span>Record</button><button onclick="ptab('meds',this)"><span>💊</span>Meds</button><button onclick="ptab('cal',this)" id="caltab"><span>📅</span>Calendar</button><button onclick="ptab('learn',this)"><span>📚</span>Learn</button><button onclick="ptab('card',this)"><span>📄</span>Card</button><button onclick="ptab('comm',this)" id="commtab"><span>💜</span>Community<i class="badge">2</i></button>
-    </div>
-  </div>
-</main>
-
-<!-- ================= CAREGIVER ================= -->
-<main class="view" id="v-caregiver">
-  <div class="cgwrap">
-    <div class="h">Zara, today</div>
-    <div class="sub">She logged through Gummy this afternoon. Here's her day beside yours.</div>
-    <div class="gstat" id="gstat">
-      <svg viewBox="0 0 120 130"><use href="#gummy"/></svg>
-      <div><b id="gs-b">Gummy is awake · 3 of 3 days for alive, 5 for thriving</b><span id="gs-s">Tummy Monster and Pain Scale done today. Food Detective not yet.</span></div>
-      <button class="btn ghost" id="restbtn" onclick="rest()">Turn on rest mode</button>
-    </div>
-    <div class="cgrec">
-      <div class="quick">
-        <button onclick="cgAsk('med')"><span>💊</span>Medicines</button>
-        <button onclick="cgAsk('eat')"><span>🍚</span>Eating</button>
-        <button onclick="cgAsk('mood')"><span>🙂</span>How she is</button>
-      </div>
-      <div class="free">
-        <textarea id="cgfree" placeholder="Or just say it. e.g. “the medicine is a bit too expensive” · “she keeps being drowsy” · “she's started eating less” · “coping well with the meds”"></textarea>
-        <div class="row"><button class="mic" aria-label="Speak">🎙</button><button class="btn" onclick="cgParse()">Record</button></div>
-      </div>
-      <div class="ask" id="cgask"></div>
-      <div class="today"><h3>What you've told the team this week</h3><div id="cgentries">
-        <div class="entry"><span class="t">Tue</span>Ate half of dinner, no complaints<span class="pill">dietitian</span></div>
-        <div class="entry"><span class="t">Mon</span>Coping well with the new tablets<span class="pill">nurse</span></div>
-      </div></div>
-    </div>
-    <div class="two">
-      <div class="persp"><h3>Zara said</h3><div class="val">6<small>out of 10</small></div><div class="prov">Child, via Gummy · Faces scale</div><p>Poo "like porridge" — type 6. Went 4 times. Tummy hurt "a lot after recess".</p></div>
-      <div class="persp"><h3>You said</h3><div class="val">3<small>out of 10</small></div><div class="prov">Caregiver</div><p>Seemed fine at dinner. Ate half. Didn't complain.</p></div>
-    </div>
-    <div class="diff">Two pictures of the same afternoon. That's normal — kids and parents disagree on pain about three times more than on night-time toilet trips. Both go to Dr Lim as they are. Nobody has to be right.</div>
-    <div class="two">
-      <div class="persp"><h3>This week</h3><table style="margin-top:8px"><tr><th>Day</th><th>Zara</th><th>You</th></tr><tr><td>Mon</td><td>Pain 2 · type 4</td><td>Pain 2</td></tr><tr><td>Wed</td><td>Pain 5 · type 6</td><td>Pain 2</td></tr><tr><td>Fri</td><td>Pain 6 · type 6</td><td>Pain 3</td></tr></table></div>
-      <div class="persp"><h3>School</h3><p>Zara mentioned recess twice this week. A letter asking Ms Rahman for unrestricted toilet access is drafted.</p><button class="btn ghost small" style="margin-top:10px" onclick="toast('Letter opened')">Review the letter</button></div>
-    </div>
-  </div>
-</main>
-
 <!-- ================= DOCTOR ================= -->
-<main class="view" id="v-doctor">
+<main class="view active" id="v-doctor">
   <div class="clin">
     <aside class="ident">
       <h1>Marcus Tan</h1><div class="meta">34 · Ulcerative colitis, left-sided · Dx 2021</div>
@@ -1170,27 +736,17 @@
       <section>
         <h2>Symptoms against inflammation <span>not the same measurement</span></h2>
         <div class="div"><div class="box"><h3>Symptom burden</h3><div class="stat">High, rising since 22 Aug</div></div><div class="box"><h3>Objective signal</h3><div class="stat">Untested this episode</div></div></div>
-        <div class="pattern"><b>Symptoms raised, no current marker.</b><p>Last calprotectin is 124 days old and predates this episode. That is not the same as a normal calprotectin. Symptoms are also confounded: ibuprofen from 19 Aug, loperamide self-started 27 Aug — see pharmacist.</p>
+        <div class="pattern"><b>Symptoms raised, no current marker.</b><p>Last calprotectin is 124 days old and predates this episode. That is not the same as a normal calprotectin. Symptoms are also confounded: ibuprofen from 19 Aug, loperamide self-started 27 Aug — see Medication.</p>
           <div class="refer" style="margin-top:10px"><button onclick="refer(this,'home calprotectin kit — patient notified')">Send home calprotectin kit</button><button onclick="refer(this,'bloods — CRP, FBC, ferritin')">Order bloods</button><button onclick="refer(this,'nurse — bring forward to this week')">Bring visit forward</button></div></div>
         <div class="lab"><div class="hh">Test</div><div class="hh">Result</div><div class="hh">Collected</div><div class="hh">Age</div>
           <div>CRP</div><div>11 mg/L</div><div>17 Aug</div><div class="ageing">18 d · ageing</div>
           <div>Calprotectin</div><div>480 µg/g</div><div>3 May</div><div class="stale">124 d · stale</div>
           <div>Haemoglobin</div><div>12.8 g/dL</div><div>17 Aug</div><div class="ageing">18 d · ageing</div></div>
       </section>
-      <section><h2>What Marcus most wants to talk about <span>ranked by him</span></h2>
-        <ol class="concerns"><li>Waking at night to go — I'm scared it's getting worse</li><li>Whether I can still travel for my sister's wedding in October</li><li>The ibuprofen I've been taking for my back — is that ok?</li></ol></section>
+      
       <section><h2>Logged often, never raised in clinic</h2>
         <div class="unsaid"><div><b>Tiredness</b><span>16 of 28 days · never raised at a visit</span></div><div><b>Toilet access at work</b><span>8 mentions · open-plan office, one cubicle</span></div></div></section>
-      <section>
-        <h2>What a normal consultation would have missed <span>in the record, not in the room</span></h2>
-        <div class="missed">
-          <div><span>😴</span><div><b>Tiredness on 16 of 28 days</b><small>Never raised at any visit on record</small></div><span class="src">energy log</span></div>
-          <div><span>💊</span><div><b>Self-started loperamide, 27 Aug</b><small>His frequency chart is probably under-reading since then</small></div><span class="src">medicines tab</span></div>
-          <div><span>🌿</span><div><b>"Herbal tea from my mum" most evenings</b><small>Unidentified. Asked plainly, answered plainly</small></div><span class="src">also-taking</span></div>
-          <div><span>🚻</span><div><b>Toilet access at work, 8 mentions</b><small>Open-plan office, one cubicle. Never said in clinic</small></div><span class="src">free text</span></div>
-          <div><span>💷</span><div><b>Skipped the dietitian on the 3rd — "didn't think I needed it"</b><small>Same belief as "felt better, stopped the tablet"</small></div><span class="src">no-show reason</span></div>
-        </div>
-      </section>
+      
 
       <section>
         <h2>IBD nurse queue <span>whole caseload · 3,312 patients · the promise clock is the point</span></h2>
@@ -1205,7 +761,7 @@
       </section>
 
       <section><h2>Refer <span>one tap — the summary goes with it</span></h2>
-        <div class="refer"><button onclick="refer(this,'IBD nurse')">IBD nurse</button><button onclick="refer(this,'dietitian')">Dietitian</button><button onclick="refer(this,'pharmacist')">Pharmacist</button><button onclick="refer(this,'medical social worker')">Medical social worker</button><button onclick="refer(this,'psychologist')">Psychologist</button></div></section>
+        <div class="refer"><button onclick="refer(this,'IBD nurse')">IBD nurse</button><button onclick="refer(this,'Food & nutrition');goTab('diet')">Food &amp; nutrition</button><button onclick="refer(this,'Medication');goTab('pharm')">Medication</button><button onclick="refer(this,'medical social worker')">Medical social worker</button><button onclick="refer(this,'psychologist')">Psychologist</button></div></section>
     </div>
   </div>
 </main>
@@ -1224,7 +780,7 @@
       <div class="approval">✓ Card approved 4 Sep</div>
     </aside>
     <div class="canvas">
-      <section><h2>Doses against symptoms <span>did stopping come first?</span></h2>
+      <section><h2>Medication — doses against symptoms <span>did stopping come first?</span></h2>
         <div id="tl-pharm"></div>
         <div class="legend"><span><i style="background:var(--green)"></i>Taken</span><span><i style="background:var(--red)"></i>Missed</span><span><i style="background:var(--purple-d)"></i>Stools / 24 h</span><span><i style="background:var(--orange);border-radius:50%"></i>Pain</span></div>
         <div class="pattern"><b>Stopping preceded the symptoms.</b><p>Doses went irregular from 17 August while he was well — "felt better" on 6 of 9 misses. Frequency and blood rose five days later. Classic remission-adherence pattern. A conversation, not a lecture.</p></div></section>
@@ -1260,7 +816,7 @@
       <div class="approval">✓ Card approved 4 Sep</div>
     </aside>
     <div class="canvas">
-      <section><h2>How wide the diet is <span>distinct foods per week</span></h2>
+      <section><h2>Food &amp; nutrition — how wide the diet is <span>distinct foods per week</span></h2>
         <div class="breadth"><div style="height:100%">23</div><div style="height:91%">21</div><div style="height:61%">14</div><div style="height:39%" class="low">9</div></div>
         <div class="breadth-lab"><div>8–14 Aug</div><div>15–21 Aug</div><div>22–28 Aug</div><div>29 Aug–4 Sep</div></div>
         <div class="delta">Fewer than half the foods he ate a month ago. Most of what's gone is what he eats with other people.</div></section>
@@ -1311,7 +867,8 @@
 
 <div class="toast" id="toast"></div>
 
-<script>
+<script>const $id=i=>document.getElementById(i)||document.createElement('div');const $q=s=>document.querySelector(s)||document.createElement('div');
+
 /* ---- mock 28 days ---- */
 const D={bristol:[4,4,5,4,4,5,4,4,4,5,4,4,5,5,6,6,6,7,6,7,7,6,7,7,6,7,7,7],freq:[3,3,4,3,3,4,3,3,3,4,3,4,4,4,5,5,6,6,6,7,5,6,7,7,6,7,8,7],noct:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,2,1,1,2,2],blood:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,1,2,2,2,2,3,2],pain:[2,2,3,2,2,3,2,2,2,3,2,3,3,3,4,4,5,5,5,6,5,6,6,7,6,7,7,7],dose:[1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,0,1,1,0,1,1,1,1,1,1,1],events:{12:'Ibuprofen',20:'Loperamide',10:'CRP 11'}};
 const B=['#8C5A2B','#A6713A','#BF8A4F','#C9A365','#D9B96E','#E6C34F','#EDB52E'];
@@ -1325,11 +882,11 @@ function timeline(el,o){const W=920,pl=44,pr=16,n=28,cw=(W-pl-pr)/n,H=o.pharm?25
  D.freq.forEach((v,i)=>{const x=pl+i*cw,h=fh*v/mx,nh=fh*D.noct[i]/mx;s+=`<rect x="${x+3}" y="${fy+fh-h}" width="${cw-6}" height="${h}" rx="3" fill="#4A3A8A"/>`;if(nh)s+=`<rect x="${x+3}" y="${fy+fh-nh}" width="${cw-6}" height="${nh}" rx="3" fill="#7B5FC7"/>`});
  const pts=D.pain.map((v,i)=>`${pl+i*cw+cw/2},${fy+fh-fh*v/10}`).join(' ');s+=`<polyline points="${pts}" fill="none" stroke="#F0803C" stroke-width="2.5"/>`;D.pain.forEach((v,i)=>{s+=`<circle cx="${pl+i*cw+cw/2}" cy="${fy+fh-fh*v/10}" r="3" fill="#fff" stroke="#F0803C" stroke-width="2"/>`});
  labels.forEach((t,i)=>{if(!t)return;s+=`<text x="${pl+i*cw+cw/2}" y="${H-6}" font-size="10" font-weight="700" text-anchor="middle" fill="#8B85A3">${t}</text>`});el.innerHTML=s+'</svg>'}
-timeline(document.getElementById('tl-doc'),{});timeline(document.getElementById('tl-pharm'),{pharm:true});
+timeline($id('tl-doc'),{});timeline($id('tl-pharm'),{pharm:true});
 
 /* ---- nav ---- */
-document.querySelectorAll('.roles button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.roles button').forEach(x=>x.setAttribute('aria-selected','false'));b.setAttribute('aria-selected','true');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById('v-'+b.dataset.v).classList.add('active');window.scrollTo({top:0})}));
-function toast(t){const e=document.getElementById('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
+document.querySelectorAll('.roles button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.roles button').forEach(x=>x.setAttribute('aria-selected','false'));b.setAttribute('aria-selected','true');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));$id('v-'+b.dataset.v).classList.add('active');window.scrollTo({top:0})}));
+function toast(t){const e=$id('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
 function refer(b,w){b.classList.add('sent');b.textContent=b.textContent.replace(/ ✓$/,'')+' ✓';toast('Referred to '+w+' with summary attached')}
 function tog(b){b.classList.toggle('on')}
 
@@ -1341,40 +898,40 @@ function pick(b,sel){document.querySelectorAll(sel+' button').forEach(x=>x.class
 
 /* ---- kid state ---- */
 let XP=340,STREAK=3,restOn=false;
-function game(id){['home','parade','ouch','weather','feed','night','food','doctor','calm','dress'].forEach(k=>{const el=document.getElementById('k-'+k);if(el)el.style.display=k===id?'':'none'});if(id==='parade')startParade();if(id==='doctor')renderDsay();if(id==='dress')renderWardrobe();document.querySelector('#pphone .body').scrollTop=0}
-function kidLog(which,pts,msg){celebrate();XP+=pts;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';document.getElementById('xplab').textContent=XP>=500?'Gummy is Grown! ✨':`${XP} / 500 XP to Grown ✨`;if(XP>=500)document.getElementById('gname').textContent='Gummy · Grown stage 🌟';document.getElementById('rw-'+which).classList.add('on');toast(msg+' · logged as "child via Gummy"')}
+function game(id){['home','parade','ouch','weather','feed','night','food','doctor','calm','dress'].forEach(k=>{const el=$id('k-'+k);if(el)el.style.display=k===id?'':'none'});if(id==='parade')startParade();if(id==='doctor')renderDsay();if(id==='dress')renderWardrobe();$q('#pphone .body').scrollTop=0}
+function kidLog(which,pts,msg){celebrate();XP+=pts;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';$id('xplab').textContent=XP>=500?'Gummy is Grown! ✨':`${XP} / 500 XP to Grown ✨`;if(XP>=500)$id('gname').textContent='Gummy · Grown stage 🌟';$id('rw-'+which).classList.add('on');toast(msg+' · logged as "child via Gummy"')}
 const KID_FOODS=['Chicken rice','Fish soup','Mee pok','Milk','Laksa','Roti prata','Congee','Ice kacang','Steamed fish','Rojak'];
 const KID_STATUS={SAFE_CONFIRMED:{t:'Dietitian says yes',c:'safe'},TOLERATED_BEFORE:{t:'Been fine before',c:'tol'},NOT_ASSESSED:{t:'Not sure yet',c:'unknown'},CAUTION:{t:'Worth watching',c:'watch'},AVOID:{t:'Not right now',c:'avoid'}};
 function renderFoods(q=''){
  const list=KID_FOODS.filter(n=>n.toLowerCase().includes(q.toLowerCase()));
- document.getElementById('foods').innerHTML=list.map(n=>{const a=assess(n);const k=KID_STATUS[a.status];
+ $id('foods').innerHTML=list.map(n=>{const a=assess(n);const k=KID_STATUS[a.status];
   return `<div class="fd ${k.c}"><span class="dot"></span><div>${n}<span class="st">${k.t}${a.source?' — '+a.source:''}</span></div><button class="sw1" onclick="kidTry('${n}')">${a.status==='NOT_ASSESSED'?'Try it 🕵️':'Log it'}</button></div>`}).join('')}
 function kidTry(n){const a=assess(n);
- if(a.status==='NOT_ASSESSED'){TOL_LOG.push({food:n,outcome:'no symptoms',state:{activity:PHENO.activity,surgical_status:PHENO.surgical_status}});renderFoods();XP+=10;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';document.getElementById('rw-food').textContent='Case opened on '+n+'. Tell Bloop how it goes. +10 XP';document.getElementById('rw-food').classList.add('on');celebrate()}
+ if(a.status==='NOT_ASSESSED'){TOL_LOG.push({food:n,outcome:'no symptoms',state:{activity:PHENO.activity,surgical_status:PHENO.surgical_status}});renderFoods();XP+=10;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';$id('rw-food').textContent='Case opened on '+n+'. Tell Bloop how it goes. +10 XP';$id('rw-food').classList.add('on');celebrate()}
  else{addEntry('Ate · '+n);toast(n+' logged')}}
 function filt(v){renderFoods(v)}
-function rest(){restOn=!restOn;const b=document.getElementById('restbtn');b.classList.toggle('on',restOn);b.textContent=restOn?'Rest mode is on':'Turn on rest mode';document.getElementById('room').classList.toggle('rest',restOn);document.getElementById('gs-b').textContent=restOn?'Gummy is resting':'Gummy is awake · 3 of 3 days for alive, 5 for thriving';document.getElementById('gs-s').textContent=restOn?'Streak paused. Nothing lost. Dr Lim can see rest mode is on.':'Tummy Monster and Pain Scale done today. Food Detective not yet.';toast(restOn?'Rest mode on. Nothing is lost.':'Rest mode off')}
+function rest(){restOn=!restOn;const b=$id('restbtn');b.classList.toggle('on',restOn);b.textContent=restOn?'Rest mode is on':'Turn on rest mode';$id('room').classList.toggle('rest',restOn);$id('gs-b').textContent=restOn?'Gummy is resting':'Gummy is awake · 3 of 3 days for alive, 5 for thriving';$id('gs-s').textContent=restOn?'Streak paused. Nothing lost. Dr Lim can see rest mode is on.':'Tummy Monster and Pain Scale done today. Food Detective not yet.';toast(restOn?'Rest mode on. Nothing is lost.':'Rest mode off')}
 
 /* ---- patient quick record with structured follow-up ---- */
-const ask=document.getElementById('ask');
+const ask=$id('ask');
 let cur={};
 function askPain(src){cur={type:'pain',text:src||''};ask.className='ask on';ask.innerHTML=`<div class="q">${src?'You said it hurt. How much, 0 to 10?':'How much, 0 to 10?'}</div><div class="why">A number is something your doctor can compare week to week.</div><div class="scale">${[...Array(11).keys()].map(n=>`<button onclick="pick(this,'.scale');cur.score=${n}">${n}</button>`).join('')}</div><div class="chips"><button onclick="tog(this)">After eating</button><button onclick="tog(this)">Before going</button><button onclick="tog(this)">Woke me</button><button onclick="tog(this)">Cramping</button></div><div class="chips"><button class="btn" onclick="save()">Save</button><button class="btn ghost" onclick="ask.className='ask'">Skip</button></div>`}
-function askStool(src){cur={type:'stool',text:src||''};ask.className='ask on';ask.innerHTML=`<div class="q">${src?'You mentioned going. What was it like?':'What was it like?'}</div><div class="why">Tap the closest. This is the Bristol chart your doctor already uses.</div><div class="bristol">${[1,2,3,4,5,6,7].map(t=>`<button onclick="pick(this,'.bristol');cur.b=${t}">${pooSVG(t)}${t}</button>`).join('')}</div><div class="chips"><button onclick="tog(this)">At night</button><button onclick="tog(this)">Urgent</button><button class="blood" onclick="tog(this);cur.blood=1">Blood</button></div><div class="chips" id="bloodq" style="display:none"></div><div class="chips"><button class="btn" onclick="save()">Save</button><button class="btn ghost" onclick="ask.className='ask'">Skip</button></div>`;ask.querySelector('.blood').addEventListener('click',()=>{const q=document.getElementById('bloodq');q.style.display='flex';q.innerHTML=`<span style="font-size:12px;font-weight:800;color:var(--muted);align-self:center">Blood:</span><button onclick="pick(this,'#bloodq')">Streaks</button><button onclick="pick(this,'#bloodq')">Mixed in</button><button onclick="pick(this,'#bloodq')">Mostly blood</button>`})}
+function askStool(src){cur={type:'stool',text:src||''};ask.className='ask on';ask.innerHTML=`<div class="q">${src?'You mentioned going. What was it like?':'What was it like?'}</div><div class="why">Tap the closest. This is the Bristol chart your doctor already uses.</div><div class="bristol">${[1,2,3,4,5,6,7].map(t=>`<button onclick="pick(this,'.bristol');cur.b=${t}">${pooSVG(t)}${t}</button>`).join('')}</div><div class="chips"><button onclick="tog(this)">At night</button><button onclick="tog(this)">Urgent</button><button class="blood" onclick="tog(this);cur.blood=1">Blood</button></div><div class="chips" id="bloodq" style="display:none"></div><div class="chips"><button class="btn" onclick="save()">Save</button><button class="btn ghost" onclick="ask.className='ask'">Skip</button></div>`;ask.querySelector('.blood').addEventListener('click',()=>{const q=$id('bloodq');q.style.display='flex';q.innerHTML=`<span style="font-size:12px;font-weight:800;color:var(--muted);align-self:center">Blood:</span><button onclick="pick(this,'#bloodq')">Streaks</button><button onclick="pick(this,'#bloodq')">Mixed in</button><button onclick="pick(this,'#bloodq')">Mostly blood</button>`})}
 function askFood(src){cur={type:'food',text:src||''};ask.className='ask on';ask.innerHTML=`<div class="q">What did you eat?</div><div class="why">Just the dish. Where and how much are optional.</div><div class="snap"><label><span>📷</span>Photo of the plate<input type="file" accept="image/*" capture="environment" onchange="snap(this,'p')"></label></div><div class="snapres" id="snap-p"><img id="img-p" alt=""><div class="g">Looks like…<small>confirm or fix</small><div class="chips"><button onclick="snapPick(this,'p','Chicken rice')">Chicken rice</button><button onclick="snapPick(this,'p','Fish soup')">Fish soup</button><button onclick="snapPick(this,'p','Something else')">Something else</button></div></div></div><input class="search" placeholder="or type it, e.g. chicken rice" id="fin"><div class="chips"><button onclick="tog(this)">Hawker</button><button onclick="tog(this)">Home</button><button onclick="tog(this)">Small portion</button><button onclick="tog(this)">Skipped a meal</button></div><div class="chips"><button class="btn" onclick="save()">Save</button><button class="btn ghost" onclick="ask.className='ask'">Skip</button></div>`}
-function parseFree(){const t=document.getElementById('free').value.trim();if(!t)return;const l=t.toLowerCase();const hasNum=/\b([0-9]|10)\s*(\/|out of)\s*10\b/.test(l);
+function parseFree(){const t=$id('free').value.trim();if(!t)return;const l=t.toLowerCase();const hasNum=/\b([0-9]|10)\s*(\/|out of)\s*10\b/.test(l);
  if(/pain|hurt|cramp|ache|sore/.test(l)&&!hasNum){askPain(t);return}
  if(/toilet|went|poo|stool|loo|bathroom|diarrh/.test(l)&&!/type\s*[1-7]/.test(l)){askStool(t);return}
  if(/blood/.test(l)){askStool(t);return}
  if(/ate|eat|lunch|dinner|breakfast|rice|noodle|laksa/.test(l)){askFood(t);return}
- addEntry('Note · '+t);document.getElementById('free').value='';toast('Recorded')}
-function save(){let txt='';if(cur.type==='pain')txt=`Pain ${cur.score??'?'}`+(cur.text?' · "'+cur.text+'"':'');if(cur.type==='stool')txt=`Went · type ${cur.b??'?'}`+(cur.blood?' · blood':'')+(cur.text?' · "'+cur.text+'"':'');if(cur.type==='food'){const v=document.getElementById('fin')?.value;txt='Ate · '+(v||'?')}addEntry(txt);ask.className='ask';document.getElementById('free').value='';toast('Recorded')}
-function addEntry(t){const d=new Date(),hh=String(d.getHours()).padStart(2,'0'),mm=String(d.getMinutes()).padStart(2,'0');const e=document.createElement('div');e.className='entry';e.innerHTML=`<span class="t">${hh}:${mm}</span>${t}`;document.getElementById('entries').prepend(e)}
+ addEntry('Note · '+t);$id('free').value='';toast('Recorded')}
+function save(){let txt='';if(cur.type==='pain')txt=`Pain ${cur.score??'?'}`+(cur.text?' · "'+cur.text+'"':'');if(cur.type==='stool')txt=`Went · type ${cur.b??'?'}`+(cur.blood?' · blood':'')+(cur.text?' · "'+cur.text+'"':'');if(cur.type==='food'){const v=$id('fin')?.value;txt='Ate · '+(v||'?')}addEntry(txt);ask.className='ask';$id('free').value='';toast('Recorded')}
+function addEntry(t){const d=new Date(),hh=String(d.getHours()).padStart(2,'0'),mm=String(d.getMinutes()).padStart(2,'0');const e=document.createElement('div');e.className='entry';e.innerHTML=`<span class="t">${hh}:${mm}</span>${t}`;$id('entries').prepend(e)}
 
 /* ---- patient mode switch ---- */
-function mode(m,btn){document.querySelectorAll('.modes button').forEach(x=>x.classList.remove('on'));btn.classList.add('on');document.getElementById('p-chat').style.display=m==='chat'?'':'none';document.getElementById('p-game').style.display=m==='game'?'':'none';document.getElementById('p-sub').textContent=m==='chat'?'Tap what happened. Words only if you want.':'Play to log. Gummy keeps the record.'}
+function mode(m,btn){document.querySelectorAll('.modes button').forEach(x=>x.classList.remove('on'));btn.classList.add('on');$id('p-chat').style.display=m==='chat'?'':'none';$id('p-game').style.display=m==='game'?'':'none';$id('p-sub').textContent=m==='chat'?'Tap what happened. Words only if you want.':'Play to log. Gummy keeps the record.'}
 
 /* ---- caregiver record with structured follow-ups ---- */
-const cgask=document.getElementById('cgask');let cg={};
+const cgask=$id('cgask');let cg={};
 function cgAsk(kind,src){cg={kind,text:src||''};cgask.className='ask on';
  if(kind==='cost')cgask.innerHTML=`<div class="q">Which medicine, and how much of a strain?</div><div class="why">This goes to the pharmacist and the medical social worker. There are often options — generics, subsidy schemes, splitting supply.</div><div class="chips"><button onclick="tog(this)">Mesalazine</button><button onclick="tog(this)">Azathioprine</button><button onclick="tog(this)">Adalimumab</button><button onclick="tog(this)">Nutrition drinks</button></div><div class="chips"><button onclick="pick(this,'#cgask .lvl')" class="lvl">A bit</button><button onclick="pick(this,'#cgask .lvl')" class="lvl">A lot</button><button onclick="pick(this,'#cgask .lvl')" class="lvl">Can't continue</button></div><div class="chips"><button class="btn" onclick="cgSave('Medicine cost · '+chipsOf('#cgask'),'cost','pharmacist + MSW')">Save</button><button class="btn ghost" onclick="cgask.className='ask'">Skip</button></div>`;
  if(kind==='drowsy')cgask.innerHTML=`<div class="q">When is she drowsy, and since when?</div><div class="why">Timing tells the pharmacist whether it's likely the medicine.</div><div class="chips"><button onclick="tog(this)">After the morning dose</button><button onclick="tog(this)">All day</button><button onclick="tog(this)">Evenings</button><button onclick="tog(this)">At school</button></div><div class="chips"><button onclick="pick(this,'#cgask .since')" class="since">Few days</button><button onclick="pick(this,'#cgask .since')" class="since">About a week</button><button onclick="pick(this,'#cgask .since')" class="since">Since the new medicine</button></div><div class="chips"><button class="btn" onclick="cgSave('Drowsy · '+chipsOf('#cgask'),'pharm','pharmacist')">Save</button><button class="btn ghost" onclick="cgask.className='ask'">Skip</button></div>`;
@@ -1384,18 +941,18 @@ function cgAsk(kind,src){cg={kind,text:src||''};cgask.className='ask on';
  if(kind==='good'){cgSave('Coping well with medicines'+(src?' · "'+src+'"':''),'good','nurse');return}
  if(kind==='mood')cgask.innerHTML=`<div class="q">How is she, overall?</div><div class="chips"><button onclick="cgSave('Doing well','good','nurse')">Good week</button><button onclick="cgSave('Low or withdrawn','pharm','MSW')">Low or withdrawn</button><button onclick="cgSave('Anxious about school','pharm','MSW')">Anxious about school</button><button onclick="cgAsk('drowsy')">Drowsy or flat</button></div>`;}
 function chipsOf(sel){return [...document.querySelectorAll(sel+' .chips button.on')].map(b=>b.textContent).join(', ')||'no detail'}
-function cgParse(){const t=document.getElementById('cgfree').value.trim();if(!t)return;const l=t.toLowerCase();
+function cgParse(){const t=$id('cgfree').value.trim();if(!t)return;const l=t.toLowerCase();
  if(/expensive|cost|afford|price|\$|money/.test(l)){cgAsk('cost',t);return}
  if(/drows|sleepy|tired|flat|lethargic|dozy/.test(l)){cgAsk('drowsy',t);return}
  if(/eat|appetite|hungry|meal|portion|food/.test(l)){cgAsk('eat',t);return}
  if(/coping|fine|well|good|managing|ok with/.test(l)){cgAsk('good',t);return}
  if(/miss|forgot|refus|spat|vomit/.test(l)){cgAsk('missed',t);return}
  cgSave('Note · '+t,'good','nurse')}
-function cgSave(txt,cls,route){const e=document.createElement('div');e.className='entry';e.innerHTML=`<span class="t">Now</span>${txt}<span class="pill ${cls}">${route}</span>`;document.getElementById('cgentries').prepend(e);cgask.className='ask';document.getElementById('cgfree').value='';toast('Recorded · caregiver report · routed to '+route)}
+function cgSave(txt,cls,route){const e=document.createElement('div');e.className='entry';e.innerHTML=`<span class="t">Now</span>${txt}<span class="pill ${cls}">${route}</span>`;$id('cgentries').prepend(e);cgask.className='ask';$id('cgfree').value='';toast('Recorded · caregiver report · routed to '+route)}
 
 /* ---- photo capture (mock recognition) ---- */
-function snap(inp,who){const f=inp.files&&inp.files[0];const box=document.getElementById('snap-'+who);const img=document.getElementById('img-'+who);if(f){img.src=URL.createObjectURL(f)}else{img.removeAttribute('src')}box.classList.add('on');toast('Photo saved with the meal · recognition is a guess until you confirm')}
-function snapPick(b,who,name){pick(b,'#snap-'+who+' .chips');if(who==='p'){const fin=document.getElementById('fin');if(fin)fin.value=(name==='Something else'?'':name)}else{if(name!=='Something else'){if(!KID_FOODS.includes(name))KID_FOODS.unshift(name);renderFoods();XP+=10;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';toast(name+' logged from photo · +10 XP')}}}
+function snap(inp,who){const f=inp.files&&inp.files[0];const box=$id('snap-'+who);const img=$id('img-'+who);if(f){img.src=URL.createObjectURL(f)}else{img.removeAttribute('src')}box.classList.add('on');toast('Photo saved with the meal · recognition is a guess until you confirm')}
+function snapPick(b,who,name){pick(b,'#snap-'+who+' .chips');if(who==='p'){const fin=$id('fin');if(fin)fin.value=(name==='Something else'?'':name)}else{if(name!=='Something else'){if(!KID_FOODS.includes(name))KID_FOODS.unshift(name);renderFoods();XP+=10;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';toast(name+' logged from photo · +10 XP')}}}
 
 /* =====================================================================
    FOOD MODEL — five statuses, every one carries its source.
@@ -1518,7 +1075,7 @@ function macros(name){
 }
 
 function askScan(){cur={type:'scan'};ask.className='ask on';ask.innerHTML=`<div class="q">Scan a meal</div><div class="why">Photo of the plate, or pick what you're having. You'll get what's in it, and where each item stands for you.</div><div class="snap"><label><span>📷</span>Point at the plate<input type="file" accept="image/*" capture="environment" onchange="scanShot(this)"></label></div><div class="pheno" id="pheno"></div><div id="scanpick" class="scanpick">${Object.keys(FOODDB).map(n=>`<button onclick="showScan('${n}')">${n}</button>`).join('')}</div><div id="scanout"></div>`;renderPheno()}
-function renderPheno(){const el=document.getElementById('pheno');if(!el)return;const known=PHENO.diagnosis!=='unknown';
+function renderPheno(){const el=$id('pheno');if(!el)return;const known=PHENO.diagnosis!=='unknown';
  el.innerHTML=`<div class="phlab">What we know about you <span>${known?'phenotype on record':'nothing on record — default mode'}</span></div>
   <div class="phrow">
    <button class="${known?'on':''}" onclick="setPheno(true)">Crohn's · ileal · flaring · dietitian list</button>
@@ -1526,14 +1083,14 @@ function renderPheno(){const el=document.getElementById('pheno');if(!el)return;c
   </div>`}
 function setPheno(on){if(on){PHENO.diagnosis='CD';PHENO.location='ileal';PHENO.activity='active';PHENO.surgical_status='none';DIET_SAFE.splice(0,DIET_SAFE.length,'Chicken rice','Congee','Fish soup');KNOWN_TRIGGERS.splice(0,KNOWN_TRIGGERS.length,'lactose')}
  else{PHENO.diagnosis='unknown';PHENO.location='unknown';PHENO.activity='unknown';PHENO.surgical_status='unknown';DIET_SAFE.length=0;KNOWN_TRIGGERS.length=0}
- renderPheno();const o=document.getElementById('scanout');if(o)o.innerHTML='';toast(on?'Phenotype on record — gates can now fire':'Default mode — unknown never becomes a warning')}
-function scanShot(inp){toast('Photo taken · which one is it?');document.getElementById('scanpick').scrollIntoView({block:'nearest'})}
+ renderPheno();const o=$id('scanout');if(o)o.innerHTML='';toast(on?'Phenotype on record — gates can now fire':'Default mode — unknown never becomes a warning')}
+function scanShot(inp){toast('Photo taken · which one is it?');$id('scanpick').scrollIntoView({block:'nearest'})}
 
 function showScan(name){
  const a=assess(name), m=macros(name), dn=DIET_NOTES[name];
  const cls=STATUS_CLASS[a.status];
  const proFrac=TARGETS.protein_target_g?Math.round(m.pro/TARGETS.protein_target_g*10)/10:null;
- const out=document.getElementById('scanout');
+ const out=$id('scanout');
  out.innerHTML=`<div class="scanres ${cls}">
   <h4>${name}</h4><div class="now">Roughly ${m.g} g on the plate — an estimate from the photo.</div>
 
@@ -1557,7 +1114,7 @@ function showScan(name){
 function scanLog(name,ate){const m=macros(name);addEntry((ate?'Ate · ':'Not today · ')+name+(ate?` · ${m.pro} g protein, ${m.kcal} kcal`:''));ask.className='ask';toast(ate?'Logged. Tell me how it goes in a few hours.':'Logged — nothing is off your list')}
 
 /* ---- patient tabs ---- */
-function ptab(id,btn){const inGame=document.querySelector('.modes button.on')?.textContent.includes('Game');document.getElementById('p-chat').style.display=(id==='rec'&&inGame)?'none':'';document.getElementById('p-game').style.display=(id==='rec'&&inGame)?'':'none';['rec','meds','cal','card','learn','comm'].forEach(k=>{const el=document.getElementById('p-'+k);if(el)el.style.display=k===id?'':'none'});document.querySelectorAll('#ptabs button').forEach(x=>x.classList.remove('on'));btn.classList.add('on');document.querySelector('#pphone .body').scrollTop=0}
+function ptab(id,btn){const inGame=$q('.modes button.on')?.textContent.includes('Game');$id('p-chat').style.display=(id==='rec'&&inGame)?'none':'';$id('p-game').style.display=(id==='rec'&&inGame)?'':'none';['rec','meds','cal','card','learn','comm'].forEach(k=>{const el=$id('p-'+k);if(el)el.style.display=k===id?'':'none'});document.querySelectorAll('#ptabs button').forEach(x=>x.classList.remove('on'));btn.classList.add('on');$q('#pphone .body').scrollTop=0}
 function energy(b,v){pick(b,'.energy .row3:not(.small)');const extra=[...document.querySelectorAll('.energy .row3.small button.on')].map(x=>x.textContent).join(', ');addEntry('Energy '+v+(extra?' · '+extra:''));toast('Recorded · goes to your card as fatigue if it keeps up')}
 function missed(b,why){pick(b,'#p-meds .chips');addEntry('Missed dose · '+why);toast('Logged · your pharmacist sees the reason, not just the miss')}
 
@@ -1582,39 +1139,39 @@ const EVENTS=[
  {d:14,m:'Dec',type:'test',title:'Home calprotectin kit',sub:'Posted to you · results to Dr Nair · your next routine check',rsvp:null}
 ];
 const COL={clinic:'var(--purple)',test:'var(--yellow)',ccss:'var(--teal)'};
-function renderWeek(){const days=['Tue 1','Wed 2','Thu 3','Fri 4','Sat 5','Sun 6','Mon 7','Tue 8','Wed 9','Thu 10','Fri 11','Sat 12','Sun 13','Mon 14'];const wk=document.getElementById('wk');wk.innerHTML=days.map(x=>{const [dn,dd]=x.split(' ');const n=+dd;const dots=EVENTS.filter(e=>e.m==='Sep'&&e.d===n).map(e=>`<i style="background:${COL[e.type]}"></i>`).join('');return`<div class="${n===4?'today':''}${n<4?' dim':''}">${dn}<span class="d">${n}</span><span class="dots">${dots}</span></div>`}).join('')}
-function renderEvents(){document.getElementById('events').innerHTML=EVENTS.map((e,i)=>`<div class="ev ${e.type}"><div class="when">${e.m}<b>${e.d}</b></div><div class="t"><b>${e.title}</b><span>${e.sub}</span></div>${e.rsvp==='ask'?`<button class="go" onclick="rsvp(this,'${e.title}',null,${i})">I'll go</button>`:e.rsvp==='yes'?`<span class="go yes">Going ✓</span>`:''}</div>`).join('')}
-function rsvp(btn,title,nudgeId,idx){if(idx!=null)EVENTS[idx].rsvp='yes';if(nudgeId){const e=EVENTS.find(x=>x.title.includes('Eating out'));if(e)e.rsvp='yes';document.getElementById(nudgeId).innerHTML='<span>✅</span><div><b>You\'re going. Added to your calendar.</b><small>Reminder the day before. Ms Lim will know you\'re coming.</small></div>'}
- renderEvents();addEntry('Going · '+title+' <span class="pill" style="background:var(--teal-l);color:#146F60">CCSS</span>');XP+=50;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';const b=document.querySelector('#caltab .badge');if(b)b.remove();toast('Added · +50 XP for showing up for your community')}
+function renderWeek(){const days=['Tue 1','Wed 2','Thu 3','Fri 4','Sat 5','Sun 6','Mon 7','Tue 8','Wed 9','Thu 10','Fri 11','Sat 12','Sun 13','Mon 14'];const wk=$id('wk');wk.innerHTML=days.map(x=>{const [dn,dd]=x.split(' ');const n=+dd;const dots=EVENTS.filter(e=>e.m==='Sep'&&e.d===n).map(e=>`<i style="background:${COL[e.type]}"></i>`).join('');return`<div class="${n===4?'today':''}${n<4?' dim':''}">${dn}<span class="d">${n}</span><span class="dots">${dots}</span></div>`}).join('')}
+function renderEvents(){$id('events').innerHTML=EVENTS.map((e,i)=>`<div class="ev ${e.type}"><div class="when">${e.m}<b>${e.d}</b></div><div class="t"><b>${e.title}</b><span>${e.sub}</span></div>${e.rsvp==='ask'?`<button class="go" onclick="rsvp(this,'${e.title}',null,${i})">I'll go</button>`:e.rsvp==='yes'?`<span class="go yes">Going ✓</span>`:''}</div>`).join('')}
+function rsvp(btn,title,nudgeId,idx){if(idx!=null)EVENTS[idx].rsvp='yes';if(nudgeId){const e=EVENTS.find(x=>x.title.includes('Eating out'));if(e)e.rsvp='yes';$id(nudgeId).innerHTML='<span>✅</span><div><b>You\'re going. Added to your calendar.</b><small>Reminder the day before. Ms Lim will know you\'re coming.</small></div>'}
+ renderEvents();addEntry('Going · '+title+' <span class="pill" style="background:var(--teal-l);color:#146F60">CCSS</span>');XP+=50;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';const b=$q('#caltab .badge');if(b)b.remove();toast('Added · +50 XP for showing up for your community')}
 renderWeek();renderEvents();
 
 /* ---- missed appointment: no penalty, reason routes, rebook rewards ---- */
 let noshowReason=null;
 function noshow(b,why,route){pick(b,'#missed1 .chips:first-of-type');noshowReason=why;const msg={nurse:'Flagged to Sister Devi as unwell, not as a no-show',MSW:'Sent to the medical social worker — there may be help with this',pharmacist:'Your pharmacist will see this. It\'s a common feeling in remission, and worth a chat',none:'Noted. A reminder the morning of should help'}[route];addEntry('Missed appointment · '+why+(route!=='none'?' <span class="pill">'+route+'</span>':''));toast(msg)}
-function rebook(id){addEntry('Rebooked · Ms Lim · Thu 17 Sep, 10 am <span class="pill">CCSS</span>'.replace('CCSS','clinic'));XP+=20;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';document.getElementById(id).innerHTML='<span>✅</span><div><b>Rebooked for Thu 10 am</b><small>'+(noshowReason?'Reason passed on. ':'No reason given — Sister Devi may check in. ')+'+20 XP for coming back, nothing lost for missing.</small></div>'}
+function rebook(id){addEntry('Rebooked · Ms Lim · Thu 17 Sep, 10 am <span class="pill">CCSS</span>'.replace('CCSS','clinic'));XP+=20;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';$id(id).innerHTML='<span>✅</span><div><b>Rebooked for Thu 10 am</b><small>'+(noshowReason?'Reason passed on. ':'No reason given — Sister Devi may check in. ')+'+20 XP for coming back, nothing lost for missing.</small></div>'}
 
 /* ---- celebrate: bounce + confetti on the home Gummy ---- */
-function celebrate(dance){const g=document.getElementById('gwrap');if(g){g.classList.remove('bounce','dance');void g.offsetWidth;g.classList.add(dance?'dance':'bounce')}const c=document.getElementById('confetti');if(c){c.innerHTML='';const cols=['#7B5FC7','#2BB5A0','#F5C542','#F0803C','#E84545'];for(let i=0;i<24;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=cols[i%5];s.style.animationDelay=(Math.random()*.4)+'s';c.appendChild(s)}setTimeout(()=>c.innerHTML='',1600)}}
+function celebrate(dance){const g=$id('gwrap');if(g){g.classList.remove('bounce','dance');void g.offsetWidth;g.classList.add(dance?'dance':'bounce')}const c=$id('confetti');if(c){c.innerHTML='';const cols=['#7B5FC7','#2BB5A0','#F5C542','#F0803C','#E84545'];for(let i=0;i<24;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=cols[i%5];s.style.animationDelay=(Math.random()*.4)+'s';c.appendChild(s)}setTimeout(()=>c.innerHTML='',1600)}}
 
 /* ---- Poo Parade: marchers on the Bristol ramp, tap to pick ---- */
 const paradeNames=['Pebbles','Lumpy','Cracky','Smoothie','Blobby','Mushy','Puddle'];
-function startParade(){const el=document.getElementById('parade');if(el.dataset.on)return;el.dataset.on=1;el.innerHTML=[1,2,3,4,5,6,7].map((t,i)=>`<button class="marcher" style="animation-delay:${-i*2}s" onclick="pick(this,'#parade');cur.b=${t}">${pooSVG(t)}${paradeNames[i]}<span style="font-size:9px;color:var(--muted)">type ${t}</span></button>`).join('')}
+function startParade(){const el=$id('parade');if(el.dataset.on)return;el.dataset.on=1;el.innerHTML=[1,2,3,4,5,6,7].map((t,i)=>`<button class="marcher" style="animation-delay:${-i*2}s" onclick="pick(this,'#parade');cur.b=${t}">${pooSVG(t)}${paradeNames[i]}<span style="font-size:9px;color:var(--muted)">type ${t}</span></button>`).join('')}
 
 /* ---- Tummy Weather: pain as weather, FPS-R underneath ---- */
-function weather(b,lvl,cls){pick(b,'#wx');const sky=document.getElementById('sky');sky.className='sky '+cls;const rain=document.getElementById('rain');rain.innerHTML='';if(lvl>=2){for(let i=0;i<18;i++){const d=document.createElement('i');d.style.left=Math.random()*100+'%';d.style.animationDelay=(Math.random()*.7)+'s';rain.appendChild(d)}}cur.score=[0,2,5,7,10][lvl]}
+function weather(b,lvl,cls){pick(b,'#wx');const sky=$id('sky');sky.className='sky '+cls;const rain=$id('rain');rain.innerHTML='';if(lvl>=2){for(let i=0;i<18;i++){const d=document.createElement('i');d.style.left=Math.random()*100+'%';d.style.animationDelay=(Math.random()*.7)+'s';rain.appendChild(d)}}cur.score=[0,2,5,7,10][lvl]}
 
 /* ---- Feed Gummy: tablet flies in, Gummy dances; missing = hungry, never sick ---- */
-function feed(b,which){if(b.classList.contains('fed'))return;b.classList.add('fly');const m=document.getElementById('mouth');m.classList.add('on');const g=document.getElementById('feedg');g.classList.remove('dance');void g.offsetWidth;g.classList.add('dance');setTimeout(()=>{b.classList.remove('fly');b.classList.add('fed');m.classList.remove('on');XP+=10;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';document.getElementById('rw-feed').classList.add('on');toast(which+' · logged as taken')},550)}
+function feed(b,which){if(b.classList.contains('fed'))return;b.classList.add('fly');const m=$id('mouth');m.classList.add('on');const g=$id('feedg');g.classList.remove('dance');void g.offsetWidth;g.classList.add('dance');setTimeout(()=>{b.classList.remove('fly');b.classList.add('fed');m.classList.remove('on');XP+=10;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';$id('rw-feed').classList.add('on');toast(which+' · logged as taken')},550)}
 
 /* ---- Night Watch ---- */
 let moons=0;
-function moonTap(){moons++;const m=document.getElementById('moon');m.classList.remove('pulse');void m.offsetWidth;m.classList.add('pulse');document.getElementById('moonct').textContent=moons+(moons===1?' time':' times');cur.noct=moons}
-function nightZero(){moons=0;document.getElementById('moonct').textContent='Slept through 🎉';cur.noct=0;kidLog('night',10,'Slept through — logged')}
+function moonTap(){moons++;const m=$id('moon');m.classList.remove('pulse');void m.offsetWidth;m.classList.add('pulse');$id('moonct').textContent=moons+(moons===1?' time':' times');cur.noct=moons}
+function nightZero(){moons=0;$id('moonct').textContent='Slept through 🎉';cur.noct=0;kidLog('night',10,'Slept through — logged')}
 
 /* ---- Dress Gummy: buy with XP, or earn ---- */
 const HATS=[{e:'🎩',n:'Top hat',cost:50},{e:'👑',n:'Crown',cost:120},{e:'🧢',n:'Cap',cost:40},{e:'🎓',n:'Grad cap',cost:0,earn:'Gummy Grown'},{e:'🩺',n:'Stethoscope',cost:0,earn:'after a clinic visit',owned:true},{e:'👕',n:'CCSS tee',cost:0,earn:'first CCSS meetup'},{e:'🦸',n:'Hero cape',cost:0,earn:'calprotectin normal'},{e:'🐰',n:'Bunny ears',cost:30},{e:'🌺',n:'Hibiscus',cost:0,owned:true,wearing:true}];
-function renderWardrobe(){document.getElementById('wardrobe').innerHTML=HATS.map((x,i)=>{const owned=x.owned||x.cost>0&&x.bought;const locked=!owned&&x.cost===0;const cls=x.wearing?'wearing':locked?'locked':'';const foot=x.wearing?'wearing':owned?'tap to wear':locked?x.earn:x.cost+' XP';return`<button class="${cls}" onclick="wear(${i})"><span>${x.e}</span>${x.n}<small>${foot}</small></button>`}).join('')}
-function wear(i){const x=HATS[i];if(!(x.owned||x.bought)){if(x.cost===0){toast('Earned, not bought — '+x.earn);return}if(XP<x.cost){toast('Need '+(x.cost-XP)+' more XP');return}XP-=x.cost;x.bought=true;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%'}HATS.forEach(h=>h.wearing=false);x.wearing=true;document.getElementById('hat').textContent=x.e==='🌺'?'':x.e;renderWardrobe();celebrate(true);toast('Gummy is wearing the '+x.n.toLowerCase())}
+function renderWardrobe(){$id('wardrobe').innerHTML=HATS.map((x,i)=>{const owned=x.owned||x.cost>0&&x.bought;const locked=!owned&&x.cost===0;const cls=x.wearing?'wearing':locked?'locked':'';const foot=x.wearing?'wearing':owned?'tap to wear':locked?x.earn:x.cost+' XP';return`<button class="${cls}" onclick="wear(${i})"><span>${x.e}</span>${x.n}<small>${foot}</small></button>`}).join('')}
+function wear(i){const x=HATS[i];if(!(x.owned||x.bought)){if(x.cost===0){toast('Earned, not bought — '+x.earn);return}if(XP<x.cost){toast('Need '+(x.cost-XP)+' more XP');return}XP-=x.cost;x.bought=true;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%'}HATS.forEach(h=>h.wearing=false);x.wearing=true;$id('hat').textContent=x.e==='🌺'?'':x.e;renderWardrobe();celebrate(true);toast('Gummy is wearing the '+x.n.toLowerCase())}
 
 /* ---- pet name: chosen by the child, applied everywhere ---- */
 const PET={name:'Bloop'};
@@ -1622,36 +1179,36 @@ function applyName(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_
 const _toast=toast;toast=function(t){_toast(t.replace(/Gummy/g,PET.name))};
 new MutationObserver(m=>{for(const r of m){for(const nd of r.addedNodes){if(nd.nodeType===1)applyName(nd);else if(nd.nodeType===3&&nd.nodeValue.includes('Gummy'))nd.nodeValue=nd.nodeValue.replace(/Gummy/g,PET.name)}}}).observe(document.body,{childList:true,subtree:true});
 applyName(document.body);
-function namePick(){const a=document.getElementById('nameask');a.className='ask on';a.innerHTML=`<div class="q">What's your monster called?</div><div class="why">Pick one or make one up. You can change it any time.</div><div class="chips">${['Bloop','Momo','Zuzu','Pixel','Nova','Tofu','Kiki','Boba'].map(n=>`<button onclick="setName('${n}')">${n}</button>`).join('')}</div><div style="display:flex;gap:6px;margin-top:8px"><input class="search" style="margin:0" id="nameinp" placeholder="or type a name" maxlength="12"><button class="btn" onclick="setName(document.getElementById('nameinp').value)">Go</button></div>`}
-function setName(n){n=(n||'').trim();if(!n)return;const old=PET.name;PET.name=n;const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let t;const re=new RegExp(old.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g');while(t=w.nextNode()){if(t.nodeValue.includes(old))t.nodeValue=t.nodeValue.replace(re,n)}document.getElementById('nameask').className='ask';celebrate(true);toast(n+' it is')}
+function namePick(){const a=$id('nameask');a.className='ask on';a.innerHTML=`<div class="q">What's your monster called?</div><div class="why">Pick one or make one up. You can change it any time.</div><div class="chips">${['Bloop','Momo','Zuzu','Pixel','Nova','Tofu','Kiki','Boba'].map(n=>`<button onclick="setName('${n}')">${n}</button>`).join('')}</div><div style="display:flex;gap:6px;margin-top:8px"><input class="search" style="margin:0" id="nameinp" placeholder="or type a name" maxlength="12"><button class="btn" onclick="setName($id('nameinp').value)">Go</button></div>`}
+function setName(n){n=(n||'').trim();if(!n)return;const old=PET.name;PET.name=n;const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let t;const re=new RegExp(old.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g');while(t=w.nextNode()){if(t.nodeValue.includes(old))t.nodeValue=t.nodeValue.replace(re,n)}$id('nameask').className='ask';celebrate(true);toast(n+' it is')}
 
 /* ---- habits: no streaks, XP per tick, badge at 10 ---- */
 const HABITS=[{e:'💧',n:'Water with every meal',w:'Dehydration is common in a flare',on:true,c:4},{e:'🚶',n:'10-minute walk',w:'Movement helps energy and mood',on:true,c:7},{e:'🛏️',n:'Screens off by 10',w:'Sleep and symptoms feed each other',on:true,c:2},{e:'🍽️',n:'Sit down to eat',w:'Slower eating, easier on the gut',on:false,c:0},{e:'🫁',n:'2-minute breathing',w:'Stress is a flare trigger for many',on:false,c:0},{e:'💊',n:'Meds with breakfast',w:'Tie the dose to something you already do',on:false,c:0}];
-function renderHabits(){document.getElementById('habits').innerHTML=HABITS.map((x,i)=>`<div class="hb ${x.on?'':'off'} ${x.today?'done':''} ${x.c>=10?'badge':''}"><button class="ck" onclick="tick(${i})" ${x.on?'':'disabled'}>${x.today?'✓':''}</button><div class="t"><b>${x.n}</b><small>${x.w}</small></div><span class="cnt">${x.c>=10?'🏅 ':''}${x.c} ticks</span><button class="go" style="font-size:10px;padding:4px 8px;background:none" onclick="HABITS[${i}].on=!HABITS[${i}].on;renderHabits()">${x.on?'stop':'add'}</button></div>`).join('')}
-function tick(i){const x=HABITS[i];if(x.today){x.today=false;x.c--;renderHabits();return}x.today=true;x.c++;XP+=10;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';renderHabits();celebrate();toast(x.c===10?'Badge! '+x.n+' is a habit now. +10 XP':'+10 XP · '+x.n)}
+function renderHabits(){$id('habits').innerHTML=HABITS.map((x,i)=>`<div class="hb ${x.on?'':'off'} ${x.today?'done':''} ${x.c>=10?'badge':''}"><button class="ck" onclick="tick(${i})" ${x.on?'':'disabled'}>${x.today?'✓':''}</button><div class="t"><b>${x.n}</b><small>${x.w}</small></div><span class="cnt">${x.c>=10?'🏅 ':''}${x.c} ticks</span><button class="go" style="font-size:10px;padding:4px 8px;background:none" onclick="HABITS[${i}].on=!HABITS[${i}].on;renderHabits()">${x.on?'stop':'add'}</button></div>`).join('')}
+function tick(i){const x=HABITS[i];if(x.today){x.today=false;x.c--;renderHabits();return}x.today=true;x.c++;XP+=10;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';renderHabits();celebrate();toast(x.c===10?'Badge! '+x.n+' is a habit now. +10 XP':'+10 XP · '+x.n)}
 renderHabits();
 
 /* ---- courses: watching or reading earns XP on completion ---- */
 const COURSES=[{e:'😴',n:'Sleep when your gut won\'t',by:'CCSS + NUH sleep clinic',len:'4 × 5 min',xp:40,p:2,of:4},{e:'💊',n:'Why mesalazine works when you feel fine',by:'your pharmacist',len:'6 min read',xp:25,p:0,of:1},{e:'🍜',n:'Eating out in a flare — hawker edition',by:'Ms Lim, dietitian',len:'3 × 4 min',xp:30,p:0,of:3},{e:'🧠',n:'The worry that doesn\'t switch off',by:'MSW team',len:'5 × 6 min',xp:50,p:0,of:5},{e:'✈️',n:'Travelling with IBD',by:'CCSS members',len:'2 × 5 min',xp:20,p:2,of:2}];
-function renderCourses(){document.getElementById('courses').innerHTML=COURSES.map((c,i)=>{const done=c.p>=c.of;return`<div class="cr"><span class="ic">${c.e}</span><div class="t"><b>${c.n}</b><small>${c.by} · ${c.len} · ${c.xp} XP</small><div class="bar"><i style="width:${100*c.p/c.of}%"></i></div></div><button class="go ${done?'done':''}" onclick="learn(${i})">${done?'Done ✓':c.p?'Continue':'Start'}</button></div>`}).join('')}
-function learn(i){const c=COURSES[i];if(c.p>=c.of){toast('Already finished — nice');return}c.p++;renderCourses();if(c.p>=c.of){XP+=c.xp;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';celebrate();toast('Finished · +'+c.xp+' XP · goes on your card as something you learned')}else toast('Session '+c.p+' of '+c.of+' done')}
+function renderCourses(){$id('courses').innerHTML=COURSES.map((c,i)=>{const done=c.p>=c.of;return`<div class="cr"><span class="ic">${c.e}</span><div class="t"><b>${c.n}</b><small>${c.by} · ${c.len} · ${c.xp} XP</small><div class="bar"><i style="width:${100*c.p/c.of}%"></i></div></div><button class="go ${done?'done':''}" onclick="learn(${i})">${done?'Done ✓':c.p?'Continue':'Start'}</button></div>`}).join('')}
+function learn(i){const c=COURSES[i];if(c.p>=c.of){toast('Already finished — nice');return}c.p++;renderCourses();if(c.p>=c.of){XP+=c.xp;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';celebrate();toast('Finished · +'+c.xp+' XP · goes on your card as something you learned')}else toast('Session '+c.p+' of '+c.of+' done')}
 renderCourses();
 
 /* ---- Ouch Map: location + FPS-R + timing ---- */
 let OUCH=[];
-document.getElementById('zones').addEventListener('click',e=>{const r=e.target.closest('rect');if(!r)return;const z=r.dataset.z,loc=r.dataset.loc;const x=+r.getAttribute('x')+ +r.getAttribute('width')/2,y=+r.getAttribute('y')+ +r.getAttribute('height')/2;if(OUCH.find(o=>o.loc===loc)){OUCH=OUCH.filter(o=>o.loc!==loc)}else OUCH.push({z,loc,x,y});renderOuch()});
-function renderOuch(){document.getElementById('ouches').innerHTML=OUCH.map(o=>`<g class="ouch"><circle cx="${o.x}" cy="${o.y}" r="11" fill="#E84545" opacity=".9"/><text x="${o.x}" y="${o.y+5}" font-size="14" text-anchor="middle">🩹</text></g>`).join('');document.getElementById('ouchlist').innerHTML=OUCH.length?'<b>It hurts:</b>'+OUCH.map(o=>o.z).join('<br>'):'Nowhere yet — that\'s fine too.'}
+$id('zones').addEventListener('click',e=>{const r=e.target.closest('rect');if(!r)return;const z=r.dataset.z,loc=r.dataset.loc;const x=+r.getAttribute('x')+ +r.getAttribute('width')/2,y=+r.getAttribute('y')+ +r.getAttribute('height')/2;if(OUCH.find(o=>o.loc===loc)){OUCH=OUCH.filter(o=>o.loc!==loc)}else OUCH.push({z,loc,x,y});renderOuch()});
+function renderOuch(){$id('ouches').innerHTML=OUCH.map(o=>`<g class="ouch"><circle cx="${o.x}" cy="${o.y}" r="11" fill="#E84545" opacity=".9"/><text x="${o.x}" y="${o.y+5}" font-size="14" text-anchor="middle">🩹</text></g>`).join('');$id('ouchlist').innerHTML=OUCH.length?'<b>It hurts:</b>'+OUCH.map(o=>o.z).join('<br>'):'Nowhere yet — that\'s fine too.'}
 function ouchClear(){OUCH=[];renderOuch()}
 function ouchSave(){const when=[...document.querySelectorAll('#k-ouch .chips button.on')].map(b=>b.textContent.replace(/[^\w\s]/g,'').trim());cur.locs=OUCH.map(o=>o.loc);kidLog('ouch',10,'Pain mapped · '+(OUCH.length?OUCH.map(o=>o.z).join(', '):'no spots')+(cur.score!=null?' · '+cur.score+'/10':'')+(when.length?' · '+when.join(', '):''))}
 
 /* ---- Doctor Says: clinician picks 3 explainers, child taps to reveal, then says what the plan is ---- */
 const DSAY=[{e:'💊',t:'A new tablet, every morning',w:'It calms the angry bits in your tummy. It takes a few weeks to work, so keep going even when you feel fine.'},{e:'🧪',t:'A poo test at home',w:'A tiny bit of poo in a tube. It tells Dr Lim if your tummy is still angry inside, even when it doesn\'t hurt.'},{e:'🍜',t:'You can still eat with your family',w:'Some foods might be "trying again" for now. Ms Lim will help. Nothing is banned forever.'}];
-function renderDsay(){document.getElementById('dsay').innerHTML=DSAY.map((d,i)=>`<div class="ds" id="ds${i}" onclick="this.classList.add('on');this.querySelector('.tap').textContent='✓';celebrate()"><svg class="av" viewBox="0 0 120 130"><use href="#gummy"/></svg><div><b>${d.e} ${d.t}</b><small>${d.w}</small></div><span class="tap">tap</span></div>`).join('')}
-function dsaySave(){const plan=document.querySelector('#dplan button.on')?.textContent||'no answer';const wrong=/Stop the medicine|whatever I want/.test(plan);kidLog('doctor',10,'Plan as understood: '+plan);if(wrong)setTimeout(()=>toast('Logged — Dr Lim will see this doesn\'t match, and can check in'),2400)}
+function renderDsay(){$id('dsay').innerHTML=DSAY.map((d,i)=>`<div class="ds" id="ds${i}" onclick="this.classList.add('on');this.querySelector('.tap').textContent='✓';celebrate()"><svg class="av" viewBox="0 0 120 130"><use href="#gummy"/></svg><div><b>${d.e} ${d.t}</b><small>${d.w}</small></div><span class="tap">tap</span></div>`).join('')}
+function dsaySave(){const plan=$q('#dplan button.on')?.textContent||'no answer';const wrong=/Stop the medicine|whatever I want/.test(plan);kidLog('doctor',10,'Plan as understood: '+plan);if(wrong)setTimeout(()=>toast('Logged — Dr Lim will see this doesn\'t match, and can check in'),2400)}
 
 /* ---- Calm Cave: paced breathing, 4s in / 4s out, ~2 minutes ---- */
 let calmT=null,calmN=0;
-function calm(){const b=document.getElementById('bubble'),t=document.getElementById('btxt'),btn=document.getElementById('calmbtn');if(calmT){clearInterval(calmT);calmT=null;b.className='bubble out';t.textContent='tap to start';btn.textContent='Start';if(calmN>=4){XP+=10;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';document.getElementById('rw-calm').classList.add('on');toast('That counts. +15 XP')}else toast('Stopped early — that\'s fine. Nothing lost.');calmN=0;return}
+function calm(){const b=$id('bubble'),t=$id('btxt'),btn=$id('calmbtn');if(calmT){clearInterval(calmT);calmT=null;b.className='bubble out';t.textContent='tap to start';btn.textContent='Start';if(calmN>=4){XP+=10;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';$id('rw-calm').classList.add('on');toast('That counts. +15 XP')}else toast('Stopped early — that\'s fine. Nothing lost.');calmN=0;return}
  btn.textContent='Stop';calmN=0;let phase=0;const step=()=>{phase=1-phase;b.className='bubble '+(phase?'in':'out');t.textContent=phase?'breathe in':'breathe out';if(!phase)calmN++;if(calmN>=15){calm()}};step();calmT=setInterval(step,4000)}
 
 /* ---- Community: monster-to-monster, moderated, no free text ---- */
@@ -1661,18 +1218,18 @@ const PALS=[
  {name:'Tofu',owner:'age 9',mood:'is resting today 😴',new:false,msg:null}
 ];
 const SAYINGS=['👋 Hello from Bloop!','💪 Hope today is a good one','🎉 Well done!','🫂 Me too — you\'re not the only one','🎮 Want to play Food Detective?'];
-function renderPals(){document.getElementById('pals').innerHTML=PALS.map((p,i)=>`
+function renderPals(){$id('pals').innerHTML=PALS.map((p,i)=>`
  <div class="pal ${p.new?'new':''}"><svg viewBox="0 0 120 130"><use href="#gummy"/></svg>
  <div class="t"><b>${p.name}</b><small>${p.owner} · ${p.mood}</small>${p.msg?`<small style="color:var(--purple-d);font-weight:800;margin-top:2px">${p.msg}</small>`:''}</div>
  <button class="say" onclick="sayTo(${i})">Say hi</button></div>
  <div class="saybox" id="say${i}" style="display:none">${SAYINGS.map(s=>`<button onclick="sendSay(${i},'${s}')">${s}</button>`).join('')}</div>`).join('')}
-function sayTo(i){const b=document.getElementById('say'+i);b.style.display=b.style.display==='none'?'grid':'none'}
-function sendSay(i,s){document.getElementById('say'+i).style.display='none';PALS[i].new=false;renderPals();const bd=document.querySelector('#commtab .badge');if(bd)bd.remove();celebrate();toast('Sent to '+PALS[i].name+' · a CCSS moderator sees it too')}
+function sayTo(i){const b=$id('say'+i);b.style.display=b.style.display==='none'?'grid':'none'}
+function sendSay(i,s){$id('say'+i).style.display='none';PALS[i].new=false;renderPals();const bd=$q('#commtab .badge');if(bd)bd.remove();celebrate();toast('Sent to '+PALS[i].name+' · a CCSS moderator sees it too')}
 renderPals();
 
 const GIFTS=[{e:'🎩',n:'Top hat'},{e:'🐰',n:'Bunny ears'},{e:'🌺',n:'Hibiscus'},{e:'⭐',n:'Star'}];
-function renderGifts(){document.getElementById('gifts').innerHTML=GIFTS.map((g,i)=>`<button id="gift${i}" onclick="sendGift(${i})"><span>${g.e}</span>${g.n}</button>`).join('')}
-function sendGift(i){const b=document.getElementById('gift'+i);b.classList.add('sent');celebrate(true);toast(GIFTS[i].n+' sent to Momo · you keep yours')}
+function renderGifts(){$id('gifts').innerHTML=GIFTS.map((g,i)=>`<button id="gift${i}" onclick="sendGift(${i})"><span>${g.e}</span>${g.n}</button>`).join('')}
+function sendGift(i){const b=$id('gift'+i);b.classList.add('sent');celebrate(true);toast(GIFTS[i].n+' sent to Momo · you keep yours')}
 renderGifts();
 
 const CCSS_EV=[
@@ -1680,13 +1237,13 @@ const CCSS_EV=[
  {d:'Sat 21 Sep',t:'CCSS Kids Camp',s:'Whole day · monsters welcome',rsvp:false},
  {d:'Sat 26 Sep',t:'Research study — IBD and sleep (NUS)',s:'Online · 30 min · CCSS-approved',rsvp:false}
 ];
-function renderCcss(){document.getElementById('ccssev').innerHTML=CCSS_EV.map((e,i)=>`<div class="ev ccss"><div class="when">${e.d.split(' ')[0]}<b>${e.d.split(' ')[1]}</b></div><div class="t"><b>${e.t}</b><span>${e.s}</span></div>${e.rsvp?'<span class="go yes">Going ✓</span>':`<button class="go" onclick="ccssGo(${i})">I'll go</button>`}</div>`).join('')}
-function ccssGo(i){CCSS_EV[i].rsvp=true;renderCcss();addEntry('Going · '+CCSS_EV[i].t+' <span class="pill" style="background:var(--teal-l);color:#146F60">CCSS</span>');XP+=50;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';celebrate();toast('Added to your calendar · +50 XP for showing up for your community')}
+function renderCcss(){$id('ccssev').innerHTML=CCSS_EV.map((e,i)=>`<div class="ev ccss"><div class="when">${e.d.split(' ')[0]}<b>${e.d.split(' ')[1]}</b></div><div class="t"><b>${e.t}</b><span>${e.s}</span></div>${e.rsvp?'<span class="go yes">Going ✓</span>':`<button class="go" onclick="ccssGo(${i})">I'll go</button>`}</div>`).join('')}
+function ccssGo(i){CCSS_EV[i].rsvp=true;renderCcss();addEntry('Going · '+CCSS_EV[i].t+' <span class="pill" style="background:var(--teal-l);color:#146F60">CCSS</span>');XP+=50;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';celebrate();toast('Added to your calendar · +50 XP for showing up for your community')}
 renderCcss();
 
 const WALL=[{e:'🏆',b:'Zuzu reached Grown stage',s:'Zuzu · 2 days ago'},{e:'🩺',b:'Momo earned the stethoscope',s:'Momo · after a clinic visit'},{e:'🕵️',b:'Tofu opened a food case — congee went fine',s:'Tofu · last week'}];
-function renderWall(){document.getElementById('wall').innerHTML=WALL.map((w,i)=>`<div class="wl"><span class="e">${w.e}</span><div><b>${w.b}</b><small>${w.s}</small></div><button class="cheer" id="ch${i}" onclick="cheer(${i})">💜 Cheer</button></div>`).join('')}
-function cheer(i){const b=document.getElementById('ch'+i);b.classList.add('on');b.textContent='💜 Cheered';toast('Cheer sent')}
+function renderWall(){$id('wall').innerHTML=WALL.map((w,i)=>`<div class="wl"><span class="e">${w.e}</span><div><b>${w.b}</b><small>${w.s}</small></div><button class="cheer" id="ch${i}" onclick="cheer(${i})">💜 Cheer</button></div>`).join('')}
+function cheer(i){const b=$id('ch'+i);b.classList.add('on');b.textContent='💜 Cheered';toast('Cheer sent')}
 renderWall();
 
 /* ---- Learn: micro cards ---- */
@@ -1697,12 +1254,12 @@ const MICRO=[
  {e:'🍚',b:'One bad day is not a trigger',s:'It takes several times before a food means anything. Keep the food on your list.',xp:10,done:false},
  {e:'🩸',b:'What to never wait on',s:'Heavy bleeding, severe pain with a fever, or not keeping fluids down — call, do not log.',xp:10,done:false}
 ];
-function renderMicro(){document.getElementById('micro').innerHTML=MICRO.map((m,i)=>`<div class="mc"><span class="e">${m.e}</span><div class="t"><b>${m.b}</b><small>${m.s}</small></div><button class="go ${m.done?'done':''}" onclick="readMicro(${i})">${m.done?'Read ✓':'Read'}</button></div>`).join('')}
-function readMicro(i){if(MICRO[i].done)return;MICRO[i].done=true;XP+=MICRO[i].xp;document.getElementById('xp').textContent=XP;document.getElementById('xpfill').style.width=Math.min(100,XP/5)+'%';renderMicro();celebrate();toast('+'+MICRO[i].xp+' XP')}
+function renderMicro(){$id('micro').innerHTML=MICRO.map((m,i)=>`<div class="mc"><span class="e">${m.e}</span><div class="t"><b>${m.b}</b><small>${m.s}</small></div><button class="go ${m.done?'done':''}" onclick="readMicro(${i})">${m.done?'Read ✓':'Read'}</button></div>`).join('')}
+function readMicro(i){if(MICRO[i].done)return;MICRO[i].done=true;XP+=MICRO[i].xp;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';renderMicro();celebrate();toast('+'+MICRO[i].xp+' XP')}
 renderMicro();
 
 /* ---- patient profile drives the food gates ---- */
-function setDx(v,b){pick(b,'#pf-dx');PHENO.diagnosis=v;document.getElementById('pf-cd').style.display=(v==='CD'||v==='IBDU')?'':'none';if(v==='UC'){PHENO.location='colonic'}}
+function setDx(v,b){pick(b,'#pf-dx');PHENO.diagnosis=v;$id('pf-cd').style.display=(v==='CD'||v==='IBDU')?'':'none';if(v==='UC'){PHENO.location='colonic'}}
 function setField(k,v,b){pick(b,'#pf-'+({location:'loc',stricturing:'str',surgical_status:'surg',activity:'act'}[k]));PHENO[k]=v}
 function togAllergy(a,b){b.classList.toggle('on');const i=ALLERGIES.indexOf(a);if(i<0)ALLERGIES.push(a);else ALLERGIES.splice(i,1)}
 function setDiet(n,b){pick(b,'#pf-diet');DIET_PLAN.name=n}
@@ -1716,10 +1273,10 @@ function saveProfile(){
  if(ALLERGIES.length)bits.push(`allergies: ${ALLERGIES.join(', ')}`);
  if(DIET_PLAN.name!=='None in particular')bits.push(`following ${DIET_PLAN.name}`);
  const unknowns=['diagnosis','location','stricturing','activity'].filter(k=>PHENO[k]==='unknown').length;
- const el=document.getElementById('pf-echo');el.className='pfecho on';
+ const el=$id('pf-echo');el.className='pfecho on';
  el.innerHTML=`Your food scans will now read you as: ${bits.join(' · ')}.`+
    (unknowns?`<br>${unknowns} thing${unknowns>1?'s':''} left blank. Blank means the app says less, never more — nothing gets guessed.`:'');
- renderFoods();const o=document.getElementById('scanout');if(o)o.innerHTML='';renderPheno();
+ renderFoods();const o=$id('scanout');if(o)o.innerHTML='';renderPheno();
  editAbout(false);toast('Saved · your food scans have been updated');
 }
 
@@ -1727,18 +1284,18 @@ function saveProfile(){
 const PREFS=[];
 function togPref(v,b){b.classList.toggle('on');const i=PREFS.indexOf(v);if(i<0)PREFS.push(v);else PREFS.splice(i,1);}
 function editAbout(on){
- document.getElementById('pf-read').style.display=on?'none':'';
- document.getElementById('pf-edit').style.display=on?'':'none';
- const b=document.getElementById('editbtn');b.textContent=on?'Cancel':'Edit';b.classList.toggle('on',on);
+ $id('pf-read').style.display=on?'none':'';
+ $id('pf-edit').style.display=on?'':'none';
+ const b=$id('editbtn');b.textContent=on?'Cancel':'Edit';b.classList.toggle('on',on);
  b.setAttribute('onclick',on?'editAbout(false)':'editAbout(true)');
  if(!on)renderAbout();
 }
 function renderAbout(){
  const dxLabel={UC:'Ulcerative colitis',CD:"Crohn's",IBDU:'IBD, not classified',unknown:'Not classified yet'}[PHENO.diagnosis];
  const locLabel={ileal:'small bowel (ileal)',colonic:'colon',ileocolonic:'small bowel and colon',unknown:null}[PHENO.location];
- document.getElementById('rd-name').textContent=document.getElementById('pf-name').value||'—';
- document.getElementById('rd-age').textContent=document.getElementById('pf-age').value||'';
- document.getElementById('rd-dx').textContent=dxLabel+((PHENO.diagnosis!=='UC'&&locLabel)?' · '+locLabel:'');
+ $id('rd-name').textContent=$id('pf-name').value||'—';
+ $id('rd-age').textContent=$id('pf-age').value||'';
+ $id('rd-dx').textContent=dxLabel+((PHENO.diagnosis!=='UC'&&locLabel)?' · '+locLabel:'');
  const r=[];
  r.push(`<span>${PHENO.activity==='active'?'Flaring now':PHENO.activity==='remission'?'Settled':'Activity not stated'}</span>`);
  if(PHENO.stricturing==='yes')r.push('<span class="alert">Narrowing confirmed</span>');
@@ -1748,18 +1305,18 @@ function renderAbout(){
  else r.push('<span class="blank">No allergies listed</span>');
  if(DIET_PLAN.name!=='None in particular')r.push(`<span>${DIET_PLAN.name}</span>`);
  PREFS.forEach(p=>r.push(`<span>${p}</span>`));
- document.getElementById('rd-rows').innerHTML=r.join('');
- const n=document.getElementById('pf-note').value.trim();
- document.getElementById('rd-note').innerHTML=n?`<b>Also worth knowing</b>${n}`:`<b>Also worth knowing</b><span style="color:var(--muted)">Nothing added yet.</span>`;
+ $id('rd-rows').innerHTML=r.join('');
+ const n=$id('pf-note').value.trim();
+ $id('rd-note').innerHTML=n?`<b>Also worth knowing</b>${n}`:`<b>Also worth knowing</b><span style="color:var(--muted)">Nothing added yet.</span>`;
 }
 renderAbout();
 
 /* ---- modes ---- */
 let MODE='pt';
-function setMode(m){MODE=m;document.body.classList.toggle('hcp',m==='hcp');document.querySelectorAll('.modesw button').forEach((b,i)=>b.setAttribute('aria-selected',(i===0)===(m==='pt')?'true':'false'));document.getElementById('roles-pt').style.display=m==='pt'?'':'none';document.getElementById('roles-hcp').style.display=m==='hcp'?'':'none';const first=document.querySelector(m==='pt'?'#roles-pt button':'#roles-hcp button');first.click()}
+function setMode(m){MODE=m;document.body.classList.toggle('hcp',m==='hcp');document.querySelectorAll('.modesw button').forEach((b,i)=>b.setAttribute('aria-selected',(i===0)===(m==='pt')?'true':'false'));$id('roles-pt').style.display=m==='pt'?'':'none';$id('roles-hcp').style.display=m==='hcp'?'':'none';const first=$q(m==='pt'?'#roles-pt button':'#roles-hcp button');first.click()}
 
 /* ---- provenance filter ---- */
-function prov(k,b){document.querySelectorAll('.provsw button').forEach(x=>x.classList.remove('on'));b.classList.add('on');const n=document.getElementById('provnote');const msg={all:'',patient:'Showing only what Marcus entered himself — 88% of this record. Scores and the "unsaid" panel are unchanged.',caregiver:'No caregiver reports on this record. For a child, this filter is where parent and child diverge.',school:'No school reports. For a child at school, this is the reporter that sees the day.',instrument:'Instrument scores only — MARS-5 and the quarterly MUST. Nothing else on this page comes from a questionnaire.',ai:'AI-inferred fields only — 5%. Each carries a confidence value and is never merged with reported data. Below 0.7 it is omitted.'}[k];n.textContent=msg;n.style.display=msg?'':'none'}
+function prov(k,b){document.querySelectorAll('.provsw button').forEach(x=>x.classList.remove('on'));b.classList.add('on');const n=$id('provnote');const msg={all:'',patient:'Showing only what Marcus entered himself — 88% of this record. Scores and the "unsaid" panel are unchanged.',caregiver:'No caregiver reports on this record. For a child, this filter is where parent and child diverge.',school:'No school reports. For a child at school, this is the reporter that sees the day.',instrument:'Instrument scores only — MARS-5 and the quarterly MUST. Nothing else on this page comes from a questionnaire.',ai:'AI-inferred fields only — 5%. Each carries a confidence value and is never merged with reported data. Below 0.7 it is omitted.'}[k];n.textContent=msg;n.style.display=msg?'':'none'}
 
 /* ---- dietitian write-back: mutates the same arrays the scan reads ---- */
 const WB_LOG=[];
@@ -1768,22 +1325,23 @@ function wbSet(food,act,b){b.closest('.wb').querySelectorAll('button').forEach(x
  if(act==='safe')DIET_SAFE.push(food);if(act==='avoid')DIET_AVOID.push({food,reason:'set by Ms Priya Lim, dietitian, 10 Sep',conditional:false});
  const tag=b.closest('tr').querySelector('.tag');const st=assess(food);tag.className='tag '+({SAFE_CONFIRMED:'ok',TOLERATED_BEFORE:'ok',NOT_ASSESSED:'grey',CAUTION:'warn',AVOID:'blood'}[st.status]);tag.textContent=STATUS_LABEL[st.status];
  b.closest('tr').querySelectorAll('td')[2].textContent=st.source||'—';
- WB_LOG.unshift(`${food} → ${STATUS_LABEL[st.status]} · Ms Priya Lim · 10 Sep`);document.getElementById('wblog').innerHTML=WB_LOG.slice(0,4).join('<br>');
+ WB_LOG.unshift(`${food} → ${STATUS_LABEL[st.status]} · Ms Priya Lim · 10 Sep`);$id('wblog').innerHTML=WB_LOG.slice(0,4).join('<br>');
  if(typeof renderFoods==='function')renderFoods();toast('Saved · appears in his next scan, attributed to you')}
-function wbNote(){const f=document.getElementById('wbfood').value.trim(),t=document.getElementById('wbtext').value.trim();if(!f||!t)return;DIET_NOTES[f]={note:t,by:'Ms Priya Lim, dietitian',on:'10 Sep'};WB_LOG.unshift(`Note on ${f} · Ms Priya Lim · 10 Sep`);document.getElementById('wblog').innerHTML=WB_LOG.slice(0,4).join('<br>');document.getElementById('wbfood').value='';document.getElementById('wbtext').value='';toast('Note saved · he sees it the next time he scans '+f)}
+function wbNote(){const f=$id('wbfood').value.trim(),t=$id('wbtext').value.trim();if(!f||!t)return;DIET_NOTES[f]={note:t,by:'Ms Priya Lim, dietitian',on:'10 Sep'};WB_LOG.unshift(`Note on ${f} · Ms Priya Lim · 10 Sep`);$id('wblog').innerHTML=WB_LOG.slice(0,4).join('<br>');$id('wbfood').value='';$id('wbtext').value='';toast('Note saved · he sees it the next time he scans '+f)}
 
 /* ---- ask my team, with context attached ---- */
-function askTeam(){const box=document.getElementById('askbox');const tab=document.querySelector('#ptabs button.on')?.textContent.trim()||'Record';const last=document.querySelector('#entries .entry')?.textContent.replace(/\s+/g,' ').trim();const ctx={Record:'your last entry',Meds:'your medicines',Calendar:'your appointments',Learn:'what you were reading',Card:'your card',Community:'community'}[tab]||tab;document.getElementById('askctx').innerHTML=`Attached: <b>${ctx}</b>${last&&tab==='Record'?' — '+last.slice(0,60):''}`;box.className='askbox on';document.getElementById('asktxt').focus()}
-function askSend(who){const t=document.getElementById('asktxt').value.trim();if(!t){toast('Type a question first');return}addEntry('Asked '+who.split(',')[0]+' · "'+t.slice(0,50)+'" <span class="pill">'+(who.includes('nurse')?'nurse':who.includes('Pharm')?'pharmacist':'dietitian')+'</span>');document.getElementById('asktxt').value='';document.getElementById('askbox').className='askbox';toast('Sent to '+who+' with context · reply within '+(who.includes('Pharm')?'2':'1')+' working day'+(who.includes('Pharm')?'s':''))}
+function askTeam(){const box=$id('askbox');const tab=$q('#ptabs button.on')?.textContent.trim()||'Record';const last=$q('#entries .entry')?.textContent.replace(/\s+/g,' ').trim();const ctx={Record:'your last entry',Meds:'your medicines',Calendar:'your appointments',Learn:'what you were reading',Card:'your card',Community:'community'}[tab]||tab;$id('askctx').innerHTML=`Attached: <b>${ctx}</b>${last&&tab==='Record'?' — '+last.slice(0,60):''}`;box.className='askbox on';$id('asktxt').focus()}
+function askSend(who){const t=$id('asktxt').value.trim();if(!t){toast('Type a question first');return}addEntry('Asked '+who.split(',')[0]+' · "'+t.slice(0,50)+'" <span class="pill">'+(who.includes('nurse')?'nurse':who.includes('Pharm')?'pharmacist':'dietitian')+'</span>');$id('asktxt').value='';$id('askbox').className='askbox';toast('Sent to '+who+' with context · reply within '+(who.includes('Pharm')?'2':'1')+' working day'+(who.includes('Pharm')?'s':''))}
 
 /* ---- living well goals ---- */
 const GOALS=[{t:"My sister's wedding in October",s:'Travel, a long day, family food',met:false},{t:'A full week at work',s:'No days lost',met:false},{t:'Eat laksa with my mum again',s:'Once things settle',met:false},{t:'Sleep through the night',s:'Three in a row',met:true}];
-function renderGoals(){document.getElementById('goals').innerHTML=GOALS.map((g,i)=>`<div class="goal ${g.met?'met':''}"><button class="ck" onclick="GOALS[${i}].met=!GOALS[${i}].met;renderGoals();if(GOALS[${i}].met){celebrate();toast('Noticed. Well done.')}">${g.met?'✓':''}</button><div><b>${g.t}</b><small>${g.s}</small></div></div>`).join('')}
-function addGoal(){const v=document.getElementById('goalinp').value.trim();if(!v)return;GOALS.unshift({t:v,s:'',met:false});document.getElementById('goalinp').value='';renderGoals()}
+function renderGoals(){$id('goals').innerHTML=GOALS.map((g,i)=>`<div class="goal ${g.met?'met':''}"><button class="ck" onclick="GOALS[${i}].met=!GOALS[${i}].met;renderGoals();if(GOALS[${i}].met){celebrate();toast('Noticed. Well done.')}">${g.met?'✓':''}</button><div><b>${g.t}</b><small>${g.s}</small></div></div>`).join('')}
+function addGoal(){const v=$id('goalinp').value.trim();if(!v)return;GOALS.unshift({t:v,s:'',met:false});$id('goalinp').value='';renderGoals()}
 renderGoals();
 
 /* ---- in-room handover ---- */
-function inRoom(on){document.getElementById('inroom').className='inroom'+(on?' on':'')}
+function inRoom(on){$id('inroom').className='inroom'+(on?' on':'')}
+function goTab(v){const b=document.querySelector(`#roles-hcp button[data-v="${v}"]`);if(b){b.click();window.scrollTo({top:0})}}
 </script>
 </body>
 </html>
