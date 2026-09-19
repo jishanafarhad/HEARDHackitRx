@@ -575,14 +575,14 @@
     --ink:#17305A;--ink-2:#3B5170;--muted:#6F82A0;--line:#D6E2F2;
     --grad:linear-gradient(120deg,#2F7BEA 0%,#5AA0FF 100%);--grad-bg:linear-gradient(180deg,#F3F6FB 0%,#E9EFF7 100%)}
   body.hcp{background:var(--grad-bg);min-height:100vh}
-  body.hcp .rail{background:linear-gradient(180deg,#1F3F78,#17305A);border:0;border-bottom:3px solid var(--blue);border-radius:0;box-shadow:0 2px 10px rgba(15,33,64,.25);margin:0;padding:12px 28px}
+  body.hcp .rail{background:linear-gradient(180deg,#1F3F78,#17305A);border:3px solid var(--blue-l);border-radius:0 0 26px 26px;box-shadow:0 8px 0 #0F2140,0 14px 30px rgba(15,33,64,.35);margin:10px 12px 0;padding:14px 22px}
   body.hcp .mark{color:#fff;font-family:"Nunito",system-ui,sans-serif;font-weight:900;letter-spacing:.04em}
   body.hcp .mark small{color:#9FC3FF;font-weight:700}
-  body.hcp .roles{background:rgba(255,255,255,.08);border:1px solid rgba(159,195,255,.35);padding:4px;border-radius:999px}
+  body.hcp .roles{background:#0F2140;border:2px solid var(--blue-l);padding:4px;border-radius:999px}
   body.hcp .roles button{color:#C9DBF5;font-family:"Nunito",system-ui,sans-serif;font-weight:800;font-size:13px}
-  body.hcp .roles button[aria-selected="true"]{background:var(--blue);color:#fff}
-  body.hcp .reset{background:rgba(255,255,255,.08);color:#9FC3FF;border:1px solid rgba(159,195,255,.35)}
-  body.hcp .hcpbar{background:#fff;color:var(--ink-2);padding:9px 28px;font-weight:600;border-bottom:1px solid var(--line)}
+  body.hcp .roles button[aria-selected="true"]{background:var(--blue);color:#fff;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
+  body.hcp .reset{background:#0F2140;color:#9FC3FF;border:2px solid var(--blue-l)}
+
   body.hcp .hcpbar b{color:var(--navy)}
   body.hcp .view{padding:24px 28px 48px}
   body.hcp .ident,body.hcp .canvas>section{background:#fff;border:1px solid var(--line);border-top:3px solid var(--blue);border-radius:14px;box-shadow:0 1px 3px rgba(15,33,64,.06),0 6px 18px rgba(15,33,64,.06)}
@@ -745,7 +745,6 @@
   </nav>
   <button class="reset" onclick="location.reload()" title="Reset the demo">↺ Reset</button>
 </header>
-<div class="hcpbar"><b>Permissions</b> · Gastroenterologist writes all three tabs · Pharmacist writes Medication · Dietitian writes Food &amp; nutrition · everyone reads all · every score shows its denominator · every lab shows its age · red means blood or a red flag, never decoration</div>
 
 <!-- SVG defs shared -->
 <svg width="0" height="0" style="position:absolute">
@@ -785,12 +784,13 @@
       <div class="approval">✓ Card approved by patient 4 Sep, 9:12 pm</div>
     </aside>
     <div class="canvas">
-      <div class="contra" id="contra-doc"><b>⚠ Active disease + NSAID + anti-diarrhoeal.</b> Ibuprofen from 19 Aug (recognised flare trigger, ECCO/AGA). Loperamide self-started 27 Aug (colonic dilation risk in severe colitis; masks frequency). <button onclick="this.parentElement.style.display='none';toast('Reviewed · logged in your name')">Reviewed</button></div>
-      <div class="voice">“Waking at night to go — I'm scared it's getting worse.”<span>Marcus, his top concern, his words · 4 Sep</span></div>
       <div class="opener"><div class="lbl">Ninety seconds</div>
         <p>He stopped his mesalazine on 17 August while well. Symptoms turned on the 22nd. He has been taking ibuprofen since the 19th and loperamide since the 27th. There is no calprotectin from this episode.</p>
         <div class="sub">Everything below is the evidence for that sentence.</div>
       </div>
+      <div class="voice">“Waking at night to go — I'm scared it's getting worse.”<span>Marcus, his top concern, his words · 4 Sep</span></div>
+      <div class="contra" id="contra-doc"><b>⚠ Active disease + NSAID + anti-diarrhoeal.</b> Ibuprofen from 19 Aug (recognised flare trigger, ECCO/AGA). Loperamide self-started 27 Aug (colonic dilation risk in severe colitis; masks frequency). <button onclick="this.parentElement.style.display='none';toast('Reviewed · logged in your name')">Reviewed</button></div>
+
 
       <section>
         <h2>Who said what <span>every record carries its source — filter the whole page</span><button class="printbtn" onclick="window.print()">🖨 Print / share</button></h2>
