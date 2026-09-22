@@ -522,7 +522,7 @@
   .mc .go{font-size:11px;font-weight:800;padding:6px 10px;border-radius:999px;background:var(--lav);color:var(--purple-d);white-space:nowrap}
   .mc .go.done{background:var(--green-l);color:var(--green-d)}
 
-  .statgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
   .sbox{border-radius:14px;padding:12px;background:var(--lav)}
   .sbox b{display:block;font-size:12px;font-weight:800;color:var(--ink-2)}
   .sbox .n{display:block;font-size:26px;font-weight:800;line-height:1.1;margin:2px 0}
@@ -704,7 +704,7 @@
   .reg b{font-weight:600} .reg .v{color:var(--ink-2)} .reg em{font-style:normal;color:var(--muted)}
   .heat{display:grid;grid-template-columns:repeat(14,1fr);gap:4px}
   .heat div{aspect-ratio:1;border-radius:4px;font-size:9px;display:flex;align-items:flex-end;justify-content:flex-end;padding:2px;color:rgba(0,0,0,.45);font-weight:600}
-  .heat .t{background:#9AD9B5} .heat .m{background:#F2A6A6} .heat .u{background:var(--lav);border:1px solid var(--line)}
+  .heat .t{background:#9AD9B5} .heat .m{background:#F2A6A6} .heat .u{background:var(--lav);border:1px solid var(--line)} .heat .inj{outline:2px solid var(--navy);font-size:10px} .heat .inj.missed{outline-color:var(--red);background:var(--red-l)}
   .pnote{width:100%;min-height:96px;font:inherit;font-size:13px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;resize:vertical;line-height:1.5}
   .three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
   .col{border-radius:10px;padding:12px;border:1px solid var(--line)}
@@ -772,45 +772,46 @@
 <main class="view active" id="v-doctor">
   <div class="clin">
     <aside class="ident">
-      <div class="status red"><b>Active</b><span>SCCAI 8 · from 26 of 28 days</span></div>
-      <h1>Marcus Tan</h1><div class="meta">34 · Ulcerative colitis, left-sided · Dx 2021</div>
-      <dl><dt>Therapy</dt><dd>Mesalazine 2.4 g, since Mar 2024</dd><dt>Last seen</dt><dd>4 Aug · 31 days</dd><dt>Next</dt><dd>8 Sep, 2:40 pm</dd><dt>Follow-up</dt><dd>Patient-initiated</dd><dt>Logged</dt><dd>26 of 28 days</dd></dl>
+      <div class="status red"><b>Active</b><span>wPCDAI 47.5 · from 27 of 28 days · threshold 40</span></div>
+      <h1>Evan Koh</h1><div class="meta">13 · Crohn's, ileal (L1), inflammatory · Dx Nov 2025 · KKH</div>
+      <dl><dt>Therapy</dt><dd>Adalimumab 40 mg SC q2w, since Feb 2026</dd><dt>Weight</dt><dd>41.5 kg · 25th → 10th centile in 6 mo</dd><dt>Last seen</dt><dd>11 Aug · 4-weekly</dd><dt>Next</dt><dd>9 Sep, 3:10 pm</dd><dt>Reporters</dt><dd>Evan · mum · school</dd><dt>Logged</dt><dd>27 of 28 days</dd></dl>
       <div class="flags">
-        <div class="flag"><b>Patient reported a flare</b>4 Sep, 9:02 pm · frequency 7, blood mixed, 2 nocturnal, pain 7<div class="route">Sister Devi replied 9:41 pm · visit brought forward</div></div>
-        <div class="flag"><b>Nocturnal stools</b>9 of last 14 nights<div class="route">IBD nurse notified 1 Sep · acknowledged</div></div>
-        <div class="flag"><b>Blood, mixed</b>11 of 14 days, 1 day "mostly"<div class="route">Routed to you · 2 Sep</div></div>
-        <div class="flag warn"><b>NSAID exposure</b>Ibuprofen from 19 Aug<div class="route">Flagged by pharmacy</div></div>
+        <div class="flag"><b>Pain ≥ 7 on 12 of 14 days</b>RLQ, after eating on 11 of 14 · woke him 3 nights<div class="route">Nurse Aisha notified 1 Sep · acknowledged</div></div>
+        <div class="flag"><b>Adalimumab dose missed 8 Sep</b>School camp · 1 of 2 in window · no trough level ever checked<div class="route">Routed to you</div></div>
+        <div class="flag warn"><b>NSAID exposure</b>Ibuprofen from 19 Aug, given by mum for pain<div class="route">Flagged by pharmacy</div></div>
+        <div class="flag warn"><b>Bristol firming since 25 Aug is probably iron</b>Ferrous fumarate started that day<div class="route">Confounder, not improvement</div></div>
+        <div class="flag warn"><b>Weight 41.5 kg · −2.8 % in 4 weeks</b>Crossing down a centile line<div class="route">Dietitian aware</div></div>
       </div>
-      <div class="approval">✓ Card approved by patient 4 Sep, 9:12 pm</div>
+      <div class="approval">✓ Card approved by Evan and mum · 8 Sep, 8:40 pm</div>
     </aside>
     <div class="canvas">
       <div class="opener"><div class="lbl">Ninety seconds</div>
-        <p>He stopped his mesalazine on 17 August while well. Symptoms turned on the 22nd. He has been taking ibuprofen since the 19th and loperamide since the 27th. There is no calprotectin from this episode.</p>
+        <p>Pain most days since 22 August, right lower quadrant, after meals, on adalimumab every two weeks since February. Mum started ibuprofen on the 19th. Oral iron from the 25th — stools have firmed since, which is the iron, not remission. The 8 September injection was missed for school camp. No calprotectin since May and no adalimumab trough level on record.</p>
         <div class="sub">Everything below is the evidence for that sentence.</div>
       </div>
-      <div class="voice">“Waking at night to go — I'm scared it's getting worse.”<span>Marcus, his top concern, his words · 4 Sep</span></div>
-      <div class="contra" id="contra-doc"><b>⚠ Active disease + NSAID + anti-diarrhoeal.</b> Ibuprofen from 19 Aug (recognised flare trigger, ECCO/AGA). Loperamide self-started 27 Aug (colonic dilation risk in severe colitis; masks frequency). <button onclick="this.parentElement.style.display='none';toast('Reviewed · logged in your name')">Reviewed</button></div>
+      <div class="voice">“My tummy hurts after every lunch and I don't want to eat at school anymore.”<span>Evan, via the companion · 6 Sep · mum's version the same day: “he's just picky at the moment”</span></div>
+      <div class="contra" id="contra-doc"><b>⚠ Active disease + NSAID.</b> Ibuprofen from 19 Aug, parent-administered for pain (recognised flare trigger, ECCO-ESPGHAN). Oral iron from 25 Aug — Bristol drift 6→3 since is a known iron effect and should not be read as response. <button onclick="this.parentElement.style.display='none';toast('Reviewed · logged in your name')">Reviewed</button></div>
 
 
       <section>
         <h2>Who said what <span>every record carries its source — filter the whole page</span><button class="printbtn" onclick="window.print()">🖨 Print / share</button></h2>
         <div class="provsw"><button class="on" onclick="prov('all',this)">All</button><button onclick="prov('patient',this)">Patient</button><button onclick="prov('caregiver',this)">Caregiver</button><button onclick="prov('school',this)">School</button><button onclick="prov('instrument',this)">Instrument</button><button onclick="prov('ai',this)">AI-inferred</button></div>
-        <div class="provbar"><i style="width:88%;background:var(--purple)"></i><i style="width:0%;background:var(--teal)"></i><i style="width:0%;background:var(--yellow)"></i><i style="width:7%;background:var(--green)"></i><i style="width:5%;background:#C9C3DB"></i></div>
-        <div class="provleg"><span><i style="background:var(--purple)"></i>Patient 88%</span><span><i style="background:var(--teal)"></i>Caregiver 0%</span><span><i style="background:var(--yellow)"></i>School 0%</span><span><i style="background:var(--green)"></i>Instrument 7%</span><span><i style="background:#C9C3DB"></i>AI-inferred 5% — always shown distinct</span></div>
+        <div class="provbar"><i style="width:52%;background:var(--purple)"></i><i style="width:31%;background:var(--teal)"></i><i style="width:9%;background:var(--yellow)"></i><i style="width:5%;background:var(--green)"></i><i style="width:3%;background:#C9C3DB"></i></div>
+        <div class="provleg"><span><i style="background:var(--purple)"></i>Evan via avatar 52%</span><span><i style="background:var(--teal)"></i>Mum 31%</span><span><i style="background:var(--yellow)"></i>School 9%</span><span><i style="background:var(--green)"></i>Instrument 5%</span><span><i style="background:#C9C3DB"></i>AI-inferred 3% — always shown distinct</span></div>
         <div id="provnote" class="note"></div>
-        <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600;color:var(--purple)">Paediatric example — three reporters, one week</summary>
-          <div class="paed"><span class="hh"></span><span class="hh">Child, via avatar</span><span class="hh">Parent</span><span class="hh">School</span>
-            <span>Mon</span><span>Pain 2 · type 4</span><span>Pain 2</span><span>—</span>
-            <span>Wed</span><span class="dis">Pain 5 · type 6</span><span class="dis">Pain 2</span><span class="dis">Left class twice, 3 toilet trips</span>
-            <span>Fri</span><span class="dis">Pain 6 · type 6</span><span class="dis">Pain 3 · "seemed fine at dinner"</span><span>Ate half of lunch</span></div>
-          <div class="note">Stored side by side, never merged. Only about one in four parent-child pairs agree on six of seven symptoms; the school is the reporter that sees the day.</div>
+        <details style="margin-top:12px" open><summary style="cursor:pointer;font-weight:600;color:var(--purple)">Three reporters, last week — where they disagree</summary>
+          <div class="paed"><span class="hh"></span><span class="hh">Evan, via avatar</span><span class="hh">Mum</span><span class="hh">School (Ms Rahman)</span>
+            <span>Tue</span><span class="dis">Pain 7 · after recess</span><span class="dis">Pain 3 · "fine at dinner"</span><span class="dis">Left class twice · didn't eat lunch</span>
+            <span>Thu</span><span class="dis">Pain 8 · type 3</span><span class="dis">Pain 4</span><span>Sat out PE</span>
+            <span>Sat</span><span>Pain 5</span><span>Pain 5 · camp packing</span><span>—</span></div>
+          <div class="note">Stored side by side, never merged. Mum's pain scores run 3–4 points below Evan's on school days; the school is the reporter that sees lunch.</div>
         </details>
       </section>
 
       <section>
-        <h2>Derived activity <span>computed from daily logs — never asked as a questionnaire</span></h2>
-        <div class="score"><div class="big">SCCAI 8</div><span class="band mod">moderate</span><span class="denom">from 26 of 28 days · was 2 at last visit</span></div>
-        <div class="delta">Quiet for the first two weeks, then a clear turn from about 22 August: frequency doubled, stools loosened to 6–7, blood appeared, night-time stools began. Pain rose in step and is mostly after meals.</div>
+        <h2>Derived activity <span>wPCDAI — computed from daily logs, never asked as a questionnaire</span></h2>
+        <div class="score"><div class="big">wPCDAI 47.5</div><span class="band mod">moderate–severe</span><span class="denom">from 27 of 28 days · was 15 at last visit · &gt;40 = moderate–severe</span></div>
+        <div class="delta">Pain is the driver: median 7, mostly after meals, right lower quadrant. Stool frequency modest at 3–5; streaks of blood on 4 days; nocturnal on 8 nights. Weight down 2.8 % in four weeks. Stools have firmed since 25 August — that is the iron, not improvement. The picture is consistent with active ileal disease on anti-TNF, with a missed dose and no trough level to interpret it against.</div>
       </section>
       <section>
         <h2>Twenty-eight days <span>8 Aug – 4 Sep</span></h2>
@@ -820,45 +821,31 @@
       <section>
         <h2>Inflammatory concordance <span>STRIDE-II: symptoms and markers are different targets</span></h2>
         <div class="conc"><span>Concordant active</span><span>Concordant quiet</span><span>Symptoms without markers</span><span class="on">Untested</span></div>
-        <div class="div"><div class="box"><h3>Symptom burden</h3><div class="stat">High, rising since 22 Aug</div></div><div class="box"><h3>Objective signal</h3><div class="stat">Untested this episode</div></div></div>
-        <div class="pattern"><b>Symptoms raised, no current marker.</b><p>Last calprotectin is 124 days old and predates this episode. That is not the same as a normal calprotectin. Symptoms are also confounded: ibuprofen from 19 Aug, loperamide self-started 27 Aug — see Medication.</p>
-</div>
+        <div class="div"><div class="box"><h3>Symptom burden</h3><div class="stat">High, pain-led, since 22 Aug</div></div><div class="box"><h3>Objective signal</h3><div class="stat">CRP raised 17 Aug (ageing) · calprotectin untested this episode</div></div></div>
+        <div class="pattern"><b>Symptoms raised, marker ageing, no calprotectin.</b><p>CRP 18 on 17 Aug is 22 days old — before the ibuprofen, the iron and the missed injection. Last calprotectin is from May and predates this episode. Haemoglobin 10.9 and ferritin 8 explain why iron was started. On anti-TNF with pain persisting, the missing number is the adalimumab trough.</p></div>
         <div class="lab"><div class="hh">Test</div><div class="hh">Result</div><div class="hh">Collected</div><div class="hh">Age</div>
-          <div>CRP</div><div>11 mg/L</div><div>17 Aug</div><div class="ageing">18 d · ageing</div>
-          <div>Calprotectin</div><div>480 µg/g</div><div>3 May</div><div class="stale">124 d · stale</div>
-          <div>Haemoglobin</div><div>12.8 g/dL</div><div>17 Aug</div><div class="ageing">18 d · ageing</div></div>
+          <div>CRP</div><div>18 mg/L <span style="color:var(--muted)">(ref &lt;5)</span></div><div>17 Aug</div><div class="ageing">22 d · ageing</div>
+          <div>Faecal calprotectin</div><div>610 µg/g</div><div>14 May</div><div class="stale">117 d · stale</div>
+          <div>Haemoglobin</div><div>10.9 g/dL <span style="color:var(--muted)">(low)</span></div><div>17 Aug</div><div class="ageing">22 d · ageing</div>
+          <div>Ferritin</div><div>8 µg/L <span style="color:var(--muted)">(low)</span></div><div>17 Aug</div><div class="ageing">22 d · ageing</div>
+          <div>Adalimumab trough / ADA</div><div>—</div><div>never</div><div class="stale">not on record</div></div>
       </section>
       
       <section><h2>Logged often, never raised in clinic</h2>
-        <div class="unsaid"><div><b>Tiredness</b><span>16 of 28 days · never raised at a visit</span></div><div><b>Toilet access at work</b><span>8 mentions · open-plan office, one cubicle</span></div></div></section>
-      
-
-      
-
-      <section class="hub"><h2>Actions <span>pathway prompts are config, phrased as things to consider — never orders</span></h2>
-        <div class="path">
-          <div class="on"><b>Rising frequency, no calprotectin this episode</b>Order the kit before any escalation decision. If it returns normal: consider C. difficile toxin PCR and IBS-overlap screen.</div>
-          <div><b>Frequency &gt; 6 + blood + fever</b>Not met — no fever logged. If met: consider ASUC assessment (Truelove–Witts); Oxford day-3 criteria apply once admitted.</div>
-          <div><b>Steroid-dependence threshold</b>Not met — 1 course. If met: maintenance therapy review indicated.</div>
-        </div>
-        <div class="hubrow">
-          <button onclick="refer(this,'nurse — bring forward to this week')">📅 Bring visit forward</button>
-          <button onclick="refer(this,'home calprotectin kit + bloods — patient notified')">🧪 Order lab kit</button>
-          <button class="urgent" onclick="refer(this,'urgent care — patient and nurse notified')">🚨 Route to urgent care</button>
-        </div>
+        <div class="unsaid"><div><b>Skipping school lunch</b><span>School logged 9 of last 14 school days · Evan: "don't want to eat at school" · mum: "picky"</span></div><div><b>Injection dread</b><span>"Hate the pen" on 5 days before each injection · never raised in clinic</span></div><div><b>Tiredness</b><span>Energy low on 14 of 28 days · sat out PE 4 times per school</span></div><div><b>Grandma's cod liver oil</b><span>Most mornings · mum's entry · not on the medication list</span></div></div>
       </section>
-      <section><h2>Note to Marcus <span>pick a topic — a plain-language draft appears below, you edit, it goes to his card</span></h2>
+      <section><h2>Note to Evan and mum <span>pick a topic — draft goes to mum's view; a one-line version goes to Evan's companion</span></h2>
         <div class="refer notes">
-          <button onclick="draftNote('cost',this)">💷 Cost of medicines</button>
-          <button onclick="draftNote('why',this)">💊 Why the tablet matters when you feel fine</button>
-          <button onclick="draftNote('kit',this)">🧪 Home test on its way</button>
-          <button onclick="draftNote('diet',this)">🍚 Eating during the flare</button>
-          <button onclick="draftNote('mood',this)">🫂 Support beyond the clinic</button>
+          <button onclick="draftNote('pen',this)">💉 About the injection</button>
           <button onclick="draftNote('nsaid',this)">🚫 About the ibuprofen</button>
+          <button onclick="draftNote('iron',this)">🩸 Why the iron hurts, and what to do</button>
+          <button onclick="draftNote('lunch',this)">🍚 Lunch at school</button>
+          <button onclick="draftNote('kit',this)">🧪 Tests on the way</button>
+          <button onclick="draftNote('school',this)">🏫 Letter for school</button>
         </div>
         <textarea class="pnote" id="pnote-pt" placeholder="Pick a topic above, or write your own."></textarea>
-        <div class="chips" style="margin-top:8px"><button class="btn small" onclick="sendNote()">Send to his card</button><button class="btn small ghost" onclick="document.getElementById('pnote-pt').value=''">Clear</button><span class="note" id="notelog" style="margin:0"></span></div>
-        <div class="note">Second person, no jargon, one ask at most. Anything about money routes a copy to the medical social worker automatically.</div>
+        <div class="chips" style="margin-top:8px"><button class="btn small" onclick="sendNote()">Send to mum + Evan</button><button class="btn small ghost" onclick="document.getElementById('pnote-pt').value=''">Clear</button><span class="note" id="notelog" style="margin:0"></span></div>
+        <div class="note">To mum in the second person, one ask at most. Evan gets one sentence through the companion, never an instruction. Anything about cost or school routes a copy to the medical social worker.</div>
       </section>
     </div>
   </div>
@@ -868,57 +855,63 @@
 <main class="view" id="v-pharm">
   <div class="clin">
     <aside class="ident">
-      <h1>Marcus Tan</h1><div class="meta">34 · UC · Mesalazine 2.4 g</div>
-      <dl><dt>MARS-5</dt><dd>17 / 25 <span style="color:var(--red-d)">↓ from 24</span></dd><dt>Missed</dt><dd>9 of 28</dd><dt>Pattern</dt><dd>Stopped when well</dd><dt>Steroids 12 mo</dt><dd>1 course · 42 d</dd></dl>
+      <h1>Evan Koh</h1><div class="meta">13 · 41.5 kg · Crohn's, ileal · Adalimumab 40 mg q2w</div>
+      <dl><dt>Adalimumab</dt><dd>1 of 2 doses in window <span style="color:var(--red-d)">missed 8 Sep</span></dd><dt>Oral iron</dt><dd>16 of 28 taken</dd><dt>Pattern</dt><dd>Stops when it hurts</dd><dt>MARS-5</dt><dd>19 / 25 <span style="color:var(--muted)">(mum)</span></dd><dt>Steroids 12 mo</dt><dd>1 course · 56 d</dd></dl>
       <div class="flags">
-        <div class="flag"><b>NSAID</b>Ibuprofen 400 mg from 19 Aug, OTC<div class="route">Recognised flare trigger</div></div>
-        <div class="flag warn"><b>Loperamide</b>Self-started 27 Aug<div class="route">Doctor's frequency may be masked</div></div>
-        <div class="flag warn"><b>Adherence fell before symptoms</b>Gaps from 17 Aug · turn 22 Aug<div class="route">Counselling call suggested</div></div>
+        <div class="flag"><b>NSAID</b>Ibuprofen 200–400 mg from 19 Aug, given by mum for pain<div class="route">Recognised flare trigger · note drafted for mum</div></div>
+        <div class="flag"><b>Adalimumab missed 8 Sep</b>School camp · injection dread logged before every dose<div class="route">Trough/ADA never checked</div></div>
+        <div class="flag warn"><b>Oral iron</b>Ferrous fumarate from 25 Aug · taken 16 of 28<div class="route">Firmer, darker stools — confounds the Bristol trend</div></div>
+        <div class="flag warn"><b>Cod liver oil, grandma's</b>Most mornings · not on the list<div class="route">Mum's entry</div></div>
       </div>
-      <div class="approval">✓ Card approved 4 Sep</div>
+      <div class="approval">✓ Card approved by Evan and mum · 8 Sep</div>
     </aside>
     <div class="canvas">
-      <div class="contra" id="contra-pharm"><b>⚠ Active disease + NSAID + anti-diarrhoeal.</b> Ibuprofen from 19 Aug (recognised flare trigger, ECCO/AGA). Loperamide self-started 27 Aug (colonic dilation risk in severe colitis; masks frequency). <button onclick="this.parentElement.style.display='none';toast('Reviewed · logged in your name')">Reviewed</button></div>
+      <div class="contra" id="contra-pharm"><b>⚠ Active disease + NSAID in a 13-year-old.</b> Ibuprofen from 19 Aug, parent-administered. Paracetamol dose for 41.5 kg is on the list. Oral iron from 25 Aug is confounding the stool chart the doctor is reading. <button onclick="this.parentElement.style.display='none';toast('Reviewed · logged in your name')">Reviewed</button></div>
       <section><h2>Registry</h2>
         <div class="reg">
-          <div><span class="k">Maintenance therapy</span><b>Mesalazine 2.4 g/day</b><span class="v">Adherence 68 % <em>(19 of 28)</em></span></div>
-          <div><span class="k">Targeted biologics</span><b>None</b><span class="v">—</span></div>
-          <div><span class="k">Risk factor flags</span><b>⚠️ NSAID exposure · ibuprofen from 19 Aug</b><span class="v">flagged by pharmacy</span></div>
-          <div><span class="k"></span><b>⚠️ Self-directed loperamide · from 27 Aug</b><span class="v">confounds stool data</span></div>
+          <div><span class="k">Biologic</span><b>Adalimumab 40 mg SC every 2 weeks · since Feb 2026</b><span class="v">1 of 2 in window <em>(8 Sep missed)</em></span></div>
+          <div><span class="k">Nutrition</span><b>Partial enteral nutrition — Modulen 2 cartons/day</b><span class="v">school carton skipped most days</span></div>
+          <div><span class="k">Daily</span><b>Ferrous fumarate 200 mg · Vitamin D 1000 IU</b><span class="v">iron 16 of 28 <em>("hurts after")</em></span></div>
+          <div><span class="k">PRN</span><b>Paracetamol 500 mg</b><span class="v">on list · rarely used</span></div>
+          <div><span class="k">Risk factor flags</span><b>⚠️ NSAID · ibuprofen from 19 Aug, parent-given</b><span class="v">flagged by pharmacy</span></div>
+          <div><span class="k"></span><b>⚠️ Iron confounding Bristol · from 25 Aug</b><span class="v">read the chart with this in mind</span></div>
         </div>
       </section>
 
-      <section><h2>Adherence, 28 days <span>green taken · red missed · grey not logged</span></h2>
+      <section><h2>Daily iron, 28 days <span>green taken · red missed · 💉 adalimumab day, red outline = missed</span></h2>
         <div class="heat" id="heat"></div>
-        <div class="note">Misses cluster from 17 Aug, six of nine with "felt better" as the reason. Symptoms turned on the 22nd.</div>
+        <div class="note">Iron misses are scattered, not clustered — 9 of 12 with "hurts after" as the reason. That is a side-effect pattern, not a belief pattern. The one adalimumab miss is the camp.</div>
       </section>
 
-      <section><h2>Medication — doses against symptoms <span>did stopping come first?</span></h2>
+      <section><h2>Medication — doses against symptoms <span>what changed, and when</span></h2>
         <div id="tl-pharm"></div>
         <div class="legend"><span><i style="background:var(--green)"></i>Taken</span><span><i style="background:var(--red)"></i>Missed</span><span><i style="background:var(--purple-d)"></i>Stools / 24 h</span><span><i style="background:var(--orange);border-radius:50%"></i>Pain</span></div>
-        <div class="pattern"><b>Stopping preceded the symptoms.</b><p>Doses went irregular from 17 August while he was well — "felt better" on 6 of 9 misses. Frequency and blood rose five days later. Classic remission-adherence pattern. A conversation, not a lecture.</p></div></section>
+        <div class="pattern"><b>Pain rose before anything was stopped.</b><p>Pain climbs from 22 Aug with adalimumab taken on time. Ibuprofen enters on the 19th, iron on the 25th, and the injection is missed on 8 Sep — three changes stacked on a flare already under way. The adherence question here is not "did he stop" but "is the dose still working": a trough level has never been drawn.</p></div></section>
       <section><h2>Medicines that change what the other dashboards see</h2>
         <table><tr><th>Medicine</th><th>Since</th><th>Source</th><th>Effect on the streams</th></tr>
-          <tr><td>Ibuprofen 400 mg</td><td>19 Aug</td><td><span class="tag grey">Patient, OTC</span></td><td>NSAID — recognised UC flare trigger. Started 3 days before symptoms turned.</td></tr>
-          <tr><td>Loperamide 2–4 mg</td><td>27 Aug</td><td><span class="tag grey">Patient, OTC</span></td><td>Masks frequency. True count since 27 Aug is probably higher than logged.</td></tr>
-          <tr><td>Ferrous fumarate</td><td>—</td><td><span class="tag ok">Not taking</span></td><td>Would darken and firm stool. Not a confounder here.</td></tr></table></section>
+          <tr><td>Ibuprofen 200–400 mg</td><td>19 Aug</td><td><span class="tag grey">Mum, OTC</span></td><td>NSAID — flare trigger in Crohn's. Started 3 days before pain climbed.</td></tr>
+          <tr><td>Ferrous fumarate 200 mg</td><td>25 Aug</td><td><span class="tag grey">Prescribed</span></td><td>Darkens and firms stool: Bristol 6 → 3 since. The doctor's chart looks like improvement; it isn't evidence of it.</td></tr>
+          <tr><td>Modulen (PEN)</td><td>Jun</td><td><span class="tag grey">Prescribed</span></td><td>2 cartons/day. Lowers appetite for solids — reads as "eating less" in the food log.</td></tr>
+          <tr><td>Budesonide 9 mg</td><td>Jun–Aug</td><td><span class="tag ok">Completed</span></td><td>8-week course. Stools firmed during it too — separate from the iron effect.</td></tr></table></section>
       <section><h2>Also taking <span>asked plainly, reported verbatim</span></h2>
         <table><tr><th>What</th><th>How often</th><th>Type</th><th>Note</th></tr>
-          <tr><td>"Herbal tea from my mum for the stomach"</td><td>Most evenings</td><td><span class="tag grey">TCM</span></td><td>Unidentified. Ask what's in it — to know, not to stop it.</td></tr>
-          <tr><td>Probiotic capsules</td><td>Daily</td><td><span class="tag grey">Supplement</span></td><td>Low concern.</td></tr></table></section>
+          <tr><td>"Cod liver oil from his grandma"</td><td>Most mornings</td><td><span class="tag grey">Supplement</span></td><td>Vitamin A load with vitamin D already prescribed — worth a look.</td></tr>
+          <tr><td>Probiotic gummies</td><td>Daily</td><td><span class="tag grey">Supplement</span></td><td>Low concern.</td></tr>
+          <tr><td>"Herbal soup for the stomach"</td><td>Weekends</td><td><span class="tag grey">TCM</span></td><td>Unidentified. Ask what's in it — to know, not to stop it.</td></tr></table></section>
       <section><h2>Pharmacist notes <span>saved in your name · visible to the doctor and dietitian</span></h2>
-        <textarea class="pnote" id="pnote" placeholder="Medication reconciliation, suspected drug-induced contribution, alternatives to discuss…">Ibuprofen 400 mg OTC from 19 Aug for back pain — recognised UC flare trigger, started 3 days before symptoms turned. Suggest paracetamol; discuss with Dr Nair. Loperamide self-started 27 Aug — frequency in the dashboard likely under-reads since then. Mesalazine gaps from 17 Aug with "felt better" — necessity-belief conversation, not a reminder problem.</textarea>
+        <textarea class="pnote" id="pnote" placeholder="Medication reconciliation, suspected drug-induced contribution, alternatives to discuss…">Ibuprofen 200–400 mg OTC from 19 Aug, given by mum for abdominal pain — NSAID in active Crohn's, started 3 days before pain climbed. Paracetamol 15 mg/kg (≈600 mg) q6h PRN is on the list; note drafted for mum. Ferrous fumarate from 25 Aug — 9 of 12 misses are "hurts after": suggest with dinner or alternate-day dosing; if still not tolerated, IV iron given Hb 10.9 / ferritin 8. Bristol firming since 25 Aug is iron, not response — flagged to Dr Lim. Adalimumab: 1 missed (camp), no trough/ADA on record — recommend TDM before any escalation. Cod liver oil + prescribed vitamin D: check total vitamin A/D.</textarea>
         <div class="chips" style="margin-top:8px"><button class="btn small" onclick="pnoteSave()">Save note</button><span class="note" id="pnotelog" style="margin:0"></span></div>
       </section>
 
       <section><h2>Why he misses doses <span>his words</span></h2>
         <table><tr><th>Reason</th><th class="n">Times</th><th>Where it points</th></tr>
-          <tr><td>Felt better, didn't seem needed</td><td class="n">6</td><td>Belief about necessity — a five-minute conversation</td></tr>
-          <tr><td>Forgot</td><td class="n">2</td><td>Reminder timing</td></tr>
-          <tr><td>Ran out</td><td class="n">1</td><td>Refill sync</td></tr></table></section>
+          <tr><td>Iron — "hurts after"</td><td class="n">9</td><td>Side effect — timing with food, alternate days, or IV iron</td></tr>
+          <tr><td>Iron — forgot</td><td class="n">3</td><td>Tie to dinner, not breakfast</td></tr>
+          <tr><td>Adalimumab — school camp</td><td class="n">1</td><td>Move injection day; plan around the calendar</td></tr>
+          <tr><td>Modulen at school — "embarrassing"</td><td class="n">11</td><td>School letter; a plain bottle</td></tr></table></section>
 
       <section><h2>Steroid exposure, rolling 12 months</h2>
-        <div class="score"><div class="big">42</div><span class="denom">days · 1 course</span></div>
+        <div class="score"><div class="big">56</div><span class="denom">days · 1 course · budesonide 9 mg, Jun–Aug</span></div>
         <div class="thresh"><div class="bar"><i style="width:50%"></i><em style="left:100%"></em></div>
           <div class="tl"><span>ECCO steroid-dependence: ≥ 2 courses in 12 months, or unable to taper below 10 mg within 3 months</span><span class="ok">Below — 1 of 2 courses</span></div>
           <div class="note">If crossed, this line reads "meets ECCO steroid-dependence definition — maintenance therapy review indicated" and stops there. The drug choice is yours.</div>
@@ -932,79 +925,76 @@
 <main class="view" id="v-diet">
   <div class="clin">
     <aside class="ident">
-      <h1>Marcus Tan</h1><div class="meta">34 · UC · Referred by Dr Nair 4 Sep</div>
-      <dl><dt>Weight</dt><dd>71.2 kg <span style="color:var(--red-d)">−3.1 % / 4 wk</span></dd><dt>MUST</dt><dd>1 · medium</dd><dt>Foods / week</dt><dd>9 <span style="color:var(--red-d)">from 23</span></dd><dt>On safe list</dt><dd>3</dd><dt>Setting</dt><dd>Hawker most lunches</dd></dl>
+      <h1>Evan Koh</h1><div class="meta">13 · Crohn's, ileal · PEN (Modulen) · Referred by Dr Lim 8 Sep</div>
+      <dl><dt>Weight</dt><dd>41.5 kg <span style="color:var(--red-d)">−2.8 % / 4 wk</span></dd><dt>Centile</dt><dd>25th → 10th <span style="color:var(--red-d)">in 6 mo</span></dd><dt>Height</dt><dd>152 cm · 40th · steady</dd><dt>Foods / week</dt><dd>12 <span style="color:var(--muted)">swinging 9–21</span></dd><dt>Setting</dt><dd>School lunch skipped 9 of 14</dd></dl>
       <div class="flags">
-        <div class="flag"><b>Diet narrowing</b>Distinct foods down 61 % in 4 weeks<div class="route">Fastest fall on the caseload this month</div></div>
-        <div class="flag warn"><b>Milk flagged from one bad day</b>He listed lactose as a trigger after a single episode<div class="route">Worth confirming or clearing — it is his only self-set trigger</div></div>
-        <div class="flag warn"><b>Meals skipped on pain days</b>7 of 14<div class="route">Appetite trending down</div></div>
+        <div class="flag"><b>Weight crossing down a centile</b>25th → 10th in 6 months · −2.8 % in 4 weeks<div class="route">Growth is a treatment target</div></div>
+        <div class="flag warn"><b>Trial-and-error eating</b>21 distinct foods one week, 9 the next · 14 foods tried then dropped<div class="route">He is experimenting, not restricting — read it that way</div></div>
+        <div class="flag warn"><b>School lunch skipped 9 of 14</b>School reporter · Evan: "hurts after" · mum: "picky"<div class="route">Three views of one meal</div></div>
+        <div class="flag warn"><b>Modulen at school refused</b>11 of 14 days · "embarrassing"<div class="route">Half the PEN prescription not reaching him</div></div>
       </div>
-      <div class="approval">✓ Card approved 4 Sep</div>
+      <div class="approval">✓ Card approved by Evan and mum · 8 Sep</div>
     </aside>
     <div class="canvas">
       <section><h2>At a glance</h2>
         <div class="three">
-          <div class="col ok"><b>On the safe list</b><span>Chicken rice · Congee · Fish soup</span><small>set by you</small></div>
-          <div class="col care"><b>Worth watching</b><span>Laksa · Milk · Nasi lemak · Char kway teow · Rojak · Salad</span><small>each with a named source below</small></div>
-          <div class="col na"><b>Not assessed</b><span>31 foods</span><small>no entry from you, nothing in his log, no gate met — expected to be the largest group</small></div>
+          <div class="col ok"><b>Tolerated before</b><span>Congee · Plain pasta · Banana · Steamed fish · Chicken rice (no skin)</span><small>his own log, this phase — no dietitian input assumed</small></div>
+          <div class="col care"><b>Worth watching</b><span>Laksa · Milk · Nasi lemak · Char kway teow · Rojak · Salad · Ice kacang · Curry puff</span><small>each with a named source below</small></div>
+          <div class="col na"><b>Not assessed</b><span>27 foods</span><small>tried once or twice, no pattern yet — he is still experimenting</small></div>
         </div>
-        <div class="hyd">💧 Fluids logged today: <b>4</b> · yesterday 3 · 7-day median 3 <span>· logged by him, no target set</span></div>
+        <div class="hyd">💧 Fluids logged today: <b>3</b> · 7-day median 3 <span>· plus Modulen at home only · no target set</span></div>
       </section>
 
       <section><h2>Food &amp; nutrition — how wide the diet is <span>distinct foods per week</span></h2>
-        <div class="breadth"><div style="height:100%">23</div><div style="height:91%">21</div><div style="height:61%">14</div><div style="height:39%" class="low">9</div></div>
-        <div class="breadth-lab"><div>8–14 Aug</div><div>15–21 Aug</div><div>22–28 Aug</div><div>29 Aug–4 Sep</div></div>
-        <div class="delta">Fewer than half the foods he ate a month ago. Most of what's gone is what he eats with other people.</div></section>
-      <section><h2>Where each food stands <span>every status carries its source — you are the only one who can set Avoid</span></h2>
+        <div class="breadth"><div style="height:86%">18</div><div style="height:43%">9</div><div style="height:100%">21</div><div style="height:57%">12</div></div>
+        <div class="breadth-lab"><div>12–18 Aug</div><div>19–25 Aug</div><div>26 Aug–1 Sep</div><div>2–8 Sep</div></div>
+        <div class="delta">Not a narrowing curve — a sawtooth. He drops to 9 when it hurts, then tries 21 things the week after. That is a 13-year-old running his own experiment. The job is to make the experiment safer, not to stop it.</div></section>
+      <section><h2>Where each food stands <span>every status carries its source — nothing here was set by a clinician</span></h2>
         <div class="statgrid">
-          <div class="sbox ok"><b>On your safe list</b><span class="n">3</span><span class="s">Chicken rice · Congee · Fish soup</span></div>
-          <div class="sbox ok2"><b>Tolerated before</b><span class="n">2</span><span class="s">Mee pok · Steamed fish <em>(state-matched only)</em></span></div>
-          <div class="sbox na"><b>Not assessed</b><span class="n">31</span><span class="s">No entry from you, nothing in his log, no gate met. Expected to be the largest group.</span></div>
-          <div class="sbox care"><b>Worth watching</b><span class="n">6</span><span class="s">Each with a named source, below</span></div>
-          <div class="sbox avoid"><b>Avoid</b><span class="n">0</span><span class="s">Nothing set. Only you, or obstruction risk with confirmed narrowing.</span></div>
+          <div class="sbox ok2"><b>Tolerated before</b><span class="n">5</span><span class="s">Congee · Plain pasta · Banana · Steamed fish · Chicken rice <em>(his log, state-matched)</em></span></div>
+          <div class="sbox na"><b>Not assessed</b><span class="n">27</span><span class="s">No entry from you, nothing in his log, no gate met. Expected to be the largest group.</span></div>
+          <div class="sbox care"><b>Worth watching</b><span class="n">8</span><span class="s">Each with a named source, below</span></div>
+          <div class="sbox avoid"><b>Avoid</b><span class="n">0</span><span class="s">Only a stated allergy, or obstruction risk with confirmed narrowing. Neither applies.</span></div>
         </div>
-        <div class="note" style="margin-top:12px;color:var(--purple);font-weight:600">You can change any status below. It appears in his next scan, attributed to you by name and date. He is never shown that a status was removed — it just stops applying.</div>
         <table style="margin-top:8px">
-          <tr><th>Food</th><th>Status</th><th>Source that put it there</th><th>Set</th></tr>
-          <tr id="wb-Laksa"><td>Laksa</td><td><span class="tag warn">Worth watching</span></td><td>His own log — symptoms after it, in a matching phase</td><td><div class="wb"><button class="safe" onclick="wbSet('Laksa','safe',this)">Safe list</button><button onclick="wbSet('Laksa','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Laksa','avoid',this)">Avoid</button></div></td></tr>
-          <tr id="wb-Milk"><td>Milk</td><td><span class="tag warn">Worth watching</span></td><td>He told us lactose affects him</td><td><div class="wb"><button class="safe" onclick="wbSet('Milk','safe',this)">Safe list</button><button onclick="wbSet('Milk','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Milk','avoid',this)">Avoid</button></div></td></tr>
-          <tr id="wb-Nasi-lemak"><td>Nasi lemak</td><td><span class="tag warn">Worth watching</span></td><td>Fat load gate — active disease right now</td><td><div class="wb"><button class="safe" onclick="wbSet('Nasi lemak','safe',this)">Safe list</button><button onclick="wbSet('Nasi lemak','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Nasi lemak','avoid',this)">Avoid</button></div></td></tr>
-          <tr id="wb-Char-kway-teow"><td>Char kway teow</td><td><span class="tag warn">Worth watching</span></td><td>Fat load gate — active disease right now</td><td><div class="wb"><button class="safe" onclick="wbSet('Char kway teow','safe',this)">Safe list</button><button onclick="wbSet('Char kway teow','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Char kway teow','avoid',this)">Avoid</button></div></td></tr>
-          <tr id="wb-Rojak"><td>Rojak</td><td><span class="tag warn">Worth watching</span></td><td>Fermentable carbohydrate gate — Crohn's</td><td><div class="wb"><button class="safe" onclick="wbSet('Rojak','safe',this)">Safe list</button><button onclick="wbSet('Rojak','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Rojak','avoid',this)">Avoid</button></div></td></tr>
-          <tr id="wb-Salad"><td>Salad</td><td><span class="tag warn">Worth watching</span></td><td>Fermentable carbohydrate gate — Crohn's</td><td><div class="wb"><button class="safe" onclick="wbSet('Salad','safe',this)">Safe list</button><button onclick="wbSet('Salad','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Salad','avoid',this)">Avoid</button></div></td></tr>
-          <tr id="wb-Roti-prata"><td>Roti prata</td><td><span class="tag grey">Not assessed</span></td><td>—</td><td><div class="wb"><button class="safe" onclick="wbSet('Roti prata','safe',this)">Safe list</button><button onclick="wbSet('Roti prata','clear',this)">Clear</button><button class="avoid" onclick="wbSet('Roti prata','avoid',this)">Avoid</button></div></td></tr>
-        </table>
-        <div class="wbnote"><input id="wbfood" placeholder="Food (e.g. Laksa)" style="max-width:130px"><input id="wbtext" placeholder="Note he will see in the scan, in your words"><button onclick="wbNote()">Add note</button></div>
-        <div class="wblog" id="wblog"></div>
-        <div class="note">Three of these six are open only because he is flaring. They close on their own when activity returns to remission — nothing needs removing from his diet permanently.</div>
+          <tr><th>Food</th><th>Status</th><th>Source that put it there</th></tr>
+          <tr><td>Laksa</td><td><span class="tag warn">Worth watching</span></td><td>His own log — pain 8 within 2 h, twice, both while flaring</td></tr>
+          <tr><td>Milk</td><td><span class="tag warn">Worth watching</span></td><td>Lactose gate — ileal disease</td></tr>
+          <tr><td>Ice kacang</td><td><span class="tag warn">Worth watching</span></td><td>Lactose gate — ileal disease</td></tr>
+          <tr><td>Nasi lemak</td><td><span class="tag warn">Worth watching</span></td><td>Fat load gate — active disease</td></tr>
+          <tr><td>Char kway teow</td><td><span class="tag warn">Worth watching</span></td><td>Fat load gate — active disease</td></tr>
+          <tr><td>Curry puff</td><td><span class="tag warn">Worth watching</span></td><td>Fat load gate — active disease</td></tr>
+          <tr><td>Rojak</td><td><span class="tag warn">Worth watching</span></td><td>Fermentable carbohydrate gate — Crohn's</td></tr>
+          <tr><td>Salad</td><td><span class="tag warn">Worth watching</span></td><td>Fermentable carbohydrate gate — Crohn's</td></tr>
+          <tr><td>Roti prata</td><td><span class="tag grey">Not assessed</span></td><td>tried twice, no pattern</td></tr></table>
+        <div class="note">Five of these eight are open only because he is flaring. They close on their own in remission. Nothing here is a permanent exclusion — and none of it was set by a clinician.</div>
       </section>
 
-      <section class="hub"><h2>Intervention console <span>each writes in your name and appears on his side</span></h2>
+      <section class="hub"><h2>Intervention console <span>one-tap orders and referrals — the only input asked of you</span></h2>
         <div class="hubrow">
-          <button onclick="refer(this,'low-residue plan — sent to his Learn tab')">🍚 Order low-residue plan</button>
-          <button onclick="refer(this,'EEN referral — nurse notified')">🥤 Refer for EEN</button>
-          <button onclick="refer(this,'MUST rescreen — prompted in app')">⚖️ Request MUST rescreen</button>
-          <button onclick="document.getElementById('wbfood').value='';document.getElementById('wbtext').focus();toast('Type the supplement note below')">💊 Add supplement note</button>
+          <button onclick="refer(this,'packed-lunch plan for school — sent to mum')">🍱 Packed-lunch plan</button>
+          <button onclick="refer(this,'PEN review — plain bottle for school, second flavour')">🥤 PEN review</button>
+          <button onclick="refer(this,'growth review — height, weight, bone age')">📏 Growth review</button>
+          <button onclick="refer(this,'vitamin D / iron / B12 panel — ordered')">🩸 Request vitamin D / iron panel</button>
         </div>
       </section>
 
       <section><h2>Stale tolerance <span>dropped silently, never shown to him</span></h2>
-        <table>
-          <tr><th>Food</th><th>Logged as fine</th><th>Why it no longer counts</th></tr>
-          <tr><td>Mee pok</td><td>3 Aug, in remission</td><td>He is active now — tolerance in remission is not evidence in a flare</td></tr>
-        </table>
-        <div class="note">He has not been told this food is a problem. It has simply gone back to Not assessed.</div>
+        <table><tr><th>Food</th><th>Logged as fine</th><th>Why it no longer counts</th></tr>
+          <tr><td>Mee pok</td><td>June, in remission on budesonide</td><td>He is active now — tolerance in remission is not evidence in a flare</td></tr>
+          <tr><td>Pizza</td><td>July, in remission</td><td>Same. Back to Not assessed until he tries it again while settled</td></tr></table>
+        <div class="note">He has not been told these are a problem. They have simply gone back to Not assessed.</div>
       </section>
       <section><h2>Food beside symptoms <span>association only · sorted by how often eaten, not how scary</span></h2>
         <table><tr><th>Food</th><th class="n">Eaten</th><th>Bristol shift 6–12 h</th><th>Pain</th><th>Read</th></tr>
-          <tr><td>Chicken rice</td><td class="n">11</td><td>none</td><td>0</td><td><span class="tag ok">no pattern</span></td></tr>
-          <tr><td>Fish soup</td><td class="n">11</td><td>none</td><td>0</td><td><span class="tag ok">no pattern</span></td></tr>
-          <tr><td>Congee</td><td class="n">9</td><td>none</td><td>−1</td><td><span class="tag ok">no pattern</span></td></tr>
-          <tr><td>Nasi lemak</td><td class="n">5</td><td>+1 on 3 of 5</td><td>+2</td><td><span class="tag warn">weak association</span></td></tr>
-          <tr><td>Laksa</td><td class="n">3</td><td>+2 on 2 of 3</td><td>+3</td><td><span class="tag grey">too few to say</span></td></tr>
-          <tr><td>Milk</td><td class="n">1</td><td>+2</td><td>+3</td><td><span class="tag grey">one day is not a pattern</span></td></tr></table>
-        <div class="note">All inside a flare that began ~22 Aug. Food and flare are tangled. Nothing here is a cause.</div></section>
-      <section><h2>When pain comes</h2><div class="div"><div class="box"><h3>Within an hour of eating</h3><div class="stat">9 of last 14 days</div></div><div class="box"><h3>Meals skipped</h3><div class="stat">7 of 14 · all pain days</div></div></div></section>
+          <tr><td>Congee</td><td class="n">14</td><td>none</td><td>0</td><td><span class="tag ok">no pattern</span></td></tr>
+          <tr><td>Plain pasta</td><td class="n">9</td><td>none</td><td>0</td><td><span class="tag ok">no pattern</span></td></tr>
+          <tr><td>Chicken rice</td><td class="n">8</td><td>none</td><td>+1</td><td><span class="tag ok">no pattern</span></td></tr>
+          <tr><td>Curry puff</td><td class="n">4</td><td>+1 on 2 of 4</td><td>+3</td><td><span class="tag warn">weak association</span></td></tr>
+          <tr><td>Laksa</td><td class="n">2</td><td>+1</td><td>+4</td><td><span class="tag grey">too few to say</span></td></tr>
+          <tr><td>Fried chicken</td><td class="n">1</td><td>+2</td><td>+4</td><td><span class="tag grey">one day is not a pattern</span></td></tr></table>
+        <div class="note">All inside a flare that began ~22 Aug, with iron from the 25th firming everything. Food, flare and iron are tangled. Nothing here is a cause.</div></section>
+      <section><h2>When pain comes</h2><div class="div"><div class="box"><h3>Within 2 hours of eating</h3><div class="stat">11 of last 14 days</div></div><div class="box"><h3>Meals skipped</h3><div class="stat">School lunch 9 of 14 · dinner 2 of 14</div></div></div></section>
     </div>
   </div>
 </main>
@@ -1014,9 +1004,18 @@
 <script>const $id=i=>document.getElementById(i)||document.createElement('div');const $q=s=>document.querySelector(s)||document.createElement('div');
 
 /* ---- mock 28 days ---- */
-const D={bristol:[4,4,5,4,4,5,4,4,4,5,4,4,5,5,6,6,6,7,6,7,7,6,7,7,6,7,7,7],freq:[3,3,4,3,3,4,3,3,3,4,3,4,4,4,5,5,6,6,6,7,5,6,7,7,6,7,8,7],noct:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,2,1,1,2,2],blood:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,1,2,2,2,2,3,2],pain:[2,2,3,2,2,3,2,2,2,3,2,3,3,3,4,4,5,5,5,6,5,6,6,7,6,7,7,7],dose:[1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,0,1,1,0,1,1,1,1,1,1,1],events:{12:'Ibuprofen',20:'Loperamide',10:'CRP 11 ▲'}};
+const D={
+ bristol:[5,5,6,5,6,6,5,6,6,6,5,6,6,6,6,5,6,4,4,3,4,3,4,4,3,4,3,4],
+ freq:   [3,3,4,3,4,4,3,4,5,4,4,5,5,4,5,5,5,4,4,3,4,3,4,4,3,3,3,4],
+ noct:   [0,0,0,0,0,1,0,0,1,0,0,1,1,0,1,0,1,0,0,0,0,0,1,0,0,0,0,1],
+ blood:  [0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
+ pain:   [3,4,3,4,5,5,4,6,6,7,6,7,8,7,7,6,7,6,7,8,7,6,7,8,7,6,7,7],
+ dose:   [1,1,1,1,1,1,1,0,1,0,1,1,0,1,0,1,0,1,1,0,1,0,0,1,0,1,0,1],
+ inject: {2:'taken',16:'taken',30:'missed'},
+ events: {10:'CRP 18 ▲',12:'Ibuprofen (parent)',18:'Oral iron',27:'Injection missed'}
+};
 const B=['#8C5A2B','#A6713A','#BF8A4F','#C9A365','#D9B96E','#E6C34F','#EDB52E'];
-const labels=['8 Aug','','','','','','14','','','','','','','21','','','','','','','28','','','','','1 Sep','','4 Sep'];
+const labels=['12 Aug','','','','','','18','','','','','','','25','','','','','','','1 Sep','','','','','','','8 Sep'];
 function timeline(el,o){const W=920,pl=44,pr=16,n=28,cw=(W-pl-pr)/n,H=o.pharm?250:300;let s=`<svg class="tl" viewBox="0 0 ${W} ${H}">`;
  for(const[d,t]of Object.entries(D.events)){const x=pl+(d-1)*cw+cw/2;s+=`<line x1="${x}" y1="8" x2="${x}" y2="${H-22}" stroke="#8B85A3" stroke-dasharray="3 3"/><text x="${x+4}" y="16" font-size="10" font-weight="700" fill="#8B85A3">${t}</text>`}
  let y;
@@ -1119,12 +1118,9 @@ const ALLERGEN_MAP={'Peanut':['Rojak','Ice kacang'],'Tree nuts':['Ice kacang'],'
 const DIET_PLAN={name:'None in particular'};
 
 /* Dietitian-maintained — highest authority. Empty until a dietitian is in the loop. */
-const DIET_SAFE=['Chicken rice','Congee','Fish soup'];
+const DIET_SAFE=[];   /* no dietitian in the loop — stays empty */
 const DIET_AVOID=[];                       /* [{food, reason, conditional:bool}] */
-const DIET_NOTES={
- 'Milk':{note:"Retry half a cup with a meal once things settle, not on an empty stomach. One bad day doesn't prove intolerance.",by:'Ms Priya Lim, dietitian',on:'28 Aug'},
- 'Chicken rice':{note:'Plain rice, no skin — consistently well tolerated. Good default when symptomatic.',by:'Ms Priya Lim, dietitian',on:'28 Aug'}
-};
+const DIET_NOTES={};  /* no dietitian in the loop */
 
 /* Tolerance log. phenotype_state_at_time is written AT LOG TIME and cannot be
    reconstructed later. A food tolerated in remission is not evidence in a flare. */
@@ -1222,10 +1218,10 @@ function askScan(){cur={type:'scan'};ask.className='ask on';ask.innerHTML=`<div 
 function renderPheno(){const el=$id('pheno');if(!el)return;const known=PHENO.diagnosis!=='unknown';
  el.innerHTML=`<div class="phlab">What we know about you <span>${known?'phenotype on record':'nothing on record — default mode'}</span></div>
   <div class="phrow">
-   <button class="${known?'on':''}" onclick="setPheno(true)">Crohn's · ileal · flaring · dietitian list</button>
+   <button class="${known?'on':''}" onclick="setPheno(true)">Crohn's · ileal · flaring · his own log</button>
    <button class="${known?'':'on'}" onclick="setPheno(false)">Nothing known yet</button>
   </div>`}
-function setPheno(on){if(on){PHENO.diagnosis='CD';PHENO.location='ileal';PHENO.activity='active';PHENO.surgical_status='none';DIET_SAFE.splice(0,DIET_SAFE.length,'Chicken rice','Congee','Fish soup');KNOWN_TRIGGERS.splice(0,KNOWN_TRIGGERS.length,'lactose')}
+function setPheno(on){if(on){PHENO.diagnosis='CD';PHENO.location='ileal';PHENO.activity='active';PHENO.surgical_status='none';KNOWN_TRIGGERS.splice(0,KNOWN_TRIGGERS.length,'lactose')}
  else{PHENO.diagnosis='unknown';PHENO.location='unknown';PHENO.activity='unknown';PHENO.surgical_status='unknown';DIET_SAFE.length=0;KNOWN_TRIGGERS.length=0}
  renderPheno();const o=$id('scanout');if(o)o.innerHTML='';toast(on?'Phenotype on record — gates can now fire':'Default mode — unknown never becomes a warning')}
 function scanShot(inp){toast('Photo taken · which one is it?');$id('scanpick').scrollIntoView({block:'nearest'})}
@@ -1248,9 +1244,8 @@ function showScan(name){
   ${a.detail?`<div class="stat-detail">${a.detail}</div>`:''}
   ${a.status==='NOT_ASSESSED'?`<div class="stat-detail muted-note">No dietitian entry and nothing in your log for this yet. That's not a warning — most foods sit here.</div>`:''}
 
-  ${dn?`<div class="dnote"><b>${dn.by} · ${dn.on}</b>${dn.note}</div>`:''}
 
-  <div class="chips"><button class="btn" onclick="scanLog('${name}',true)">Eating it — log it</button><button class="btn ghost" onclick="scanLog('${name}',false)">Not today</button><button class="btn ghost" onclick="toast('Sent to Ms Lim with this card')">Ask dietitian</button></div>
+  <div class="chips"><button class="btn" onclick="scanLog('${name}',true)">Eating it — log it</button><button class="btn ghost" onclick="scanLog('${name}',false)">Not today</button><button class="btn ghost" onclick="toast('Sent to Ms Tan with this companion')">Ask dietitian</button></div>
   <div class="fine-print">Portion is estimated from the photo. Nothing here is a diagnosis, and no single food causes a flare.</div>
  </div>`;
  out.scrollIntoView({block:'nearest'});
@@ -1263,36 +1258,36 @@ function energy(b,v){pick(b,'.energy .row3:not(.small)');const extra=[...documen
 function missed(b,why){pick(b,'#p-meds .chips');addEntry('Missed dose · '+why);toast('Logged · your pharmacist sees the reason, not just the miss')}
 
 /* ---- flare report: structured, sent to nurse, response promise stated ---- */
-function askFlare(){cur={type:'flare'};ask.className='ask on';ask.innerHTML=`<div class="q" style="color:var(--red-d)">Tell Sister Devi what's happening</div><div class="why">Four quick taps. This goes straight to the IBD nurse line, with your last 7 days attached. Reply within 1 working day.</div>
+function askFlare(){cur={type:'flare'};ask.className='ask on';ask.innerHTML=`<div class="q" style="color:var(--red-d)">Tell Nurse Aisha what's happening</div><div class="why">Four quick taps. This goes straight to the IBD nurse line, with your last 7 days attached. Reply within 1 working day.</div>
  <div class="flarecheck"><button onclick="tog(this)">Going 6+ times a day</button><button onclick="tog(this)">Blood most times</button><button onclick="tog(this)">Waking at night to go</button><button onclick="tog(this)">Pain 7 or more</button><button onclick="tog(this)">Fever</button><button onclick="tog(this)">Can't keep fluids down</button></div>
  <div class="chips" style="margin-top:10px"><button onclick="pick(this,'#ask .since')" class="since">Started today</button><button onclick="pick(this,'#ask .since')" class="since">Few days</button><button onclick="pick(this,'#ask .since')" class="since">Over a week</button></div>
  <div class="chips"><button class="btn" style="background:var(--red)" onclick="sendFlare()">Send to nurse line</button><button class="btn ghost" onclick="ask.className='ask'">Not now</button></div>
  <div class="note" style="margin-top:8px;color:var(--red-d)">Heavy bleeding, severe pain with a fever, or can't keep fluids down — don't wait. Call the IBD line now or go to A&amp;E.</div>`;ask.scrollIntoView({block:'nearest'})}
 function sendFlare(){const picked=[...document.querySelectorAll('#ask .flarecheck button.on')].map(b=>b.textContent);const urgent=picked.some(t=>/Fever|fluids/.test(t));addEntry('Flare report sent · '+(picked.length?picked.join(', '):'no details')+' <span class="pill" style="background:var(--red-l);color:var(--red-d)">nurse</span>');ask.className='ask';
- toast(urgent?'Sent as urgent. If you can\'t reach the line, go to A&E.':'Sent to Sister Devi · reply within 1 working day · Dr Nair can see it too')}
+ toast(urgent?'Sent as urgent. If you can\'t reach the line, go to A&E.':'Sent to Nurse Aisha · reply within 1 working day · Dr Lim can see it too')}
 
 /* ---- calendar: clinic + tests + CCSS in one place ---- */
 const EVENTS=[
  {d:5,m:'Sep',type:'ccss',title:'Peer meetup — young adults',sub:'Sat 5 Sep, 4 pm · CCSS, Bugis · 6 going',rsvp:'ask'},
- {d:8,m:'Sep',type:'clinic',title:'Dr Nair — gastroenterology',sub:'Tue 8 Sep, 2:40 pm · NUH clinic C · your card is ready',rsvp:null},
- {d:12,m:'Sep',type:'ccss',title:'Talk: Eating out in a flare',sub:'Sat 12 Sep, 2 pm · TTSH auditorium · Ms Lim speaking · 4 from your group',rsvp:'ask'},
+ {d:8,m:'Sep',type:'clinic',title:'Dr Lim — gastroenterology',sub:'Tue 8 Sep, 2:40 pm · NUH clinic C · your card is ready',rsvp:null},
+ {d:12,m:'Sep',type:'ccss',title:'Talk: Eating out in a flare',sub:'Sat 12 Sep, 2 pm · TTSH auditorium · Ms Tan speaking · 4 from your group',rsvp:'ask'},
  {d:12,m:'Sep',type:'test',title:'Refill due — mesalazine',sub:'Order by Thu to be safe',rsvp:null},
- {d:17,m:'Sep',type:'clinic',title:'Ms Lim — dietitian',sub:'Thu 17 Sep, 10 am · NUH · bring your food scans',rsvp:null},
+ {d:17,m:'Sep',type:'clinic',title:'Ms Tan — dietitian',sub:'Thu 17 Sep, 10 am · NUH · bring your food scans',rsvp:null},
  {d:26,m:'Sep',type:'ccss',title:'Research study — IBD and sleep (NUS)',sub:'Sat 26 Sep · online · 30 min survey · CCSS-approved',rsvp:'ask'},
  {d:3,m:'Oct',type:'ccss',title:'World IBD Day prep — volunteers',sub:'Sat 3 Oct · CCSS · optional',rsvp:'ask'},
- {d:14,m:'Dec',type:'test',title:'Home calprotectin kit',sub:'Posted to you · results to Dr Nair · your next routine check',rsvp:null}
+ {d:14,m:'Dec',type:'test',title:'Home calprotectin kit',sub:'Posted to you · results to Dr Lim · your next routine check',rsvp:null}
 ];
 const COL={clinic:'var(--purple)',test:'var(--yellow)',ccss:'var(--teal)'};
 function renderWeek(){const days=['Tue 1','Wed 2','Thu 3','Fri 4','Sat 5','Sun 6','Mon 7','Tue 8','Wed 9','Thu 10','Fri 11','Sat 12','Sun 13','Mon 14'];const wk=$id('wk');wk.innerHTML=days.map(x=>{const [dn,dd]=x.split(' ');const n=+dd;const dots=EVENTS.filter(e=>e.m==='Sep'&&e.d===n).map(e=>`<i style="background:${COL[e.type]}"></i>`).join('');return`<div class="${n===4?'today':''}${n<4?' dim':''}">${dn}<span class="d">${n}</span><span class="dots">${dots}</span></div>`}).join('')}
 function renderEvents(){$id('events').innerHTML=EVENTS.map((e,i)=>`<div class="ev ${e.type}"><div class="when">${e.m}<b>${e.d}</b></div><div class="t"><b>${e.title}</b><span>${e.sub}</span></div>${e.rsvp==='ask'?`<button class="go" onclick="rsvp(this,'${e.title}',null,${i})">I'll go</button>`:e.rsvp==='yes'?`<span class="go yes">Going ✓</span>`:''}</div>`).join('')}
-function rsvp(btn,title,nudgeId,idx){if(idx!=null)EVENTS[idx].rsvp='yes';if(nudgeId){const e=EVENTS.find(x=>x.title.includes('Eating out'));if(e)e.rsvp='yes';$id(nudgeId).innerHTML='<span>✅</span><div><b>You\'re going. Added to your calendar.</b><small>Reminder the day before. Ms Lim will know you\'re coming.</small></div>'}
+function rsvp(btn,title,nudgeId,idx){if(idx!=null)EVENTS[idx].rsvp='yes';if(nudgeId){const e=EVENTS.find(x=>x.title.includes('Eating out'));if(e)e.rsvp='yes';$id(nudgeId).innerHTML='<span>✅</span><div><b>You\'re going. Added to your calendar.</b><small>Reminder the day before. Ms Tan will know you\'re coming.</small></div>'}
  renderEvents();addEntry('Going · '+title+' <span class="pill" style="background:var(--teal-l);color:#146F60">CCSS</span>');XP+=50;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';const b=$q('#caltab .badge');if(b)b.remove();toast('Added · +50 XP for showing up for your community')}
 renderWeek();renderEvents();
 
 /* ---- missed appointment: no penalty, reason routes, rebook rewards ---- */
 let noshowReason=null;
-function noshow(b,why,route){pick(b,'#missed1 .chips:first-of-type');noshowReason=why;const msg={nurse:'Flagged to Sister Devi as unwell, not as a no-show',MSW:'Sent to the medical social worker — there may be help with this',pharmacist:'Your pharmacist will see this. It\'s a common feeling in remission, and worth a chat',none:'Noted. A reminder the morning of should help'}[route];addEntry('Missed appointment · '+why+(route!=='none'?' <span class="pill">'+route+'</span>':''));toast(msg)}
-function rebook(id){addEntry('Rebooked · Ms Lim · Thu 17 Sep, 10 am <span class="pill">CCSS</span>'.replace('CCSS','clinic'));XP+=20;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';$id(id).innerHTML='<span>✅</span><div><b>Rebooked for Thu 10 am</b><small>'+(noshowReason?'Reason passed on. ':'No reason given — Sister Devi may check in. ')+'+20 XP for coming back, nothing lost for missing.</small></div>'}
+function noshow(b,why,route){pick(b,'#missed1 .chips:first-of-type');noshowReason=why;const msg={nurse:'Flagged to Nurse Aisha as unwell, not as a no-show',MSW:'Sent to the medical social worker — there may be help with this',pharmacist:'Your pharmacist will see this. It\'s a common feeling in remission, and worth a chat',none:'Noted. A reminder the morning of should help'}[route];addEntry('Missed appointment · '+why+(route!=='none'?' <span class="pill">'+route+'</span>':''));toast(msg)}
+function rebook(id){addEntry('Rebooked · Ms Tan · Thu 17 Sep, 10 am <span class="pill">CCSS</span>'.replace('CCSS','clinic'));XP+=20;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';$id(id).innerHTML='<span>✅</span><div><b>Rebooked for Thu 10 am</b><small>'+(noshowReason?'Reason passed on. ':'No reason given — Nurse Aisha may check in. ')+'+20 XP for coming back, nothing lost for missing.</small></div>'}
 
 /* ---- celebrate: bounce + confetti on the home Gummy ---- */
 function celebrate(dance){const g=$id('gwrap');if(g){g.classList.remove('bounce','dance');void g.offsetWidth;g.classList.add(dance?'dance':'bounce')}const c=$id('confetti');if(c){c.innerHTML='';const cols=['#7B5FC7','#2BB5A0','#F5C542','#F0803C','#E84545'];for(let i=0;i<24;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=cols[i%5];s.style.animationDelay=(Math.random()*.4)+'s';c.appendChild(s)}setTimeout(()=>c.innerHTML='',1600)}}
@@ -1333,7 +1328,7 @@ function tick(i){const x=HABITS[i];if(x.today){x.today=false;x.c--;renderHabits(
 renderHabits();
 
 /* ---- courses: watching or reading earns XP on completion ---- */
-const COURSES=[{e:'😴',n:'Sleep when your gut won\'t',by:'CCSS + NUH sleep clinic',len:'4 × 5 min',xp:40,p:2,of:4},{e:'💊',n:'Why mesalazine works when you feel fine',by:'your pharmacist',len:'6 min read',xp:25,p:0,of:1},{e:'🍜',n:'Eating out in a flare — hawker edition',by:'Ms Lim, dietitian',len:'3 × 4 min',xp:30,p:0,of:3},{e:'🧠',n:'The worry that doesn\'t switch off',by:'MSW team',len:'5 × 6 min',xp:50,p:0,of:5},{e:'✈️',n:'Travelling with IBD',by:'CCSS members',len:'2 × 5 min',xp:20,p:2,of:2}];
+const COURSES=[{e:'😴',n:'Sleep when your gut won\'t',by:'CCSS + NUH sleep clinic',len:'4 × 5 min',xp:40,p:2,of:4},{e:'💊',n:'Why mesalazine works when you feel fine',by:'your pharmacist',len:'6 min read',xp:25,p:0,of:1},{e:'🍜',n:'Eating out in a flare — hawker edition',by:'Ms Tan, dietitian',len:'3 × 4 min',xp:30,p:0,of:3},{e:'🧠',n:'The worry that doesn\'t switch off',by:'MSW team',len:'5 × 6 min',xp:50,p:0,of:5},{e:'✈️',n:'Travelling with IBD',by:'CCSS members',len:'2 × 5 min',xp:20,p:2,of:2}];
 function renderCourses(){$id('courses').innerHTML=COURSES.map((c,i)=>{const done=c.p>=c.of;return`<div class="cr"><span class="ic">${c.e}</span><div class="t"><b>${c.n}</b><small>${c.by} · ${c.len} · ${c.xp} XP</small><div class="bar"><i style="width:${100*c.p/c.of}%"></i></div></div><button class="go ${done?'done':''}" onclick="learn(${i})">${done?'Done ✓':c.p?'Continue':'Start'}</button></div>`}).join('')}
 function learn(i){const c=COURSES[i];if(c.p>=c.of){toast('Already finished — nice');return}c.p++;renderCourses();if(c.p>=c.of){XP+=c.xp;$id('xp').textContent=XP;$id('xpfill').style.width=Math.min(100,XP/5)+'%';celebrate();toast('Finished · +'+c.xp+' XP · goes on your card as something you learned')}else toast('Session '+c.p+' of '+c.of+' done')}
 renderCourses();
@@ -1346,7 +1341,7 @@ function ouchClear(){OUCH=[];renderOuch()}
 function ouchSave(){const when=[...document.querySelectorAll('#k-ouch .chips button.on')].map(b=>b.textContent.replace(/[^\w\s]/g,'').trim());cur.locs=OUCH.map(o=>o.loc);kidLog('ouch',10,'Pain mapped · '+(OUCH.length?OUCH.map(o=>o.z).join(', '):'no spots')+(cur.score!=null?' · '+cur.score+'/10':'')+(when.length?' · '+when.join(', '):''))}
 
 /* ---- Doctor Says: clinician picks 3 explainers, child taps to reveal, then says what the plan is ---- */
-const DSAY=[{e:'💊',t:'A new tablet, every morning',w:'It calms the angry bits in your tummy. It takes a few weeks to work, so keep going even when you feel fine.'},{e:'🧪',t:'A poo test at home',w:'A tiny bit of poo in a tube. It tells Dr Lim if your tummy is still angry inside, even when it doesn\'t hurt.'},{e:'🍜',t:'You can still eat with your family',w:'Some foods might be "trying again" for now. Ms Lim will help. Nothing is banned forever.'}];
+const DSAY=[{e:'💊',t:'A new tablet, every morning',w:'It calms the angry bits in your tummy. It takes a few weeks to work, so keep going even when you feel fine.'},{e:'🧪',t:'A poo test at home',w:'A tiny bit of poo in a tube. It tells Dr Lim if your tummy is still angry inside, even when it doesn\'t hurt.'},{e:'🍜',t:'You can still eat with your family',w:'Some foods might be "trying again" for now. Ms Tan will help. Nothing is banned forever.'}];
 function renderDsay(){$id('dsay').innerHTML=DSAY.map((d,i)=>`<div class="ds" id="ds${i}" onclick="this.classList.add('on');this.querySelector('.tap').textContent='✓';celebrate()"><svg class="av" viewBox="0 0 120 130"><use href="#gummy"/></svg><div><b>${d.e} ${d.t}</b><small>${d.w}</small></div><span class="tap">tap</span></div>`).join('')}
 function dsaySave(){const plan=$q('#dplan button.on')?.textContent||'no answer';const wrong=/Stop the medicine|whatever I want/.test(plan);kidLog('doctor',10,'Plan as understood: '+plan);if(wrong)setTimeout(()=>toast('Logged — Dr Lim will see this doesn\'t match, and can check in'),2400)}
 
@@ -1377,7 +1372,7 @@ function sendGift(i){const b=$id('gift'+i);b.classList.add('sent');celebrate(tru
 renderGifts();
 
 const CCSS_EV=[
- {d:'Sat 12 Sep',t:'Talk: Eating out in a flare',s:'TTSH · Ms Lim speaking · 4 from your group going',rsvp:false},
+ {d:'Sat 12 Sep',t:'Talk: Eating out in a flare',s:'TTSH · Ms Tan speaking · 4 from your group going',rsvp:false},
  {d:'Sat 21 Sep',t:'CCSS Kids Camp',s:'Whole day · monsters welcome',rsvp:false},
  {d:'Sat 26 Sep',t:'Research study — IBD and sleep (NUS)',s:'Online · 30 min · CCSS-approved',rsvp:false}
 ];
@@ -1460,18 +1455,8 @@ let MODE='pt';
 function setMode(m){MODE=m;document.body.classList.toggle('hcp',m==='hcp');document.querySelectorAll('.modesw button').forEach((b,i)=>b.setAttribute('aria-selected',(i===0)===(m==='pt')?'true':'false'));$id('roles-pt').style.display=m==='pt'?'':'none';$id('roles-hcp').style.display=m==='hcp'?'':'none';const first=$q(m==='pt'?'#roles-pt button':'#roles-hcp button');first.click()}
 
 /* ---- provenance filter ---- */
-function prov(k,b){document.querySelectorAll('.provsw button').forEach(x=>x.classList.remove('on'));b.classList.add('on');const n=$id('provnote');const msg={all:'',patient:'Showing only what Marcus entered himself — 88% of this record. Scores and the "unsaid" panel are unchanged.',caregiver:'No caregiver reports on this record. For a child, this filter is where parent and child diverge.',school:'No school reports. For a child at school, this is the reporter that sees the day.',instrument:'Instrument scores only — MARS-5 and the quarterly MUST. Nothing else on this page comes from a questionnaire.',ai:'AI-inferred fields only — 5%. Each carries a confidence value and is never merged with reported data. Below 0.7 it is omitted.'}[k];n.textContent=msg;n.style.display=msg?'':'none'}
+function prov(k,b){document.querySelectorAll('.provsw button').forEach(x=>x.classList.remove('on'));b.classList.add('on');const n=$id('provnote');const msg={all:'',patient:'Evan\'s own entries, all via the companion — 52% of this record. Pain scores here run higher than mum\'s.',caregiver:'Mum\'s entries — 31%. Cost, drowsiness, eating less, and every adalimumab injection are logged here.',school:'Ms Rahman\'s entries — 9%. Left class, missed lunch, sat out PE. The reporter that sees the day.',instrument:'Instrument scores only — MARS-5 and the quarterly MUST. Nothing else on this page comes from a questionnaire.',ai:'AI-inferred fields only — 5%. Each carries a confidence value and is never merged with reported data. Below 0.7 it is omitted.'}[k];n.textContent=msg;n.style.display=msg?'':'none'}
 
-/* ---- dietitian write-back: mutates the same arrays the scan reads ---- */
-const WB_LOG=[];
-function wbSet(food,act,b){b.closest('.wb').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
- const si=DIET_SAFE.indexOf(food);if(si>=0)DIET_SAFE.splice(si,1);const ai=DIET_AVOID.findIndex(x=>x.food===food);if(ai>=0)DIET_AVOID.splice(ai,1);
- if(act==='safe')DIET_SAFE.push(food);if(act==='avoid')DIET_AVOID.push({food,reason:'set by Ms Priya Lim, dietitian, 10 Sep',conditional:false});
- const tag=b.closest('tr').querySelector('.tag');const st=assess(food);tag.className='tag '+({SAFE_CONFIRMED:'ok',TOLERATED_BEFORE:'ok',NOT_ASSESSED:'grey',CAUTION:'warn',AVOID:'blood'}[st.status]);tag.textContent=STATUS_LABEL[st.status];
- b.closest('tr').querySelectorAll('td')[2].textContent=st.source||'—';
- WB_LOG.unshift(`${food} → ${STATUS_LABEL[st.status]} · Ms Priya Lim · 10 Sep`);$id('wblog').innerHTML=WB_LOG.slice(0,4).join('<br>');
- if(typeof renderFoods==='function')renderFoods();toast('Saved · appears in his next scan, attributed to you')}
-function wbNote(){const f=$id('wbfood').value.trim(),t=$id('wbtext').value.trim();if(!f||!t)return;DIET_NOTES[f]={note:t,by:'Ms Priya Lim, dietitian',on:'10 Sep'};WB_LOG.unshift(`Note on ${f} · Ms Priya Lim · 10 Sep`);$id('wblog').innerHTML=WB_LOG.slice(0,4).join('<br>');$id('wbfood').value='';$id('wbtext').value='';toast('Note saved · he sees it the next time he scans '+f)}
 
 /* ---- ask my team, with context attached ---- */
 function askTeam(){const box=$id('askbox');const tab=$q('#ptabs button.on')?.textContent.trim()||'Record';const last=$q('#entries .entry')?.textContent.replace(/\s+/g,' ').trim();const ctx={Record:'your last entry',Meds:'your medicines',Calendar:'your appointments',Learn:'what you were reading',Card:'your card',Community:'community'}[tab]||tab;$id('askctx').innerHTML=`Attached: <b>${ctx}</b>${last&&tab==='Record'?' — '+last.slice(0,60):''}`;box.className='askbox on';$id('asktxt').focus()}
@@ -1488,19 +1473,19 @@ function inRoom(on){$id('inroom').className='inroom'+(on?' on':'')}
 function goTab(v){const b=document.querySelector(`#roles-hcp button[data-v="${v}"]`);if(b){b.click();window.scrollTo({top:0})}}
 
 /* adherence heatmap from the same dose array the timeline uses */
-(function(){const el=document.getElementById('heat');if(!el)return;const days=['8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','1','2','3','4'];el.innerHTML=D.dose.map((v,i)=>`<div class="${v?'t':'m'}" title="${days[i]} ${i<24?'Aug':'Sep'}">${days[i]}</div>`).join('')})();
-function pnoteSave(){const t=document.getElementById('pnote').value.trim();document.getElementById('pnotelog').textContent=t?'Saved · Jish, pharmacist · 19 Sep · visible to Dr Nair and Ms Lim':'';toast('Note saved in your name')}
+(function(){const el=document.getElementById('heat');if(!el)return;const days=['12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','1','2','3','4','5','6','7','8'];el.innerHTML=D.dose.map((v,i)=>{const inj=D.inject[i+1];return `<div class="${v?'t':'m'}${inj?' inj '+inj:''}" title="${days[i]} ${i<20?'Aug':'Sep'}${inj?' · adalimumab '+inj:''}">${inj?'💉':''}${days[i]}</div>`}).join('')})();
+function pnoteSave(){const t=document.getElementById('pnote').value.trim();document.getElementById('pnotelog').textContent=t?'Saved · Jish, pharmacist · 19 Sep · visible to Dr Lim and Ms Tan':'';toast('Note saved in your name')}
 
 const NOTES={
- cost:"Hi Marcus — you mentioned the medicines are getting expensive. You shouldn't have to choose between them and other things. I've asked our medical social worker to call you this week about subsidy options and whether a generic or a different supply arrangement would help. Nothing changes with your tablets in the meantime. — Dr Nair",
- why:"Hi Marcus — one thing I want to say plainly: mesalazine works while you feel well, not only when you feel bad. Feeling fine is the tablet doing its job. Stopping it when things are good is the most common way a flare starts. If the twice-a-day is hard to keep up, tell me and we'll look at once-a-day. — Dr Nair",
- kit:"Hi Marcus — a home calprotectin kit is on its way to you. It's a small stool sample in a tube, posted back in the envelope provided. It tells me whether your gut is inflamed inside, which the symptoms alone can't. Please do it in the next few days so I have the result before we decide anything. — Dr Nair",
- diet:"Hi Marcus — while things are unsettled, eat what stays down and don't worry about variety for now. Chicken rice, congee and fish soup are on your safe list. Milk is worth watching, not banned. Ms Lim will help you bring foods back once you're settled — nothing is off the table for good. — Dr Nair",
- mood:"Hi Marcus — you've logged low energy on most days this month and mentioned worrying about toilet access at work. That's a lot to carry. Our medical social worker can help with work letters and with the day-to-day of this. Would it be all right if she got in touch? — Dr Nair",
- nsaid:"Hi Marcus — the ibuprofen for your back can set off a flare in ulcerative colitis, and it started three days before your symptoms turned. Please stop it and use paracetamol instead. If the back pain needs more than that, tell me and we'll sort something safe. — Dr Nair"
+ pen:"Hi Mrs Koh — Evan's logged 'hate the pen' before every injection, and the camp week made it easy to miss one. That's very normal at 13. Two things that help: Nurse Aisha can show him the citrate-free pen, which stings less, and we can move injection day to a Friday so he isn't sore for school. Please don't double up the missed dose — we'll check his levels first. — Dr Lim\n\n[to Evan] Lots of people your age hate the pen. There's a version that stings less — we'll sort it.",
+ nsaid:"Hi Mrs Koh — I can see the ibuprofen started on 19 Aug for his tummy pain. I understand why — but in Crohn's it can make the gut worse, and his pain has climbed since. Please stop it and use paracetamol instead; the dose is on his medication list. If paracetamol isn't enough, tell Nurse Aisha the same day and we'll sort something safe. — Dr Lim\n\n[to Evan] Paracetamol from now on, not the other one. Tell mum if it's not enough.",
+ iron:"Hi Mrs Koh — the iron tablets are why his stools have gone dark and firm since 25 Aug, and why he says his tummy hurts after them. That's the tablet, not the Crohn's getting better or worse. Try giving it with food at dinner rather than breakfast, or every other day — it still works. If he still can't manage it, we can give iron through a drip instead. — Dr Lim\n\n[to Evan] The iron is what's making things dark and firm. Take it with dinner — it's easier.",
+ lunch:"Hi Mrs Koh — the school has logged Evan not eating lunch on 9 of the last 14 school days, and he's told the app he doesn't want to eat at school. His weight is down. This isn't pickiness — eating hurts after meals right now. Ms Tan, our dietitian, will call you about a packed lunch that's easier on him, and about the formula drinks at school. — Dr Lim\n\n[to Evan] Ms Tan is going to help make lunch hurt less. You're not in trouble for skipping it.",
+ kit:"Hi Mrs Koh — I'm sending a home stool kit and asking for a blood test before Tuesday: it checks whether his gut is inflamed inside and whether the adalimumab level in his blood is where it should be. Both together tell me whether the medicine needs adjusting or whether something else is going on. The stool kit is a small tube; the blood test is at the KKH lab, no appointment needed. — Dr Lim\n\n[to Evan] One poo in a tube and one blood test before Tuesday. Then we'll know what's going on.",
+ school:"To Ms Rahman — Evan has Crohn's disease and is currently unwell. Please allow him unrestricted toilet access without needing to ask, permission to leave class when needed, and to keep his formula drink with him. He may sit out PE at his own judgement. Thank you for logging his days — it has been genuinely useful to his care. — Dr Lim, KKH\n\n[to Evan] Ms Rahman has a letter now. You don't have to ask to go."
 };
-function draftNote(k,b){document.querySelectorAll('.refer.notes button').forEach(x=>x.classList.remove('sent'));b.classList.add('sent');document.getElementById('pnote-pt').value=NOTES[k];document.getElementById('notelog').textContent=(k==='cost'||k==='mood')?'A copy will go to the medical social worker.':''}
-function sendNote(){const t=document.getElementById('pnote-pt').value.trim();if(!t){toast('Nothing to send');return}document.getElementById('notelog').textContent='Sent to his card · 19 Sep · Dr Nair';toast('Sent · appears on his card as a note from you')}
+function draftNote(k,b){document.querySelectorAll('.refer.notes button').forEach(x=>x.classList.remove('sent'));b.classList.add('sent');document.getElementById('pnote-pt').value=NOTES[k];document.getElementById('notelog').textContent=(k==='school'||k==='lunch')?'A copy will go to the medical social worker.':''}
+function sendNote(){const t=document.getElementById('pnote-pt').value.trim();if(!t){toast('Nothing to send');return}document.getElementById('notelog').textContent='Sent to mum\'s view · one line to Evan\'s companion · 22 Sep · Dr Lim';toast('Sent · mum gets the note; Evan gets the one line')}
 </script>
 </body>
 </html>
