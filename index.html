@@ -732,12 +732,26 @@
   .path div.on{background:#FFF8E8;border-color:#F0D48A;color:var(--ink)} .path div.on b{color:#8A5A00}
   .refer.notes button{font-weight:600}
 
+
+  html,body{max-width:100%;overflow-x:hidden}
+  *,*::before,*::after{box-sizing:border-box}
+  .clin,.canvas,.ident,.canvas>section,.opener,.voice,.contra{min-width:0;max-width:100%}
+  .clin>*{min-width:0}
+  @media (max-width:900px){
+    body.hcp .rail{width:calc(100% - 16px);margin:6px 8px 0}
+    body.hcp .view{width:100%;max-width:100%}
+    .heat{grid-template-columns:repeat(7,minmax(0,1fr))}
+    .breadth,.breadth-lab{max-width:100%}
+    .statgrid,.three,.div,.hubrow,.unsaid,.path{grid-template-columns:minmax(0,1fr)}
+    .conc,.provsw,.refer,.legend,.provleg,.chips{flex-wrap:wrap}
+    .roleselect{max-width:56%}
+  }
   /* ---------- responsive: phone + desktop ---------- */
   :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
   html{scroll-padding-top:env(safe-area-inset-top,0px)}
   .roleselect{display:none;font:inherit;font-family:"Nunito",system-ui,sans-serif;font-weight:800;font-size:14px;color:#fff;background:#0F2140 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239FC3FF' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;border:2px solid var(--blue-l);border-radius:999px;padding:9px 38px 9px 14px;appearance:none;-webkit-appearance:none;margin-left:auto;max-width:60%}
   body.hcp .tl{min-width:640px}
-  body.hcp .canvas>section:has(.tl){overflow-x:auto}
+  #tl-doc,#tl-pharm{overflow-x:auto;-webkit-overflow-scrolling:touch}
   body.hcp table{display:block;overflow-x:auto;white-space:nowrap}
   body.hcp table tr{white-space:normal}
   @media (max-width:900px){
