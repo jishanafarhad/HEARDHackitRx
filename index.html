@@ -754,6 +754,37 @@
   .disc b{color:var(--navy);font-weight:600}
   .lab .old{opacity:.45}
   .lab .old.stale{opacity:1}
+
+  .opener .lead{font-family:"Nunito",system-ui,sans-serif;font-weight:800;font-size:18px;line-height:1.4;margin-top:6px}
+  .ninety{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:7px}
+  .ninety li{display:grid;grid-template-columns:118px 1fr;gap:12px;font-size:14px;line-height:1.45;color:#E4EDF7;padding-top:7px;border-top:1px solid rgba(159,195,255,.25)}
+  .ninety li b{font-family:"Nunito",system-ui,sans-serif;font-weight:800;color:#9FC3FF;font-size:12px;letter-spacing:.04em;text-transform:uppercase;padding-top:2px}
+  .ninety li:last-child{color:#fff;font-weight:600}
+  .ninety li:last-child b{color:#F5C542}
+  @media (max-width:900px){.opener .lead{font-size:16px}.ninety li{grid-template-columns:1fr;gap:2px;font-size:13px}}
+
+  .meds{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .medcard{background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:12px 14px;display:grid;gap:6px}
+  .medcard.bio{border-left-color:var(--navy);background:var(--blue-bg)}
+  .medcard.prn{border-left-color:#9FB6C1}
+  .medcard.done{border-left-color:#B8C4CE;background:var(--lav);opacity:.85}
+  .medcard.bad{border-left-color:var(--red);background:var(--red-l)}
+  .medcard.warn{border-left-color:#F5C542;background:#FFF8E8}
+  .mtop{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .mname{font-family:"Nunito",system-ui,sans-serif;font-weight:800;font-size:16px;color:var(--navy)}
+  .mtag{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+  .mdose{font-size:13px;color:var(--ink-2)}
+  .madh{display:flex;align-items:center;gap:10px}
+  .mbar{flex:1;height:8px;background:var(--lav);border-radius:4px;overflow:hidden;border:1px solid var(--line)}
+  .mbar i{display:block;height:100%;background:var(--blue);border-radius:4px}
+  .mpct{font-size:12px;font-weight:600;white-space:nowrap}
+  .mpct.ok{color:var(--green-d)} .mpct.warn{color:#8A5A00} .mpct.grey{color:var(--muted)}
+  .mfoot{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--ink-2)}
+  .mfoot .miss{color:var(--red-d);font-weight:600}
+  .mnote{font-size:12px;color:var(--ink-2);border-top:1px dashed var(--line);padding-top:6px}
+  .ph2{font-family:"Nunito",system-ui,sans-serif;font-weight:800;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px}
+  .ph2.red{color:var(--red-d)}
+  @media (max-width:900px){.meds{grid-template-columns:1fr}}
   /* ---------- responsive: phone + desktop ---------- */
   :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
   html{scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -860,8 +891,14 @@
     </aside>
     <div class="canvas">
       <div class="opener"><div class="lbl">Ninety seconds</div>
-        <p>Post-prandial right lower quadrant pain most days since 22 Aug, on adalimumab 40 mg fortnightly since Feb. Parent started ibuprofen 19 Aug. Oral iron from 25 Aug; stools have firmed since — iron effect, not response. Adalimumab missed 8 Sep. No calprotectin since May; adalimumab trough never measured.</p>
-        <div class="sub">The sections below are the evidence.</div>
+        <p class="lead">13-year-old with ileal Crohn's, symptomatic on adalimumab. Pain-driven flare since 22 Aug; wPCDAI 47.5, up from 15.</p>
+        <ul class="ninety">
+          <li><b>Symptoms</b> Post-prandial RLQ pain, median 7/10, on 12 of 14 days. Nocturnal waking 3 nights. Stools 3–5/day, blood streaks on 4 days.</li>
+          <li><b>Confounders</b> Ibuprofen since 19 Aug (parent-administered). Oral iron since 25 Aug — stool firming since is iron, not response. Adalimumab dose missed 8 Sep.</li>
+          <li><b>Objective data</b> CRP 18 on 17 Aug, now outdated. Hb 10.9, ferritin 8. Calprotectin last measured May. Adalimumab trough never measured.</li>
+          <li><b>Growth</b> Weight 41.5 kg, down 2.8 % in 4 weeks; 25th → 10th percentile over 6 months. Height stable.</li>
+          <li><b>The question</b> Loss of response, under-dosing, or disease unmasked by NSAID — the trough level decides. Order it with a calprotectin before changing therapy.</li>
+        </ul>
       </div>
       <div class="contra growth"><b>Growth: weight 25th → 10th percentile over 6 months.</b> Height 40th percentile, stable. Growth is a treatment target in paediatric Crohn's. <button onclick="this.parentElement.style.display='none';toast('Reviewed · logged in your name')">Reviewed</button></div>
       <div class="voice">“My tummy hurts after every lunch and I don't want to eat at school anymore.”<span>Evan, 6 Sep · parent, same day: “he's just picky at the moment”</span></div>
@@ -957,14 +994,75 @@
     </aside>
     <div class="canvas">
       <div class="contra" id="contra-pharm"><b>⚠ Active Crohn's + NSAID, age 13.</b> Ibuprofen since 19 Aug, parent-administered. Weight-based paracetamol dose is on the list. Oral iron since 25 Aug is confounding the stool chart. <button onclick="this.parentElement.style.display='none';toast('Reviewed · logged in your name')">Reviewed</button></div>
-      <section><h2>Registry</h2>
-        <div class="reg">
-          <div><span class="k">Biologic</span><b>Adalimumab 40 mg SC fortnightly · since Feb 2026</b><span class="v">1 of 2 doses <em>(8 Sep missed)</em></span></div>
-          <div><span class="k">Nutrition</span><b>Partial enteral nutrition — Modulen 2 cartons/day</b><span class="v">school carton declined most days</span></div>
-          <div><span class="k">Daily</span><b>Ferrous fumarate 200 mg · Vitamin D 1000 IU</b><span class="v">iron 16 of 28 <em>("hurts after")</em></span></div>
-          <div><span class="k">PRN</span><b>Paracetamol 500 mg</b><span class="v">on list · rarely used</span></div>
-          <div><span class="k">Risk factor flags</span><b>⚠️ NSAID · ibuprofen since 19 Aug, parent-administered</b><span class="v">flagged by pharmacy</span></div>
-          <div><span class="k"></span><b>⚠️ Iron confounding stool chart · since 25 Aug</b><span class="v">interpret Bristol trend accordingly</span></div>
+      <section><h2>Current medicines <span>28 days · adherence from logged doses · red = missed, grey = not logged</span></h2>
+        <div class="meds">
+          <div class="medcard bio">
+            <div class="mtop"><span class="mname">Adalimumab</span><span class="mtag">Biologic · anti-TNF</span></div>
+            <div class="mdose">40 mg subcutaneous · every 2 weeks · since Feb 2026 · self-injected, parent supervised</div>
+            <div class="madh"><div class="mbar"><i style="width:50%"></i></div><span class="mpct warn">1 of 2 doses</span></div>
+            <div class="mfoot"><span>Last: 25 Aug ✓</span><span class="miss">Missed: 8 Sep — school camp</span><span>Next due: 22 Sep</span></div>
+            <div class="mnote">Trough / antibodies never measured. "Hate the pen" logged before every dose.</div>
+          </div>
+          <div class="medcard">
+            <div class="mtop"><span class="mname">Ferrous fumarate</span><span class="mtag">Oral iron</span></div>
+            <div class="mdose">200 mg once daily · since 25 Aug · for Hb 10.9, ferritin 8</div>
+            <div class="madh"><div class="mbar"><i style="width:57%"></i></div><span class="mpct warn">16 of 28 · 57 %</span></div>
+            <div class="mfoot"><span>Missed 12</span><span class="miss">9 × "hurts after"</span><span>3 × forgot</span></div>
+            <div class="mnote">Darkens and firms stool — confounds the Bristol chart since 25 Aug.</div>
+          </div>
+          <div class="medcard">
+            <div class="mtop"><span class="mname">Modulen IBD</span><span class="mtag">Partial enteral nutrition</span></div>
+            <div class="mdose">2 cartons daily · home + school · since Jun</div>
+            <div class="madh"><div class="mbar"><i style="width:50%"></i></div><span class="mpct warn">28 of 56 cartons · 50 %</span></div>
+            <div class="mfoot"><span>Home carton: 26 of 28 ✓</span><span class="miss">School carton: 2 of 28</span></div>
+            <div class="mnote">School carton declined 11 of 14 school days — "embarrassing". Home dosing intact.</div>
+          </div>
+          <div class="medcard">
+            <div class="mtop"><span class="mname">Colecalciferol</span><span class="mtag">Vitamin D</span></div>
+            <div class="mdose">1000 IU once daily · since Nov 2025</div>
+            <div class="madh"><div class="mbar"><i style="width:93%"></i></div><span class="mpct ok">26 of 28 · 93 %</span></div>
+            <div class="mfoot"><span>Missed 2 · forgot</span></div>
+          </div>
+          <div class="medcard prn">
+            <div class="mtop"><span class="mname">Paracetamol</span><span class="mtag">PRN analgesia</span></div>
+            <div class="mdose">500 mg up to 4 × daily (15 mg/kg) · on list since Nov 2025</div>
+            <div class="madh"><span class="mpct grey">Used 3 times in 28 days</span></div>
+            <div class="mnote">Underused relative to pain logged — ibuprofen was used instead.</div>
+          </div>
+        </div>
+
+        <div class="ph2">Completed</div>
+        <div class="meds">
+          <div class="medcard done">
+            <div class="mtop"><span class="mname">Budesonide</span><span class="mtag">Corticosteroid</span></div>
+            <div class="mdose">9 mg daily, 8-week course · Jun – Aug 2026 · completed</div>
+            <div class="mfoot"><span>1 course in 12 months · below ECCO steroid-dependence threshold</span></div>
+          </div>
+        </div>
+
+        <div class="ph2 red">Not prescribed — reported by parent</div>
+        <div class="meds">
+          <div class="medcard bad">
+            <div class="mtop"><span class="mname">Ibuprofen</span><span class="mtag">NSAID · OTC</span></div>
+            <div class="mdose">200–400 mg as needed · since 19 Aug · parent-administered for pain</div>
+            <div class="mfoot"><span class="miss">Flare trigger in Crohn's</span><span>Started 3 days before pain escalated</span></div>
+            <div class="mnote">Parent note drafted: stop, use paracetamol. Weight-based dose on list.</div>
+          </div>
+          <div class="medcard warn">
+            <div class="mtop"><span class="mname">Cod liver oil</span><span class="mtag">Supplement · grandparent</span></div>
+            <div class="mdose">Most mornings · dose unknown</div>
+            <div class="mnote">Contains vitamin A and D. Review total intake alongside prescribed vitamin D.</div>
+          </div>
+          <div class="medcard">
+            <div class="mtop"><span class="mname">Probiotic gummies</span><span class="mtag">Supplement</span></div>
+            <div class="mdose">Daily</div>
+            <div class="mnote">Low concern.</div>
+          </div>
+          <div class="medcard">
+            <div class="mtop"><span class="mname">"Herbal soup for the stomach"</span><span class="mtag">TCM</span></div>
+            <div class="mdose">Weekends · contents unknown</div>
+            <div class="mnote">Ask — to document, not to discourage.</div>
+          </div>
         </div>
       </section>
 
@@ -983,11 +1081,6 @@
           <tr><td>Ferrous fumarate 200 mg</td><td>25 Aug</td><td><span class="tag grey">Prescribed</span></td><td>Darkens and firms stool: Bristol 6 → 3 since start. Mimics improvement; not evidence of it.</td></tr>
           <tr><td>Modulen (PEN)</td><td>Jun</td><td><span class="tag grey">Prescribed</span></td><td>2 cartons/day. Suppresses solid-food appetite — appears as "eating less" in the food log.</td></tr>
           <tr><td>Budesonide 9 mg</td><td>Jun–Aug</td><td><span class="tag ok">Completed</span></td><td>8-week course, completed. Stools also firmed during treatment — separate from the iron effect.</td></tr></table></section>
-      <section><h2>Also taking <span>asked plainly, reported verbatim</span></h2>
-        <table><tr><th>What</th><th>How often</th><th>Type</th><th>Note</th></tr>
-          <tr><td>"Cod liver oil from his grandma"</td><td>Most mornings</td><td><span class="tag grey">Supplement</span></td><td>Vitamin A on top of prescribed vitamin D — review total intake.</td></tr>
-          <tr><td>Probiotic gummies</td><td>Daily</td><td><span class="tag grey">Supplement</span></td><td>Low concern.</td></tr>
-          <tr><td>"Herbal soup for the stomach"</td><td>Weekends</td><td><span class="tag grey">TCM</span></td><td>Contents unknown. Ask — to document, not to discourage.</td></tr></table></section>
       <section><h2>Pharmacist notes <span>saved in your name · visible to the doctor and dietitian</span></h2>
         <textarea class="pnote" id="pnote" placeholder="Medication reconciliation, suspected drug-induced contribution, alternatives to discuss…">Ibuprofen 200–400 mg OTC since 19 Aug, parent-administered for abdominal pain — NSAID in active Crohn's, started 3 days before pain escalated. Paracetamol 15 mg/kg (≈600 mg) 6-hourly PRN is on the list; parent note drafted. Ferrous fumarate since 25 Aug: 9 of 12 omissions attributed to GI upset — suggest dosing with dinner or alternate days; if still not tolerated, IV iron (Hb 10.9, ferritin 8). Stool firming since 25 Aug is an iron effect, not response — flagged to Dr Lim. Adalimumab: one missed dose (camp), no trough or antibody level on record — recommend therapeutic drug monitoring before any escalation. Cod liver oil plus prescribed vitamin D — review total vitamin A and D intake.</textarea>
         <div class="chips" style="margin-top:8px"><button class="btn small" onclick="pnoteSave()">Save note</button><span class="note" id="pnotelog" style="margin:0"></span></div>
