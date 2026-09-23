@@ -746,6 +746,14 @@
     .conc,.provsw,.refer,.legend,.provleg,.chips{flex-wrap:wrap}
     .roleselect{max-width:56%}
   }
+
+  .contra.growth{background:#FFF8E8;border-color:#F0D48A;border-left-color:#F5C542}
+  .contra.growth b{color:#8A5A00}
+  .contra.growth button{border-color:#F0D48A;color:#8A5A00}
+  .disc{font-size:13px;color:var(--ink-2);background:var(--lav);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:10px}
+  .disc b{color:var(--navy);font-weight:600}
+  .lab .old{opacity:.45}
+  .lab .old.stale{opacity:1}
   /* ---------- responsive: phone + desktop ---------- */
   :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
   html{scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -855,6 +863,7 @@
         <p>Post-prandial right lower quadrant pain most days since 22 Aug, on adalimumab 40 mg fortnightly since Feb. Parent started ibuprofen 19 Aug. Oral iron from 25 Aug; stools have firmed since — iron effect, not response. Adalimumab missed 8 Sep. No calprotectin since May; adalimumab trough never measured.</p>
         <div class="sub">The sections below are the evidence.</div>
       </div>
+      <div class="contra growth"><b>Growth: weight 25th → 10th percentile over 6 months.</b> Height 40th percentile, stable. Growth is a treatment target in paediatric Crohn's. <button onclick="this.parentElement.style.display='none';toast('Reviewed · logged in your name')">Reviewed</button></div>
       <div class="voice">“My tummy hurts after every lunch and I don't want to eat at school anymore.”<span>Evan, 6 Sep · parent, same day: “he's just picky at the moment”</span></div>
       <div class="contra" id="contra-doc"><b>⚠ Active Crohn's + NSAID.</b> Ibuprofen since 19 Aug, parent-administered. Oral iron since 25 Aug — the stool firming since then is an iron effect, not response. <button onclick="this.parentElement.style.display='none';toast('Reviewed · logged in your name')">Reviewed</button></div>
 
@@ -866,6 +875,7 @@
         <div class="provleg"><span><i style="background:var(--purple)"></i>Patient 52%</span><span><i style="background:var(--teal)"></i>Parent 31%</span><span><i style="background:var(--yellow)"></i>School 9%</span><span><i style="background:var(--green)"></i>Instrument 5%</span><span><i style="background:#C9C3DB"></i>AI-inferred 3% — always shown distinct</span></div>
         <div id="provnote" class="note"></div>
         <details style="margin-top:12px" open><summary style="cursor:pointer;font-weight:600;color:var(--purple)">Three reporters, last week — discrepancies</summary>
+          <div class="disc">Parent pain scores average <b>3.4 points below</b> the patient's on school days (n = 9). Weekend scores agree within 1 point. School reports account for 9 of the 14 school-lunch entries.</div>
           <div class="paed"><span class="hh"></span><span class="hh">Patient</span><span class="hh">Parent</span><span class="hh">School</span>
             <span>Tue</span><span class="dis">Pain 7 · after recess</span><span class="dis">Pain 3 · "fine at dinner"</span><span class="dis">Left class twice · didn't eat lunch</span>
             <span>Thu</span><span class="dis">Pain 8 · type 3</span><span class="dis">Pain 4</span><span>Sat out PE</span>
@@ -889,7 +899,7 @@
         <div class="conc"><span>Concordant active</span><span>Concordant quiet</span><span>Symptoms without markers</span><span class="on">Untested</span></div>
         <div class="div"><div class="box"><h3>Symptom burden</h3><div class="stat">High, pain-driven, since 22 Aug</div></div><div class="box"><h3>Objective signal</h3><div class="stat">CRP raised 17 Aug (22 days old) · no calprotectin this episode</div></div></div>
         <div class="pattern"><b>Active symptoms; objective markers outdated.</b><p>CRP 18 on 17 Aug predates the ibuprofen, the iron and the missed dose. Last calprotectin (May) predates this episode. Hb 10.9 and ferritin 8 explain the iron. With persistent pain on anti-TNF, the missing data point is the adalimumab trough.</p></div>
-        <div class="lab"><div class="hh">Test</div><div class="hh">Result</div><div class="hh">Collected</div><div class="hh">Age</div>
+        <div class="lab" id="labtable"><div class="hh">Test</div><div class="hh">Result</div><div class="hh">Collected</div><div class="hh">Age</div>
           <div>CRP</div><div>18 mg/L <span style="color:var(--muted)">(ref &lt;5)</span></div><div>17 Aug</div><div class="ageing">22 d · outdated</div>
           <div>Faecal calprotectin</div><div>610 µg/g</div><div>14 May</div><div class="stale">117 d · pre-dates episode</div>
           <div>Haemoglobin</div><div>10.9 g/dL <span style="color:var(--muted)">(low)</span></div><div>17 Aug</div><div class="ageing">22 d · outdated</div>
@@ -1566,6 +1576,10 @@ const NOTES={
 };
 function draftNote(k,b){document.querySelectorAll('.refer.notes button').forEach(x=>x.classList.remove('sent'));b.classList.add('sent');document.getElementById('pnote-pt').value=NOTES[k];document.getElementById('notelog').textContent=(k==='school'||k==='lunch')?'A copy will go to the medical social worker.':''}
 function sendNote(){const t=document.getElementById('pnote-pt').value.trim();if(!t){toast('Nothing to send');return}document.getElementById('notelog').textContent='Sent to mum\'s view · one line to Evan\'s companion · 22 Sep · Dr Lim';toast('Sent · mum gets the note; Evan gets the one line')}
+
+/* lab fade: results older than LAB_FRESH_DAYS while disease is active are faded; ages still shown */
+(function(){const LAB_FRESH_DAYS=14, ACTIVE=true; const t=document.getElementById('labtable'); if(!t||!ACTIVE) return;
+ const cells=[...t.children].slice(4); for(let i=0;i<cells.length;i+=4){const age=cells[i+3]; const n=parseInt((age.textContent.match(/(\d+)\s*d/)||[])[1]||'0',10); if(n>LAB_FRESH_DAYS||/never/.test(age.textContent)){cells[i].classList.add('old');cells[i+1].classList.add('old');cells[i+2].classList.add('old')}}})();
 </script>
 </body>
 </html>
