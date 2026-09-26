@@ -894,8 +894,8 @@
   <div class="clin">
     <aside class="ident">
       <div class="status red"><b>Active</b><span>PRO3 32 · remission &lt; 13 · from 19 of 28 days</span></div>
-      <h1>Evan Koh</h1><div class="meta">13 · Crohn's, ileal (L1), inflammatory · Dx Nov 2025 · KKH</div>
-      <dl><dt>Therapy</dt><dd>Adalimumab 40 mg SC q2w, since Feb 2026</dd><dt>Weight</dt><dd>41.5 kg · 25th → 10th percentile over 6 months</dd><dt>Last seen</dt><dd>11 Aug · 4-weekly</dd><dt>Next</dt><dd>9 Sep, 3:10 pm</dd><dt>Reporters</dt><dd>Evan · mum · school</dd><dt>Logged</dt><dd>19 of 28 days</dd></dl>
+      <h1>Evan Koh</h1><div class="meta">13 · Ileal Crohn's (L1, inflammatory) · Dx Nov 2025 · KKH · Adalimumab 40 mg fortnightly</div>
+      <dl><dt>Therapy</dt><dd>Adalimumab 40 mg SC q2w, since Feb 2026</dd><dt>Weight</dt><dd>41.5 kg · 25th → 10th percentile over 6 months</dd><dt>Last seen</dt><dd>11 Aug · 4-weekly</dd><dt>Next</dt><dd>9 Sep, 3:10 pm</dd><dt>Reporters</dt><dd>Patient · parent · school</dd><dt>Logged</dt><dd>19 of 28 days</dd></dl>
       <div class="flags">
         <div class="flag"><b>Severe pain, 10 of 13 logged days</b>Last 14 days · right lower quadrant · post-prandial 9 of 13 · nocturnal waking 3 nights<div class="route">IBD nurse notified 1 Sep · acknowledged</div></div>
         <div class="flag"><b>Adalimumab dose missed, 8 Sep</b>School camp · no trough level on record<div class="route">For your review</div></div>
@@ -903,7 +903,7 @@
         <div class="flag warn"><b>Stool firming since 25 Aug</b>Coincides with oral iron start<div class="route">Confounder — not evidence of response</div></div>
         <div class="flag warn"><b>Weight loss 2.8 % in 4 weeks</b>Crossed a growth percentile<div class="route">Dietitian aware</div></div>
       </div>
-      <div class="approval">✓ Shared by patient and parent · 8 Sep</div>
+      <div class="approval">✓ Shared by patient and parent · 8 Sep, 8:40 pm</div>
     </aside>
     <div class="canvas">
       <div class="opener"><div class="lbl">Ninety seconds</div>
@@ -945,7 +945,7 @@
           <div class="ph2" style="margin:12px 0 6px">Medication compliance, logged days</div>
           <div class="crow"><span>Adalimumab</span><div class="mbar"><i style="width:50%"></i></div><b class="warn">1 of 2 doses</b><small>8 Sep missed</small></div>
           <div class="crow"><span>Daily medicines</span><div class="mbar"><i style="width:76%"></i></div><b class="warn">76 %</b><small>iron 12 of 19 · vitamin D 17 of 19</small></div>
-          <div class="crow"><span>Enteral nutrition</span><div class="mbar"><i style="width:57%"></i></div><b class="warn">20 of 35 cartons</b><small>home intact · school declined</small></div>
+          <div class="crow"><span>Enteral nutrition</span><div class="mbar"><i style="width:61%"></i></div><b class="warn">19 of 31 cartons</b><small>home intact · school declined</small></div>
           <small class="note" style="margin-top:4px">Full detail on the Medication tab.</small>
         </div>
       </section>
@@ -968,7 +968,7 @@
       </section>
       
       <section><h2>Logged repeatedly, not raised in clinic</h2>
-        <div class="unsaid"><div><b>School lunch skipped</b><span>9 of 14 school days (school report) · patient: "don't want to eat at school" · parent: "picky"</span></div><div><b>Injection anxiety</b><span>"Hate the pen" logged before every dose · not raised in clinic</span></div><div><b>Fatigue</b><span>Low energy 14 of 28 days · sat out PE 4 times (school report)</span></div><div><b>Cod liver oil, unprescribed</b><span>Most mornings (parent report) · not on medication list · given prescribed vitamin D, check total vitamin A/D</span></div></div>
+        <div class="unsaid"><div><b>School lunch skipped</b><span>9 of 12 logged school days (school report) · patient: "don't want to eat at school" · parent: "picky"</span></div><div><b>Injection anxiety</b><span>"Hate the pen" logged before every dose · not raised in clinic</span></div><div><b>Fatigue</b><span>Low energy 14 of 19 logged days · sat out PE 4 times (school report)</span></div><div><b>Cod liver oil, unprescribed</b><span>Most mornings (parent report) · not on medication list · given prescribed vitamin D, check total vitamin A/D</span></div></div>
       </section>
       <section class="hub"><h2>Actions <span>pathway prompts from guideline config — for consideration, not orders</span></h2>
         <div class="path">
@@ -994,7 +994,7 @@
           <button onclick="draftNote('school',this)">🏫 Letter for school</button>
         </div>
         <textarea class="pnote" id="pnote-pt" placeholder="Pick a topic above, or write your own."></textarea>
-        <div class="chips" style="margin-top:8px"><button class="btn small" onclick="sendNote()">Send to mum + Evan</button><button class="btn small ghost" onclick="document.getElementById('pnote-pt').value=''">Clear</button><span class="note" id="notelog" style="margin:0"></span></div>
+        <div class="chips" style="margin-top:8px"><button class="btn small" onclick="sendNote()">Send to parent + patient</button><button class="btn small ghost" onclick="document.getElementById('pnote-pt').value=''">Clear</button><span class="note" id="notelog" style="margin:0"></span></div>
         <div class="note">Addressed to the parent, one request at most. The patient receives a single sentence, never an instruction. Cost or school topics copy the medical social worker.</div>
       </section>
     </div>
@@ -1005,15 +1005,16 @@
 <main class="view" id="v-pharm">
   <div class="clin">
     <aside class="ident">
-      <h1>Evan Koh</h1><div class="meta">13 · 41.5 kg · Ileal Crohn's · Adalimumab 40 mg fortnightly</div>
-      <dl><dt>Adalimumab</dt><dd>1 of 2 doses <span style="color:var(--red-d)">missed 8 Sep</span></dd><dt>Oral iron</dt><dd>16 of 28 taken</dd><dt>Pattern</dt><dd>Omits iron when symptomatic</dd><dt>MARS-5</dt><dd>19 / 25 <span style="color:var(--muted)">(parent-reported)</span></dd><dt>Steroids 12 mo</dt><dd>1 course · 56 d</dd></dl>
+      <div class="status red"><b>Active</b><span>PRO3 32 · remission &lt; 13 · from 19 of 28 days</span></div>
+      <h1>Evan Koh</h1><div class="meta">13 · Ileal Crohn's (L1, inflammatory) · Dx Nov 2025 · KKH · Adalimumab 40 mg fortnightly</div>
+      <dl><dt>Weight</dt><dd>41.5 kg · 25th → 10th percentile over 6 months</dd><dt>Logged</dt><dd>19 of 28 days</dd><dt>Adalimumab</dt><dd>1 of 2 doses <span style="color:var(--red-d)">missed 8 Sep</span></dd><dt>Oral iron</dt><dd>12 of 19 logged days</dd><dt>Pattern</dt><dd>Omits iron when symptomatic</dd><dt>MARS-5</dt><dd>19 / 25 <span style="color:var(--muted)">(parent-reported)</span></dd><dt>Steroids 12 mo</dt><dd>1 course · 56 d</dd></dl>
       <div class="flags">
         <div class="flag"><b>NSAID</b>Ibuprofen 200–400 mg since 19 Aug, parent-administered<div class="route">Flare trigger · parent note drafted</div></div>
         <div class="flag"><b>Adalimumab missed 8 Sep</b>School camp · injection anxiety logged before every dose<div class="route">Trough / antibodies never measured</div></div>
-        <div class="flag warn"><b>Oral iron</b>Ferrous fumarate since 25 Aug · 16 of 28 doses taken<div class="route">Darker, firmer stools — confounds the Bristol trend</div></div>
+        <div class="flag warn"><b>Oral iron</b>Ferrous fumarate since 25 Aug · taken 12 of 19 logged days<div class="route">Darker, firmer stools — confounds the Bristol trend</div></div>
         <div class="flag warn"><b>Cod liver oil, unprescribed</b>Most mornings · not on list<div class="route">Parent report</div></div>
       </div>
-      <div class="approval">✓ Shared by patient and parent · 8 Sep</div>
+      <div class="approval">✓ Shared by patient and parent · 8 Sep, 8:40 pm</div>
     </aside>
     <div class="canvas">
       <div class="contra" id="contra-pharm"><b>⚠ Active Crohn's + NSAID, age 13.</b> Ibuprofen since 19 Aug, parent-administered. Weight-based paracetamol dose is on the list. Oral iron since 25 Aug is confounding the stool chart. <button onclick="this.parentElement.style.display='none';toast('Reviewed · logged in your name')">Reviewed</button></div>
@@ -1054,7 +1055,7 @@
 
       <section><h2>Daily iron, 28 days <span>green taken · red missed · grey not logged · 💉 adalimumab day (red outline = missed)</span></h2>
         <div class="heat" id="heat"></div>
-        <div class="note">Of 19 logged days: iron taken 11, missed 8 — 6 of 8 attributed to "hurts after". Nine days have no log at all; treat those as unknown, not missed. The single adalimumab miss was school camp.</div>
+        <div class="note">Of 19 logged days: iron taken 12, missed 7 — 5 of 7 attributed to "hurts after". Nine days have no log at all; treat those as unknown, not missed. The single adalimumab miss was school camp.</div>
       </section>
 
       <section><h2>Medication — doses against symptoms <span>what changed, and when</span></h2>
@@ -1063,21 +1064,21 @@
         <div class="pattern"><b>Symptoms preceded any missed dose.</b><p>Pain rose from 22 Aug with adalimumab on schedule. Ibuprofen (19 Aug), iron (25 Aug) and the missed injection (8 Sep) followed. The question is not adherence but efficacy — no trough level has been drawn.</p></div></section>
       <section><h2>Medicines that change what the other dashboards see</h2>
         <table><tr><th>Medicine</th><th>Since</th><th>Source</th><th>Effect on the streams</th></tr>
-          <tr><td>Ibuprofen 200–400 mg</td><td>19 Aug</td><td><span class="tag grey">Mum, OTC</span></td><td>NSAID — flare trigger in Crohn's. Started 3 days before pain escalated.</td></tr>
+          <tr><td>Ibuprofen 200–400 mg</td><td>19 Aug</td><td><span class="tag grey">Parent, OTC</span></td><td>NSAID — flare trigger in Crohn's. Started 3 days before pain escalated.</td></tr>
           <tr><td>Ferrous fumarate 200 mg</td><td>25 Aug</td><td><span class="tag grey">Prescribed</span></td><td>Darkens and firms stool: Bristol 6 → 3 since start. Mimics improvement; not evidence of it.</td></tr>
           <tr><td>Modulen (PEN)</td><td>Jun</td><td><span class="tag grey">Prescribed</span></td><td>2 cartons/day. Suppresses solid-food appetite — appears as "eating less" in the food log.</td></tr>
           <tr><td>Budesonide 9 mg</td><td>Jun–Aug</td><td><span class="tag ok">Completed</span></td><td>8-week course, completed. Stools also firmed during treatment — separate from the iron effect.</td></tr></table></section>
       <section><h2>Pharmacist notes <span>saved in your name · visible to the doctor and dietitian</span></h2>
-        <textarea class="pnote" id="pnote" placeholder="Medication reconciliation, suspected drug-induced contribution, alternatives to discuss…">Ibuprofen 200–400 mg OTC since 19 Aug, parent-administered for abdominal pain — NSAID in active Crohn's, started 3 days before pain escalated. Paracetamol 15 mg/kg (≈600 mg) 6-hourly PRN is on the list; parent note drafted. Ferrous fumarate since 25 Aug: 9 of 12 omissions attributed to GI upset — suggest dosing with dinner or alternate days; if still not tolerated, IV iron (Hb 10.9, ferritin 8). Stool firming since 25 Aug is an iron effect, not response — flagged to Dr Lim. Adalimumab: one missed dose (camp), no trough or antibody level on record — recommend therapeutic drug monitoring before any escalation. Cod liver oil plus prescribed vitamin D — review total vitamin A and D intake.</textarea>
+        <textarea class="pnote" id="pnote" placeholder="Medication reconciliation, suspected drug-induced contribution, alternatives to discuss…">Ibuprofen 200–400 mg OTC since 19 Aug, parent-administered for abdominal pain — NSAID in active Crohn's, started 3 days before pain escalated. Paracetamol 15 mg/kg (≈600 mg) 6-hourly PRN is on the list; parent note drafted. Ferrous fumarate since 25 Aug: 5 of 7 omissions attributed to GI upset — suggest dosing with dinner or alternate days; if still not tolerated, IV iron (Hb 10.9, ferritin 8). Stool firming since 25 Aug is an iron effect, not response — flagged to Dr Lim. Adalimumab: one missed dose (camp), no trough or antibody level on record — recommend therapeutic drug monitoring before any escalation. Cod liver oil plus prescribed vitamin D — review total vitamin A and D intake.</textarea>
         <div class="chips" style="margin-top:8px"><button class="btn small" onclick="pnoteSave()">Save note</button><span class="note" id="pnotelog" style="margin:0"></span></div>
       </section>
 
       <section><h2>Reasons for missed doses <span>patient and parent, verbatim</span></h2>
         <table><tr><th>Reason</th><th class="n">Times</th><th>Where it points</th></tr>
-          <tr><td>Iron — "hurts after"</td><td class="n">9</td><td>Side effect — dose with dinner, alternate days, or IV iron</td></tr>
-          <tr><td>Iron — forgot</td><td class="n">3</td><td>Anchor to dinner rather than breakfast</td></tr>
+          <tr><td>Iron — "hurts after"</td><td class="n">5</td><td>Side effect — dose with dinner, alternate days, or IV iron</td></tr>
+          <tr><td>Iron — forgot</td><td class="n">2</td><td>Anchor to dinner rather than breakfast</td></tr>
           <tr><td>Adalimumab — school camp</td><td class="n">1</td><td>Move injection day; plan around school calendar</td></tr>
-          <tr><td>Modulen at school — "embarrassing"</td><td class="n">11</td><td>School letter; unbranded bottle</td></tr></table></section>
+          <tr><td>Modulen at school — "embarrassing"</td><td class="n">11 of 12</td><td>School letter; unbranded bottle</td></tr></table></section>
 
       <section><h2>Steroid exposure, rolling 12 months</h2>
         <div class="score"><div class="big">56</div><span class="denom">days · one course · budesonide 9 mg, Jun–Aug</span></div>
@@ -1094,15 +1095,16 @@
 <main class="view" id="v-diet">
   <div class="clin">
     <aside class="ident">
-      <h1>Evan Koh</h1><div class="meta">13 · Ileal Crohn's · Partial enteral nutrition · Referred 8 Sep</div>
-      <dl><dt>Weight</dt><dd>41.5 kg <span style="color:var(--red-d)">−2.8 % in 4 weeks</span></dd><dt>Percentile</dt><dd>25th → 10th <span style="color:var(--red-d)">over 6 months</span></dd><dt>Height</dt><dd>152 cm · 40th percentile · stable</dd><dt>Foods / week</dt><dd>12 <span style="color:var(--muted)">range 9–21</span></dd><dt>Setting</dt><dd>School lunch missed 9 of 14</dd></dl>
+      <div class="status red"><b>Active</b><span>PRO3 32 · remission &lt; 13 · from 19 of 28 days</span></div>
+      <h1>Evan Koh</h1><div class="meta">13 · Ileal Crohn's (L1, inflammatory) · Dx Nov 2025 · KKH · Adalimumab 40 mg fortnightly</div>
+      <dl><dt>Logged</dt><dd>19 of 28 days</dd><dt>Weight</dt><dd>41.5 kg <span style="color:var(--red-d)">−2.8 % in 4 weeks</span></dd><dt>Percentile</dt><dd>25th → 10th <span style="color:var(--red-d)">over 6 months</span></dd><dt>Height</dt><dd>152 cm · 40th percentile · stable</dd><dt>Foods / week</dt><dd>12 <span style="color:var(--muted)">range 9–21</span></dd><dt>Setting</dt><dd>School lunch missed 9 of 12 logged school days</dd></dl>
       <div class="flags">
         <div class="flag"><b>Falling weight percentile</b>25th → 10th over 6 months · −2.8 % in 4 weeks<div class="route">Growth is a treatment target</div></div>
         <div class="flag warn"><b>Trial-and-error eating</b>21 distinct foods one week, 9 the next · 14 foods tried then abandoned<div class="route">Experimentation, not restriction</div></div>
-        <div class="flag warn"><b>School lunch missed 9 of 14</b>School report · patient: "hurts after" · parent: "picky"<div class="route">Three accounts of one meal</div></div>
-        <div class="flag warn"><b>Modulen declined at school</b>11 of 14 days · "embarrassing"<div class="route">Half the PEN prescription not taken</div></div>
+        <div class="flag warn"><b>School lunch missed 9 of 12 logged school days</b>School report · patient: "hurts after" · parent: "picky"<div class="route">Three accounts of one meal</div></div>
+        <div class="flag warn"><b>Modulen declined at school</b>11 of 12 logged school days · "embarrassing"<div class="route">Half the PEN prescription not taken</div></div>
       </div>
-      <div class="approval">✓ Shared by patient and parent · 8 Sep</div>
+      <div class="approval">✓ Shared by patient and parent · 8 Sep, 8:40 pm</div>
     </aside>
     <div class="canvas">
       <section><h2>Food status at a glance</h2>
@@ -1141,7 +1143,7 @@
 
       <section class="hub"><h2>Interventions <span>one-tap orders and referrals</span></h2>
         <div class="hubrow">
-          <button onclick="refer(this,'packed-lunch plan for school — sent to mum')">🍱 Packed-lunch plan</button>
+          <button onclick="refer(this,'packed-lunch plan for school — sent to parent')">🍱 Packed-lunch plan</button>
           <button onclick="refer(this,'PEN review — plain bottle for school, second flavour')">🥤 PEN review</button>
           <button onclick="refer(this,'growth review — height, weight, bone age')">📏 Growth review</button>
           <button onclick="refer(this,'vitamin D / iron / B12 panel — ordered')">🩸 Request vitamin D / iron panel</button>
@@ -1163,7 +1165,7 @@
           <tr><td>Laksa</td><td class="n">2</td><td>+1</td><td>+4</td><td><span class="tag grey">too few to say</span></td></tr>
           <tr><td>Fried chicken</td><td class="n">1</td><td>+2</td><td>+4</td><td><span class="tag grey">one day is not a pattern</span></td></tr></table>
         <div class="note">All within a flare from ~22 Aug, with iron firming stools from the 25th. Food, flare and iron effects overlap. Nothing here is causal.</div></section>
-      <section><h2>Pain timing</h2><div class="div"><div class="box"><h3>Post-prandial, within 2 h</h3><div class="stat">9 of 13 logged days (last 14)</div></div><div class="box"><h3>Meals skipped</h3><div class="stat">School lunch 9 of 14 · dinner 2 of 14</div></div></div></section>
+      <section><h2>Pain timing</h2><div class="div"><div class="box"><h3>Post-prandial, within 2 h</h3><div class="stat">9 of 13 logged days (last 14)</div></div><div class="box"><h3>Meals skipped</h3><div class="stat">School lunch 9 of 12 · dinner 2 of 19</div></div></div></section>
     </div>
   </div>
 </main>
@@ -1722,11 +1724,11 @@ function sendNote(){const t=document.getElementById('pnote-pt').value.trim();if(
    foot:'<span>25 Aug ✓</span><span class="miss">8 Sep missed — school camp</span><span>Next due 22 Sep</span>',note:'Trough / antibodies never measured. "Hate the pen" logged before every dose.'},
   {cls:'',name:'Ferrous fumarate',tag:'Oral iron',dose:'200 mg once daily · since 25 Aug · for Hb 10.9, ferritin 8',
    bar:I.pct,pct:`<span class="mpct warn">${I.t} of ${I.tot} logged · ${I.pct} %</span>`,dots:dotsOf(iron),
-   foot:`<span>Missed ${I.tot-I.t}</span><span class="miss">6 × "hurts after"</span><span>2 × forgot</span>`,note:'Darkens and firms stool — confounds the Bristol chart since 25 Aug.'},
+   foot:`<span>Missed ${I.tot-I.t}</span><span class="miss">5 × "hurts after"</span><span>2 × forgot</span>`,note:'Darkens and firms stool — confounds the Bristol chart since 25 Aug.'},
   {cls:'',name:'Modulen IBD',tag:'Partial enteral nutrition',dose:'2 cartons daily · one at home, one at school · since Jun',
    bar:Math.round(100*(MH.t+MS.t)/(MH.tot+MS.tot)),pct:`<span class="mpct warn">${MH.t+MS.t} of ${MH.tot+MS.tot} cartons</span>`,
    dots:'<div class="dlab" style="margin:4px 0 0"><span>Home</span></div>'+dotsOf(modH)+'<div class="dlab" style="margin:4px 0 0"><span>School (school days only)</span></div>'+dotsOf(modS),
-   foot:`<span>Home ${MH.t} of ${MH.tot} ✓</span><span class="miss">School ${MS.t} of ${MS.tot}</span>`,note:'School carton declined — "embarrassing". Home dosing intact.'},
+   foot:`<span>Home ${MH.t} of ${MH.tot} ✓</span><span class="miss">School ${MS.t} of ${MS.tot}</span>`,note:'School carton declined 11 of 12 school days — "embarrassing". Home dosing intact.'},
   {cls:'',name:'Colecalciferol',tag:'Vitamin D',dose:'1000 IU once daily · since Nov 2025',
    bar:V.pct,pct:`<span class="mpct ok">${V.t} of ${V.tot} logged · ${V.pct} %</span>`,dots:dotsOf(vitd),foot:`<span>Missed ${V.tot-V.t} · forgot</span>`,note:''},
   {cls:'prn',name:'Paracetamol',tag:'PRN analgesia',dose:'500 mg up to 4 × daily (15 mg/kg) · on list since Nov 2025',
